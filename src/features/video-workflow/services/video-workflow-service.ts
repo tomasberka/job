@@ -1,10 +1,10 @@
 import { VIDEO_WORKFLOW_MOCK } from "./video-workflow-mock";
 import { VideoExportSchema, type VideoExport } from "../types/video-export";
-import { apiGet, useMocks } from "@/lib/api-client";
+import { apiGet, isMockMode } from "@/lib/api-client";
 import { z } from "zod";
 
 export async function fetchVideoExports(): Promise<VideoExport[]> {
-  if (useMocks()) {
+  if (isMockMode()) {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return VIDEO_WORKFLOW_MOCK;
   }

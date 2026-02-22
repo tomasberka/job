@@ -1,10 +1,10 @@
 import { CONTENT_MOCK } from "./content-mock";
 import { ContentItemSchema, type ContentItem, type ContentType } from "../types/content-item";
-import { apiGet, useMocks } from "@/lib/api-client";
+import { apiGet, isMockMode } from "@/lib/api-client";
 import { z } from "zod";
 
 export async function fetchContentItems(): Promise<ContentItem[]> {
-  if (useMocks()) {
+  if (isMockMode()) {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return CONTENT_MOCK;
   }

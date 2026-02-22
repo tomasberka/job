@@ -11,9 +11,14 @@ export class ApiError extends Error {
 }
 
 export async function apiGet<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { "Content-Type": "application/json" },
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}${path}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    throw new ApiError(0, `Network error: ${err instanceof Error ? err.message : "unknown"}`);
+  }
 
   if (!res.ok) {
     throw new ApiError(res.status, `API ${res.status}: ${res.statusText}`);
@@ -22,6 +27,6 @@ export async function apiGet<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export function useMocks(): boolean {
+export function isMockMode(): boolean {
   return process.env.NEXT_PUBLIC_USE_MOCKS !== "false";
 }

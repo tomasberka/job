@@ -2,6 +2,15 @@ import { PC_INVENTORY_MOCK } from "@/features/pc-inventory/services/pc-inventory
 
 const BASE_URL = "https://hellocomp.cz";
 
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 export function GET() {
   const items = PC_INVENTORY_MOCK.map((p) => {
     const statusLabel =
@@ -14,11 +23,11 @@ export function GET() {
         : "Vyprodáno";
 
     const enclosure = p.imageUrl
-      ? `<enclosure url="${p.imageUrl}" type="image/jpeg" />`
+      ? `<enclosure url="${escapeXml(p.imageUrl)}" type="image/jpeg" />`
       : "";
 
     const image = p.imageUrl
-      ? `<media:content url="${p.imageUrl}" medium="image" />`
+      ? `<media:content url="${escapeXml(p.imageUrl)}" medium="image" />`
       : "";
 
     return `
