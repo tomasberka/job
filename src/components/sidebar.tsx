@@ -3,44 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Monitor,
-  FileText,
   LayoutDashboard,
   Zap,
-  Sparkles,
   ImageOff,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   {
-    href: "/",
-    label: "Command Center",
-    icon: LayoutDashboard,
-    badge: "HUB",
-  },
-  {
-    href: "/pc-inventory",
-    label: "Sklad PC",
-    icon: Monitor,
-  },
-  {
-    href: "/content-generator",
-    label: "Obsah",
-    icon: FileText,
-  },
-  {
-    href: "/social-posts",
-    label: "Sociální sítě",
-    icon: Sparkles,
-    badge: "NEW",
-  },
-  {
     href: "/photo-generator.html",
     label: "Photo Factory",
     icon: ImageOff,
-    badge: "ADOBE",
+    badge: "READY",
     external: true,
+  },
+  {
+    href: "/",
+    label: "Budoucí struktura",
+    icon: LayoutDashboard,
+    badge: "PLAN",
   },
 ];
 
