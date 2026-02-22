@@ -248,6 +248,7 @@ export function SocialPostsGenerator({
     const [platforms, setPlatforms] = useState<SocialPlatform[]>(defaultPlatforms);
     const [numTopics, setNumTopics] = useState(defaultNumTopics);
     const [showSettings, setShowSettings] = useState(false);
+    const [bossMode, setBossMode] = useState(false);
 
     const {
         data: result,
@@ -340,18 +341,40 @@ export function SocialPostsGenerator({
                             AI-powered posts optimized for real-time trends across platforms
                         </p>
                     </div>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowSettings(!showSettings)}
-                    >
-                        <Settings2 className="w-4 h-4 mr-2" />
-                        Settings
-                    </Button>
+
+                    <div className="flex items-center gap-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setBossMode((prev) => !prev)}
+                        >
+                            {bossMode ? "Disable Boss Mode" : "Enable Boss Mode"}
+                        </Button>
+
+                        {!bossMode && (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setShowSettings(!showSettings)}
+                            >
+                                <Settings2 className="w-4 h-4 mr-2" />
+                                Settings
+                            </Button>
+                        )}
+                    </div>
                 </div>
 
+                <Card className="p-4 bg-slate-50 border-slate-200">
+                    <p className="text-sm font-semibold text-slate-900">🎯 Guided demo flow</p>
+                    <ol className="mt-2 space-y-1 text-xs text-slate-700 list-decimal pl-4">
+                        <li>Generate fresh trend posts</li>
+                        <li>Open Social Upload Studio and attach videos</li>
+                        <li>Prepare batch and open Meta Business Suite</li>
+                    </ol>
+                </Card>
+
                 {/* Settings Panel */}
-                {showSettings && (
+                {!bossMode && showSettings && (
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -428,7 +451,7 @@ export function SocialPostsGenerator({
             </div>
 
             {/* Trending Topics Info */}
-            {result?.trendingTopics && result.trendingTopics.length > 0 && (
+            {!bossMode && result?.trendingTopics && result.trendingTopics.length > 0 && (
                 <Card className="p-4 bg-blue-50 border-blue-200">
                     <div className="space-y-2">
                         <p className="text-sm font-semibold text-blue-900">📈 Topics:</p>
@@ -462,7 +485,7 @@ export function SocialPostsGenerator({
                 </Card>
             )}
 
-            {result?.posts && result.posts.length > 0 && (
+            {!bossMode && result?.posts && result.posts.length > 0 && (
                 <Card className="p-4 border-slate-200 bg-white">
                     <div className="space-y-3">
                         <div>

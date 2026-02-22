@@ -3,11 +3,15 @@ import {
     type ContentTone,
     type SocialPlatform,
     type SocialPublishRequest,
+    type SocialPublishBatchStatusResponse,
+    type SocialPublishListResponse,
     type SocialPublishResponse,
     type SocialPost,
     type SocialPostsCatalogResponse,
     type SocialPostsResponse,
     SocialPublishRequestSchema,
+    SocialPublishBatchStatusResponseSchema,
+    SocialPublishListResponseSchema,
     SocialPublishResponseSchema,
     SocialPostsCatalogResponseSchema,
     SocialPostsResponseSchema,
@@ -98,6 +102,32 @@ export class SocialPostsClient {
 
         const json = await response.json();
         return SocialPublishResponseSchema.parse(json);
+    }
+
+    async getPublishBatchStatus(batchId: string): Promise<SocialPublishBatchStatusResponse> {
+        const response = await fetch(`${this.baseUrl}/social-posts/publish/${batchId}`, {
+            method: "GET",
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const json = await response.json();
+        return SocialPublishBatchStatusResponseSchema.parse(json);
+    }
+
+    async listPublishBatches(limit = 20): Promise<SocialPublishListResponse> {
+        const response = await fetch(`${this.baseUrl}/social-posts/publish?limit=${limit}`, {
+            method: "GET",
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const json = await response.json();
+        return SocialPublishListResponseSchema.parse(json);
     }
 }
 

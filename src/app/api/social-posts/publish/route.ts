@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
+    SocialPublishBatchSchema,
+    SocialPublishListResponseSchema,
     SocialPublishRequestSchema,
     SocialPublishResponseSchema,
 } from "@/features/content-generator/services/social-posts-contract";
+import { listPublishBatches, savePublishBatch } from "@/lib/social-publish-store";
 
 function createJobId(index: number) {
     return `job_${Date.now()}_${index + 1}`;
@@ -41,6 +44,16 @@ export async function POST(request: NextRequest) {
             ],
         });
 
+        const batch = SocialPublishBatchSchema.parse({
+            batchId: response.batchId,
+            provider: parsed.provider,
+            jobs: response.jobs,
+            createdAt: now,
+            updatedAt: now,
+        });
+
+        await savePublishBatch(batch);
+
         return NextResponse.json(response, { status: 200 });
     } catch (error) {
         return NextResponse.json(
@@ -49,6 +62,29 @@ export async function POST(request: NextRequest) {
                 message: error instanceof Error ? error.message : "Unknown error",
             },
             { status: 400 }
+        );
+    }
+}
+
+export async function GET(request: NextRequest) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const limit = Number(searchParams.get("limit") ?? "20");
+
+        const batches = await listPublishBatches(Number.isNaN(limit) ? 20 : limit);
+        const response = SocialPublishListResponseSchema.parse({
+            batches,
+            total: batches.length,
+        });
+
+        return NextResponse.json(response, { status: 200 });
+    } catch (error) {
+        return NextResponse.json(
+            {
+                error: "Failed to list publish batches",
+                message: error instanceof Error ? error.message : "Unknown error",
+            },
+            { status: 500 }
         );
     }
 }

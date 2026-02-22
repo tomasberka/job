@@ -118,3 +118,31 @@ export const SocialPublishResponseSchema = z.object({
     nextSteps: z.array(z.string()),
 });
 export type SocialPublishResponse = z.infer<typeof SocialPublishResponseSchema>;
+
+export const SocialPublishBatchSchema = z.object({
+    batchId: z.string(),
+    provider: SocialProviderSchema,
+    jobs: z.array(SocialPublishJobSchema),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+});
+export type SocialPublishBatch = z.infer<typeof SocialPublishBatchSchema>;
+
+export const SocialPublishBatchStatusResponseSchema = z.object({
+    batch: SocialPublishBatchSchema,
+    summary: z.object({
+        total: z.number().int().nonnegative(),
+        queued: z.number().int().nonnegative(),
+        processing: z.number().int().nonnegative(),
+        scheduled: z.number().int().nonnegative(),
+        published: z.number().int().nonnegative(),
+        failed: z.number().int().nonnegative(),
+    }),
+});
+export type SocialPublishBatchStatusResponse = z.infer<typeof SocialPublishBatchStatusResponseSchema>;
+
+export const SocialPublishListResponseSchema = z.object({
+    batches: z.array(SocialPublishBatchSchema),
+    total: z.number().int().nonnegative(),
+});
+export type SocialPublishListResponse = z.infer<typeof SocialPublishListResponseSchema>;

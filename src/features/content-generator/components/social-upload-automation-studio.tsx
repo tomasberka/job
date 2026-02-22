@@ -1,11 +1,14 @@
 "use client";
 
 import { UploadCloud, Video, CalendarClock, Rocket, CheckCircle2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
     type SocialPlatform,
+    type SocialPublishBatch,
+    type SocialPublishBatchStatusResponse,
+    type SocialPublishListResponse,
     type SocialPost,
     type SocialPublishResponse,
 } from "../services/social-posts-contract";
@@ -30,6 +33,8 @@ export function SocialUploadAutomationStudio({ generatedPosts = [] }: SocialUplo
     const [provider, setProvider] = useState<"meta-suite" | "multi-platform">("meta-suite");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [result, setResult] = useState<SocialPublishResponse | null>(null);
+    const [batchStatus, setBatchStatus] = useState<SocialPublishBatchStatusResponse | null>(null);
+    const [history, setHistory] = useState<SocialPublishBatch[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     const client = new SocialPostsClient();
@@ -96,12 +101,56 @@ export function SocialUploadAutomationStudio({ generatedPosts = [] }: SocialUplo
 
             const response = await client.createPublishBatch(payload);
             setResult(response);
+            const live = await client.getPublishBatchStatus(response.batchId);
+            setBatchStatus(live);
+            const listed: SocialPublishListResponse = await client.listPublishBatches(10);
+            setHistory(listed.batches);
         } catch (submitError) {
             setError(submitError instanceof Error ? submitError.message : "Failed to prepare upload batch.");
         } finally {
             setIsSubmitting(false);
         }
     };
+
+    const refreshBatchStatus = async () => {
+        if (!result?.batchId) return;
+        try {
+            const live = await client.getPublishBatchStatus(result.batchId);
+            setBatchStatus(live);
+        } catch {
+            // keep last known status in UI
+        }
+    };
+
+    useEffect(() => {
+        let ignore = false;
+
+        const loadHistory = async () => {
+            try {
+                const listed = await client.listPublishBatches(10);
+                if (!ignore) setHistory(listed.batches);
+            } catch {
+                if (!ignore) setHistory([]);
+            }
+        };
+
+        void loadHistory();
+
+        return () => {
+            ignore = true;
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!result?.batchId) return;
+
+        void refreshBatchStatus();
+        const interval = window.setInterval(() => {
+            void refreshBatchStatus();
+        }, 5000);
+
+        return () => window.clearInterval(interval);
+    }, [result?.batchId]);
 
     const platforms: SocialPlatform[] = [
         "instagram",
@@ -236,6 +285,33 @@ export function SocialUploadAutomationStudio({ generatedPosts = [] }: SocialUplo
                             <li key={step}>{step}</li>
                         ))}
                     </ul>
+
+                    {batchStatus && (
+                        <div className="rounded border border-emerald-300 bg-white p-2.5 text-xs text-slate-700 space-y-1">
+                            <p className="font-semibold">Live status</p>
+                            <p>
+                                queued: {batchStatus.summary.queued} • processing: {batchStatus.summary.processing} • scheduled: {batchStatus.summary.scheduled} • published: {batchStatus.summary.published} • failed: {batchStatus.summary.failed}
+                            </p>
+                            <Button size="sm" variant="outline" onClick={refreshBatchStatus}>
+                                Refresh status
+                            </Button>
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {history.length > 0 && (
+                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 space-y-2">
+                    <p className="text-xs font-semibold text-slate-800">Recent batches</p>
+                    <div className="space-y-1.5">
+                        {history.slice(0, 5).map((batch) => (
+                            <div key={batch.batchId} className="flex flex-wrap items-center justify-between gap-2 text-xs rounded border border-slate-200 bg-white px-2 py-1.5">
+                                <span className="font-medium text-slate-700">{batch.batchId}</span>
+                                <span className="text-slate-500">{batch.jobs.length} jobs</span>
+                                <span className="text-slate-500">{new Date(batch.updatedAt).toLocaleString()}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </Card>
