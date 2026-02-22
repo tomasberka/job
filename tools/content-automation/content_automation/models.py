@@ -93,7 +93,7 @@ class Product:
 
     @property
     def platform(self) -> Optional[str]:
-        """Extract CPU platform (AMD or Intel)."""
+        """Extract platform (AMD or Intel) from product name."""
         name_lower = self.name.lower()
         if "amd" in name_lower:
             return "AMD"

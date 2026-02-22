@@ -93,7 +93,7 @@ _SCRIPT_TEMPLATE = """[0:00] HOOK — Otevření záběrem na rozsvícený Hello
 
 _SEO_TEMPLATE = (
     "HelloComp gaming PC s {gpu} — {audience} sestava pro maximální FPS "
-    "a bezkomromisní herní zážitek. Česká značka herních počítačů "
+    "a bezkompromisní herní zážitek. Česká značka herních počítačů "
     "HelloComp nabízí prémiové konfigurace s {gpu} pro náročné hráče. "
     "Objednej online na hellocomp.cz."
 )
