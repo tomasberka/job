@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HelloComp Photo Post Factory</title>
+    <!-- Adobe Express Embed SDK v4 -->
+    <script src="https://cc-embed.adobe.com/sdk/v4/CCEverywhere.js"></script>
     <style>
         :root {
             --brand-blue: #2166CC;
@@ -88,6 +90,65 @@
             border-radius: 10px;
             padding: 10px 12px;
             font-size: 12px;
+        }
+
+        .sdk-config {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .sdk-config label {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: .03em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .sdk-status {
+            font-size: 11px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .sdk-status.ready {
+            background: rgba(8, 170, 94, .15);
+            color: #3cd68d;
+        }
+
+        .sdk-status.not-ready {
+            background: rgba(255, 100, 60, .12);
+            color: #ff8866;
+        }
+
+        .remove-bg-card-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 10;
+            background: rgba(33, 102, 204, .9);
+            border: 1px solid rgba(255, 255, 255, .3);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 5px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: opacity .2s;
+        }
+
+        .remove-bg-card-btn:hover {
+            opacity: .85;
+        }
+
+        .remove-bg-card-btn:disabled {
+            opacity: .4;
+            cursor: not-allowed;
         }
 
         .status {
@@ -298,10 +359,20 @@
             <div class="actions">
                 <button id="renderBtn">Generovat</button>
                 <button class="secondary" id="clearBtn">Vyčistit</button>
-                <button class="secondary" id="removeBgBtn">Adobe Remove BG</button>
+                <button class="secondary" id="removeBgAllBtn">Remove BG (vše)</button>
+            </div>
+            <div class="sdk-config">
+                <label>Adobe Express Client ID</label>
+                <input id="adobeClientId" class="api-base" value="6742aefa92e546b5a3f0031f7168bbde"
+                    placeholder="Vložte Client ID z Adobe Developer Console" />
+                <label>App Name</label>
+                <input id="adobeAppName" class="api-base" value="HelloComp Photo Factory"
+                    placeholder="Název projektu (musí sedět s Adobe Console)" />
+                <button class="secondary" id="initSdkBtn" style="align-self:flex-start;">Inicializovat SDK</button>
+                <div id="sdkStatus" class="sdk-status not-ready">SDK neinicializován</div>
             </div>
             <input id="apiBaseInput" class="api-base" value="http://localhost:3000"
-                placeholder="API base (např. http://localhost:3000)" />
+                placeholder="API base (např. http://localhost:3000) — pro server proxy" />
             <div id="statusText" class="status"></div>
             <textarea
                 id="csvInput">id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;legal_line
@@ -314,11 +385,54 @@
     </div>
 
     <script>
+        /* ─── DOM refs ─────────────────────────────────────── */
         const input = document.getElementById('csvInput');
         const container = document.getElementById('cardsContainer');
         const statusText = document.getElementById('statusText');
         const apiBaseInput = document.getElementById('apiBaseInput');
+        const adobeClientIdInput = document.getElementById('adobeClientId');
+        const adobeAppNameInput = document.getElementById('adobeAppName');
+        const sdkStatusEl = document.getElementById('sdkStatus');
 
+        /* ─── Adobe Express Embed SDK state ────────────────── */
+        let ccEverywhere = null;
+
+        async function initAdobeSdk() {
+            const clientId = (adobeClientIdInput.value || '').trim();
+            const appName = (adobeAppNameInput.value || 'HelloComp Photo Factory').trim();
+
+            if (!clientId) {
+                sdkStatusEl.textContent = 'Chybí Client ID!';
+                sdkStatusEl.className = 'sdk-status not-ready';
+                return;
+            }
+
+            if (!window.CCEverywhere) {
+                sdkStatusEl.textContent = 'Adobe SDK se nenačetlo — zkontrolujte připojení (HTTPS vyžadován).';
+                sdkStatusEl.className = 'sdk-status not-ready';
+                return;
+            }
+
+            try {
+                sdkStatusEl.textContent = 'Inicializuji...';
+                ccEverywhere = await window.CCEverywhere.initialize({
+                    clientId,
+                    appName,
+                });
+                sdkStatusEl.textContent = `SDK Ready ✓ (${appName})`;
+                sdkStatusEl.className = 'sdk-status ready';
+                // Re-render cards to show per-card remove-bg buttons
+                render();
+            } catch (err) {
+                ccEverywhere = null;
+                sdkStatusEl.textContent = `SDK chyba: ${err.message || err}`;
+                sdkStatusEl.className = 'sdk-status not-ready';
+            }
+        }
+
+        document.getElementById('initSdkBtn').addEventListener('click', initAdobeSdk);
+
+        /* ─── CSV parsing ──────────────────────────────────── */
         const parseCsvWithHeaders = (raw) => {
             const lines = raw.trim().split(/\r?\n/).filter(Boolean);
             if (lines.length < 2) return { headers: [], rows: [] };
@@ -358,46 +472,142 @@
             return '';
         };
 
-        const createCard = (item) => {
-            const image = item.image_url;
-            const focal = item.focal_point || 'center';
-            const overlay = overlayClass(item.overlay_style || 'default');
-            const hasImage = image && /^https?:\/\//i.test(image);
+        /* ─── Fetch image → base64 ────────────────────────── */
+        async function imageUrlToBase64(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+            const blob = await response.blob();
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
 
-            return `
-        <article class="card">
-          ${hasImage
-                    ? `<img class="photo" src="${esc(image)}" alt="${esc(item.image_alt || item.product_name || 'HelloComp produkt')}" style="object-position:${esc(focal)};" />`
-                    : '<div class="fallback"></div>'}
-          <div class="overlay ${overlay}"></div>
+        /* ─── Adobe Express: Remove BG for a single image ── */
+        function removeBackgroundSingle(rowIndex) {
+            return new Promise(async (resolve, reject) => {
+                if (!ccEverywhere) {
+                    reject(new Error('SDK neinicializován'));
+                    return;
+                }
 
-          <div class="content">
-            <div class="top">
-              <div class="tag">${esc(item.product_name || 'HelloComp')}</div>
-              <div class="stock">${esc(item.badge_stock || 'Skladem')}</div>
-            </div>
+                const { headers, rows } = parseCsvWithHeaders(input.value);
+                const row = rows[rowIndex];
+                if (!row || !row.image_url || !/^https?:\/\//i.test(row.image_url)) {
+                    reject(new Error('Neplatná image_url'));
+                    return;
+                }
 
-            <div class="bottom">
-              <p class="claim">${esc(item.positioning_claim || 'Herní počítače pro každého')}</p>
-              <h2 class="hook">${esc(item.hook || 'Výkon pro tvoji hru')}</h2>
-              <p class="specs">${esc(item.specs || '')}</p>
-              <div class="price-row">
-                <p class="price">${esc(item.price || '')}</p>
-                <div class="cta">${esc(item.cta || 'OBJEDNEJTE SI TEĎ')}</div>
-              </div>
-              <p class="legal">${esc(item.legal_line || '')}</p>
-            </div>
-          </div>
-        </article>
-      `;
-        };
+                statusText.textContent = `Načítám obrázek ${rowIndex + 1}...`;
 
-        const render = () => {
-            const items = parseCsv(input.value);
-            container.innerHTML = items.map(createCard).join('');
-        };
+                let base64Data;
+                try {
+                    base64Data = await imageUrlToBase64(row.image_url);
+                } catch (err) {
+                    reject(new Error(`Nelze načíst obrázek: ${err.message}`));
+                    return;
+                }
 
-        const removeBackgroundBatch = async () => {
+                statusText.textContent = `Adobe Express: odstranění pozadí ${rowIndex + 1}...`;
+
+                const docConfig = {
+                    asset: {
+                        data: base64Data,
+                        dataType: 'base64',
+                        type: 'image',
+                    },
+                };
+
+                const exportOptions = [
+                    {
+                        id: 'save-to-app',
+                        label: 'Uložit do generátoru',
+                        action: { target: 'publish' },
+                        style: { uiType: 'button' },
+                    },
+                    {
+                        id: 'download',
+                        label: 'Stáhnout',
+                        action: { target: 'download' },
+                        style: { uiType: 'button' },
+                    },
+                ];
+
+                const appConfig = {
+                    callbacks: {
+                        onPublish: (publishParams) => {
+                            // publishParams.asset[0].data contains base64 of processed image
+                            if (publishParams?.asset?.[0]?.data) {
+                                const processedBase64 = publishParams.asset[0].data;
+                                const mimeType = publishParams.asset[0].type === 'image/png' ? 'image/png' : 'image/png';
+                                const dataUrl = `data:${mimeType};base64,${processedBase64}`;
+
+                                // Update the row's image_url with the data URL
+                                rows[rowIndex].image_url = dataUrl;
+                                input.value = toCsv(headers, rows);
+                                render();
+                                statusText.textContent = `Obrázek ${rowIndex + 1} — pozadí odstraněno ✓`;
+                                resolve(dataUrl);
+                            } else {
+                                reject(new Error('Adobe nevrátil výstupní obrázek'));
+                            }
+                        },
+                        onError: (err) => {
+                            statusText.textContent = `Chyba Adobe: ${err?.message || err}`;
+                            reject(new Error(err?.message || 'Adobe Express error'));
+                        },
+                        onPublishComplete: () => {
+                            // Modal closed after publish
+                        },
+                    },
+                };
+
+                try {
+                    ccEverywhere.quickAction.removeBackground(docConfig, appConfig, exportOptions);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        /* ─── Batch remove BG (sequential, one modal at a time) ── */
+        async function removeBackgroundAll() {
+            if (!ccEverywhere) {
+                statusText.textContent = 'Nejdříve inicializujte Adobe SDK!';
+                return;
+            }
+
+            const { rows } = parseCsvWithHeaders(input.value);
+            const candidates = rows
+                .map((row, i) => ({ row, i }))
+                .filter(({ row }) => row.image_url && /^https?:\/\//i.test(row.image_url));
+
+            if (!candidates.length) {
+                statusText.textContent = 'Žádné validní obrázky k zpracování.';
+                return;
+            }
+
+            let success = 0;
+            let failed = 0;
+
+            for (const { i } of candidates) {
+                statusText.textContent = `Remove BG: ${success + failed + 1}/${candidates.length} — čekám na Adobe...`;
+                try {
+                    await removeBackgroundSingle(i);
+                    success++;
+                } catch (err) {
+                    console.warn(`BG removal failed for row ${i}:`, err);
+                    failed++;
+                }
+            }
+
+            statusText.textContent = `Hotovo. Úspěch: ${success}, chyby: ${failed}.`;
+        }
+
+        /* ─── Server proxy fallback (original approach) ──── */
+        const removeBackgroundServerProxy = async () => {
             const { headers, rows } = parseCsvWithHeaders(input.value);
             if (!rows.length) {
                 statusText.textContent = 'CSV je prázdné.';
@@ -423,7 +633,7 @@
 
             for (let index = 0; index < candidates.length; index += 1) {
                 const row = candidates[index];
-                statusText.textContent = `Adobe remove BG: ${index + 1}/${candidates.length}`;
+                statusText.textContent = `Server proxy remove BG: ${index + 1}/${candidates.length}`;
 
                 try {
                     const response = await fetch(`${apiBase}/api/image/remove-background`, {
@@ -456,12 +666,68 @@
             statusText.textContent = `Hotovo. Úspěch: ${success}, chyby: ${failed}.`;
         };
 
+        /* ─── Card rendering ───────────────────────────────── */
+        const createCard = (item, rowIndex) => {
+            const image = item.image_url;
+            const focal = item.focal_point || 'center';
+            const overlay = overlayClass(item.overlay_style || 'default');
+            const hasImage = image && (
+                /^https?:\/\//i.test(image) || image.startsWith('data:')
+            );
+            const canRemoveBg = ccEverywhere && hasImage;
+
+            return `
+        <article class="card">
+          ${canRemoveBg
+                    ? `<button class="remove-bg-card-btn" onclick="onCardRemoveBg(${rowIndex})">✂ Remove BG</button>`
+                    : ''}
+          ${hasImage
+                    ? `<img class="photo" src="${esc(image)}" alt="${esc(item.image_alt || item.product_name || 'HelloComp produkt')}" style="object-position:${esc(focal)};" />`
+                    : '<div class="fallback"></div>'}
+          <div class="overlay ${overlay}"></div>
+
+          <div class="content">
+            <div class="top">
+              <div class="tag">${esc(item.product_name || 'HelloComp')}</div>
+              <div class="stock">${esc(item.badge_stock || 'Skladem')}</div>
+            </div>
+
+            <div class="bottom">
+              <p class="claim">${esc(item.positioning_claim || 'Herní počítače pro každého')}</p>
+              <h2 class="hook">${esc(item.hook || 'Výkon pro tvoji hru')}</h2>
+              <p class="specs">${esc(item.specs || '')}</p>
+              <div class="price-row">
+                <p class="price">${esc(item.price || '')}</p>
+                <div class="cta">${esc(item.cta || 'OBJEDNEJTE SI TEĎ')}</div>
+              </div>
+              <p class="legal">${esc(item.legal_line || '')}</p>
+            </div>
+          </div>
+        </article>
+      `;
+        };
+
+        // Global handler for per-card remove BG buttons
+        window.onCardRemoveBg = async function (rowIndex) {
+            try {
+                await removeBackgroundSingle(rowIndex);
+            } catch (err) {
+                statusText.textContent = `Chyba: ${err.message}`;
+            }
+        };
+
+        const render = () => {
+            const items = parseCsv(input.value);
+            container.innerHTML = items.map((item, i) => createCard(item, i)).join('');
+        };
+
+        /* ─── Event listeners ──────────────────────────────── */
         document.getElementById('renderBtn').addEventListener('click', render);
         document.getElementById('clearBtn').addEventListener('click', () => {
             container.innerHTML = '';
             statusText.textContent = '';
         });
-        document.getElementById('removeBgBtn').addEventListener('click', removeBackgroundBatch);
+        document.getElementById('removeBgAllBtn').addEventListener('click', removeBackgroundAll);
 
         render();
     </script>

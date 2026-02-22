@@ -5,10 +5,19 @@ import {
     AdobeBgRemovalError,
     removeBackgroundWithAdobe,
 } from "@/features/content-generator/services/adobe-bg-removal-service";
+import {
+    createJob,
+    markJobProcessing,
+    completeJob,
+    failJob,
+    buildCallbackUrl,
+} from "@/features/content-generator/services/adobe-webhook-service";
 
 const RemoveBackgroundRequestSchema = z.object({
     imageUrl: z.string().url(),
     outputFormat: z.enum(["png", "jpeg", "webp"]).optional(),
+    /** When true, creates a tracked job and returns jobId immediately for polling. */
+    async: z.boolean().optional(),
 });
 
 type RateLimitEntry = {
@@ -98,6 +107,43 @@ export async function POST(request: NextRequest) {
         const payload = RemoveBackgroundRequestSchema.parse(body);
         const imageHost = new URL(payload.imageUrl).host;
 
+        // ── Async mode: create job, process in background, return jobId ──
+        if (payload.async) {
+            const job = createJob(payload.imageUrl);
+            const callbackUrl = buildCallbackUrl(job.id);
+            console.info(
+                `[Adobe BG] async job created requestId=${requestId} jobId=${job.id} ip=${clientIp} host=${imageHost} callbackUrl=${callbackUrl ?? "none"}`,
+            );
+
+            // Fire-and-forget: process in background, update job store on completion.
+            markJobProcessing(job.id);
+            removeBackgroundWithAdobe(payload)
+                .then((result) => {
+                    completeJob(job.id, {
+                        outputImageUrl: result.outputImageUrl,
+                        outputImageDataUrl: result.outputImageDataUrl,
+                        mimeType: result.mimeType,
+                    });
+                    console.info(`[Adobe BG] async job completed jobId=${job.id}`);
+                })
+                .catch((error) => {
+                    const message = error instanceof Error ? error.message : "Unknown error";
+                    failJob(job.id, message);
+                    console.error(`[Adobe BG] async job failed jobId=${job.id} error="${message}"`);
+                });
+
+            return NextResponse.json(
+                {
+                    mode: "async",
+                    jobId: job.id,
+                    statusUrl: `/api/image/webhook/status/${job.id}`,
+                    callbackUrl,
+                },
+                { status: 202 },
+            );
+        }
+
+        // ── Sync mode: wait for result and return directly ──
         console.info(`[Adobe BG] start requestId=${requestId} ip=${clientIp} host=${imageHost}`);
         const result = await removeBackgroundWithAdobe(payload);
 
