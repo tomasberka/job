@@ -1,0 +1,401 @@
+<div id="fps-pc-finder" class="fpspf-lang-cz">
+    <div class="fpspf-wrap">
+        <div class="fpspf-section fpspf-settings">
+            <div class="fpspf-section-head">
+                <div>
+                    <div class="fpspf-h">Vyberte hry pro porovnání</div>
+                    <div class="fpspf-muted">Vyberte až 4 hry. Následně zvolte rozlišení, profil a rozpočet – a my
+                        doporučíme nejvhodnější herní sestavy z nabídky HelloComp.</div>
+
+                    <div class="fpspf-gamesHead">
+                        <div class="fpspf-search">
+                            <input id="fpspfSearch" class="fpspf-search-input" placeholder="Vyhledat hru...">
+                        </div>
+                        <button id="fpspfResetBtn" class="fpspf-btn fpspf-reset-btn" type="button">Reset výběru</button>
+                    </div>
+                </div>
+
+                <div class="fpspf-right">
+                    <div class="fpspf-selectedBox">
+                        <div class="fpspf-selectedTop">
+                            <div class="fpspf-selectedLabel">Vyberte max. 4 hry</div>
+                            <div class="fpspf-selectedCount"><span id="fpspfCount">0</span> / 4</div>
+                        </div>
+                        <div id="fpspfSelectedList" class="fpspf-selectedList">
+                            <div class="fpspf-muted" style="font-size:13px;">Zatím nemáte vybranou žádnou hru.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fpspfGrid" class="fpspf-grid">
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a0d8" data-game-qn="league_of_legends"
+                    data-game-name="League of Legends"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/21779-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/21779-285x380.jpg" alt="League of Legends"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">League of Legends</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a45d" data-game-qn="grand_theft_auto_v"
+                    data-game-name="Grand Theft Auto V"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/32982_IGDB-285x380.jpg" alt="Grand Theft Auto V"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Grand Theft Auto V</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbcd1b58e0ac8a0b6a8" data-game-qn="rocket_league"
+                    data-game-name="Rocket League"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/30921-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/30921-285x380.jpg" alt="Rocket League"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Rocket League</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbcd1b58e0ac8a0b76e" data-game-qn="overwatch_2"
+                    data-game-name="Overwatch 2"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/515025-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/515025-285x380.jpg" alt="Overwatch 2"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Overwatch 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbad1b58e0ac8a0a823" data-game-qn="fortnite"
+                    data-game-name="Fortnite" data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/33214-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/33214-285x380.jpg" alt="Fortnite" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Fortnite</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a73b" data-game-qn="valorant"
+                    data-game-name="Valorant"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/516575-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/516575-285x380.jpg" alt="Valorant" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Valorant</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbed1b58e0ac8a0bfba" data-game-qn="world_of_warcraft"
+                    data-game-name="World of Warcraft"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/18122-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/18122-285x380.jpg" alt="World of Warcraft"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">World of Warcraft</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a578" data-game-qn="apex_legends"
+                    data-game-name="Apex Legends"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/511224-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/511224-285x380.jpg" alt="Apex Legends"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Apex Legends</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbc4d1b58e0ac8a0dca4" data-game-qn="counter_strike_2"
+                    data-game-name="Counter-Strike 2"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/32399-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/32399-285x380.jpg" alt="Counter-Strike 2"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Counter-Strike 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbcd1b58e0ac8a0b450" data-game-qn="minecraft"
+                    data-game-name="Minecraft"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/27471_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/27471_IGDB-285x380.jpg" alt="Minecraft"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Minecraft</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a65e" data-game-qn="call_of_duty_warzone_20"
+                    data-game-name="Call of Duty: Warzone 2.0"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/512710-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/512710-285x380.jpg"
+                        alt="Call of Duty: Warzone 2.0" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Call of Duty: Warzone 2.0</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbcd1b58e0ac8a0b513" data-game-qn="dota_2"
+                    data-game-name="Dota 2" data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/29595-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/29595-285x380.jpg" alt="Dota 2" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Dota 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbbd1b58e0ac8a0afd3" data-game-qn="elden_ring"
+                    data-game-name="Elden Ring"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/512953_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/512953_IGDB-285x380.jpg" alt="Elden Ring"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Elden Ring</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbc1d1b58e0ac8a0cf86" data-game-qn="diablo_iv"
+                    data-game-name="Diablo IV"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/515024-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/515024-285x380.jpg" alt="Diablo IV" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Diablo IV</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbad1b58e0ac8a0a8f3" data-game-qn="escape_from_tarkov"
+                    data-game-name="Escape From Tarkov"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/491931_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/491931_IGDB-285x380.jpg" alt="Escape From Tarkov"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Escape From Tarkov</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbcd1b58e0ac8a0b83f"
+                    data-game-qn="tom_clancys_rainbow_six_siege" data-game-name="Tom Clancy's Rainbow Six Siege"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/460630-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/460630-285x380.jpg"
+                        alt="Tom Clancy's Rainbow Six Siege" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Tom Clancy's Rainbow Six Siege</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbed1b58e0ac8a0c02a"
+                    data-game-qn="playerunknowns_battlegrounds" data-game-name="PlayerUnknown's Battlegrounds"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/493057-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/493057-285x380.jpg"
+                        alt="PlayerUnknown's Battlegrounds" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">PlayerUnknown's Battlegrounds</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbbd1b58e0ac8a0af2e" data-game-qn="rust"
+                    data-game-name="Rust"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/263490_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/263490_IGDB-285x380.jpg" alt="Rust" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Rust</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbc2d1b58e0ac8a0d56b" data-game-qn="baldurs_gate_3"
+                    data-game-name="Baldur's Gate 3"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/512923_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/512923_IGDB-285x380.jpg" alt="Baldur's Gate 3"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Baldur's Gate 3</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbbd1b58e0ac8a0b1fb" data-game-qn="red_dead_redemption_2"
+                    data-game-name="Red Dead Redemption 2"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/493959_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/493959_IGDB-285x380.jpg"
+                        alt="Red Dead Redemption 2" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Red Dead Redemption 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbc3d1b58e0ac8a0d8b4" data-game-qn="resident_evil_village"
+                    data-game-name="Resident Evil Village"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/518017_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/518017_IGDB-285x380.jpg"
+                        alt="Resident Evil Village" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Resident Evil Village</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="6861ac9e0ceac14632b2d13f" data-game-qn="monster_hunter_wilds"
+                    data-game-name="Monster Hunter Wilds"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/1286077738_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/1286077738_IGDB-285x380.jpg"
+                        alt="Monster Hunter Wilds" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Monster Hunter Wilds</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbc0d1b58e0ac8a0c794" data-game-qn="world_of_tanks"
+                    data-game-name="World of Tanks"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/27546_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/27546_IGDB-285x380.jpg" alt="World of Tanks"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">World of Tanks</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="692b888f92b93b48e99d1eae" data-game-qn="battlefield_6"
+                    data-game-name="Battlefield 6"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/168648543_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/168648543_IGDB-285x380.jpg" alt="Battlefield 6"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Battlefield 6</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="67aa0c09bf461889ef08aad2" data-game-qn="destiny_2"
+                    data-game-name="Destiny 2"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/497057-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/497057-285x380.jpg" alt="Destiny 2" loading="lazy"
+                        onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Destiny 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="67aa0c07bf461889ef08a8aa" data-game-qn="helldivers_2"
+                    data-game-name="Helldivers 2"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/766571430_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/766571430_IGDB-285x380.jpg" alt="Helldivers 2"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Helldivers 2</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbdd1b58e0ac8a0bae6" data-game-qn="sea_of_thieves"
+                    data-game-name="Sea of Thieves"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/490377-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/490377-285x380.jpg" alt="Sea of Thieves"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Sea of Thieves</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="67aa0c07bf461889ef08a8b8" data-game-qn="hunt_showdown"
+                    data-game-name="Hunt: Showdown"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/500188_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/500188_IGDB-285x380.jpg" alt="Hunt: Showdown"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Hunt: Showdown</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbbed1b58e0ac8a0c0af" data-game-qn="halo_infinite"
+                    data-game-name="Halo Infinite"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/506416-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/506416-285x380.jpg" alt="Halo Infinite"
+                        loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">Halo Infinite</div>
+                </div>
+
+                <div class="fpspf-game  " data-game-id="65e0fbb9d1b58e0ac8a0a1c5" data-game-qn="the_witcher_3_wild_hunt"
+                    data-game-name="The Witcher 3: Wild Hunt"
+                    data-game-img="https://static-cdn.jtvnw.net/ttv-boxart/115977_IGDB-285x380.jpg">
+                    <img src="https://static-cdn.jtvnw.net/ttv-boxart/115977_IGDB-285x380.jpg"
+                        alt="The Witcher 3: Wild Hunt" loading="lazy" onerror="this.style.display='none';">
+                    <div class="sel">Vybráno</div>
+                    <div class="name">The Witcher 3: Wild Hunt</div>
+                </div>
+            </div>
+
+            <div class="fpspf-actionsRow">
+                <button id="fpspfMoreBtn" class="fpspf-btn fpspf-more-btn" type="button">Načíst další hry</button>
+            </div>
+        </div>
+
+        <div class="fpspf-section">
+            <div class="fpspf-h" style="font-size:22px;margin-bottom:6px;">Nastavení</div>
+            <div class="fpspf-muted" style="margin-bottom:12px;">Zvolte rozlišení, profil a rozpočet. Poté zobrazíme
+                doporučené sestavy.</div>
+            <div class="fpspf-note fpspf-note-inline is-missing" id="fpspfNote">Doplňte údaje: hru, rozlišení, profil,
+                rozpočet</div>
+            <div id="fpspfSetupAlert" class="fpspf-setup-alert" role="status" aria-live="polite"></div>
+
+            <div class="fpspf-controls">
+                <div class="fpspf-box">
+                    <div class="label">Rozlišení</div>
+                    <div class="fpspf-chips">
+                        <button class="fpspf-chip " type="button" data-res="fhd">
+                            Full HD 1920 x 1080
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-res="wqhd">
+                            WQHD 2560 x 1440
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-res="uhd">
+                            4K 3840 x 2160
+                        </button>
+                    </div>
+                </div>
+
+                <div class="fpspf-box">
+                    <div class="label">Profil</div>
+                    <div class="fpspf-chips">
+                        <button class="fpspf-chip " type="button" data-preset="max_fps">
+                            Max FPS (nižší detaily)
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-preset="balanced">
+                            Vyvážené (střední detaily)
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-preset="quality">
+                            Max kvalita (vyšší detaily)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="fpspf-box">
+                    <div class="label">Rozpočet</div>
+                    <div class="fpspf-chips">
+                        <button class="fpspf-chip " type="button" data-budget="25">
+                            Do 25 000 Kč
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-budget="45">
+                            25–45 000 Kč
+                        </button>
+
+                        <button class="fpspf-chip " type="button" data-budget="45p">
+                            Nad 45 000 Kč
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="fpspf-actionsRow fpspf-runRow">
+                <div class="fpspf-runWrap">
+                    <button id="fpspfRunBtn" class="fpspf-btn fpspf-more-btn fpspf-run-btn" type="button">Zobrazit herní
+                        sestavy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="fpspf-section fpspf-results">
+            <div class="fpspf-resultsHead" id="fpspfSortWrap" style="display:none;">
+                <div class="fpspf-sort">
+                    <button class="fpspf-chip fpspf-chip-sm active" type="button" data-sort="recommended">
+                        Doporučujeme
+                    </button>
+
+                    <button class="fpspf-chip fpspf-chip-sm " type="button" data-sort="fps_desc">
+                        Nejvíc FPS
+                    </button>
+
+                    <button class="fpspf-chip fpspf-chip-sm " type="button" data-sort="price_asc">
+                        Nejlevnější
+                    </button>
+
+                    <button class="fpspf-chip fpspf-chip-sm " type="button" data-sort="price_desc">
+                        Nejdražší
+                    </button>
+                </div>
+            </div>
+            <div id="fpspfResults"></div>
+            <div class="fpspf-actionsRow" style="margin-top:14px;">
+                <button id="fpspfMorePCBtn" class="fpspf-btn fpspf-more-btn" type="button" style="display:none;">Načíst
+                    další sestavy</button>
+            </div>
+        </div>
+    </div>
+</div>
