@@ -1,21 +1,28 @@
 import { PC_INVENTORY_MOCK } from "./pc-inventory-mock";
-import type { PCProduct, PCLineup } from "../types/pc-product";
+import { PCProductSchema, type PCProduct, type PCLineup } from "../types/pc-product";
+import { apiGet, useMocks } from "@/lib/api-client";
+import { z } from "zod";
 
 export async function fetchPCInventory(): Promise<PCProduct[]> {
-  await new Promise((resolve) => setTimeout(resolve, 300));
-  return PC_INVENTORY_MOCK;
+  if (useMocks()) {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    return PC_INVENTORY_MOCK;
+  }
+
+  const raw = await apiGet<unknown[]>("/pc-inventory");
+  return z.array(PCProductSchema).parse(raw);
 }
 
 export async function fetchPCProductById(
   id: string
 ): Promise<PCProduct | undefined> {
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  return PC_INVENTORY_MOCK.find((p) => p.id === id);
+  const products = await fetchPCInventory();
+  return products.find((p) => p.id === id);
 }
 
 export async function fetchPCProductsByLineup(
   lineup: PCLineup
 ): Promise<PCProduct[]> {
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  return PC_INVENTORY_MOCK.filter((p) => p.lineup === lineup);
+  const products = await fetchPCInventory();
+  return products.filter((p) => p.lineup === lineup);
 }

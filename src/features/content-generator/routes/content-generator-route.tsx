@@ -6,9 +6,11 @@ import { ContentCard } from "../components/content-card";
 import { FileText } from "lucide-react";
 
 export function ContentGeneratorRoute() {
-  const { data: items, isLoading } = useQuery({
+  const { data: items, isLoading, isError, error } = useQuery({
     queryKey: ["content-items"],
     queryFn: fetchContentItems,
+    retry: 3,
+    staleTime: 60_000,
   });
 
   const jsonLd = {
@@ -54,6 +56,15 @@ export function ContentGeneratorRoute() {
                 className="h-44 animate-pulse rounded-xl bg-muted/40"
               />
             ))}
+          </div>
+        ) : isError ? (
+          <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-center">
+            <p className="text-sm font-medium text-destructive">
+              Nepodařilo se načíst obsah
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {error instanceof Error ? error.message : "Neznámá chyba"}
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
