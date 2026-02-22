@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { PCInventoryRoute } from "@/features/pc-inventory/routes/pc-inventory-route";
+import { MarketingHubRoute } from "@/features/marketing-hub/routes/marketing-hub-route";
 
 export const metadata: Metadata = {
-  title: "Přehled | HelloComp",
+  title: "Marketing Hub | HelloComp",
   description:
-    "HelloComp řídicí panel — správa PC sestavů, tvorba obsahu a sledování video produkce.",
+    "Sjednocený one-man marketing hub pro SEO copywriting, social engagement, video workflow a gaming PC e-shop content.",
   openGraph: {
+    title: "Marketing Hub | HelloComp",
+    description:
+      "SEO + copy + social + feed workflow v jednom dashboardu pro rychlý marketing execution.",
     images: [
       { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Dashboard" },
     ],
@@ -13,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return <PCInventoryRoute />;
+  return <MarketingHubRoute />;
 }

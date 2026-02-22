@@ -1,6 +1,6 @@
 # HelloComp — Řídicí panel
 
-Internal Next.js dashboard for [HelloComp](https://hellocomp.cz) — a Czech gaming PC brand. Manages product stock, content production, and video workflow in one place.
+Internal Next.js dashboard for [HelloComp](https://hellocomp.cz) — a Czech gaming PC brand. Manages product stock, SEO/copywriting, social media production, feed distribution, and video workflow in one place.
 
 ---
 
@@ -14,6 +14,20 @@ Internal Next.js dashboard for [HelloComp](https://hellocomp.cz) — a Czech gam
 | **Video Workflow** | `/video-workflow` | DaVinci Resolve export tracker — status, progress, format, platform |
 | **RSS Feed** | `/feed.xml` | Product RSS feed for hellocomp.cz (media:content, atom:link) |
 | **Sitemap** | `/sitemap.xml` | Next.js sitemap with per-page priorities and product images |
+
+---
+
+## One-Man Marketing Flow
+
+Default dashboard route (`/`) now acts as a unified marketing hub for solo execution:
+
+1. **PC Inventory** (`/pc-inventory`) → source product truth (SKU/spec/price/stock)
+2. **Content Generator** (`/content-generator`) → SEO copy + hooks + scripts
+3. **Social Posts** (`/social-posts`) → trend-based posts per platform and tone
+4. **Video Workflow** (`/video-workflow`) → publishing readiness
+5. **Feed/Sitemap** (`/feed.xml`, `/sitemap.xml`) → discoverability and syndication
+
+Detailed playbook: [ONE_MAN_MARKETING_SYSTEM.md](ONE_MAN_MARKETING_SYSTEM.md)
 
 ---
 

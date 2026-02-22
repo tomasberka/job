@@ -50,6 +50,7 @@
 |----------|---------|-----------|----------|
 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) | One-page cheat sheet | 5 min | Everyone |
 | [COMPLETION_REPORT.md](COMPLETION_REPORT.md) | What was built | 5 min | Project overview |
+| [ONE_MAN_MARKETING_SYSTEM.md](ONE_MAN_MARKETING_SYSTEM.md) | Unified solo marketing workflow | 10 min | Solo marketer / founder |
 | [TRENDING_SOCIALS_QUICKSTART.md](TRENDING_SOCIALS_QUICKSTART.md) | 5-minute setup guide | 10 min | First-time users |
 
 ### Technical Documents
