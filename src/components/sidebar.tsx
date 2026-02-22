@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Zap,
   Sparkles,
+  ImageOff,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,13 @@ const navItems = [
     label: "Sociální sítě",
     icon: Sparkles,
     badge: "NEW",
+  },
+  {
+    href: "/photo-generator.html",
+    label: "Photo Factory",
+    icon: ImageOff,
+    badge: "ADOBE",
+    external: true,
   },
 ];
 
@@ -60,13 +68,16 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="flex flex-col gap-1 px-3">
-        {navItems.map(({ href, label, icon: Icon, badge }) => {
+        {navItems.map(({ href, label, icon: Icon, badge, external }) => {
           const active =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
+          const Tag = external ? "a" : Link;
+          const extraProps = external ? { target: "_self" as const } : {};
           return (
-            <Link
+            <Tag
               key={href}
               href={href}
+              {...extraProps}
               className={cn(
                 "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150 relative",
                 active
@@ -88,7 +99,7 @@ export function Sidebar() {
                   {badge}
                 </span>
               )}
-            </Link>
+            </Tag>
           );
         })}
       </nav>
