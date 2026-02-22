@@ -517,7 +517,7 @@
         /* ─── v5: Lineup Badge ─── */
         .lineup-badge {
             position: absolute;
-            top: 8px;
+            top: 30px;
             left: 10px;
             transform: none;
             z-index: 20;
@@ -1049,9 +1049,135 @@
             width: auto;
             height: auto;
             object-fit: contain;
+            object-position: center center;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .3));
             transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s;
             border-radius: 12px
+        }
+
+        .card .content {
+            overflow: hidden
+        }
+
+        .card .logo-row {
+            flex-wrap: wrap;
+            row-gap: 4px
+        }
+
+        .card .hook,
+        .card .name,
+        .card .specs-line,
+        .card .claim,
+        .card .price,
+        .card .cta-btn,
+        .card .cta-url {
+            max-width: 100%
+        }
+
+        .card .hook,
+        .card .name,
+        .card .specs-line,
+        .card .claim {
+            overflow-wrap: anywhere
+        }
+
+        .card .price-row {
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .card .stock-pill,
+        .card .stock-tag,
+        .card .gpu-badge,
+        .card .urgency-pill,
+        .card .lineup-badge,
+        .card .category-tag,
+        .card .template-label {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .card .cta-btn {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .tpl-hero,
+        .tpl-neon,
+        .tpl-specs,
+        .tpl-cinema {
+            background-size: 120% 120%;
+            animation: templateAmbientDrift 16s ease-in-out infinite
+        }
+
+        .tpl-hero .content::before,
+        .tpl-neon .content::before,
+        .tpl-specs .content::before,
+        .tpl-cinema .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -35%;
+            width: 35%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, .55), rgba(255, 87, 87, .42), transparent);
+            filter: blur(.2px);
+            pointer-events: none;
+            animation: contentSweepLine 5.5s linear infinite;
+            opacity: .55
+        }
+
+        @keyframes templateAmbientDrift {
+
+            0%,
+            100% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+        }
+
+        @keyframes contentSweepLine {
+            0% {
+                left: -35%;
+                opacity: 0
+            }
+
+            15% {
+                opacity: .6
+            }
+
+            85% {
+                opacity: .6
+            }
+
+            100% {
+                left: 110%;
+                opacity: 0
+            }
+        }
+
+        .tpl-hero .product-zone,
+        .tpl-split .product-zone,
+        .tpl-minimal .product-zone,
+        .tpl-neon .product-zone,
+        .tpl-specs .product-zone,
+        .tpl-cinema .product-zone {
+            z-index: 8
+        }
+
+        .tpl-hero .content,
+        .tpl-split .content,
+        .tpl-minimal .content,
+        .tpl-neon .content,
+        .tpl-specs .content,
+        .tpl-cinema .content {
+            z-index: 12
         }
 
         .card .product-img.bg-removed {
@@ -1572,10 +1698,10 @@
 
         .tpl-split .product-zone {
             position: absolute;
-            top: 0;
+            top: 4%;
             left: 0;
             right: 0;
-            height: 52%;
+            height: 48%;
             background: linear-gradient(160deg, #edf0f5, #f8f9fb);
             display: flex;
             align-items: center;
@@ -1584,8 +1710,8 @@
         }
 
         .tpl-split .product-img {
-            max-height: 86%;
-            max-width: 78%;
+            max-height: 82%;
+            max-width: 74%;
             object-fit: contain;
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .12));
             border-radius: 12px;
@@ -1608,7 +1734,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50%;
+            height: 52%;
             padding: 16px 20px 22px;
             display: flex;
             flex-direction: column;
@@ -1726,10 +1852,10 @@
 
         .tpl-minimal .product-zone {
             position: absolute;
-            top: 0;
+            top: 4%;
             left: 0;
             right: 0;
-            height: 55%;
+            height: 50%;
             background: linear-gradient(180deg, #ffffff, #f0f2f6);
             display: flex;
             align-items: center;
@@ -1738,8 +1864,8 @@
         }
 
         .tpl-minimal .product-img {
-            max-height: 86%;
-            max-width: 78%;
+            max-height: 82%;
+            max-width: 74%;
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .12));
             border-radius: 12px;
@@ -1762,7 +1888,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 45%;
+            height: 48%;
             padding: 18px 20px 22px;
             display: flex;
             flex-direction: column;
@@ -1936,7 +2062,7 @@
             top: 5%;
             left: 0;
             right: 0;
-            height: 46%;
+            height: 44%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1975,7 +2101,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 16px 20px 22px;
+            padding: 18px 20px 22px;
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -2122,10 +2248,10 @@
 
         .tpl-specs .product-zone {
             position: absolute;
-            top: 1%;
+            top: 4%;
             left: 0;
             right: 0;
-            height: 44%;
+            height: 38%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2157,7 +2283,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 58%;
+            height: 62%;
             padding: 12px 18px 20px;
             display: flex;
             flex-direction: column;
@@ -2377,7 +2503,7 @@
             top: 0 !important;
             left: 0 !important;
             right: auto !important;
-            width: 40% !important;
+            width: 38% !important;
             height: 100% !important;
             padding: 8px !important
         }
@@ -2385,9 +2511,9 @@
         .card.fmt-fb .content {
             top: 0 !important;
             bottom: 0 !important;
-            left: 40% !important;
+            left: 38% !important;
             right: 0 !important;
-            width: 60% !important;
+            width: 62% !important;
             height: 100% !important;
             padding: 10px 14px !important;
             justify-content: center !important;
@@ -2438,8 +2564,8 @@
         }
 
         .card.fmt-fb .product-img {
-            max-height: 80% !important;
-            max-width: 88% !important
+            max-height: 78% !important;
+            max-width: 82% !important
         }
 
         .card.fmt-fb .cinema-bar {
@@ -2463,7 +2589,7 @@
 
         .tpl-hero.fmt-fb .lineup-badge,
         .tpl-neon.fmt-fb .lineup-badge {
-            top: 6px !important;
+            top: 24px !important;
             left: 8px !important;
             font-size: 6.5px !important;
             padding: 2px 7px !important;
@@ -2497,7 +2623,7 @@
             top: 0 !important;
             left: 0 !important;
             right: auto !important;
-            width: 42% !important;
+            width: 39% !important;
             height: 100% !important;
             padding: 10px !important
         }
@@ -2505,9 +2631,9 @@
         .card.fmt-wide .content {
             top: 0 !important;
             bottom: 0 !important;
-            left: 42% !important;
+            left: 39% !important;
             right: 0 !important;
-            width: 58% !important;
+            width: 61% !important;
             height: 100% !important;
             padding: 12px 16px !important;
             justify-content: center !important;
@@ -2558,8 +2684,8 @@
         }
 
         .card.fmt-wide .product-img {
-            max-height: 82% !important;
-            max-width: 86% !important
+            max-height: 80% !important;
+            max-width: 80% !important
         }
 
         .card.fmt-wide .cinema-bar {
@@ -2583,7 +2709,7 @@
 
         .tpl-hero.fmt-wide .lineup-badge,
         .tpl-neon.fmt-wide .lineup-badge {
-            top: 7px !important;
+            top: 24px !important;
             left: 9px !important;
             font-size: 6.5px !important;
             padding: 2px 7px !important;
@@ -3070,10 +3196,10 @@
         /* Product zone — center hero spotlight */
         .tpl-cinema .product-zone {
             position: absolute;
-            top: 8%;
+            top: 11%;
             left: 0;
             right: 0;
-            height: 50%;
+            height: 42%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -3082,8 +3208,8 @@
         }
 
         .tpl-cinema .product-img {
-            max-height: 90%;
-            max-width: 80%;
+            max-height: 82%;
+            max-width: 72%;
             object-fit: contain;
             filter: drop-shadow(0 0 40px rgba(0, 212, 255, .3)) drop-shadow(0 20px 60px rgba(0, 0, 0, .8));
             animation: none;
@@ -3155,7 +3281,7 @@
             bottom: 8%;
             left: 0;
             right: 0;
-            height: 42%;
+            height: 48%;
             padding: 16px 22px 18px;
             display: flex;
             flex-direction: column;

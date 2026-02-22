@@ -4,7 +4,7 @@ import { SocialPostsGenerator } from "@/features/content-generator/components/so
 export const metadata: Metadata = {
     title: "Trending Social Posts | HelloComp Dashboard",
     description:
-        "Generate AI-powered trending social media posts optimized for TikTok, Instagram, Twitter, LinkedIn, and more.",
+        "Generate AI-powered trending social posts and prepare them for automation pipeline scheduling across key platforms.",
     openGraph: {
         title: "Trending Social Posts Generator",
         description: "Create professional gaming PC content for social media",
@@ -20,8 +20,8 @@ export default function SocialPostsPage() {
                     🎬 Trending Social Posts
                 </h1>
                 <p className="text-lg text-slate-600 mt-2">
-                    Generate AI-powered, human-like posts that leverage real-time gaming trends.
-                    Optimized for TikTok, Instagram, Twitter, LinkedIn, YouTube Shorts, and more.
+                    Generate AI-powered, human-like posts from fresh trends and prepare them for a clean
+                    automation workflow from draft to scheduling.
                 </p>
             </div>
 
@@ -38,6 +38,7 @@ export default function SocialPostsPage() {
                             <li>✅ Template fallback for offline use</li>
                             <li>✅ One-click copy to clipboard</li>
                             <li>✅ Direct share links</li>
+                            <li>✅ Automation-ready pipeline metadata</li>
                         </ul>
                     </div>
 
@@ -81,7 +82,7 @@ export default function SocialPostsPage() {
                     <div>
                         <p className="font-semibold text-slate-900 mb-2">3. Share</p>
                         <p className="text-slate-600">
-                            Copy posts with one click or post directly to social media. No formatting needed.
+                            Copy posts with one click, then move them through review/scheduling with no reformatting.
                         </p>
                     </div>
                 </div>

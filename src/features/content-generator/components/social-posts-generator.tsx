@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import {
     Copy,
+    Download,
     ExternalLink,
     Loader2,
     RefreshCw,
@@ -15,10 +16,10 @@ import {
     copyPostToClipboard,
     getPlatformEmoji,
     getToneColor,
-    SocialPost,
-    SocialPlatform,
     useSocialPostsGenerator,
 } from "../services/social-posts-service";
+import { SocialPost, SocialPlatform } from "../services/social-posts-contract";
+import { SocialUploadAutomationStudio } from "./social-upload-automation-studio";
 
 interface SocialPostCardProps {
     post: SocialPost;
@@ -264,6 +265,61 @@ export function SocialPostsGenerator({
         refetch();
     };
 
+    const escapeCsv = (value: string) => `"${value.replace(/"/g, '""')}"`;
+
+    const buildMetaSuiteCsv = (posts: SocialPost[]) => {
+        const header = [
+            "platform",
+            "message",
+            "hashtags",
+            "cta",
+            "publish_time",
+            "asset_url",
+        ];
+
+        const rows = posts
+            .filter((post) => post.platform === "instagram" || post.platform === "facebook")
+            .map((post) => [
+                post.platform,
+                post.body,
+                post.hashtags.join(" "),
+                post.cta || "",
+                "",
+                "",
+            ]);
+
+        return [header, ...rows].map((row) => row.map((cell) => escapeCsv(cell)).join(",")).join("\n");
+    };
+
+    const downloadMetaSuiteCsv = () => {
+        const posts = result?.posts ?? [];
+        const csv = buildMetaSuiteCsv(posts);
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `meta-suite-upload-${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
+
+    const copyMetaCaptionBundle = async () => {
+        const posts = (result?.posts ?? []).filter(
+            (post) => post.platform === "instagram" || post.platform === "facebook"
+        );
+
+        const payload = posts
+            .map(
+                (post, index) =>
+                    `${index + 1}. [${post.platform.toUpperCase()}] ${post.title}\n${post.body}\n${post.hashtags.join(" ")}\nCTA: ${post.cta || ""}`
+            )
+            .join("\n\n---\n\n");
+
+        await navigator.clipboard.writeText(payload || "No Meta-ready posts generated yet.");
+    };
+
     const availablePlatforms: Array<{ id: SocialPlatform; label: string }> = [
         { id: "tiktok", label: "🎵 TikTok" },
         { id: "instagram", label: "📸 Instagram" },
@@ -389,9 +445,59 @@ export function SocialPostsGenerator({
                         <p className="text-xs text-blue-700 mt-2">
                             ⏱️ Generated in {result.generationTimeMs}ms using {result.modelUsed}
                         </p>
+                        {result.automation && (
+                            <div className="mt-2 rounded border border-blue-200 bg-white p-2.5">
+                                <p className="text-xs font-semibold text-slate-800">⚙️ Automation pipeline</p>
+                                <p className="mt-1 text-xs text-slate-600">
+                                    {result.automation.pipeline.join(" → ")}
+                                </p>
+                                <p className="mt-1 text-[11px] text-slate-500">
+                                    Stage: <span className="font-semibold capitalize">{result.automation.workflowStage}</span>
+                                    {" • "}
+                                    Scheduling ready: {result.automation.readyForScheduling ? "yes" : "no"}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </Card>
             )}
+
+            {result?.posts && result.posts.length > 0 && (
+                <Card className="p-4 border-slate-200 bg-white">
+                    <div className="space-y-3">
+                        <div>
+                            <p className="text-sm font-semibold text-slate-900">📤 Meta Suite Upload Automation</p>
+                            <p className="text-xs text-slate-600 mt-1">
+                                Export ready captions for Instagram/Facebook, then upload media in Meta Business Suite.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                            <Button size="sm" variant="outline" onClick={downloadMetaSuiteCsv}>
+                                <Download className="w-4 h-4 mr-1" />
+                                Export Meta CSV
+                            </Button>
+
+                            <Button size="sm" variant="outline" onClick={copyMetaCaptionBundle}>
+                                <Copy className="w-4 h-4 mr-1" />
+                                Copy Caption Bundle
+                            </Button>
+
+                            <a
+                                href="https://business.facebook.com/latest/content_calendar"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center rounded-md border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                            >
+                                <ExternalLink className="w-4 h-4 mr-1" />
+                                Open Meta Suite
+                            </a>
+                        </div>
+                    </div>
+                </Card>
+            )}
+
+            <SocialUploadAutomationStudio generatedPosts={result?.posts} />
 
             {/* Posts Grid */}
             <SocialPostsGrid

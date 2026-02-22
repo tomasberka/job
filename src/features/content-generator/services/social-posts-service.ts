@@ -1,61 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { z } from "zod";
-
-// ============================================================================
-// TYPE DEFINITIONS (Mirror Python models)
-// ============================================================================
-
-export const SocialPlatformSchema = z.enum([
-    "tiktok",
-    "instagram",
-    "twitter",
-    "linkedin",
-    "youtube-shorts",
-    "facebook",
-]);
-export type SocialPlatform = z.infer<typeof SocialPlatformSchema>;
-
-export const ContentToneSchema = z.enum([
-    "aggressive",
-    "casual",
-    "professional",
-    "viral",
-    "emotional",
-]);
-export type ContentTone = z.infer<typeof ContentToneSchema>;
-
-export const SocialPostSchema = z.object({
-    platform: SocialPlatformSchema,
-    title: z.string(),
-    body: z.string(),
-    hashtags: z.array(z.string()),
-    emojis: z.array(z.string()),
-    cta: z.string().optional(),
-    tone: ContentToneSchema,
-    trendingTopic: z.string().optional(),
-    gpuMention: z.string().optional(),
-    createdAt: z.string().datetime(),
-});
-export type SocialPost = z.infer<typeof SocialPostSchema>;
-
-export const TrendingTopicSchema = z.object({
-    keyword: z.string(),
-    category: z.string(),
-    platforms: z.array(z.string()),
-    volume: z.number(),
-    urgency: z.number(),
-    relevance: z.number(),
-});
-export type TrendingTopic = z.infer<typeof TrendingTopicSchema>;
-
-export const SocialPostsResponseSchema = z.object({
-    posts: z.array(SocialPostSchema),
-    trendingTopics: z.array(TrendingTopicSchema),
-    productContext: z.string().optional(),
-    modelUsed: z.string(),
-    generationTimeMs: z.number(),
-});
-export type SocialPostsResponse = z.infer<typeof SocialPostsResponseSchema>;
+import {
+    type ContentTone,
+    type SocialPlatform,
+    type SocialPublishRequest,
+    type SocialPublishResponse,
+    type SocialPost,
+    type SocialPostsCatalogResponse,
+    type SocialPostsResponse,
+    SocialPublishRequestSchema,
+    SocialPublishResponseSchema,
+    SocialPostsCatalogResponseSchema,
+    SocialPostsResponseSchema,
+} from "./social-posts-contract";
 
 // ============================================================================
 // API CLIENT
@@ -121,7 +77,27 @@ export class SocialPostsClient {
             );
         }
 
-        return response.json();
+        const json = await response.json();
+        return SocialPostsCatalogResponseSchema.parse(json);
+    }
+
+    async createPublishBatch(payload: SocialPublishRequest): Promise<SocialPublishResponse> {
+        const parsedPayload = SocialPublishRequestSchema.parse(payload);
+
+        const response = await fetch(`${this.baseUrl}/social-posts/publish`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(parsedPayload),
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const json = await response.json();
+        return SocialPublishResponseSchema.parse(json);
     }
 }
 
@@ -178,7 +154,7 @@ export function useTrendingTopics() {
 
     return useQuery({
         queryKey: ["trendingTopics"],
-        queryFn: () => client.getTrendingTopics(),
+        queryFn: (): Promise<SocialPostsCatalogResponse> => client.getTrendingTopics(),
         staleTime: 1000 * 60 * 30, // 30 minutes
         retry: 1,
     });

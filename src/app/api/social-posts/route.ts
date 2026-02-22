@@ -1,11 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import {
+    ContentToneSchema,
+    SocialPlatformSchema,
+    SocialPostRequestSchema,
+} from "@/features/content-generator/services/social-posts-contract";
+import {
+    generateMockSocialPosts,
+    getDefaultAutomation,
+    getMockTrendingTopics,
+} from "@/features/content-generator/services/social-posts-mock-generator";
 
-// Validation schema for API requests
-const SocialPostRequestSchema = z.object({
-    platforms: z.array(z.string()).optional().default(["tiktok", "instagram"]),
-    numTopics: z.number().int().min(1).max(5).optional().default(2),
-    tones: z.array(z.string()).optional().default(["casual", "viral"]),
+const SocialCatalogSchema = z.object({
+    trending: z.array(
+        z.object({
+            keyword: z.string(),
+            category: z.string(),
+            platforms: z.array(SocialPlatformSchema),
+            volume: z.number(),
+            urgency: z.number(),
+            relevance: z.number(),
+        })
+    ),
+    availablePlatforms: z.array(SocialPlatformSchema),
+    availableTones: z.array(ContentToneSchema),
+    automationDefaults: z.object({
+        workflowStage: z.enum(["draft", "review", "scheduled", "published"]),
+        pipeline: z.array(z.string()),
+        publishTargets: z.array(SocialPlatformSchema),
+        readyForScheduling: z.boolean(),
+    }),
 });
 
 /**
@@ -32,11 +56,13 @@ const SocialPostRequestSchema = z.object({
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        SocialPostRequestSchema.parse(body);
+        const parsed = SocialPostRequestSchema.parse(body);
 
-        // Call Python backend (via environment or subprocess)
-        // For now, we'll return a mock response to show structure
-        const response = await generateSocialPostsFromPython();
+        const response = generateMockSocialPosts({
+            platforms: parsed.platforms,
+            numTopics: parsed.numTopics,
+            tones: parsed.tones,
+        });
 
         return NextResponse.json(response, { status: 200 });
     } catch (error) {
@@ -70,41 +96,22 @@ export async function POST(request: NextRequest) {
  */
 export async function GET() {
     try {
-        // Return trending topics and structure
-        const trendingTopics = [
-            {
-                keyword: "GTA VI System Requirements",
-                category: "gaming",
-                platforms: ["twitter", "youtube-shorts", "tiktok"],
-                volume: 8500,
-                urgency: 0.95,
-                relevance: 0.95,
-            },
-            {
-                keyword: "RTX 5090 Gaming Performance",
-                category: "gaming",
-                platforms: ["youtube-shorts", "twitter", "instagram"],
-                volume: 6200,
-                urgency: 0.9,
-                relevance: 0.98,
-            },
-        ];
+        const payload = {
+            trending: getMockTrendingTopics(),
+            availablePlatforms: [
+                "tiktok",
+                "instagram",
+                "twitter",
+                "linkedin",
+                "youtube-shorts",
+                "facebook",
+            ] as const,
+            availableTones: ["aggressive", "casual", "professional", "viral", "emotional"] as const,
+            automationDefaults: getDefaultAutomation(["tiktok", "instagram", "twitter"]),
+        };
 
-        return NextResponse.json(
-            {
-                trending: trendingTopics,
-                availablePlatforms: [
-                    "tiktok",
-                    "instagram",
-                    "twitter",
-                    "linkedin",
-                    "youtube-shorts",
-                    "facebook",
-                ],
-                availableTones: ["aggressive", "casual", "professional", "viral", "emotional"],
-            },
-            { status: 200 }
-        );
+        const validated = SocialCatalogSchema.parse(payload);
+        return NextResponse.json(validated, { status: 200 });
     } catch {
         return NextResponse.json(
             {
@@ -113,69 +120,4 @@ export async function GET() {
             { status: 500 }
         );
     }
-}
-
-/**
- * Placeholder: Call Python trending-socials generator.
- * In production, this would:
- * 1. Spawn Python subprocess
- * 2. Pass JSON params
- * 3. Parse JSON output
- * 4. Return to client
- */
-async function generateSocialPostsFromPython(): Promise<object> {
-    // Mock implementation for demonstration
-    // In production: spawn subprocess and call trending-socials CLI
-
-    const mockPosts = [
-        {
-            platform: "tiktok",
-            title: "TikTok Post — GTA VI System Requirements",
-            body: "POV: Právě si zjistil, že tvůj PC zvládá GTA VI bez problémů. HelloComp + RTX 5090 = neomezený gaming. 🔥💻",
-            hashtags: ["#gta6", "#gamingpc", "#hellocomp"],
-            emojis: ["🔥", "💻", "⚡"],
-            cta: "Link in bio",
-            tone: "casual",
-            trendingTopic: "GTA VI System Requirements",
-            gpuMention: "RTX 5090",
-            createdAt: new Date().toISOString(),
-        },
-        {
-            platform: "instagram",
-            title: "Instagram Post — RTX 5090 Gaming Performance",
-            body: "Když tvé gaming PC je tak výkonné, že accidentálně skipneš cutscenu. RTX 5090 v HelloComp — přesně to, co potřebuješ. 👀🎮✨",
-            hashtags: ["#rtx5090", "#gaming", "#hellocomp"],
-            emojis: ["👀", "🎮", "✨"],
-            cta: "Link in bio",
-            tone: "casual",
-            trendingTopic: "RTX 5090 Gaming Performance",
-            gpuMention: "RTX 5090",
-            createdAt: new Date().toISOString(),
-        },
-    ];
-
-    return {
-        posts: mockPosts,
-        trendingTopics: [
-            {
-                keyword: "GTA VI System Requirements",
-                category: "gaming",
-                platforms: ["twitter", "youtube-shorts", "tiktok"],
-                volume: 8500,
-                urgency: 0.95,
-                relevance: 0.95,
-            },
-            {
-                keyword: "RTX 5090 Gaming Performance",
-                category: "gaming",
-                platforms: ["youtube-shorts", "twitter", "instagram"],
-                volume: 6200,
-                urgency: 0.9,
-                relevance: 0.98,
-            },
-        ],
-        productContext: null,
-        modelUsed: "gemini-2.0-flash",
-        generationTimeMs: Math.random() * 5000,
-    };
 }
