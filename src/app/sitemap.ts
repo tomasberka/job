@@ -18,9 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/pc-inventory`,
-      lastModified: new Date(
-        Math.max(...PC_INVENTORY_MOCK.map((p) => new Date(p.updatedAt).getTime()))
-      ),
+      lastModified: PC_INVENTORY_MOCK.length > 0
+        ? new Date(
+            Math.max(...PC_INVENTORY_MOCK.map((p) => new Date(p.updatedAt).getTime()))
+          )
+        : new Date(),
       changeFrequency: "daily",
       priority: 0.9,
       images: productImages,

@@ -1,10 +1,10 @@
 import { PC_INVENTORY_MOCK } from "./pc-inventory-mock";
 import { PCProductSchema, type PCProduct, type PCLineup } from "../types/pc-product";
-import { apiGet, useMocks } from "@/lib/api-client";
+import { apiGet, isMockMode } from "@/lib/api-client";
 import { z } from "zod";
 
 export async function fetchPCInventory(): Promise<PCProduct[]> {
-  if (useMocks()) {
+  if (isMockMode()) {
     await new Promise((resolve) => setTimeout(resolve, 300));
     return PC_INVENTORY_MOCK;
   }
