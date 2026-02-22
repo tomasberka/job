@@ -14,22 +14,22 @@ import { cn } from "@/lib/utils";
 const navItems = [
   {
     href: "/",
-    label: "Dashboard",
+    label: "Přehled",
     icon: LayoutDashboard,
   },
   {
     href: "/pc-inventory",
-    label: "PC Inventory",
+    label: "Sklad PC",
     icon: Monitor,
   },
   {
     href: "/content-generator",
-    label: "Content Generator",
+    label: "Obsah",
     icon: FileText,
   },
   {
     href: "/video-workflow",
-    label: "Video Workflow",
+    label: "Video produkce",
     icon: Video,
   },
 ];
@@ -50,7 +50,7 @@ export function Sidebar() {
               HelloComp
             </p>
             <p className="mt-0.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-              Dashboard
+              Řídicí panel
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ export function Sidebar() {
             hellocomp.cz
           </p>
           <p className="mt-0.5 text-[10px] text-muted-foreground/60">
-            Internal dashboard v0.1
+            Interní dashboard v0.1
           </p>
         </div>
       </div>

@@ -53,9 +53,9 @@ export function PCInventoryRoute() {
             <Monitor className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-foreground">PC Inventory</h1>
+            <h1 className="text-xl font-bold text-foreground">Sklad PC</h1>
             <p className="text-sm text-muted-foreground">
-              HelloComp GAMER SE · Pro · Max lineup
+              HelloComp GAMER SE · Pro · Max — aktuální zásoby
             </p>
           </div>
         </div>

@@ -38,10 +38,10 @@ export function ContentGeneratorRoute() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              Content Generator
+              Generátor obsahu
             </h1>
             <p className="text-sm text-muted-foreground">
-              TikTok hooks · SEO meta · Video scripts
+              TikTok hooky · SEO meta · Video skripty
             </p>
           </div>
         </div>

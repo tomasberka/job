@@ -38,10 +38,10 @@ export function VideoWorkflowRoute() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              Video Workflow
+              Video produkce
             </h1>
             <p className="text-sm text-muted-foreground">
-              DaVinci Resolve export tracking
+              Správa exportů DaVinci Resolve
             </p>
           </div>
         </div>

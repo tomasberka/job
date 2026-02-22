@@ -7,12 +7,12 @@ const statusConfig: Record<
   VideoExportStatus,
   { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
 > = {
-  queued: { label: "Queued", variant: "outline" },
-  rendering: { label: "Rendering", variant: "secondary" },
-  exported: { label: "Exported", variant: "secondary" },
-  uploading: { label: "Uploading", variant: "secondary" },
-  published: { label: "Published", variant: "default" },
-  failed: { label: "Failed", variant: "destructive" },
+  queued: { label: "Ve frontě", variant: "outline" },
+  rendering: { label: "Renderuje se", variant: "secondary" },
+  exported: { label: "Exportováno", variant: "secondary" },
+  uploading: { label: "Nahrávání", variant: "secondary" },
+  published: { label: "Publikováno", variant: "default" },
+  failed: { label: "Chyba", variant: "destructive" },
 };
 
 const platformColors: Record<string, string> = {
@@ -63,7 +63,7 @@ export function VideoExportCard({ videoExport: ve }: VideoExportCardProps) {
         {ve.status === "rendering" && (
           <div>
             <div className="mb-1 flex justify-between text-xs text-muted-foreground">
-              <span>Rendering</span>
+              <span>Renderuje se</span>
               <span>{ve.progress}%</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-muted">
@@ -79,10 +79,10 @@ export function VideoExportCard({ videoExport: ve }: VideoExportCardProps) {
         <div className="rounded-lg bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
           <div className="font-medium text-foreground/70">DaVinci Resolve</div>
           <div className="mt-1 space-y-0.5">
-            <div>Project: {ve.davinci.project}</div>
-            <div>Timeline: {ve.davinci.timeline}</div>
+            <div>Projekt: {ve.davinci.project}</div>
+            <div>Časová osa: {ve.davinci.timeline}</div>
             {ve.davinci.colorGrade && (
-              <div className="text-green-400/80">✓ Color graded</div>
+              <div className="text-green-400/80">✓ Korekce barev</div>
             )}
           </div>
         </div>
