@@ -18,7 +18,7 @@ Internal Next.js dashboard for [HelloComp](https://hellocomp.cz) — a Czech gam
 
 ## Tech Stack
 
-- **Framework** — [Next.js 15](https://nextjs.org) (App Router, React 19)
+- **Framework** — [Next.js 16](https://nextjs.org) (App Router, React 19)
 - **Language** — TypeScript 5
 - **Styling** — Tailwind CSS 3 + `class-variance-authority`
 - **UI components** — Radix UI (Dialog, DropdownMenu, Tooltip, Separator, Slot)
@@ -102,7 +102,7 @@ Root config files:
 | `tailwind.config.ts` | Tailwind configuration |
 | `postcss.config.mjs` | PostCSS config |
 | `tsconfig.json` | TypeScript config (`@/` path alias → `./src`) |
-| `.eslintrc.json` | ESLint config (extends `next/core-web-vitals`) |
+| `eslint.config.mjs` | ESLint flat config (extends `next/core-web-vitals`) |
 | `next-env.d.ts` | Next.js TypeScript declarations (auto-generated) |
 | `sitemap0.xml` | Static sitemap snapshot |
 | `products (1).csv` | Source product data used to seed mock data |
