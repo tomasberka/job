@@ -18,7 +18,7 @@ export function VideoWorkflowRoute() {
     "@type": "WebPage",
     name: "Video produkce | HelloComp",
     description:
-      "Sledování exportů DaVinci Resolve a správa video produkce HelloComp.",
+      "Sledování exportů a správa video produkce HelloComp.",
     url: "https://hellocomp.cz/video-workflow",
     publisher: {
       "@type": "Organization",
@@ -43,7 +43,7 @@ export function VideoWorkflowRoute() {
               Video produkce
             </h1>
             <p className="text-sm text-muted-foreground">
-              Správa exportů DaVinci Resolve
+              Správa video exportů
             </p>
           </div>
         </div>

@@ -75,18 +75,6 @@ export function VideoExportCard({ videoExport: ve }: VideoExportCardProps) {
           </div>
         )}
 
-        {/* DaVinci info */}
-        <div className="rounded-lg bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
-          <div className="font-medium text-foreground/70">DaVinci Resolve</div>
-          <div className="mt-1 space-y-0.5">
-            <div>Projekt: {ve.davinci.project}</div>
-            <div>Časová osa: {ve.davinci.timeline}</div>
-            {ve.davinci.colorGrade && (
-              <div className="text-green-400/80">✓ Korekce barev</div>
-            )}
-          </div>
-        </div>
-
         <div className="flex items-center justify-between text-xs text-muted-foreground/70">
           <span>{ve.fileSize.toLocaleString()} MB</span>
           <span>SKU: {ve.productSku}</span>
