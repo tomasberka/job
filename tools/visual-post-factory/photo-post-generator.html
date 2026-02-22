@@ -1070,12 +1070,16 @@
         /* === HERO === */
         .tpl-hero {
             background:
-                radial-gradient(ellipse at 25% 15%, rgba(33, 102, 204, .18) 0%, transparent 50%),
-                radial-gradient(ellipse at 75% 80%, rgba(0, 212, 255, .08) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 50%, rgba(16, 24, 48, .6) 0%, transparent 70%),
-                linear-gradient(170deg, #0f1628 0%, #080d18 40%, #04070d 100%);
-            border: 1px solid rgba(33, 102, 204, .15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .6), 0 0 0 1px rgba(33, 102, 204, .06)
+                /* Hot red-orange gaming focal points */
+                radial-gradient(circle at 15% 10%, rgba(255, 40, 40, .35) 0%, transparent 35%),
+                radial-gradient(circle at 85% 15%, rgba(255, 120, 0, .25) 0%, transparent 30%),
+                radial-gradient(circle at 50% 45%, rgba(220, 20, 60, .15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 90%, rgba(255, 60, 0, .2) 0%, transparent 40%),
+                radial-gradient(ellipse at 25% 75%, rgba(180, 0, 50, .12) 0%, transparent 45%),
+                /* Deep dark gaming base */
+                linear-gradient(155deg, #1a0508 0%, #0d0205 25%, #120810 50%, #0a0206 75%, #050103 100%);
+            border: 1px solid rgba(255, 50, 50, .25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .7), 0 0 80px rgba(255, 40, 40, .08), inset 0 0 120px rgba(255, 40, 40, .03)
         }
 
         .tpl-hero::before {
@@ -1084,7 +1088,7 @@
             inset: -1px;
             border-radius: 18px;
             padding: 1px;
-            background: linear-gradient(170deg, rgba(33, 102, 204, .3), transparent 40%, rgba(0, 212, 255, .15));
+            background: linear-gradient(170deg, rgba(255, 50, 50, .5), rgba(255, 120, 0, .3) 30%, transparent 50%, rgba(255, 40, 40, .2));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -1092,8 +1096,25 @@
             z-index: 1
         }
 
+        /* Gaming mesh grid overlay */
+        .tpl-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background:
+                linear-gradient(rgba(255, 40, 40, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 40, 40, .03) 1px, transparent 1px),
+                /* Diagonal accent stripes */
+                repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255, 50, 50, .02) 60px, rgba(255, 50, 50, .02) 61px);
+            background-size: 30px 30px, 30px 30px, 86px 86px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .5
+        }
+
         .tpl-hero:hover {
-            box-shadow: 0 24px 64px rgba(33, 102, 204, .15), 0 20px 60px rgba(0, 0, 0, .6)
+            box-shadow: 0 24px 64px rgba(255, 40, 40, .2), 0 20px 60px rgba(0, 0, 0, .7), 0 0 120px rgba(255, 50, 50, .1)
         }
 
         .tpl-hero .product-zone {
@@ -1801,12 +1822,32 @@
         /* === NEON === */
         .tpl-neon {
             background:
-                radial-gradient(ellipse at 30% 20%, rgba(0, 212, 255, .12) 0%, transparent 45%),
-                radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, .1) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 40%, rgba(0, 100, 200, .08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 30%, #0d1220, #05080e 70%);
-            border: 1px solid rgba(0, 212, 255, .18);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .6), 0 0 80px rgba(0, 212, 255, .08), inset 0 0 80px rgba(0, 212, 255, .03)
+                /* Electric cyan hotspots */
+                radial-gradient(circle at 20% 15%, rgba(0, 255, 255, .3) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(120, 0, 255, .25) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(0, 200, 255, .1) 0%, transparent 50%),
+                radial-gradient(circle at 30% 85%, rgba(168, 85, 247, .2) 0%, transparent 35%),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 200, .12) 0%, transparent 40%),
+                /* Cyberpunk dark base */
+                linear-gradient(160deg, #06101a 0%, #040818 30%, #0a0620 60%, #030510 100%);
+            border: 1px solid rgba(0, 212, 255, .3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .7), 0 0 100px rgba(0, 212, 255, .12), inset 0 0 100px rgba(0, 212, 255, .04)
+        }
+
+        /* Neon hex grid overlay */
+        .tpl-neon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background:
+                linear-gradient(rgba(0, 212, 255, .04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, .04) 1px, transparent 1px),
+                repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(168, 85, 247, .02) 80px, rgba(168, 85, 247, .02) 81px);
+            background-size: 24px 24px, 24px 24px, 113px 113px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .6
         }
 
         .tpl-neon .glow-ring {
@@ -2016,12 +2057,32 @@
         /* === SPECS === */
         .tpl-specs {
             background:
-                radial-gradient(ellipse at 40% 20%, rgba(33, 102, 204, .12) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 85%, rgba(16, 185, 129, .08) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 50%, rgba(15, 20, 35, .5) 0%, transparent 60%),
-                linear-gradient(170deg, #111827 0%, #0b0f1a 100%);
-            border: 1px solid rgba(33, 102, 204, .12);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .5), 0 0 0 1px rgba(33, 102, 204, .04)
+                /* Military-grade tactical blue/teal hotspots */
+                radial-gradient(circle at 25% 10%, rgba(0, 150, 255, .2) 0%, transparent 35%),
+                radial-gradient(circle at 75% 20%, rgba(16, 185, 129, .18) 0%, transparent 30%),
+                radial-gradient(circle at 50% 60%, rgba(33, 102, 204, .1) 0%, transparent 45%),
+                radial-gradient(circle at 20% 90%, rgba(0, 200, 180, .1) 0%, transparent 35%),
+                radial-gradient(circle at 85% 80%, rgba(33, 102, 204, .08) 0%, transparent 40%),
+                /* Dark tactical base */
+                linear-gradient(165deg, #0a1018 0%, #060c14 30%, #081015 60%, #040810 100%);
+            border: 1px solid rgba(33, 102, 204, .18);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .6), 0 0 60px rgba(33, 102, 204, .06)
+        }
+
+        /* Tactical grid overlay */
+        .tpl-specs::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background:
+                linear-gradient(rgba(33, 102, 204, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(33, 102, 204, .03) 1px, transparent 1px),
+                repeating-linear-gradient(30deg, transparent, transparent 100px, rgba(16, 185, 129, .015) 100px, rgba(16, 185, 129, .015) 101px);
+            background-size: 20px 20px, 20px 20px, 141px 141px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .5
         }
 
         .tpl-specs .product-zone {
@@ -2331,10 +2392,14 @@
         .tpl-cinema .cinema-bg {
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 30% 50%, rgba(33, 102, 204, .25) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(168, 85, 247, .2) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, rgba(0, 212, 255, .15) 0%, transparent 40%),
-                linear-gradient(180deg, #050810 0%, #0a0e1a 50%, #050810 100%);
+            background:
+                /* Hot red/crimson cinema drama */
+                radial-gradient(circle at 20% 30%, rgba(200, 0, 50, .3) 0%, transparent 40%),
+                radial-gradient(circle at 80% 40%, rgba(150, 0, 200, .25) 0%, transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(255, 40, 80, .15) 0%, transparent 45%),
+                radial-gradient(circle at 40% 10%, rgba(100, 0, 255, .12) 0%, transparent 30%),
+                radial-gradient(ellipse at 70% 90%, rgba(255, 100, 0, .1) 0%, transparent 35%),
+                linear-gradient(180deg, #080210 0%, #0a0418 50%, #050108 100%);
             z-index: 1;
             animation: none;
             transition: opacity .5s .5s
