@@ -15,7 +15,6 @@ productsMarketing.xml
 /src/generated/prisma
 
 # Product cache
-data/
 
 # Prisma
 prisma.config.ts
