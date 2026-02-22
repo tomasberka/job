@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "HelloComp — Řídicí panel",
     description:
       "Interní dashboard HelloComp — hellocomp.cz",
-    siteName: "HelloComp Dashboard",
+    siteName: "HelloComp Řídicí panel",
   },
 };
 

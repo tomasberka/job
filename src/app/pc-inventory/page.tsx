@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { PCInventoryRoute } from "@/features/pc-inventory/routes/pc-inventory-route";
 
 export const metadata: Metadata = {
-  title: "PC Inventory | HelloComp",
+  title: "Sklad PC | HelloComp",
   description:
-    "Manage HelloComp GAMER SE, Pro and Max PC lineups — specs, pricing, availability.",
+    "Správa PC sestavů HelloComp GAMER SE, Pro a Max — specifikace, ceny, dostupnost.",
 };
 
 export default function PCInventoryPage() {
