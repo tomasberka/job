@@ -37,3 +37,16 @@ export const PCProductSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 export type PCProduct = z.infer<typeof PCProductSchema>;
+
+export const CreatePCProductSchema = z.object({
+  sku: z.string().min(1, "SKU je povinné"),
+  name: z.string().min(1, "Název je povinný"),
+  lineup: PCLineupSchema,
+  price: z.number().positive("Cena musí být kladná"),
+  specs: PCSpecsSchema,
+  status: PCStatusSchema,
+  stock: z.number().int().nonnegative("Sklad nesmí být záporný"),
+  imageUrl: z.string().url().optional().or(z.literal("")),
+  tags: z.array(z.string()),
+});
+export type CreatePCProduct = z.infer<typeof CreatePCProductSchema>;

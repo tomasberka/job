@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchVideoExports } from "../services/video-workflow-service";
 import { VideoExportCard } from "../components/video-export-card";
+import { CreateVideoDialog } from "../components/create-video-dialog";
 import { Video } from "lucide-react";
 
 export function VideoWorkflowRoute() {
@@ -34,18 +35,21 @@ export function VideoWorkflowRoute() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
-            <Video className="h-5 w-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
+              <Video className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-foreground">
+                Video produkce
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Správa exportů DaVinci Resolve
+              </p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-foreground">
-              Video produkce
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Správa exportů DaVinci Resolve
-            </p>
-          </div>
+          <CreateVideoDialog />
         </div>
 
         {isLoading ? (

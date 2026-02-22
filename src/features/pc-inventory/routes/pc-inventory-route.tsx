@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchPCInventory } from "../services/pc-inventory-service";
 import { PCProductCard } from "../components/pc-product-card";
+import { CreatePCDialog } from "../components/create-pc-dialog";
 import { Monitor } from "lucide-react";
 
 export function PCInventoryRoute() {
@@ -51,16 +52,19 @@ export function PCInventoryRoute() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
-            <Monitor className="h-5 w-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
+              <Monitor className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-foreground">Sklad PC</h1>
+              <p className="text-sm text-muted-foreground">
+                HelloComp GAMER SE · Pro · Max — aktuální zásoby
+              </p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-foreground">Sklad PC</h1>
-            <p className="text-sm text-muted-foreground">
-              HelloComp GAMER SE · Pro · Max — aktuální zásoby
-            </p>
-          </div>
+          <CreatePCDialog />
         </div>
 
         {isLoading ? (
