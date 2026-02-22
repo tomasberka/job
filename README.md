@@ -37,7 +37,7 @@ All templates use `object-fit: contain` (product zoomed out, clean display) + He
 
 - **Adobe Express Embed SDK** — Quick Actions (remove BG, resize, effects) via client ID `6742aefa92e546b5a3f0031f7168bbde`
 - **Auto Background Removal** — Checked by default; runs `removeBackgroundAll()` on all loaded images after SDK init
-- **Smart Copy Engine** — Price-tier-based Czech marketing copy (budget < 15k / mid 15–25k / premium 25–40k / ultra 40k+). Unique hook/claim/CTA selection with `pickUnique()` — no duplicates across batch
+- **Smart Copy Engine** — Price-tier-based Czech marketing copy (budget < 17k / mid 17–30k / premium 30–50k / ultra 50k+). Unique hook/claim/CTA selection with `pickUnique()` — no duplicates across batch. 10 hooks per tier, 4 claims per tier, 8 CTAs
 - **HelloComp Logo** — SVG logo rendered via `logoHtml(dark)` with conditional invert filter for dark/light backgrounds
 - **CSV-driven** — Paste or load `products-all.csv` (52 products: name, price, CPU, GPU, RAM, image URL)
 
@@ -45,7 +45,7 @@ All templates use `object-fit: contain` (product zoomed out, clean display) + He
 
 | File | Purpose |
 |------|---------|
-| `tools/visual-post-factory/photo-post-generator.html` | Source (559 lines, v3.0) |
+| `tools/visual-post-factory/photo-post-generator.html` | Source (578 lines, v3.0) |
 | `public/photo-generator.html` | Served copy (synced) |
 | `public/hellocomp_logo_website.svg` | HelloComp SVG logo (72 KB) |
 | `public/products-all.csv` | 52 curated gaming PCs |
@@ -127,7 +127,7 @@ public/
 
 tools/
 ├── visual-post-factory/
-│   └── photo-post-generator.html  # Source file (559 lines, v3.0)
+│   └── photo-post-generator.html  # Source file (578 lines, v3.0)
 └── content-automation/         # Python CLI: hooks, SEO, omnichannel, trending socials
 
 data/
