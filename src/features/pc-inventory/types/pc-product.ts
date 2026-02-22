@@ -32,6 +32,9 @@ export const PCProductSchema = z.object({
   status: PCStatusSchema,
   stock: z.number().int().nonnegative(),
   imageUrl: z.string().url().optional(),
+  images: z.array(z.string().url()).optional(), // All product images for marketing
+  flags: z.array(z.string()).optional(), // Promo flags: action, new, tip
+  shortDescription: z.string().optional(), // Short text for ads
   tags: z.array(z.string()),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
