@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HelloComp Photo Post Factory</title>
+    <style>
+        :root {
+            --brand-blue: #2166CC;
+            --brand-black: #111111;
+            --text: #f7f8fa;
+            --muted: #c7ced8;
+            --surface: #0d1117;
+            --surface-soft: #141a22;
+            --stroke: rgba(255, 255, 255, .12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: radial-gradient(circle at 20% 10%, #1a2230, #07090d 60%);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            height: 100%;
+        }
+
+        .panel {
+            border-right: 1px solid var(--stroke);
+            background: rgba(8, 10, 14, .8);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 12px;
+        }
+
+        .panel h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .panel p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.35;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            resize: none;
+            border: 1px solid var(--stroke);
+            background: #070a0f;
+            color: #e8edf5;
+            border-radius: 10px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .api-base {
+            width: 100%;
+            border: 1px solid var(--stroke);
+            background: #070a0f;
+            color: #e8edf5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 12px;
+        }
+
+        .status {
+            font-size: 12px;
+            color: var(--muted);
+            min-height: 1.2em;
+        }
+
+        button {
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: linear-gradient(135deg, rgba(33, 102, 204, .95), rgba(33, 102, 204, .75));
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: rgba(255, 255, 255, .08);
+            color: #d5deea;
+        }
+
+        .preview {
+            overflow: auto;
+            padding: 24px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        .card {
+            width: 324px;
+            aspect-ratio: 9/16;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--stroke);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .45);
+            background: var(--surface);
+        }
+
+        .photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(1.08);
+            transform: scale(1.01);
+        }
+
+        .fallback {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(165deg, #1f2a3d 0%, #111827 45%, #090c13 100%);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(3, 6, 12, .95) 5%, rgba(4, 8, 15, .65) 42%, rgba(6, 12, 24, .15) 72%);
+        }
+
+        .overlay.soft {
+            background: linear-gradient(to top, rgba(4, 7, 12, .88) 0%, rgba(7, 11, 19, .52) 45%, rgba(10, 16, 29, .16) 75%);
+        }
+
+        .overlay.dark {
+            background: linear-gradient(to top, rgba(2, 4, 8, .98) 0%, rgba(2, 5, 10, .7) 48%, rgba(5, 10, 20, .2) 78%);
+        }
+
+        .content {
+            position: absolute;
+            inset: 0;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(17, 17, 17, .76);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: #f3f6fb;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            padding: 5px 9px;
+            max-width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .stock {
+            background: rgba(8, 170, 94, .92);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .25);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            padding: 5px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+        }
+
+        .bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(10, 15, 24, .42);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 14px;
+            padding: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hook {
+            margin: 0;
+            font-size: 24px;
+            line-height: 1.03;
+            font-weight: 900;
+            letter-spacing: -.015em;
+            text-transform: uppercase;
+            text-wrap: balance;
+            max-height: 2.1em;
+            overflow: hidden;
+        }
+
+        .claim {
+            margin: 0;
+            color: #d8e1ee;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            opacity: .95;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .price {
+            margin: 0;
+            color: #ffffff;
+            font-size: 30px;
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -.02em;
+            text-wrap: nowrap;
+        }
+
+        .cta {
+            background: var(--brand-blue);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 8px 10px;
+            text-align: center;
+            min-width: 116px;
+        }
+
+        .legal {
+            margin: 0;
+            color: rgba(226, 235, 245, .8);
+            font-size: 10px;
+            line-height: 1.2;
+            min-height: 1.2em;
+        }
+
+        .specs {
+            margin: 0;
+            color: #d3ddeb;
+            font-size: 11px;
+            line-height: 1.25;
+            min-height: 2.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <section class="panel">
+            <h1>HelloComp Photo Post Factory</h1>
+            <p>Photo-first 9:16 generator. Vlož CSV se středníkem. Priorita: produktová fotka + cena + CTA.</p>
+            <div class="actions">
+                <button id="renderBtn">Generovat</button>
+                <button class="secondary" id="clearBtn">Vyčistit</button>
+                <button class="secondary" id="removeBgBtn">Adobe Remove BG</button>
+            </div>
+            <input id="apiBaseInput" class="api-base" value="http://localhost:3000"
+                placeholder="API base (např. http://localhost:3000)" />
+            <div id="statusText" class="status"></div>
+            <textarea
+                id="csvInput">id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;legal_line
+1;HelloComp AMD GAMER SE 5700 XT;Výkon bez kompromisů;18 490 Kč;Ryzen 5 5500 / RX 5700 XT / 16GB;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp PC build;center;soft;Skladem;Herní počítače pro každého;OBJEDNEJTE SI TEĎ;Ilustrační foto. Konfigurace se může lišit.
+2;HelloComp AMD GAMER MAX DDR5 9070 XT;Posuňte hranice výkonu;od 49 990 Kč;Ryzen 7 7700X / RX 9070 XT / 32GB DDR5;;HelloComp výkonová sestava;center;dark;Skladem;Herní počítače pro každého;POSUŇTE HRANICE VÝKONU;Aktuální dostupnost a cena na webu.
+3;HelloComp AMD GAMER SE 3060 Ti;Ready-to-play sestava;19 490 Kč;Ryzen 5 5500 / RTX 3060 Ti / 16GB;;HelloComp herní sestava;center;default;Skladem;Herní počítače pro každého;ZAPOJ A HRAJ;Ilustrační foto. Konfigurace se může lišit.</textarea>
+        </section>
+
+        <main class="preview" id="cardsContainer"></main>
+    </div>
+
+    <script>
+        const input = document.getElementById('csvInput');
+        const container = document.getElementById('cardsContainer');
+        const statusText = document.getElementById('statusText');
+        const apiBaseInput = document.getElementById('apiBaseInput');
+
+        const parseCsvWithHeaders = (raw) => {
+            const lines = raw.trim().split(/\r?\n/).filter(Boolean);
+            if (lines.length < 2) return { headers: [], rows: [] };
+            const headers = lines[0].split(';').map(h => h.trim());
+            const rows = lines.slice(1).map(line => {
+                const values = line.split(';');
+                const row = {};
+                headers.forEach((h, i) => row[h] = (values[i] || '').trim());
+                return row;
+            });
+            return { headers, rows };
+        };
+
+        const parseCsv = (raw) => parseCsvWithHeaders(raw).rows;
+
+        const serializeField = (value) => String(value || '').replace(/\r?\n/g, ' ').replace(/;/g, ',').trim();
+
+        const toCsv = (headers, rows) => {
+            if (!headers.length) return '';
+            const lines = [headers.join(';')];
+            rows.forEach(row => {
+                lines.push(headers.map(h => serializeField(row[h])).join(';'));
+            });
+            return lines.join('\n');
+        };
+
+        const esc = (value) => String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+
+        const overlayClass = (style) => {
+            if (style === 'soft') return 'soft';
+            if (style === 'dark') return 'dark';
+            return '';
+        };
+
+        const createCard = (item) => {
+            const image = item.image_url;
+            const focal = item.focal_point || 'center';
+            const overlay = overlayClass(item.overlay_style || 'default');
+            const hasImage = image && /^https?:\/\//i.test(image);
+
+            return `
+        <article class="card">
+          ${hasImage
+                    ? `<img class="photo" src="${esc(image)}" alt="${esc(item.image_alt || item.product_name || 'HelloComp produkt')}" style="object-position:${esc(focal)};" />`
+                    : '<div class="fallback"></div>'}
+          <div class="overlay ${overlay}"></div>
+
+          <div class="content">
+            <div class="top">
+              <div class="tag">${esc(item.product_name || 'HelloComp')}</div>
+              <div class="stock">${esc(item.badge_stock || 'Skladem')}</div>
+            </div>
+
+            <div class="bottom">
+              <p class="claim">${esc(item.positioning_claim || 'Herní počítače pro každého')}</p>
+              <h2 class="hook">${esc(item.hook || 'Výkon pro tvoji hru')}</h2>
+              <p class="specs">${esc(item.specs || '')}</p>
+              <div class="price-row">
+                <p class="price">${esc(item.price || '')}</p>
+                <div class="cta">${esc(item.cta || 'OBJEDNEJTE SI TEĎ')}</div>
+              </div>
+              <p class="legal">${esc(item.legal_line || '')}</p>
+            </div>
+          </div>
+        </article>
+      `;
+        };
+
+        const render = () => {
+            const items = parseCsv(input.value);
+            container.innerHTML = items.map(createCard).join('');
+        };
+
+        const removeBackgroundBatch = async () => {
+            const { headers, rows } = parseCsvWithHeaders(input.value);
+            if (!rows.length) {
+                statusText.textContent = 'CSV je prázdné.';
+                return;
+            }
+
+            const apiBase = (apiBaseInput.value || '').trim().replace(/\/$/, '');
+            if (!apiBase) {
+                statusText.textContent = 'Chybí API base URL.';
+                return;
+            }
+
+            const candidates = rows.filter(row => row.image_url && /^https?:\/\//i.test(row.image_url));
+            if (!candidates.length) {
+                statusText.textContent = 'Nebyly nalezeny validní image_url pro zpracování.';
+                return;
+            }
+
+            let success = 0;
+            let failed = 0;
+
+            statusText.textContent = `Zpracování ${candidates.length} obrázků...`;
+
+            for (let index = 0; index < candidates.length; index += 1) {
+                const row = candidates[index];
+                statusText.textContent = `Adobe remove BG: ${index + 1}/${candidates.length}`;
+
+                try {
+                    const response = await fetch(`${apiBase}/api/image/remove-background`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ imageUrl: row.image_url, outputFormat: 'png' }),
+                    });
+
+                    if (!response.ok) {
+                        failed += 1;
+                        continue;
+                    }
+
+                    const payload = await response.json();
+                    const processedImage = payload.outputImageUrl || payload.outputImageDataUrl;
+                    if (!processedImage) {
+                        failed += 1;
+                        continue;
+                    }
+
+                    row.image_url = processedImage;
+                    success += 1;
+                } catch {
+                    failed += 1;
+                }
+            }
+
+            input.value = toCsv(headers, rows);
+            render();
+            statusText.textContent = `Hotovo. Úspěch: ${success}, chyby: ${failed}.`;
+        };
+
+        document.getElementById('renderBtn').addEventListener('click', render);
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            container.innerHTML = '';
+            statusText.textContent = '';
+        });
+        document.getElementById('removeBgBtn').addEventListener('click', removeBackgroundBatch);
+
+        render();
+    </script>
+</body>
+
+</html>

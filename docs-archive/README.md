@@ -1,41 +1,25 @@
-# 📦 Documentation Archive
+# Documentation Archive
 
-Archived documentation files from previous development steps.
+Historical and reference documentation is stored here.
 
-## Files in This Archive
+## Archive Policy
 
-| File | Description |
-|------|-------------|
-| **COMPLETION_REPORT.md** | Project completion summary |
-| **DOCS_INDEX.md** | Complete documentation navigation map |
-| **IMPLEMENTATION_SUMMARY.md** | Technical implementation details |
-| **ONE_MAN_MARKETING_SYSTEM.md** | Solo marketer workflow playbook |
-| **QUICK_REFERENCE.md** | One-page system cheat sheet |
-| **ROADMAP.md** | Future development roadmap |
-| **SHOPTET_INTEGRATION.md** | 🆕 Shoptet XML integration guide for hellocomp.cz |
-| **SOCIAL_STRATEGY_MASTERY.md** | Social media strategy guide |
-| **SYSTEM_PROFILE.md** | Complete system analysis (1,337 lines) |
-| **TRENDING_SOCIALS.md** | Trending social posts technical docs |
-| **TRENDING_SOCIALS_QUICKSTART.md** | 5-minute quickstart guide |
+- Files in this folder are considered legacy or deep-reference material.
+- Active operational documents live in the project root.
+- Before using archive guidance for execution, verify current decisions in root docs.
 
-## Quick Access
+## Start Here (Archive)
 
-### For Documentation
-→ See [DOCS_INDEX.md](DOCS_INDEX.md) for complete documentation map
+- [ARCHIVE_INDEX.md](ARCHIVE_INDEX.md) — quick map with status by file.
 
-### For System Overview
-→ See [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) for full analysis (30 min read)
+## Most Useful References
 
-### For Shoptet Integration
-→ See [SHOPTET_INTEGRATION.md](SHOPTET_INTEGRATION.md) for connecting hellocomp.cz
+- [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md)
+- [SHOPTET_INTEGRATION.md](SHOPTET_INTEGRATION.md)
+- [ONE_MAN_MARKETING_SYSTEM.md](ONE_MAN_MARKETING_SYSTEM.md)
 
-### For Daily Operations
-→ See [ONE_MAN_MARKETING_SYSTEM.md](ONE_MAN_MARKETING_SYSTEM.md) for workflow
+## Restore Workflow
 
-## Why Archived?
+If you need to bring back an archived document to root:
 
-These files were moved from the root directory to keep the project clean while preserving all documentation for reference. All information is still accessible here.
-
----
-
-**To restore any file:** `cp docs-archive/[filename].md ./`
+`cp docs-archive/[filename].md ./`

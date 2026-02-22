@@ -1,0 +1,21 @@
+campaign_id,rank,product_name,format,template,positioning_claim,headline_seed,cta,objective,status
+sales-ig-v1,1,"HelloComp AMD GAMER SE 5700 XT",1080x1350,product-highlight,"Herní počítače pro každého","RX 5700 XT výkon bez kompromisů",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,2,"HelloComp AMD GAMER MAX DDR5 9070 XT",1080x1920,power-challenge,"Herní počítače pro každého","DDR5 + RX 9070 XT pro maximum FPS",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,3,"HelloComp AMD GAMER SE 3060 Ti",1080x1350,product-highlight,"Herní počítače pro každého","RTX 3060 Ti herní klasika",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,4,"HelloComp Intel GAMER SE8 580",1080x1080,price-performance,"Herní počítače pro každého","Herní výkon od dostupné ceny",ZAPOJ A HRAJ,sales,ready
+sales-ig-v1,5,"HelloComp Intel GAMER SE6 6400",1080x1080,price-performance,"Herní počítače pro každého","Dostupný vstup do PC gamingu",ZAPOJ A HRAJ,sales,ready
+sales-ig-v1,6,"HelloComp AMD GAMER 6700 XT",1080x1350,product-highlight,"Herní počítače pro každého","RX 6700 XT na moderní AAA tituly",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,7,"HelloComp Intel GAMER SE6 580",1080x1080,price-performance,"Herní počítače pro každého","Ready-to-play sestava bez čekání",ZAPOJ A HRAJ,sales,ready
+sales-ig-v1,8,"HelloComp AMD GAMER MAX DDR5 7800 XT",1080x1920,power-challenge,"Herní počítače pro každého","DDR5 + RX 7800 XT pro náročné hráče",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,9,"HelloComp AMD GAMER SE 5060",1080x1350,product-highlight,"Herní počítače pro každého","RTX 5060 výkon nové generace",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,10,"HelloComp AMD GAMER Individual Extreme 9070 XT",1080x1920,power-challenge,"Herní počítače pro každého","Extreme build pro maximální výkon",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,11,"HelloComp AMD GAMER Individual 3060 Ti",1080x1350,product-highlight,"Herní počítače pro každého","RTX 3060 Ti + 1TB NVMe",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,12,"HelloComp Intel GAMER Individual Ultra5 9060 XT White",1080x1350,product-highlight,"Herní počítače pro každého","White build + RX 9060 XT",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,13,"HelloComp AMD GAMER Individual 5050",1080x1350,product-highlight,"Herní počítače pro každého","RTX 5050 připraveno na hraní",OBJEDNEJTE SI TEĎ,sales,ready
+sales-ig-v1,14,"HelloComp AMD GAMER Individual Pro DDR5 5060",1080x1920,power-challenge,"Herní počítače pro každého","DDR5 Pro sestava s RTX 5060",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,15,"HelloComp AMD GAMER Individual Pro DDR5 5060 White",1080x1920,power-challenge,"Herní počítače pro každého","White Pro build pro náročné",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,16,"HelloComp AMD GAMER SE 1660 Super",1080x1080,price-performance,"Herní počítače pro každého","Herní klasika od dostupné ceny",ZAPOJ A HRAJ,sales,ready
+sales-ig-v1,17,"HelloComp Intel GAMER SE8 1660 Super",1080x1080,price-performance,"Herní počítače pro každého","Stabilní gaming výkon každý den",ZAPOJ A HRAJ,sales,ready
+sales-ig-v1,18,"HelloComp Intel GAMER Individual Pro DDR5 5070",1080x1920,power-challenge,"Herní počítače pro každého","RTX 5070 Pro pro vyšší FPS",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,19,"HelloComp Intel GAMER Individual Ultra5 5060 Ti",1080x1920,power-challenge,"Herní počítače pro každého","Ultra5 + RTX 5060 Ti výkonový upgrade",POSUŇTE HRANICE VÝKONU,sales,ready
+sales-ig-v1,20,"HelloComp Intel GAMER Individual Pro DDR5 5060 Ti",1080x1920,power-challenge,"Herní počítače pro každého","DDR5 Pro + RTX 5060 Ti",POSUŇTE HRANICE VÝKONU,sales,ready

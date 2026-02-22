@@ -21,6 +21,15 @@ Primary objective: convince management that this is a practical, low-risk, high-
 
 This means we do not need to build data infrastructure from scratch.
 
+### Brand Baseline Confirmed
+
+Brand color values are now fixed for implementation:
+
+- Brand Black: `#111111` (RGB `17, 17, 17`)
+- Brand Blue: `#2166CC` (RGB `33, 102, 204`)
+
+Reference: [BRAND_VISUAL_SPEC.md](BRAND_VISUAL_SPEC.md)
+
 ## 3) Proposed Solution
 
 Create a **Visual Content Factory** with three layers:
@@ -138,22 +147,44 @@ Cost-safe approach:
 
 ### Brand Inputs (must-have)
 
-- Logo files (SVG/PNG)
-- Approved fonts and color rules
-- CTA style examples
-- 5 examples of visuals you consider "premium"
+- Final legal claim boundaries per campaign type
+
+### Brand Inputs (already delivered)
+
+- Logo asset: `hellocomp_logo_website.svg`
+- Official colors:
+  - `#111111`
+  - `#2166CC`
+- Approved typography direction:
+  - `Source Sans 3` as primary
+  - system-ui chain for off-site assets
+- CTA style and examples:
+  - `OBJEDNEJTE SI TEĎ`
+  - `POSUŇTE HRANICE VÝKONU`
+  - `ZAPOJ A HRAJ`
+- Premium reference visual directions: 5 defined
 
 ### Business Inputs
 
-- Top priority channel (e.g. Instagram/Meta ads/web)
-- Top 20 SKUs to prioritize first
 - Campaign goals for next 30 days (traffic, leads, sales)
 
 ### Governance Inputs
 
-- Who approves final creatives
 - Which claims are forbidden
 - Mandatory legal text (if any)
+
+### Governance Inputs (already delivered)
+
+- Final approver: `Tomáš Berka` — Marketing, content creator, SEO and copywriting specialist for HelloComp
+
+### Business Inputs (already delivered)
+
+- Top priority channel: `Instagram (@hellocompcz)`
+- Top 20 priority SKUs prepared for MVP batch production
+  - see `data/top20-priority-skus.csv`
+- 30-day primary objective: `sales`
+  - KPI: `orders`, `ROAS`, `revenue`
+  - Reporting requirement: visible weekly proof for management
 
 ## 9) MVP CSV Format (Proposed)
 
