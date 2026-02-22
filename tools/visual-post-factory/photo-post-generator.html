@@ -2271,6 +2271,513 @@
             animation: ctaPulse 2.5s ease infinite
         }
 
+        /* ═══════════════════════════════════════════════════════
+           FORMAT-SPECIFIC LAYOUTS — 1:1, FB Banner, 16:9
+           ═══════════════════════════════════════════════════════ */
+
+        /* ─── 1:1 Square (1080×1080) ─── */
+        .card.fmt-square {
+            aspect-ratio: 1/1
+        }
+
+        .card.fmt-square .product-zone {
+            height: 42% !important;
+            top: 1% !important
+        }
+
+        .card.fmt-square .content {
+            height: auto !important;
+            max-height: 56% !important;
+            padding-bottom: 14px !important;
+            padding-top: 10px !important
+        }
+
+        .card.fmt-square .hook {
+            font-size: 16px !important;
+            -webkit-line-clamp: 2 !important
+        }
+
+        .card.fmt-square .price {
+            font-size: 28px !important
+        }
+
+        .card.fmt-square .product-name,
+        .card.fmt-square .name {
+            font-size: 10px !important
+        }
+
+        .card.fmt-square .specs-line {
+            font-size: 9px !important
+        }
+
+        .card.fmt-square .cta-btn {
+            font-size: 10px !important;
+            padding: 8px 14px !important
+        }
+
+        .card.fmt-square .logo-watermark {
+            height: 14px !important;
+            padding: 4px 8px !important
+        }
+
+        .card.fmt-square .product-img {
+            max-height: 85% !important;
+            max-width: 70% !important
+        }
+
+        /* Cinema letterbox bars thinner in square */
+        .card.fmt-square .cinema-bar {
+            height: 5% !important
+        }
+
+        /* ─── FB Banner (1200×628) — Wide landscape ─── */
+        .card.fmt-fb {
+            aspect-ratio: 1200/628;
+            width: 440px
+        }
+
+        .card.fmt-fb .product-zone {
+            top: 0 !important;
+            left: 0 !important;
+            right: auto !important;
+            width: 40% !important;
+            height: 100% !important;
+            padding: 8px !important
+        }
+
+        .card.fmt-fb .content {
+            top: 0 !important;
+            bottom: 0 !important;
+            left: 40% !important;
+            right: 0 !important;
+            width: 60% !important;
+            height: 100% !important;
+            padding: 10px 14px !important;
+            justify-content: center !important;
+            gap: 4px !important
+        }
+
+        /* Dark templates gradient horizontal in FB */
+        .tpl-hero.fmt-fb .content,
+        .tpl-neon.fmt-fb .content,
+        .tpl-specs.fmt-fb .content,
+        .tpl-cinema.fmt-fb .content {
+            background: linear-gradient(to left, rgba(4, 7, 13, .96) 0%, rgba(4, 7, 13, .85) 60%, transparent 100%) !important
+        }
+
+        /* Light templates gradient horizontal in FB */
+        .tpl-split.fmt-fb .content,
+        .tpl-minimal.fmt-fb .content {
+            background: linear-gradient(to left, #fff 0%, rgba(255, 255, 255, .97) 60%, rgba(255, 255, 255, .7) 100%) !important
+        }
+
+        .card.fmt-fb .hook {
+            font-size: 13px !important;
+            -webkit-line-clamp: 2 !important
+        }
+
+        .card.fmt-fb .price {
+            font-size: 22px !important
+        }
+
+        .card.fmt-fb .product-name,
+        .card.fmt-fb .name {
+            font-size: 9px !important
+        }
+
+        .card.fmt-fb .specs-line {
+            font-size: 8px !important
+        }
+
+        .card.fmt-fb .cta-btn {
+            font-size: 9px !important;
+            padding: 6px 12px !important
+        }
+
+        .card.fmt-fb .logo-watermark {
+            height: 12px !important;
+            padding: 3px 7px !important
+        }
+
+        .card.fmt-fb .product-img {
+            max-height: 80% !important;
+            max-width: 88% !important
+        }
+
+        .card.fmt-fb .cinema-bar {
+            height: 6% !important
+        }
+
+        .card.fmt-fb .logo-row {
+            flex-wrap: wrap !important;
+            gap: 3px !important
+        }
+
+        /* Hero VFX layers reposition for wide */
+        .tpl-hero.fmt-fb .hero-aurora,
+        .tpl-hero.fmt-fb .hero-rays,
+        .tpl-hero.fmt-fb .hero-spotlight,
+        .tpl-hero.fmt-fb .hero-flare {
+            left: 20% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important
+        }
+
+        /* Neon glow ring reposition */
+        .tpl-neon.fmt-fb .glow-ring {
+            left: 20% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 35% !important;
+            height: 70% !important
+        }
+
+        /* Cinema glow reposition */
+        .tpl-cinema.fmt-fb .cinema-glow {
+            left: 20% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 35% !important
+        }
+
+        /* ─── 16:9 Wide (1920×1080) ─── */
+        .card.fmt-wide {
+            aspect-ratio: 16/9;
+            width: 460px
+        }
+
+        .card.fmt-wide .product-zone {
+            top: 0 !important;
+            left: 0 !important;
+            right: auto !important;
+            width: 42% !important;
+            height: 100% !important;
+            padding: 10px !important
+        }
+
+        .card.fmt-wide .content {
+            top: 0 !important;
+            bottom: 0 !important;
+            left: 42% !important;
+            right: 0 !important;
+            width: 58% !important;
+            height: 100% !important;
+            padding: 12px 16px !important;
+            justify-content: center !important;
+            gap: 5px !important
+        }
+
+        /* Dark templates gradient horizontal in 16:9 */
+        .tpl-hero.fmt-wide .content,
+        .tpl-neon.fmt-wide .content,
+        .tpl-specs.fmt-wide .content,
+        .tpl-cinema.fmt-wide .content {
+            background: linear-gradient(to left, rgba(4, 7, 13, .96) 0%, rgba(4, 7, 13, .85) 60%, transparent 100%) !important
+        }
+
+        /* Light templates gradient horizontal in 16:9 */
+        .tpl-split.fmt-wide .content,
+        .tpl-minimal.fmt-wide .content {
+            background: linear-gradient(to left, #fff 0%, rgba(255, 255, 255, .97) 60%, rgba(255, 255, 255, .7) 100%) !important
+        }
+
+        .card.fmt-wide .hook {
+            font-size: 15px !important;
+            -webkit-line-clamp: 2 !important
+        }
+
+        .card.fmt-wide .price {
+            font-size: 26px !important
+        }
+
+        .card.fmt-wide .product-name,
+        .card.fmt-wide .name {
+            font-size: 10px !important
+        }
+
+        .card.fmt-wide .specs-line {
+            font-size: 9px !important
+        }
+
+        .card.fmt-wide .cta-btn {
+            font-size: 10px !important;
+            padding: 7px 14px !important
+        }
+
+        .card.fmt-wide .logo-watermark {
+            height: 14px !important;
+            padding: 4px 8px !important
+        }
+
+        .card.fmt-wide .product-img {
+            max-height: 82% !important;
+            max-width: 86% !important
+        }
+
+        .card.fmt-wide .cinema-bar {
+            height: 7% !important
+        }
+
+        .card.fmt-wide .logo-row {
+            flex-wrap: wrap !important;
+            gap: 4px !important
+        }
+
+        /* Hero VFX layers reposition for 16:9 */
+        .tpl-hero.fmt-wide .hero-aurora,
+        .tpl-hero.fmt-wide .hero-rays,
+        .tpl-hero.fmt-wide .hero-spotlight,
+        .tpl-hero.fmt-wide .hero-flare {
+            left: 21% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important
+        }
+
+        .tpl-neon.fmt-wide .glow-ring {
+            left: 21% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 38% !important;
+            height: 70% !important
+        }
+
+        .tpl-cinema.fmt-wide .cinema-glow {
+            left: 21% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 38% !important
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           VIDEO EXPORT MODAL
+           ═══════════════════════════════════════════════════════ */
+
+        .vex-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, .85);
+            backdrop-filter: blur(24px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .vex-overlay.open {
+            display: flex
+        }
+
+        .vex-panel {
+            background: linear-gradient(160deg, #12151e 0%, #0c0f17 100%);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            width: 680px;
+            max-width: 96vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .04);
+            display: flex;
+            flex-direction: column
+        }
+
+        .vex-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .vex-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .vex-close {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            color: #fff;
+            font-size: 18px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .15s
+        }
+
+        .vex-close:hover {
+            background: rgba(255, 255, 255, .12)
+        }
+
+        .vex-body {
+            padding: 18px 22px;
+            display: flex;
+            gap: 20px
+        }
+
+        .vex-preview {
+            flex: 0 0 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .4);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .06);
+            min-height: 180px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .vex-preview .card {
+            transform: scale(0.42);
+            transform-origin: center center;
+            pointer-events: none
+        }
+
+        .vex-preview-empty {
+            color: var(--muted);
+            font-size: 11px;
+            text-align: center;
+            padding: 20px
+        }
+
+        .vex-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .vex-field-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 4px
+        }
+
+        .vex-btn-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap
+        }
+
+        .vex-opt {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .04);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .15s;
+            font-family: inherit
+        }
+
+        .vex-opt:hover {
+            background: rgba(255, 255, 255, .08);
+            color: var(--text)
+        }
+
+        .vex-opt.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand)
+        }
+
+        .vex-render-btn {
+            margin-top: 6px;
+            background: linear-gradient(135deg, var(--accent), var(--neon-purple));
+            color: #fff;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: .02em;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: inherit;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px
+        }
+
+        .vex-render-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, .3)
+        }
+
+        .vex-render-btn:disabled {
+            opacity: .5;
+            pointer-events: none
+        }
+
+        .vex-progress {
+            margin-top: 8px;
+            display: none
+        }
+
+        .vex-progress.active {
+            display: block
+        }
+
+        .vex-progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, .06);
+            overflow: hidden
+        }
+
+        .vex-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--neon-purple));
+            transition: width .3s
+        }
+
+        .vex-progress-text {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 4px;
+            text-align: center
+        }
+
+        .vex-footer {
+            padding: 12px 22px 18px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px
+        }
+
+        .vex-info {
+            font-size: 10px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .vex-info-val {
+            color: var(--accent);
+            font-weight: 700
+        }
+
         /* === v5.3 PRO: Card Selection === */
         .card {
             cursor: pointer
@@ -3269,6 +3776,70 @@
         </div>
     </div>
 
+    <!-- ═══ Video Export Modal ═══ -->
+    <div class="vex-overlay" id="vexOverlay" onclick="if(event.target===this)closeVex()">
+        <div class="vex-panel">
+            <div class="vex-header">
+                <div class="vex-title">🎬 Video Export Studio</div>
+                <button class="vex-close" onclick="closeVex()">&times;</button>
+            </div>
+            <div class="vex-body">
+                <div class="vex-preview" id="vexPreview">
+                    <div class="vex-preview-empty" id="vexPreviewEmpty">Select a card first</div>
+                </div>
+                <div class="vex-controls">
+                    <div>
+                        <div class="vex-field-label">Format / Dimensions</div>
+                        <div class="vex-btn-group" id="vexFormatGroup">
+                            <button class="vex-opt active" data-vfmt="1080x1920">9:16 Story</button>
+                            <button class="vex-opt" data-vfmt="1080x1080">1:1 Post</button>
+                            <button class="vex-opt" data-vfmt="1200x628">FB Banner</button>
+                            <button class="vex-opt" data-vfmt="1920x1080">16:9 Wide</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="vex-field-label">Duration</div>
+                        <div class="vex-btn-group" id="vexDurationGroup">
+                            <button class="vex-opt" data-vdur="5">5s Quick</button>
+                            <button class="vex-opt" data-vdur="10">10s Short</button>
+                            <button class="vex-opt active" data-vdur="15">15s Standard</button>
+                            <button class="vex-opt" data-vdur="30">30s Extended</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="vex-field-label">Quality</div>
+                        <div class="vex-btn-group" id="vexQualityGroup">
+                            <button class="vex-opt" data-vq="standard" data-br="6000000">Standard (6 Mbps)</button>
+                            <button class="vex-opt active" data-vq="high" data-br="12000000">High (12 Mbps)</button>
+                            <button class="vex-opt" data-vq="ultra" data-br="20000000">Ultra (20 Mbps)</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="vex-field-label">Output Format</div>
+                        <div class="vex-btn-group" id="vexOutputGroup">
+                            <button class="vex-opt active" data-vout="mp4">MP4 (H.264)</button>
+                            <button class="vex-opt" data-vout="webm">WebM (VP9)</button>
+                        </div>
+                    </div>
+                    <button class="vex-render-btn" id="vexRenderBtn" onclick="vexRender()">
+                        🎬 Render Video
+                    </button>
+                    <div class="vex-progress" id="vexProgress">
+                        <div class="vex-progress-bar">
+                            <div class="vex-progress-fill" id="vexProgressFill"></div>
+                        </div>
+                        <div class="vex-progress-text" id="vexProgressText">Preparing...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vex-footer">
+                <div class="vex-info">Resolution: <span class="vex-info-val" id="vexResVal">1080×1920</span></div>
+                <div class="vex-info">Frames: <span class="vex-info-val" id="vexFramesVal">450</span></div>
+                <div class="vex-info">Est. size: <span class="vex-info-val" id="vexSizeVal">~22 MB</span></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         /* ===========================
            HelloComp Photo Post Factory v5 FUSION
@@ -3888,6 +4459,9 @@
                 const productData = filtered[start + idx];
                 if (productData && productData._url) card.dataset.url = productData._url;
                 injectCardToolbar(card);
+                // Apply current export format class
+                var fmtClass = formatClassMap[currentExportFormat];
+                if (fmtClass) card.classList.add(fmtClass);
             });
 
             // Pagination bar
@@ -4527,33 +5101,36 @@
 
         // ─── v7: Export format / dimensions ───
         let currentExportFormat = '1080x1920';
+        var formatClassMap = {
+            '1080x1920': '',
+            '1080x1080': 'fmt-square',
+            '1200x628': 'fmt-fb',
+            '1920x1080': 'fmt-wide'
+        };
+
         function setExportFormat(format) {
             currentExportFormat = format;
             document.querySelectorAll('#exportPicker .ep-btn').forEach(function (b) {
                 b.classList.toggle('active', b.dataset.format === format);
             });
-            // Apply dimensions to cards for visual preview
-            const dims = format.split('x');
-            const w = parseInt(dims[0]);
-            const h = parseInt(dims[1]);
-            const ratio = h / w;
-            const container = document.getElementById('cardsContainer');
-            container.querySelectorAll('.card').forEach(function (card) {
-                if (format === '1080x1920') {
-                    // Default 9:16 story — remove overrides
-                    card.style.removeProperty('aspect-ratio');
-                    card.style.removeProperty('width');
-                } else if (format === '1080x1080') {
-                    card.style.aspectRatio = '1 / 1';
-                } else if (format === '1200x628') {
-                    card.style.aspectRatio = '1200 / 628';
-                    card.style.width = '380px';
-                } else if (format === '1920x1080') {
-                    card.style.aspectRatio = '16 / 9';
-                    card.style.width = '420px';
-                }
+            // Sync modal format selector
+            document.querySelectorAll('#vexFormatGroup .vex-opt').forEach(function (b) {
+                b.classList.toggle('active', b.dataset.vfmt === format);
             });
-            setStatus('Export formát: ' + format + ' (' + w + '×' + h + ')', '#34d399');
+            // Apply format class + dimensions to cards
+            var fmtClass = formatClassMap[format] || '';
+            var container = document.getElementById('cardsContainer');
+            container.querySelectorAll('.card').forEach(function (card) {
+                // Remove all format classes
+                card.classList.remove('fmt-square', 'fmt-fb', 'fmt-wide');
+                card.style.removeProperty('aspect-ratio');
+                card.style.removeProperty('width');
+                if (fmtClass) card.classList.add(fmtClass);
+            });
+            // Update footer stats in modal
+            updateVexStats();
+            var dims = format.split('x');
+            setStatus('Export formát: ' + format + ' (' + dims[0] + '×' + dims[1] + ')', '#34d399');
         }
 
         // ─── Card selection (click to toggle) ───
@@ -5154,12 +5731,332 @@
         }
 
         async function recordSelectedVideo() {
+            // Open the video export modal instead of direct recording
+            openVex();
+        }
+
+        // ═══════════════════════════════════════════════════════
+        //   VIDEO EXPORT MODAL (VEX) — Full control studio
+        // ═══════════════════════════════════════════════════════
+
+        var vexState = {
+            format: '1080x1920',
+            duration: 15,
+            bitrate: 12000000,
+            output: 'mp4',
+            rendering: false
+        };
+
+        function openVex() {
             var selected = document.querySelector('.card.selected') || document.querySelector('.card');
-            if (!selected) { setStatus('No card to record.', '#f87171'); return; }
-            var btn = document.getElementById('recordVideoBtn');
-            if (btn) { btn.innerHTML = '⏺ <span style="font-size:10px">RECORDING...</span>'; btn.style.pointerEvents = 'none'; }
-            await recordCardVideo(selected, 15);
-            if (btn) { btn.textContent = '🎬 Record Video'; btn.style.pointerEvents = ''; }
+            if (!selected) { setStatus('No card to export — render cards first.', '#f87171'); return; }
+
+            var overlay = document.getElementById('vexOverlay');
+            overlay.classList.add('open');
+
+            // Sync format with current export format
+            vexState.format = currentExportFormat;
+            document.querySelectorAll('#vexFormatGroup .vex-opt').forEach(function (b) {
+                b.classList.toggle('active', b.dataset.vfmt === currentExportFormat);
+            });
+
+            // Show card preview
+            var preview = document.getElementById('vexPreview');
+            var empty = document.getElementById('vexPreviewEmpty');
+            if (empty) empty.style.display = 'none';
+
+            // Clone card for preview
+            var existingClone = preview.querySelector('.card');
+            if (existingClone) existingClone.remove();
+            var clone = selected.cloneNode(true);
+            clone.classList.remove('selected');
+            clone.classList.add('recording-active');
+            // Hide toolbar overlays
+            var hideItems = clone.querySelectorAll('.card-toolbar, .select-check, .saved-badge, .product-url, .tpl-switcher');
+            hideItems.forEach(function (el) { el.style.display = 'none'; });
+            preview.appendChild(clone);
+
+            updateVexStats();
+        }
+
+        function closeVex() {
+            if (vexState.rendering) return; // Don't close while rendering
+            document.getElementById('vexOverlay').classList.remove('open');
+            // Clean up preview
+            var preview = document.getElementById('vexPreview');
+            var card = preview.querySelector('.card');
+            if (card) card.remove();
+            var empty = document.getElementById('vexPreviewEmpty');
+            if (empty) empty.style.display = '';
+        }
+
+        function updateVexStats() {
+            var dims = vexState.format.split('x');
+            var w = parseInt(dims[0]) * 2; // 2x render scale
+            var h = parseInt(dims[1]) * 2;
+            var frames = vexState.duration * 30;
+            var estMB = ((vexState.bitrate * vexState.duration) / 8 / 1024 / 1024).toFixed(0);
+
+            var resEl = document.getElementById('vexResVal');
+            var framesEl = document.getElementById('vexFramesVal');
+            var sizeEl = document.getElementById('vexSizeVal');
+            if (resEl) resEl.textContent = w + '×' + h;
+            if (framesEl) framesEl.textContent = frames;
+            if (sizeEl) sizeEl.textContent = '~' + estMB + ' MB';
+        }
+
+        // Wire up modal button groups
+        document.getElementById('vexFormatGroup').addEventListener('click', function (e) {
+            var btn = e.target.closest('.vex-opt');
+            if (!btn || vexState.rendering) return;
+            this.querySelectorAll('.vex-opt').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            vexState.format = btn.dataset.vfmt;
+            // Also update main export format to keep in sync
+            setExportFormat(vexState.format);
+            updateVexStats();
+        });
+
+        document.getElementById('vexDurationGroup').addEventListener('click', function (e) {
+            var btn = e.target.closest('.vex-opt');
+            if (!btn || vexState.rendering) return;
+            this.querySelectorAll('.vex-opt').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            vexState.duration = parseInt(btn.dataset.vdur);
+            updateVexStats();
+        });
+
+        document.getElementById('vexQualityGroup').addEventListener('click', function (e) {
+            var btn = e.target.closest('.vex-opt');
+            if (!btn || vexState.rendering) return;
+            this.querySelectorAll('.vex-opt').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            vexState.bitrate = parseInt(btn.dataset.br);
+            updateVexStats();
+        });
+
+        document.getElementById('vexOutputGroup').addEventListener('click', function (e) {
+            var btn = e.target.closest('.vex-opt');
+            if (!btn || vexState.rendering) return;
+            this.querySelectorAll('.vex-opt').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            vexState.output = btn.dataset.vout;
+            updateVexStats();
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && document.getElementById('vexOverlay').classList.contains('open')) {
+                closeVex();
+            }
+        });
+
+        function vexSetProgress(pct, text) {
+            var prog = document.getElementById('vexProgress');
+            var fill = document.getElementById('vexProgressFill');
+            var txt = document.getElementById('vexProgressText');
+            prog.classList.add('active');
+            fill.style.width = pct + '%';
+            if (txt) txt.textContent = text || (pct + '%');
+        }
+
+        async function vexRender() {
+            if (vexState.rendering) return;
+            vexState.rendering = true;
+
+            var renderBtn = document.getElementById('vexRenderBtn');
+            renderBtn.disabled = true;
+            renderBtn.innerHTML = '⏺ RENDERING...';
+
+            // Get the real selected card (not the preview clone)
+            var card = document.querySelector('.card.selected') || document.querySelector('.card');
+            if (!card) {
+                vexState.rendering = false;
+                renderBtn.disabled = false;
+                renderBtn.innerHTML = '🎬 Render Video';
+                return;
+            }
+
+            var fps = 30;
+            var scale = 2;
+            var durationSec = vexState.duration;
+            var totalFrames = durationSec * fps;
+            var bitrate = vexState.bitrate;
+
+            // Ensure html2canvas & mp4-muxer are loaded
+            if (typeof html2canvas === 'undefined') {
+                vexSetProgress(2, 'Loading export engine...');
+                await new Promise(function (resolve, reject) {
+                    var s = document.createElement('script');
+                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                    s.onload = resolve; s.onerror = reject;
+                    document.head.appendChild(s);
+                });
+            }
+
+            vexSetProgress(5, 'Preparing card snapshot...');
+
+            // Enable hover state for snapshot
+            card.classList.add('recording-active');
+            card.dispatchEvent(new MouseEvent('mouseenter'));
+            await new Promise(function (r) { setTimeout(r, 1000); });
+
+            // Hide UI overlays on the real card
+            var hideEls = [card.querySelector('.card-toolbar'), card.querySelector('.select-check'), card.querySelector('.saved-badge'), card.querySelector('.product-url'), card.querySelector('.tpl-switcher')];
+            hideEls.forEach(function (el) { if (el) el.style.display = 'none'; });
+
+            var recEl = card.querySelector('.cinema-rec');
+            if (recEl) recEl.classList.add('active');
+
+            // Take hi-res snapshot
+            var snapshot = await html2canvas(card, { scale: scale, useCORS: true, backgroundColor: null, logging: false });
+
+            // Use the selected format dimensions
+            var dims = vexState.format.split('x');
+            var cw = parseInt(dims[0]) * scale;
+            var ch = parseInt(dims[1]) * scale;
+
+            vexSetProgress(10, 'Starting encoding...');
+
+            var forceWebM = (vexState.output === 'webm');
+            var useMP4 = !forceWebM && ('VideoEncoder' in window) && await loadMp4Muxer();
+
+            if (useMP4) {
+                await vexExportMP4(card, snapshot, cw, ch, fps, totalFrames, durationSec, bitrate, hideEls, recEl);
+            } else {
+                await vexExportWebM(card, snapshot, cw, ch, fps, totalFrames, durationSec, bitrate, hideEls, recEl);
+            }
+
+            // Reset
+            vexState.rendering = false;
+            renderBtn.disabled = false;
+            renderBtn.innerHTML = '🎬 Render Video';
+        }
+
+        async function vexExportMP4(card, snapshot, cw, ch, fps, totalFrames, durationSec, bitrate, hideEls, recEl) {
+            vexSetProgress(12, 'Encoding MP4 (WebCodecs + mp4-muxer)...');
+
+            var Muxer = window.Mp4Muxer.Muxer;
+            var muxer = new Muxer({
+                target: new window.Mp4Muxer.ArrayBufferTarget(),
+                video: { codec: 'avc', width: cw, height: ch },
+                fastStart: 'in-memory'
+            });
+
+            var encoder = new VideoEncoder({
+                output: function (chunk, meta) { muxer.addVideoChunk(chunk, meta); },
+                error: function (e) { console.error('VideoEncoder error:', e); }
+            });
+
+            encoder.configure({
+                codec: 'avc1.640028',
+                width: cw,
+                height: ch,
+                bitrate: bitrate,
+                framerate: fps,
+                hardwareAcceleration: 'prefer-hardware'
+            });
+
+            var offscreen = new OffscreenCanvas(cw, ch);
+            var offCtx = offscreen.getContext('2d');
+
+            for (var i = 0; i < totalFrames; i++) {
+                var t = i / totalFrames;
+                drawCinematicFrame(offCtx, cw, ch, t, snapshot);
+
+                var frame = new VideoFrame(offscreen, {
+                    timestamp: i * (1000000 / fps),
+                    duration: 1000000 / fps
+                });
+                encoder.encode(frame, { keyFrame: i % (fps * 2) === 0 });
+                frame.close();
+
+                if (i % 5 === 0) {
+                    var pct = 12 + Math.round((i / totalFrames) * 82);
+                    vexSetProgress(pct, 'Encoding: ' + Math.round((i / totalFrames) * 100) + '% (' + i + '/' + totalFrames + ')');
+                    await new Promise(function (r) { setTimeout(r, 0); });
+                }
+            }
+
+            vexSetProgress(95, 'Finalizing...');
+            await encoder.flush();
+            encoder.close();
+            muxer.finalize();
+
+            var buffer = muxer.target.buffer;
+            var blob = new Blob([buffer], { type: 'video/mp4' });
+
+            // Cleanup card
+            hideEls.forEach(function (el) { if (el) el.style.display = ''; });
+            if (recEl) recEl.classList.remove('active');
+            card.classList.remove('recording-active');
+
+            // Download
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + vexState.format + '-' + durationSec + 's.mp4';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            vexSetProgress(100, 'Done! MP4 exported (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB)');
+            setStatus('🎬 MP4 exported! (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB) — ' + durationSec + 's ' + vexState.format, '#34d399');
+        }
+
+        async function vexExportWebM(card, snapshot, cw, ch, fps, totalFrames, durationSec, bitrate, hideEls, recEl) {
+            vexSetProgress(12, 'Recording WebM (VP9)...');
+
+            var recCanvas = document.createElement('canvas');
+            recCanvas.width = cw;
+            recCanvas.height = ch;
+            var recCtx = recCanvas.getContext('2d');
+
+            var stream = recCanvas.captureStream(fps);
+            var mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+                ? 'video/webm;codecs=vp9'
+                : 'video/webm;codecs=vp8';
+            var recorder = new MediaRecorder(stream, {
+                mimeType: mimeType,
+                videoBitsPerSecond: bitrate
+            });
+            var chunks = [];
+            recorder.ondataavailable = function (e) { if (e.data.size > 0) chunks.push(e.data); };
+
+            return new Promise(function (resolve) {
+                recorder.onstop = function () {
+                    hideEls.forEach(function (el) { if (el) el.style.display = ''; });
+                    if (recEl) recEl.classList.remove('active');
+                    card.classList.remove('recording-active');
+
+                    var blob = new Blob(chunks, { type: 'video/webm' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + vexState.format + '-' + durationSec + 's.webm';
+                    a.click();
+                    URL.revokeObjectURL(url);
+
+                    vexSetProgress(100, 'Done! WebM exported (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB)');
+                    setStatus('🎬 WebM exported! (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB) — ' + durationSec + 's ' + vexState.format, '#34d399');
+                    resolve();
+                };
+
+                recorder.start();
+                var frameCount = 0;
+
+                function renderFrame() {
+                    if (frameCount >= totalFrames) { recorder.stop(); return; }
+                    var t = frameCount / totalFrames;
+                    drawCinematicFrame(recCtx, cw, ch, t, snapshot);
+                    frameCount++;
+                    if (frameCount % 5 === 0) {
+                        var pct = 12 + Math.round((frameCount / totalFrames) * 82);
+                        vexSetProgress(pct, 'Recording: ' + Math.round((frameCount / totalFrames) * 100) + '%');
+                    }
+                    requestAnimationFrame(renderFrame);
+                }
+                renderFrame();
+            });
         }
 
         // ─── Auto-load Heureka data + render on page load ───
