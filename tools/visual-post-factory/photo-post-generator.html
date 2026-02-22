@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>HelloComp Photo Post Factory v4</title>
+    <title>HelloComp Photo Post Factory v5.1 FUSION × Heureka</title>
     <script src="https://cc-embed.adobe.com/sdk/v4/CCEverywhere.js"></script>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
@@ -405,6 +405,325 @@
                 transform: translateY(-180px) scale(0);
                 opacity: 0
             }
+        }
+
+        /* ─── v5 FUSION: New Keyframes ─── */
+        @keyframes scanLine {
+            0% {
+                top: -2px
+            }
+
+            100% {
+                top: 100%
+            }
+        }
+
+        @keyframes holoShimmer {
+            0% {
+                background-position: -200% 0
+            }
+
+            100% {
+                background-position: 200% 0
+            }
+        }
+
+        @keyframes energyFill {
+            from {
+                width: 0;
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes urgencyPulse {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.05)
+            }
+        }
+
+        @keyframes borderGlow {
+
+            0%,
+            100% {
+                border-color: rgba(0, 212, 255, .15)
+            }
+
+            50% {
+                border-color: rgba(0, 212, 255, .4)
+            }
+        }
+
+        @keyframes dataStream {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 0 -200px
+            }
+        }
+
+        /* ─── v5 FUSION: Cyber Grid Overlay ─── */
+        .cyber-grid::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(0, 212, 255, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, .03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, .3) 50%, transparent 90%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, .3) 50%, transparent 90%)
+        }
+
+        /* ─── v5: Scanner Line (futuristic sweep) ─── */
+        .scanner-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(0, 212, 255, .3);
+            z-index: 10;
+            animation: scanLine 4s linear infinite;
+            opacity: .5
+        }
+
+        /* ─── v5: Holographic Shimmer (premium cards) ─── */
+        .holo-shimmer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg,
+                    transparent 30%,
+                    rgba(0, 212, 255, .06) 38%,
+                    rgba(168, 85, 247, .06) 42%,
+                    rgba(0, 212, 255, .06) 46%,
+                    transparent 54%);
+            background-size: 200% 100%;
+            animation: holoShimmer 3s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+            border-radius: 18px
+        }
+
+        /* ─── v5: Lineup Badge ─── */
+        .lineup-badge {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 8px;
+            font-weight: 900;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            white-space: nowrap
+        }
+
+        .lineup-badge.se {
+            background: rgba(33, 102, 204, .2);
+            color: var(--brand-light);
+            border: 1px solid rgba(33, 102, 204, .3)
+        }
+
+        .lineup-badge.pro {
+            background: rgba(168, 85, 247, .2);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, .3);
+            animation: borderGlow 2s ease-in-out infinite
+        }
+
+        .lineup-badge.max {
+            background: linear-gradient(135deg, rgba(234, 179, 8, .2), rgba(249, 115, 22, .2));
+            color: #fbbf24;
+            border: 1px solid rgba(234, 179, 8, .3);
+            text-shadow: 0 0 8px rgba(234, 179, 8, .3)
+        }
+
+        /* ─── v5: GPU Brand Badge ─── */
+        .gpu-badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            display: inline-block
+        }
+
+        .gpu-badge.nvidia {
+            background: rgba(118, 185, 0, .15);
+            color: #76b900;
+            border: 1px solid rgba(118, 185, 0, .2)
+        }
+
+        .gpu-badge.amd {
+            background: rgba(237, 28, 36, .15);
+            color: #ff4444;
+            border: 1px solid rgba(237, 28, 36, .2)
+        }
+
+        /* ─── v5: Urgency Pill ─── */
+        .urgency-pill {
+            font-size: 9px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(239, 68, 68, .15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, .2);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            animation: urgencyPulse 2s ease-in-out infinite;
+            display: inline-block
+        }
+
+        .urgency-pill.hot {
+            background: linear-gradient(135deg, rgba(239, 68, 68, .2), rgba(249, 115, 22, .2));
+            color: #fb923c;
+            border-color: rgba(249, 115, 22, .3)
+        }
+
+        /* ─── v5: Social Proof ─── */
+        .social-proof {
+            font-size: 9px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .social-proof .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--success);
+            display: inline-block
+        }
+
+        /* ─── v5: Energy Meter (spec bars) ─── */
+        .energy-meter {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .energy-row {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .energy-label {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            width: 48px;
+            flex-shrink: 0
+        }
+
+        .energy-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .energy-fill {
+            height: 100%;
+            border-radius: 3px;
+            animation: energyFill .8s ease both;
+            position: relative
+        }
+
+        .energy-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 60%, rgba(255, 255, 255, .3));
+            border-radius: 3px
+        }
+
+        .energy-fill.gpu {
+            background: linear-gradient(90deg, #76b900, #00d4ff)
+        }
+
+        .energy-fill.cpu {
+            background: linear-gradient(90deg, var(--brand), var(--brand-light))
+        }
+
+        .energy-fill.ram {
+            background: linear-gradient(90deg, #a855f7, #c084fc)
+        }
+
+        .energy-fill.storage {
+            background: linear-gradient(90deg, #10b981, #34d399)
+        }
+
+        .energy-value {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text);
+            width: 70px;
+            flex-shrink: 0;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        /* ─── v5: Category Tag ─── */
+        .category-tag {
+            font-size: 8px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .4);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding: 2px 6px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 4px;
+            display: inline-block
+        }
+
+        .category-tag.light {
+            color: rgba(0, 0, 0, .35);
+            border-color: rgba(0, 0, 0, .08)
+        }
+
+        /* ─── v5: Data Stream BG for dark templates ─── */
+        .data-stream {
+            position: absolute;
+            inset: 0;
+            opacity: .03;
+            background: repeating-linear-gradient(0deg,
+                    transparent 0px,
+                    transparent 18px,
+                    rgba(0, 212, 255, .5) 18px,
+                    rgba(0, 212, 255, .5) 19px);
+            animation: dataStream 8s linear infinite;
+            pointer-events: none;
+            z-index: 0
         }
 
         .template-chips {
@@ -1339,16 +1658,16 @@
     <div class="app">
         <section class="panel">
             <div class="panel-header">
-                <img class="logo-img" src="/hellocomp_logo_website.svg" alt="HelloComp"
+                <img class="logo-img" src="/hellocomp-logo.png" alt="HelloComp"
                     onerror="this.outerHTML='<span style=font-weight:900;font-size:13px>HELLOCOMP</span>'" />
-                <span class="version">v4.0 PRO</span>
+                <span class="version">v5.1 FUSION</span>
             </div>
 
             <div class="section-label">Quick Actions</div>
             <div class="btn-row">
                 <button class="btn" id="renderBtn">Generovat</button>
                 <button class="btn secondary" id="clearBtn">Vyčistit</button>
-                <button class="btn success" id="loadProductsBtn">Načíst produkty (52)</button>
+                <button class="btn success" id="loadCacheBtn">&#x26A1; Heureka Feed (1051)</button>
                 <button class="btn export" id="exportBtn">PNG Export</button>
             </div>
 
@@ -1360,6 +1679,26 @@
                 <span class="chip" data-tpl="minimal">Minimal</span>
                 <span class="chip" data-tpl="neon">Neon</span>
                 <span class="chip" data-tpl="specs-focus">Specs</span>
+            </div>
+
+            <div class="section-label">Category Filter</div>
+            <div class="template-chips" id="categoryChips">
+                <span class="chip active" data-cat="all">Vše</span>
+                <span class="chip" data-cat="pc">PC (361)</span>
+                <span class="chip" data-cat="cpu">CPU (81)</span>
+                <span class="chip" data-cat="phone">Mobily (77)</span>
+                <span class="chip" data-cat="gpu">GPU (53)</span>
+                <span class="chip" data-cat="headset">Sluchátka</span>
+                <span class="chip" data-cat="notebook">Notebooky</span>
+                <span class="chip" data-cat="peripheral">Periferie</span>
+            </div>
+
+            <div class="section-label">Lineup</div>
+            <div class="template-chips" id="lineupChips">
+                <span class="chip active" data-lineup="all">Vše</span>
+                <span class="chip" data-lineup="GAMER SE">SE</span>
+                <span class="chip" data-lineup="GAMER Pro">Pro</span>
+                <span class="chip" data-lineup="GAMER Max">Max</span>
             </div>
 
             <div class="collapsible-header" id="sdkToggle">
@@ -1403,47 +1742,157 @@
 
     <script>
         /* ===========================
-           HelloComp Photo Post Factory v4 PRO
-           Animated Templates + Smart Copy + Export
+           HelloComp Photo Post Factory v5 FUSION
+           Category Intelligence + Futuristic FX + Conversion Engine
            =========================== */
 
         // ─── Neon template particles ───
         function neonParticles() {
             let html = '';
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 16; i++) {
                 const left = Math.round(Math.random() * 100);
                 const dur = 3 + Math.random() * 4;
                 const delay = Math.random() * 5;
-                const size = 2 + Math.random() * 2;
+                const size = 2 + Math.random() * 3;
                 const hue = Math.random() > 0.5 ? 'var(--accent)' : 'var(--neon-purple)';
                 html += '<div class="particle" style="left:' + left + '%;width:' + size + 'px;height:' + size + 'px;background:' + hue + ';animation-duration:' + dur + 's;animation-delay:' + delay + 's"></div>';
             }
             return html;
         }
 
-        // ─── Smart Copy Engine ───
+        // ─── v5: GPU Brand Detection ───
+        function detectGpuBrand(gpuStr) {
+            if (!gpuStr) return { brand: 'unknown', series: '', tier: 0 };
+            const g = gpuStr.toUpperCase();
+            let brand = 'unknown', series = '', tier = 50;
+            if (g.includes('RTX 50')) { brand = 'nvidia'; series = 'RTX 50'; tier = 100; }
+            else if (g.includes('RTX 40')) { brand = 'nvidia'; series = 'RTX 40'; tier = 90; }
+            else if (g.includes('RTX 30')) { brand = 'nvidia'; series = 'RTX 30'; tier = 75; }
+            else if (g.includes('RTX 20')) { brand = 'nvidia'; series = 'RTX 20'; tier = 60; }
+            else if (g.includes('GTX 16')) { brand = 'nvidia'; series = 'GTX 16'; tier = 45; }
+            else if (g.includes('GTX 10')) { brand = 'nvidia'; series = 'GTX 10'; tier = 35; }
+            else if (g.includes('RX 9')) { brand = 'amd'; series = 'RX 9000'; tier = 95; }
+            else if (g.includes('RX 7')) { brand = 'amd'; series = 'RX 7000'; tier = 85; }
+            else if (g.includes('RX 6')) { brand = 'amd'; series = 'RX 6000'; tier = 70; }
+            else if (g.includes('RX 5')) { brand = 'amd'; series = 'RX 5000'; tier = 55; }
+            else if (g.includes('NVIDIA') || g.includes('GEFORCE') || g.includes('QUADRO')) { brand = 'nvidia'; series = 'NVIDIA'; }
+            else if (g.includes('AMD') || g.includes('RADEON')) { brand = 'amd'; series = 'AMD'; }
+            return { brand, series, tier };
+        }
+
+        // ─── v5: Category Detection (Heureka-aware) ───
+        function detectCategory(product) {
+            // Heureka JSON has category.slug pre-classified
+            if (product.category && product.category.slug) return product.category.slug;
+            // Fallback for CSV rows with _category field
+            if (product._category) return product._category;
+            // Legacy fallback: if has full specs, it's a PC
+            const s = product.specs || {};
+            if (s.cpu && s.cpu !== 'N/A' && s.gpu && s.gpu !== 'N/A') return 'pc';
+            return 'other';
+        }
+
+        // ─── v5: Lineup Badge HTML ───
+        function lineupBadgeHtml(lineup) {
+            if (!lineup) return '';
+            const cls = lineup.includes('Max') ? 'max' : lineup.includes('Pro') ? 'pro' : 'se';
+            const label = lineup.includes('Max') ? 'GAMER MAX' : lineup.includes('Pro') ? 'GAMER PRO' : 'GAMER SE';
+            return '<div class="lineup-badge ' + cls + '">' + label + '</div>';
+        }
+
+        // ─── v5: GPU Brand Badge HTML ───
+        function gpuBadgeHtml(gpuInfo) {
+            if (!gpuInfo || gpuInfo.brand === 'unknown') return '';
+            return '<span class="gpu-badge ' + gpuInfo.brand + '">' + gpuInfo.series + '</span>';
+        }
+
+        // ─── v5: Urgency pill HTML ───
+        function urgencyHtml(product) {
+            const stock = product._stock || 0;
+            if (stock > 0 && stock <= 5) return '<span class="urgency-pill">Zbývá jen ' + stock + ' ks!</span>';
+            if (stock > 5 && stock <= 15) return '<span class="urgency-pill hot">Poslední kusy</span>';
+            return '';
+        }
+
+        // ─── v5: Social Proof HTML ───
+        function socialProofHtml() {
+            const proofs = [
+                '500+ prodaných tento měsíc',
+                'Nejprodávanější sestava',
+                'Doporučeno 98% hráčů',
+                'Výběr měsíce',
+                'Top volba komunity',
+                'Ověřeno 200+ recenzemi'
+            ];
+            return '<div class="social-proof"><span class="dot"></span>' + proofs[Math.floor(Math.random() * proofs.length)] + '</div>';
+        }
+
+        // ─── v5: Energy Meter HTML (spec bars) ───
+        function energyMeterHtml(specs, gpuInfo) {
+            if (!specs || !specs.gpu || specs.gpu === 'N/A') return '';
+            const rows = [];
+            if (specs.gpu && specs.gpu !== 'N/A') {
+                rows.push({ label: 'GPU', cls: 'gpu', value: specs.gpu.substring(0, 28), pct: Math.min(gpuInfo.tier + 5, 100) });
+            }
+            if (specs.cpu && specs.cpu !== 'N/A') {
+                const cpuTier = specs.cpu.toUpperCase().includes('I9') || specs.cpu.toUpperCase().includes('RYZEN 9') ? 90 :
+                    specs.cpu.toUpperCase().includes('I7') || specs.cpu.toUpperCase().includes('RYZEN 7') ? 75 :
+                        specs.cpu.toUpperCase().includes('I5') || specs.cpu.toUpperCase().includes('RYZEN 5') ? 55 : 40;
+                rows.push({ label: 'CPU', cls: 'cpu', value: specs.cpu.substring(0, 28), pct: cpuTier });
+            }
+            if (specs.ram && specs.ram !== 'N/A') {
+                const ramGb = parseInt(specs.ram) || 8;
+                const ramPct = Math.min(ramGb * 2.5, 100);
+                rows.push({ label: 'RAM', cls: 'ram', value: specs.ram, pct: ramPct });
+            }
+            if (!rows.length) return '';
+            return '<div class="energy-meter">' + rows.map((r, i) =>
+                '<div class="energy-row">'
+                + '<span class="energy-label">' + r.label + '</span>'
+                + '<div class="energy-bar"><div class="energy-fill ' + r.cls + '" style="width:' + r.pct + '%;animation-delay:' + (0.3 + i * 0.15) + 's"></div></div>'
+                + '<span class="energy-value">' + r.value + '</span>'
+                + '</div>'
+            ).join('') + '</div>';
+        }
+
+        // ─── Smart Copy Engine (v5 — category aware) ───
         const copyEngine = (function () {
             const hooksByTier = {
                 budget: [
                     'GAMING ZA HUBIČKU', 'VÝKON ZA MÁLO', 'LEVNĚ A SILNĚ', 'NEČEKANÝ VÝKON',
                     'VSTUPTE DO HRY', 'READY TO PLAY', 'HRA ZAČÍNÁ', 'POWER ENTRY',
-                    'SMART VOLBA', 'BEZ KOMPROMISŮ'
+                    'SMART VOLBA', 'BEZ KOMPROMISŮ', 'GAME ON', 'START HERE'
                 ],
                 mid: [
                     'VÝKON BEZ KOMPROMISŮ', 'POSUŇ HRANICE', 'HERNÍ DOMINANCE', 'TVŮJ NEXT LEVEL',
                     'BUILT TO WIN', 'BEYOND LIMITS', 'POWER UPGRADE', 'SERIOUS GAMING',
-                    'PRO KAŽDÝ FRAME', 'UNLEASH POWER'
+                    'PRO KAŽDÝ FRAME', 'UNLEASH POWER', 'LEVEL UP NOW', 'GAME CHANGER'
                 ],
                 premium: [
                     'NEKOMPROMISNÍ SÍLA', 'ABSOLUTNÍ VÝKON', 'TOP TIER GAMING', 'PURE PERFORMANCE',
                     'MAXED OUT', 'ELITE LEVEL', 'ZERO COMPROMISE', 'FUTURE PROOF',
-                    'ULTIMATE SETUP', 'POWERHOUSE'
+                    'ULTIMATE SETUP', 'POWERHOUSE', 'RAW POWER', 'BEAST INSIDE'
                 ],
                 ultra: [
                     'LIMITLESS POWER', 'APEX PERFORMANCE', 'EXTREME MACHINE', 'THE ONE',
                     'SUPREMACY', 'NO LIMITS', 'GODLIKE SETUP', 'BEAST MODE ON',
-                    'FLAGSHIP KILLER', 'DREAM BUILD'
+                    'FLAGSHIP KILLER', 'DREAM BUILD', 'MAX EVERYTHING', 'UNSTOPPABLE'
                 ]
+            };
+
+            const hooksByCategory = {
+                gpu: ['UPGRADE SVŮJ RIG', 'GRAFICKÝ SKOK', 'NOVÁ GRAFIKA', 'FPS BOOST', 'VISUAL POWER', 'NEXT GEN GPU'],
+                notebook: ['GAMING ON THE GO', 'MOBILNÍ SÍLA', 'VEZMI SI VÝKON', 'HRAJ KDEKOLIV', 'PORTABLE BEAST'],
+                cpu: ['SRDCE SESTAVY', 'CORE UPGRADE', 'NOVÝ PROCESOR', 'RAW COMPUTE', 'MULTI-THREAD BEAST'],
+                phone: ['SMART VOLBA', 'TVŮJ NOVÝ TELEFON', 'ALWAYS CONNECTED', 'VÝKON V KAPSE', 'FLAGSHIP LEVEL'],
+                headset: ['SLYŠ KAŽDÝ DETAIL', 'ZVUKOVÁ DOMINANCE', 'IMMERSIVE AUDIO', 'HEAR THE GAME'],
+                monitor: ['FULL IMMERSION', 'CRYSTAL CLEAR', 'PIXEL PERFECT', 'VIZUÁLNÍ UPGRADE'],
+                peripheral: ['CONTROL FREAK', 'PŘESNOST V RUKÁCH', 'PRO SETUP', 'GAME GEAR'],
+                case: ['BYDLENÍ PRO PC', 'STYLE & AIRFLOW', 'DREAM CHASSIS'],
+                cooler: ['KEEP IT COOL', 'ZERO THROTTLE', 'ICE COLD TEMPS'],
+                psu: ['STABILNÍ NAPÁJENÍ', 'POWER BACKBONE', 'ENERGY CORE'],
+                ram: ['MEMORY BOOST', 'RYCHLOST PAMĚTI', 'ZERO LAG'],
+                storage: ['BLESKOVÉ ÚLOŽIŠTĚ', 'ZERO LOAD TIMES', 'SSD POWER']
             };
 
             const claimsByTier = {
@@ -1453,7 +1902,7 @@
                 ultra: ['Absolutní špička v gamingu', 'Ta nejlepší sestava na trhu', 'Exkluzivní herní platforma', 'Dream build realitou']
             };
 
-            const ctaPool = ['OBJEDNAT TEĎ', 'DO KOŠÍKU', 'CHCI TO', 'KOUPIT', 'ZJISTIT VÍCE', 'VYBRAT KONFIGURACI', 'PROZKOUMAT', 'NAKONFIGUROVAT'];
+            const ctaPool = ['OBJEDNAT TEĎ', 'DO KOŠÍKU', 'CHCI TO', 'KOUPIT', 'ZJISTIT VÍCE', 'VYBRAT KONFIGURACI', 'PROZKOUMAT', 'NAKONFIGUROVAT', 'ZÍSKAT TEĎ', 'MÁM ZÁJEM'];
 
             const used = { hooks: new Set(), claims: new Set(), ctas: new Set() };
 
@@ -1473,10 +1922,15 @@
                 return 'ultra';
             }
 
-            function generate(priceStr) {
+            function generate(priceStr, category) {
                 const tier = getTier(priceStr);
+                let hookPool = [...hooksByTier[tier]];
+                // Mix in category-specific hooks
+                if (category && hooksByCategory[category]) {
+                    hookPool = hookPool.concat(hooksByCategory[category]);
+                }
                 return {
-                    hook: pickUnique(hooksByTier[tier], used.hooks),
+                    hook: pickUnique(hookPool, used.hooks),
                     claim: pickUnique(claimsByTier[tier], used.claims),
                     cta: pickUnique(ctaPool, used.ctas),
                     tier
@@ -1491,10 +1945,10 @@
         // ─── Logo helper ───
         function logoHtml(dark) {
             const filter = dark ? '' : 'filter:brightness(0) invert(1);';
-            return '<img class="logo-watermark" src="/hellocomp_logo_website.svg" alt="HC" style="' + filter + '" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
+            return '<img class="logo-watermark" src="/hellocomp-logo.png" alt="HC" style="' + filter + '" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
         }
 
-        // ─── Parse specs into structured data ───
+        // ─── Parse specs ───
         function parseSpecs(specsStr) {
             if (!specsStr) return { cpu: '', gpu: '', ram: '', items: [] };
             const parts = specsStr.split('/').map(s => s.trim());
@@ -1506,20 +1960,34 @@
             };
         }
 
-        // ─── Template Renderers ───
+        // ─── v5: Format price for display ───
+        function formatPrice(price) {
+            if (!price && price !== 0) return '0 Kč';
+            const n = typeof price === 'number' ? price : parseInt(String(price).replace(/[^\d]/g, ''));
+            if (isNaN(n)) return price;
+            return n.toLocaleString('cs-CZ') + ' Kč';
+        }
+
+        // ─── Template Renderers (v5 FUSION) ───
         const templates = {
             hero(p) {
                 const s = parseSpecs(p.specs);
-                return '<div class="card tpl-hero" data-tpl="hero">'
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const isPremium = gpu.tier >= 75;
+                const cls = 'card tpl-hero cyber-grid scanner-line' + (isPremium ? ' holo-shimmer' : '');
+                return '<div class="' + cls + '" data-tpl="hero" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="data-stream"></div>'
+                    + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">HERO</span>'
                     + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + p.image_alt + '"/></div>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-line">' + p.specs + '</div>'
-                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
+                    + socialProofHtml()
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
                     + '</div>'
                     + '</div>';
@@ -1527,30 +1995,35 @@
 
             split(p) {
                 const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
                 const specTags = s.items.map(i => '<span class="spec-tag">' + i + '</span>').join('');
-                return '<div class="card tpl-split" data-tpl="split">'
+                return '<div class="card tpl-split" data-tpl="split" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">SPLIT</span>'
                     + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + p.image_alt + '"/></div>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(true) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="divider"></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-grid">' + specTags + '</div>'
-                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
                     + '</div>'
                     + '</div>';
             },
 
             minimal(p) {
-                return '<div class="card tpl-minimal" data-tpl="minimal">'
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                return '<div class="card tpl-minimal" data-tpl="minimal" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">MINIMAL</span>'
                     + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + p.image_alt + '"/></div>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(true) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || '') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -1562,19 +2035,26 @@
             },
 
             neon(p) {
-                return '<div class="card tpl-neon" data-tpl="neon">'
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram, storage: s.items[3] || '' };
+                return '<div class="card tpl-neon cyber-grid scanner-line holo-shimmer" data-tpl="neon" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="data-stream"></div>'
+                    + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">NEON</span>'
                     + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="glow-ring"></div>'
                     + '<div class="particles">' + neonParticles() + '</div>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + p.image_alt + '"/></div>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || 'ELITE GAMING') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + energyMeterHtml(specsObj, gpu)
+                    + socialProofHtml()
                     + '<div class="price">' + p.price + '</div>'
+                    + urgencyHtml(p)
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
                     + '</div>'
                     + '</div>';
@@ -1582,6 +2062,8 @@
 
             'specs-focus'(p) {
                 const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram, storage: s.items[3] || '' };
                 const specRows = [
                     { icon: '\u26A1', label: 'PROCESOR', value: s.cpu },
                     { icon: '\uD83C\uDFAE', label: 'GRAFIKA', value: s.gpu },
@@ -1592,16 +2074,19 @@
                     + '<div><div class="spec-label">' + r.label + '</div><div class="spec-value">' + r.value + '</div></div>'
                     + '</div>'
                 ).join('');
-                return '<div class="card tpl-specs" data-tpl="specs-focus">'
+                return '<div class="card tpl-specs cyber-grid" data-tpl="specs-focus" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="data-stream"></div>'
+                    + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">SPECS</span>'
                     + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + p.image_alt + '"/></div>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-table">' + specRows + '</div>'
-                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
+                    + energyMeterHtml(specsObj, gpu)
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
                     + '</div>'
                     + '</div>';
@@ -1623,6 +2108,9 @@
 
         // ─── State ───
         let currentFilter = 'all';
+        let currentCategory = 'all';
+        let currentLineup = 'all';
+        let cachedProducts = []; // v5: holds JSON cache data
         let ccEverywhere = null;
 
         // ─── Render cards ───
@@ -1639,17 +2127,33 @@
                 let tpl = (p.template || '').trim().toLowerCase();
                 if (!templates[tpl]) tpl = templateKeys[i % templateKeys.length];
                 if (currentFilter !== 'all' && tpl !== currentFilter) return;
+                if (currentCategory !== 'all' && p._category !== currentCategory) return;
+                if (currentLineup !== 'all' && p._lineup !== currentLineup) return;
                 const html = templates[tpl](p);
                 container.insertAdjacentHTML('beforeend', html);
                 rendered++;
             });
 
-            const countBar = '<div class="preview-count"><strong>' + rendered + ' karet</strong><span>|</span><span>filtr: ' + currentFilter + '</span></div>';
+            // Count bar with category + lineup info
+            const catLabel = currentCategory === 'all' ? 'vše' : currentCategory;
+            const lineLabel = currentLineup === 'all' ? 'vše' : currentLineup;
+            const countBar = '<div class="preview-count">'
+                + '<strong>' + rendered + ' karet</strong>'
+                + '<span>|</span><span>tpl: ' + currentFilter + '</span>'
+                + '<span>|</span><span>kat: ' + catLabel + '</span>'
+                + '<span>|</span><span>řada: ' + lineLabel + '</span>'
+                + '</div>';
             container.insertAdjacentHTML('afterbegin', countBar);
 
             // Stagger card entrance animations
             container.querySelectorAll('.card').forEach((card, idx) => {
                 card.style.animationDelay = (idx * 0.08) + 's';
+            });
+
+            // Stagger energy bar animations
+            container.querySelectorAll('.energy-fill').forEach((bar, idx) => {
+                const baseDelay = parseFloat(bar.style.animationDelay) || 0.3;
+                bar.style.animationDelay = (baseDelay + Math.floor(idx / 3) * 0.2) + 's';
             });
 
             // Inject per-card BG remove buttons
@@ -1662,7 +2166,7 @@
                 card.appendChild(btn);
             });
 
-            setStatus('Vygenerováno ' + rendered + ' karet. Klikni BG na kartě pro odstranění pozadí.', '#34d399');
+            setStatus('Vygenerováno ' + rendered + ' karet. v5 FUSION ready.', '#34d399');
         }
 
         function updateCount() {
@@ -1677,9 +2181,134 @@
             el.style.color = color || 'var(--muted)';
         }
 
-        // ─── Load products from CSV file ───
+        // ─── v5: Load products from Heureka JSON ───
+        async function loadFromCache() {
+            setStatus('Načítám Heureka produktový feed...', 'var(--accent)');
+            try {
+                // Primary: Heureka JSON (converted from XML feed)
+                let data;
+                const res = await fetch('/data/heureka-products.json');
+                if (res.ok) {
+                    data = await res.json();
+                } else {
+                    // Fallback: old cache
+                    const res2 = await fetch('/data/products-cache.json');
+                    if (!res2.ok) throw new Error('Nelze načíst feed: HTTP ' + res2.status);
+                    data = await res2.json();
+                }
+                const allProducts = data.products || [];
+                const meta = data.meta || {};
+                // Filter: must have price > 50 and image
+                const viable = allProducts.filter(p => p.price && p.price > 50 && p.img);
+                cachedProducts = viable;
+
+                // Smart selection: diverse mix across categories and price tiers
+                const selected = smartSelectProducts(viable, 30);
+
+                // Build CSV from selected Heureka products
+                const headers = 'id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;template;_category;_lineup;_gpuRaw;_stock';
+                const tierTemplates = {
+                    budget: ['minimal', 'split', 'specs-focus'],
+                    mid: ['split', 'hero', 'minimal'],
+                    premium: ['hero', 'neon', 'specs-focus'],
+                    ultra: ['neon', 'hero', 'specs-focus']
+                };
+                const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
+                copyEngine.reset();
+
+                const lines = selected.map(p => {
+                    const category = detectCategory(p);
+                    const gpu = (p.specs && p.specs.gpu) ? p.specs.gpu : '';
+                    const gpuInfo = detectGpuBrand(gpu);
+                    const priceStr = p.priceFormatted || formatPrice(p.price);
+                    const tier = copyEngine.getTier(String(p.price));
+                    const copy = copyEngine.generate(String(p.price), category);
+                    const pool = tierTemplates[tier];
+                    const tpl = pool[tierCounters[tier] % pool.length];
+                    tierCounters[tier]++;
+
+                    // Build specs line from Heureka structured specs
+                    const s = p.specs || {};
+                    const specsLine = [s.cpu, s.gpu, s.ram].filter(x => x).join(' / ');
+
+                    return [
+                        p.id,
+                        p.name || '',
+                        copy.hook,
+                        priceStr,
+                        specsLine,
+                        p.img,
+                        p.name || '',
+                        'center',
+                        'dark',
+                        p.inStock ? 'Skladem' : 'Na objednávku',
+                        copy.claim,
+                        copy.cta,
+                        tpl,
+                        category,
+                        p.lineup || '',
+                        gpu || '',
+                        p.inStock ? '1' : '0'
+                    ].join(';');
+                });
+
+                document.getElementById('csvInput').value = headers + '\n' + lines.join('\n');
+                const src = meta.source === 'heureka' ? 'Heureka feed' : 'cache';
+                setStatus('Načteno ' + selected.length + ' produktů z ' + src + ' (' + viable.length + '/' + (meta.totalProducts || allProducts.length) + ' celkem). Klikni Generovat!', '#34d399');
+            } catch (e) {
+                setStatus('Chyba: ' + e.message, '#f87171');
+                console.error(e);
+            }
+        }
+
+        // ─── v5: Smart Product Selection (Heureka-aware) ───
+        function smartSelectProducts(products, count) {
+            // Group by Heureka category slug
+            const byCategory = {};
+            products.forEach(p => {
+                const cat = detectCategory(p);
+                if (!byCategory[cat]) byCategory[cat] = [];
+                byCategory[cat].push(p);
+            });
+
+            // Priority weights: high-margin categories get more slots
+            const priorityCats = ['pc', 'gpu', 'notebook', 'cpu', 'phone', 'headset', 'monitor', 'case', 'psu', 'mobo', 'cooler', 'ram', 'storage', 'peripheral'];
+            const selected = [];
+            const targetRatios = { pc: 0.35, gpu: 0.12, notebook: 0.1, cpu: 0.08, phone: 0.08, headset: 0.06, monitor: 0.04 };
+
+            // Fill priority categories first
+            for (const cat of priorityCats) {
+                const target = Math.max(1, Math.ceil(count * (targetRatios[cat] || 0.02)));
+                const pool = byCategory[cat] || [];
+                if (!pool.length) continue;
+                pool.sort((a, b) => (b.price || 0) - (a.price || 0));
+                const step = Math.max(1, Math.floor(pool.length / target));
+                for (let i = 0; i < Math.min(target, pool.length); i++) {
+                    const idx = Math.min(i * step, pool.length - 1);
+                    if (!selected.find(s => s.id === pool[idx].id)) {
+                        selected.push(pool[idx]);
+                    }
+                    if (selected.length >= count) break;
+                }
+                if (selected.length >= count) break;
+            }
+
+            // Fill remaining slots with highest-priced unselected from any category
+            if (selected.length < count) {
+                const remaining = products
+                    .filter(p => !selected.find(s => s.id === p.id))
+                    .sort((a, b) => (b.price || 0) - (a.price || 0));
+                while (selected.length < count && remaining.length) {
+                    selected.push(remaining.shift());
+                }
+            }
+
+            return selected.slice(0, count);
+        }
+
+        // ─── Legacy: Load from CSV file ───
         async function loadProducts() {
-            setStatus('Načítám produkty...', 'var(--accent)');
+            setStatus('Načítám produkty z CSV...', 'var(--accent)');
             try {
                 const res = await fetch('/products-all.csv');
                 if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1687,7 +2316,6 @@
                 const lines = text.trim().split('\n');
                 if (lines.length < 2) { setStatus('CSV prázdné.', '#f87171'); return; }
                 const headers = lines[0].split(';').map(h => h.trim());
-                // Smart template assignment: match template style to price tier
                 const tierTemplates = {
                     budget: ['minimal', 'split', 'specs-focus'],
                     mid: ['split', 'hero', 'minimal'],
@@ -1708,7 +2336,7 @@
                     newLines.push(vals.join(';'));
                 }
                 document.getElementById('csvInput').value = newLines.join('\n');
-                setStatus('Načteno ' + (lines.length - 1) + ' produktů. Klikni Generovat.', '#34d399');
+                setStatus('Načteno ' + (lines.length - 1) + ' produktů z CSV.', '#34d399');
             } catch (e) {
                 setStatus('Chyba: ' + e.message, '#f87171');
             }
@@ -1725,12 +2353,14 @@
             const ctaIdx = headers.indexOf('cta');
             const claimIdx = headers.indexOf('positioning_claim');
             const priceIdx = headers.indexOf('price');
+            const catIdx = headers.indexOf('_category');
 
             const newLines = [lines[0]];
             for (let i = 1; i < lines.length; i++) {
                 const vals = lines[i].split(';');
                 const price = priceIdx >= 0 ? vals[priceIdx] : '0';
-                const gen = copyEngine.generate(price);
+                const cat = catIdx >= 0 ? vals[catIdx] : '';
+                const gen = copyEngine.generate(price, cat);
                 if (hookIdx >= 0) vals[hookIdx] = gen.hook;
                 if (ctaIdx >= 0) vals[ctaIdx] = gen.cta;
                 if (claimIdx >= 0) vals[claimIdx] = gen.claim;
@@ -1759,7 +2389,6 @@
                 statusEl.textContent = 'Připraveno';
                 setStatus('Adobe SDK inicializováno.', '#34d399');
 
-                // Auto-BG: notify user that per-card BG removal is ready
                 if (document.getElementById('autoBgRemove').checked) {
                     setStatus('SDK ready — klikni BG na kartě nebo "Remove BG (vše)" pro batch.', '#34d399');
                 }
@@ -1825,7 +2454,7 @@
             document.getElementById('sdkInner').innerHTML = '';
         }
 
-        // ─── Batch BG removal — processes cards one by one via SDK ───
+        // ─── Batch BG removal ───
         async function removeBackgroundAll() {
             const cards = Array.from(document.querySelectorAll('.card'));
             const unprocessed = cards.filter(c => {
@@ -1840,7 +2469,7 @@
                 setStatus('Nejdřív inicializuj Adobe SDK (Init SDK).', '#f87171');
                 return;
             }
-            setStatus('Batch BG removal: 0/' + unprocessed.length + ' — zpracovávám po jednom...', 'var(--accent)');
+            setStatus('Batch BG removal: 0/' + unprocessed.length + '...', 'var(--accent)');
             let done = 0;
 
             for (const card of unprocessed) {
@@ -1874,7 +2503,7 @@
                                     },
                                     onError: function (err) {
                                         closeSdkOverlay();
-                                        resolve(); // skip and continue
+                                        resolve();
                                     }
                                 }
                             },
@@ -1897,6 +2526,24 @@
             renderCards();
         });
 
+        // ─── v5: Category filter chips ───
+        document.getElementById('categoryChips').addEventListener('click', function (e) {
+            if (!e.target.classList.contains('chip')) return;
+            this.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            e.target.classList.add('active');
+            currentCategory = e.target.dataset.cat;
+            renderCards();
+        });
+
+        // ─── v5: Lineup filter chips ───
+        document.getElementById('lineupChips').addEventListener('click', function (e) {
+            if (!e.target.classList.contains('chip')) return;
+            this.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            e.target.classList.add('active');
+            currentLineup = e.target.dataset.lineup;
+            renderCards();
+        });
+
         // ─── Collapsible SDK section ───
         document.getElementById('sdkToggle').addEventListener('click', function () {
             document.getElementById('sdkSection').classList.toggle('collapsed');
@@ -1908,7 +2555,7 @@
             document.getElementById('cardsContainer').innerHTML = '';
             setStatus('Vyčištěno.', 'var(--muted)');
         });
-        document.getElementById('loadProductsBtn').addEventListener('click', loadProducts);
+        document.getElementById('loadCacheBtn').addEventListener('click', loadFromCache);
         document.getElementById('generateCopyBtn').addEventListener('click', function () {
             generateSmartCopy();
             renderCards();
@@ -1922,7 +2569,6 @@
             const cards = document.querySelectorAll('.card');
             if (!cards.length) { setStatus('Nejdřív vygeneruj karty.', '#f87171'); return; }
 
-            // Load html2canvas dynamically if not present
             if (typeof html2canvas === 'undefined') {
                 setStatus('Načítám export engine...', 'var(--accent)');
                 await new Promise((resolve, reject) => {
@@ -1939,7 +2585,6 @@
 
             for (const card of cards) {
                 try {
-                    // Temporarily disable animations for clean capture
                     card.style.animation = 'none';
                     card.querySelectorAll('*').forEach(el => { el.style.animation = 'none'; });
 
@@ -1961,7 +2606,6 @@
                 }
             }
 
-            // Re-enable animations
             renderCards();
             setStatus('Exportováno ' + done + ' karet jako PNG!', '#34d399');
         }
