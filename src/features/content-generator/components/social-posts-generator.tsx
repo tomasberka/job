@@ -137,21 +137,15 @@ export function SocialPostCard({ post, onCopy }: SocialPostCardProps) {
                                 </>
                             )}
                         </Button>
-                        <Button
-                            size="sm"
-                            variant="ghost"
-                            asChild
-                            className="flex-1"
+                        <a
+                            href={platformUrl[post.platform] || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"
                         >
-                            <a
-                                href={platformUrl[post.platform] || "#"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <ExternalLink className="w-4 h-4" />
-                                <span className="ml-1">Post</span>
-                            </a>
-                        </Button>
+                            <ExternalLink className="w-4 h-4" />
+                            <span className="ml-1">Post</span>
+                        </a>
                     </div>
 
                     {/* Metadata */}
