@@ -345,6 +345,61 @@
             background: rgba(33, 102, 204, 1)
         }
 
+        .card .bg-btn {
+            right: 52px;
+            background: rgba(16, 185, 129, .85);
+            font-size: 8px;
+            letter-spacing: .06em
+        }
+
+        .card .bg-btn:hover {
+            background: rgba(16, 185, 129, 1)
+        }
+
+        .card .bg-btn.done {
+            background: rgba(16, 185, 129, .3);
+            pointer-events: none
+        }
+
+        #sdkOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .85);
+            backdrop-filter: blur(8px)
+        }
+
+        #sdkOverlay.active {
+            display: flex
+        }
+
+        #sdkOverlay .sdk-inner {
+            width: 90vw;
+            height: 90vh;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a2e
+        }
+
+        #sdkOverlay .sdk-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+            background: rgba(0, 0, 0, .7);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: inherit
+        }
+
         .card .template-label {
             position: absolute;
             top: 8px;
@@ -1253,7 +1308,18 @@
 
             const countBar = '<div class="preview-count"><strong>' + rendered + ' karet</strong><span>|</span><span>filtr: ' + currentFilter + '</span></div>';
             container.insertAdjacentHTML('afterbegin', countBar);
-            setStatus('Vygenerováno ' + rendered + ' karet.', '#34d399');
+
+            // Inject per-card BG remove buttons
+            container.querySelectorAll('.card').forEach(card => {
+                const btn = document.createElement('button');
+                btn.className = 'remove-btn bg-btn';
+                btn.textContent = 'BG';
+                btn.title = 'Odstranit pozadí (Adobe SDK)';
+                btn.onclick = function () { removeBgCard(card.querySelector('.product-img'), btn); };
+                card.appendChild(btn);
+            });
+
+            setStatus('Vygenerováno ' + rendered + ' karet. Klikni BG na kartě pro odstranění pozadí.', '#34d399');
         }
 
         function updateCount() {
@@ -1278,12 +1344,24 @@
                 const lines = text.trim().split('\n');
                 if (lines.length < 2) { setStatus('CSV prázdné.', '#f87171'); return; }
                 const headers = lines[0].split(';').map(h => h.trim());
-                const tplCycle = ['hero', 'split', 'minimal', 'neon', 'specs-focus'];
+                // Smart template assignment: match template style to price tier
+                const tierTemplates = {
+                    budget: ['minimal', 'split', 'specs-focus'],
+                    mid: ['split', 'hero', 'minimal'],
+                    premium: ['hero', 'neon', 'specs-focus'],
+                    ultra: ['neon', 'hero', 'specs-focus']
+                };
+                const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
+                const priceColIdx = headers.indexOf('price');
                 const newLines = [lines[0]];
                 for (let i = 1; i < lines.length; i++) {
                     const vals = lines[i].split(';');
                     const tplIdx = headers.indexOf('template');
-                    if (tplIdx >= 0) vals[tplIdx] = tplCycle[(i - 1) % tplCycle.length];
+                    const price = priceColIdx >= 0 ? vals[priceColIdx] : '0';
+                    const tier = copyEngine.getTier(price);
+                    const pool = tierTemplates[tier];
+                    if (tplIdx >= 0) vals[tplIdx] = pool[tierCounters[tier] % pool.length];
+                    tierCounters[tier]++;
                     newLines.push(vals.join(';'));
                 }
                 document.getElementById('csvInput').value = newLines.join('\n');
@@ -1338,9 +1416,9 @@
                 statusEl.textContent = 'Připraveno';
                 setStatus('Adobe SDK inicializováno.', '#34d399');
 
-                // Auto-remove backgrounds if checkbox is checked
+                // Auto-BG: notify user that per-card BG removal is ready
                 if (document.getElementById('autoBgRemove').checked) {
-                    setTimeout(() => removeBackgroundAll(), 500);
+                    setStatus('SDK ready — klikni BG na kartě nebo "Remove BG (vše)" pro batch.', '#34d399');
                 }
             } catch (e) {
                 statusEl.className = 'sdk-badge off';
@@ -1349,23 +1427,122 @@
             }
         }
 
-        async function removeBackgroundAll() {
-            const images = document.querySelectorAll('.card .product-img');
-            if (!images.length) { setStatus('Žádné obrázky k úpravě.', '#f87171'); return; }
-            setStatus('Odstraňuji pozadí (' + images.length + ' obrázků)...', 'var(--accent)');
-            let done = 0;
-            for (const img of images) {
-                try {
-                    // Use Adobe Express SDK to remove background
-                    if (ccEverywhere && ccEverywhere.editor) {
-                        // Placeholder: SDK needs proper editor integration per image
-                        done++;
-                    } else {
-                        done++;
-                    }
-                } catch (e) {/* skip */ }
+        // ─── Per-card BG removal via SDK Quick Action ───
+        function removeBgCard(img, btn) {
+            if (!img) return;
+            if (img.dataset.bgRemoved) {
+                setStatus('Pozadí již odstraněno na této kartě.', 'var(--muted)');
+                return;
             }
-            setStatus('Zpracováno ' + done + '/' + images.length + ' obrázků.', '#34d399');
+            if (!ccEverywhere) {
+                setStatus('Nejdřív inicializuj Adobe SDK (klikni Init SDK).', '#f87171');
+                return;
+            }
+            setStatus('Otevírám Adobe Quick Action — odstraňuji pozadí...', 'var(--accent)');
+            const overlay = document.getElementById('sdkOverlay');
+            overlay.classList.add('active');
+
+            try {
+                ccEverywhere.quickAction.removeBackground(
+                    {
+                        asset: {
+                            data: img.src,
+                            dataType: img.src.startsWith('data:') ? 'base64' : 'url',
+                            type: 'image'
+                        }
+                    },
+                    {},
+                    {
+                        callbacks: {
+                            onPublish: function (intent, publishParams) {
+                                if (publishParams.asset && publishParams.asset[0]) {
+                                    img.src = publishParams.asset[0].data;
+                                    img.dataset.bgRemoved = '1';
+                                    if (btn) { btn.classList.add('done'); btn.textContent = '\u2713'; }
+                                }
+                                closeSdkOverlay();
+                                setStatus('Pozadí odstraněno!', '#34d399');
+                            },
+                            onError: function (err) {
+                                closeSdkOverlay();
+                                setStatus('SDK chyba: ' + (err.message || JSON.stringify(err)), '#f87171');
+                            }
+                        }
+                    },
+                    { id: 'sdkInner' }
+                );
+            } catch (e) {
+                closeSdkOverlay();
+                setStatus('SDK chyba: ' + e.message, '#f87171');
+            }
+        }
+
+        function closeSdkOverlay() {
+            document.getElementById('sdkOverlay').classList.remove('active');
+            document.getElementById('sdkInner').innerHTML = '';
+        }
+
+        // ─── Batch BG removal — processes cards one by one via SDK ───
+        async function removeBackgroundAll() {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const unprocessed = cards.filter(c => {
+                const img = c.querySelector('.product-img');
+                return img && !img.dataset.bgRemoved;
+            });
+            if (!unprocessed.length) {
+                setStatus('Všechny obrázky již zpracovány.', 'var(--muted)');
+                return;
+            }
+            if (!ccEverywhere) {
+                setStatus('Nejdřív inicializuj Adobe SDK (Init SDK).', '#f87171');
+                return;
+            }
+            setStatus('Batch BG removal: 0/' + unprocessed.length + ' — zpracovávám po jednom...', 'var(--accent)');
+            let done = 0;
+
+            for (const card of unprocessed) {
+                const img = card.querySelector('.product-img');
+                const btn = card.querySelector('.bg-btn');
+                try {
+                    await new Promise(function (resolve) {
+                        const overlay = document.getElementById('sdkOverlay');
+                        overlay.classList.add('active');
+                        ccEverywhere.quickAction.removeBackground(
+                            {
+                                asset: {
+                                    data: img.src,
+                                    dataType: img.src.startsWith('data:') ? 'base64' : 'url',
+                                    type: 'image'
+                                }
+                            },
+                            {},
+                            {
+                                callbacks: {
+                                    onPublish: function (intent, publishParams) {
+                                        if (publishParams.asset && publishParams.asset[0]) {
+                                            img.src = publishParams.asset[0].data;
+                                            img.dataset.bgRemoved = '1';
+                                            if (btn) { btn.classList.add('done'); btn.textContent = '\u2713'; }
+                                        }
+                                        done++;
+                                        closeSdkOverlay();
+                                        setStatus('Batch BG: ' + done + '/' + unprocessed.length + '...', 'var(--accent)');
+                                        resolve();
+                                    },
+                                    onError: function (err) {
+                                        closeSdkOverlay();
+                                        resolve(); // skip and continue
+                                    }
+                                }
+                            },
+                            { id: 'sdkInner' }
+                        );
+                    });
+                } catch (e) {
+                    closeSdkOverlay();
+                }
+            }
+            setStatus('Hotovo: ' + done + '/' + unprocessed.length + ' obrázků zpracováno.', '#34d399');
         }
 
         // ─── Template filter chips ───
@@ -1399,6 +1576,12 @@
         // ─── Auto-render on load ───
         window.addEventListener('DOMContentLoaded', renderCards);
     </script>
+
+    <!-- SDK Quick Action overlay -->
+    <div id="sdkOverlay">
+        <div class="sdk-inner" id="sdkInner"></div>
+        <button class="sdk-close" onclick="closeSdkOverlay()">&#10005; Zavřít</button>
+    </div>
 </body>
 
 </html>
