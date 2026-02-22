@@ -24,3 +24,5 @@ dev.db
 
 # Environment
 .env
+background-removal-js-main/
+public/data/bg-cache/

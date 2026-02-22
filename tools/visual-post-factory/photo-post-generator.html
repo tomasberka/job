@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>HelloComp Photo Post Factory v5.3 PRO × Heureka</title>
+    <title>HelloComp Photo Post Factory v6 ASSET × Heureka</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
@@ -898,33 +898,129 @@
             padding: 3px 6px;
             border-radius: 4px;
             background: rgba(0, 0, 0, .5);
+            display: none;
             color: rgba(255, 255, 255, .5);
             backdrop-filter: blur(4px)
         }
 
         .card .logo-watermark {
-            height: 18px;
+            height: 20px;
             width: auto;
-            opacity: .7
+            opacity: .85;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3));
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges
+        }
+
+        /* ─── Per-card template switcher ─── */
+        .tpl-switcher {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            z-index: 25;
+            display: flex;
+            gap: 2px;
+            opacity: 0;
+            transition: opacity .2s;
+            pointer-events: none
+        }
+
+        .card:hover .tpl-switcher {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .tpl-switcher .ts-btn {
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: rgba(0, 0, 0, .6);
+            color: rgba(255, 255, 255, .6);
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: all .15s
+        }
+
+        .tpl-switcher .ts-btn:hover {
+            background: rgba(33, 102, 204, .8);
+            color: #fff;
+            border-color: rgba(33, 102, 204, .6)
+        }
+
+        .tpl-switcher .ts-btn.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand)
+        }
+
+        /* ─── Export format picker ─── */
+        .export-picker {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-top: 4px
+        }
+
+        .export-picker .ep-btn {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--stroke);
+            background: rgba(255, 255, 255, .04);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .export-picker .ep-btn:hover {
+            background: rgba(255, 255, 255, .08);
+            color: var(--text)
+        }
+
+        .export-picker .ep-btn.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand)
+        }
+
+        /* ─── Sort indicator ─── */
+        .sort-row {
+            display: flex;
+            gap: 4px;
+            align-items: center
+        }
+
+        .sort-row select {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--stroke);
+            color: var(--text);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600
         }
 
         .card .product-img {
             display: block;
-            max-height: 100%;
-            max-width: 90%;
+            max-height: 80%;
+            max-width: 70%;
             width: auto;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .3));
             animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both;
             transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s;
-            /* Instant visual BG removal for white-bg product photos on dark cards */
-            mix-blend-mode: multiply
+            border-radius: 12px
         }
 
         .card .product-img.bg-removed {
-            mix-blend-mode: normal
-                /* Reset after actual BG removal */
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .5)) drop-shadow(0 2px 8px rgba(0, 212, 255, .15));
+            border-radius: 0
         }
 
         .card:hover .product-img {
@@ -966,10 +1062,25 @@
             top: 5%;
             left: 0;
             right: 0;
-            height: 52%;
+            height: 48%;
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            padding: 12px
+        }
+
+        .tpl-hero .product-zone .product-img {
+            background: rgba(255, 255, 255, .92);
+            border-radius: 16px;
+            padding: 10px;
+            max-height: 85%;
+            max-width: 75%
+        }
+
+        .tpl-hero .product-zone .product-img.bg-removed {
+            background: none;
+            padding: 0;
+            border-radius: 0
         }
 
         .tpl-hero .product-img {
@@ -992,6 +1103,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between
+        }
+
+        .tpl-hero .logo-watermark {
+            filter: brightness(0) invert(1);
+            opacity: .85;
+            height: 20px
         }
 
         .tpl-hero .stock-pill {
@@ -1082,11 +1199,15 @@
             background: linear-gradient(160deg, #edf0f5, #f8f9fb);
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            padding: 16px
         }
 
         .tpl-split .product-img {
-            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .12))
+            max-height: 85%;
+            max-width: 70%;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .12));
+            border-radius: 12px
         }
 
         .tpl-split .content {
@@ -1110,7 +1231,8 @@
 
         .tpl-split .logo-watermark {
             filter: none;
-            opacity: .8
+            opacity: .85;
+            height: 20px
         }
 
         .tpl-split .stock-pill {
@@ -1213,11 +1335,15 @@
             background: linear-gradient(180deg, #ffffff, #f0f2f6);
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            padding: 16px
         }
 
         .tpl-minimal .product-img {
-            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .12))
+            max-height: 85%;
+            max-width: 70%;
+            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .12));
+            border-radius: 12px
         }
 
         .tpl-minimal .content {
@@ -1240,7 +1366,8 @@
 
         .tpl-minimal .logo-watermark {
             filter: none;
-            opacity: .7
+            opacity: .8;
+            height: 18px
         }
 
         .tpl-minimal .stock-tag {
@@ -1357,16 +1484,28 @@
             top: 3%;
             left: 0;
             right: 0;
-            height: 50%;
+            height: 46%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2
+            z-index: 2;
+            padding: 12px
         }
 
         .tpl-neon .product-img {
+            background: rgba(255, 255, 255, .88);
+            border-radius: 16px;
+            padding: 10px;
+            max-height: 85%;
+            max-width: 72%;
             filter: drop-shadow(0 0 30px rgba(0, 212, 255, .15)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
             animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both, float 4s ease-in-out .8s infinite
+        }
+
+        .tpl-neon .product-img.bg-removed {
+            background: none;
+            padding: 0;
+            border-radius: 0
         }
 
         .tpl-neon:hover .product-img {
@@ -1393,8 +1532,9 @@
         }
 
         .tpl-neon .logo-watermark {
-            filter: brightness(0) invert(1);
-            opacity: .6
+            filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(0, 212, 255, .4));
+            opacity: .8;
+            height: 20px
         }
 
         .tpl-neon .stock-pill {
@@ -1483,14 +1623,26 @@
             top: 2%;
             left: 0;
             right: 0;
-            height: 38%;
+            height: 36%;
             display: flex;
             align-items: center;
-            justify-content: center
+            justify-content: center;
+            padding: 10px
         }
 
         .tpl-specs .product-img {
+            background: rgba(255, 255, 255, .9);
+            border-radius: 14px;
+            padding: 8px;
+            max-height: 85%;
+            max-width: 70%;
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .4))
+        }
+
+        .tpl-specs .product-img.bg-removed {
+            background: none;
+            padding: 0;
+            border-radius: 0
         }
 
         .tpl-specs .content {
@@ -1510,6 +1662,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between
+        }
+
+        .tpl-specs .logo-watermark {
+            filter: brightness(0) invert(1);
+            opacity: .8;
+            height: 20px
         }
 
         .tpl-specs .stock-pill {
@@ -1664,326 +1822,8 @@
             box-shadow: 0 0 12px rgba(0, 212, 255, .5)
         }
 
-        /* === v5.3 PRO: CS2 (Counter-Strike) Style === */
-        .tpl-csgo {
-            background: linear-gradient(160deg, #1a1f1a 0%, #0d1210 40%, #0a0e0c 100%);
-            border: 1px solid rgba(134, 169, 82, .15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
-        }
-
-        .tpl-csgo .rarity-stripe {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            z-index: 10
-        }
-
-        .tpl-csgo .rarity-stripe.covert {
-            background: #eb4b4b
-        }
-
-        .tpl-csgo .rarity-stripe.classified {
-            background: #d32ce6
-        }
-
-        .tpl-csgo .rarity-stripe.restricted {
-            background: #8847ff
-        }
-
-        .tpl-csgo .wear-tag {
-            font-size: 7px;
-            font-weight: 800;
-            color: rgba(134, 169, 82, .7);
-            text-transform: uppercase;
-            letter-spacing: .1em;
-            padding: 2px 6px;
-            border: 1px solid rgba(134, 169, 82, .15);
-            border-radius: 3px;
-            display: inline-block
-        }
-
-        .tpl-csgo .hook {
-            color: #86a952
-        }
-
-        .tpl-csgo .price {
-            color: #86a952
-        }
-
-        .tpl-csgo .name {
-            color: #c5d6a0
-        }
-
-        .tpl-csgo .cta-btn {
-            background: linear-gradient(135deg, #4a7a2e, #86a952);
-            color: #0d1210;
-            font-weight: 900
-        }
-
-        .tpl-csgo .product-zone {
-            background: radial-gradient(ellipse at center 40%, rgba(134, 169, 82, .06), transparent 70%)
-        }
-
-        /* === v5.3 PRO: League of Legends Style === */
-        .tpl-lol {
-            background: linear-gradient(170deg, #0a1628 0%, #091020 40%, #05091a 100%);
-            border: 1px solid rgba(200, 170, 80, .2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
-        }
-
-        .tpl-lol::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 18px;
-            padding: 1px;
-            background: linear-gradient(170deg, rgba(200, 170, 80, .4), transparent 30%, transparent 70%, rgba(200, 170, 80, .2));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 1
-        }
-
-        .tpl-lol .rank-frame {
-            position: absolute;
-            top: 38%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
-            border: 2px solid rgba(200, 170, 80, .12);
-            border-radius: 50%;
-            z-index: 0;
-            box-shadow: 0 0 40px rgba(200, 170, 80, .06), inset 0 0 30px rgba(200, 170, 80, .04)
-        }
-
-        .tpl-lol .rank-tag {
-            font-size: 8px;
-            font-weight: 900;
-            color: #c8aa50;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            padding: 3px 10px;
-            border: 1px solid rgba(200, 170, 80, .25);
-            border-radius: 999px;
-            display: inline-block;
-            text-shadow: 0 0 8px rgba(200, 170, 80, .3)
-        }
-
-        .tpl-lol .hook {
-            color: #c8aa50;
-            text-shadow: 0 0 12px rgba(200, 170, 80, .3)
-        }
-
-        .tpl-lol .price {
-            color: #c8aa50;
-            text-shadow: 0 0 8px rgba(200, 170, 80, .2)
-        }
-
-        .tpl-lol .name {
-            color: #e8dcc0
-        }
-
-        .tpl-lol .cta-btn {
-            background: linear-gradient(135deg, #785a28, #c8aa50);
-            color: #0a0c10;
-            font-weight: 900
-        }
-
-        .tpl-lol .product-zone {
-            background: radial-gradient(ellipse at center 40%, rgba(200, 170, 80, .05), transparent 70%)
-        }
-
-        /* === v5.3 PRO: Fortnite Style === */
-        .tpl-fortnite {
-            background: linear-gradient(160deg, #1a0a3e 0%, #0f0628 40%, #0a0420 100%);
-            border: 1px solid rgba(147, 100, 255, .2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
-        }
-
-        .tpl-fortnite .diagonal-stripes {
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(147, 100, 255, .03) 20px, rgba(147, 100, 255, .03) 22px);
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 18px
-        }
-
-        .tpl-fortnite .rarity-glow {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 120px;
-            background: radial-gradient(ellipse, rgba(147, 100, 255, .12), transparent);
-            pointer-events: none;
-            z-index: 0
-        }
-
-        .tpl-fortnite .item-rarity {
-            font-size: 8px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            padding: 3px 10px;
-            border-radius: 4px;
-            display: inline-block
-        }
-
-        .tpl-fortnite .item-rarity.legendary {
-            background: linear-gradient(135deg, rgba(255, 170, 0, .2), rgba(255, 120, 0, .2));
-            color: #ffaa00;
-            border: 1px solid rgba(255, 170, 0, .3);
-            text-shadow: 0 0 8px rgba(255, 170, 0, .4)
-        }
-
-        .tpl-fortnite .item-rarity.epic {
-            background: rgba(147, 100, 255, .15);
-            color: #b57aff;
-            border: 1px solid rgba(147, 100, 255, .3)
-        }
-
-        .tpl-fortnite .hook {
-            color: #b57aff
-        }
-
-        .tpl-fortnite .price {
-            color: #fff;
-            text-shadow: 0 0 12px rgba(147, 100, 255, .4)
-        }
-
-        .tpl-fortnite .name {
-            color: #e0d4ff
-        }
-
-        .tpl-fortnite .cta-btn {
-            background: linear-gradient(135deg, #7c3aed, #9364ff);
-            color: #fff;
-            font-weight: 900;
-            border-radius: 12px
-        }
-
-        /* === v5.3 PRO: Minecraft Style === */
-        .tpl-minecraft {
-            background: linear-gradient(170deg, #3c2a14 0%, #2a1e0e 40%, #1a1208 100%);
-            border: 3px solid #5c4a2a;
-            border-radius: 4px !important;
-            box-shadow: 4px 4px 0 #1a1208, 0 20px 60px rgba(0, 0, 0, .7)
-        }
-
-        .tpl-minecraft .dirt-overlay {
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0, 0, 0, .05) 16px, rgba(0, 0, 0, .05) 17px), repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(0, 0, 0, .05) 16px, rgba(0, 0, 0, .05) 17px);
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 2px
-        }
-
-        .tpl-minecraft .craft-label {
-            font-size: 9px;
-            font-weight: 900;
-            color: #a8a8a8;
-            text-transform: uppercase;
-            letter-spacing: .06em;
-            text-shadow: 2px 2px 0 #1a1208;
-            font-family: monospace
-        }
-
-        .tpl-minecraft .hook {
-            color: #55ff55;
-            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
-            font-family: monospace
-        }
-
-        .tpl-minecraft .name {
-            color: #ffff55;
-            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
-            font-family: monospace
-        }
-
-        .tpl-minecraft .price {
-            color: #55ff55;
-            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
-            font-family: monospace
-        }
-
-        .tpl-minecraft .specs-line {
-            color: #a8a8a8;
-            font-family: monospace;
-            text-shadow: 1px 1px 0 rgba(0, 0, 0, .4)
-        }
-
-        .tpl-minecraft .cta-btn {
-            background: #4a8a2a;
-            color: #fff;
-            border: 2px solid #5c9e3a;
-            border-radius: 2px;
-            box-shadow: 2px 2px 0 #2a5a1a;
-            text-shadow: 1px 1px 0 rgba(0, 0, 0, .4);
-            font-family: monospace;
-            font-weight: 900
-        }
-
-        /* === v5.3 PRO: Roblox Style === */
-        .tpl-roblox {
-            background: linear-gradient(160deg, #1a2744 0%, #0f1a30 40%, #0a1220 100%);
-            border: 1px solid rgba(0, 180, 255, .2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .6)
-        }
-
-        .tpl-roblox .rbx-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(0, 180, 255, .06), transparent);
-            pointer-events: none;
-            z-index: 0;
-            border-radius: 18px 18px 0 0
-        }
-
-        .tpl-roblox .rbx-badge {
-            font-size: 8px;
-            font-weight: 900;
-            color: #00e676;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            padding: 3px 8px;
-            background: rgba(0, 230, 118, .1);
-            border: 1px solid rgba(0, 230, 118, .2);
-            border-radius: 6px;
-            display: inline-block
-        }
-
-        .tpl-roblox .hook {
-            color: #00b4ff
-        }
-
-        .tpl-roblox .price {
-            color: #00e676;
-            font-weight: 900
-        }
-
-        .tpl-roblox .name {
-            color: #e0eaff
-        }
-
-        .tpl-roblox .cta-btn {
-            background: linear-gradient(135deg, #00b4ff, #0091ea);
-            color: #fff;
-            font-weight: 900;
-            border-radius: 999px;
-            padding: 10px 20px
-        }
-
         /* === v5.3: Enhanced BG States === */
+
         .bg-controls {
             display: flex;
             gap: 4px;
@@ -2001,6 +1841,289 @@
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .5)) drop-shadow(0 2px 8px rgba(0, 212, 255, .15));
             transition: filter .5s
         }
+
+        /* === v6 ASSET MANAGER UX === */
+        .card-toolbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 30;
+            display: flex;
+            gap: 3px;
+            padding: 6px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, .4) 70%, transparent);
+            opacity: 0;
+            transition: opacity .2s;
+            pointer-events: none
+        }
+
+        .card:hover .card-toolbar,
+        .card.editing .card-toolbar {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .card-toolbar .tb-btn {
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, .18);
+            color: #fff;
+            font-size: 11px;
+            padding: 5px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .15s;
+            line-height: 1;
+            font-family: inherit;
+            font-weight: 700
+        }
+
+        .card-toolbar .tb-btn:hover {
+            background: rgba(255, 255, 255, .25);
+            transform: translateY(-1px)
+        }
+
+        .card-toolbar .tb-btn.del {
+            margin-left: auto;
+            color: #f87171
+        }
+
+        .card-toolbar .tb-btn.saved-ok {
+            background: rgba(16, 185, 129, .3);
+            color: #34d399;
+            pointer-events: none
+        }
+
+        .card.editing {
+            outline: 2px dashed var(--accent);
+            outline-offset: -2px
+        }
+
+        .card.editing [contenteditable="true"] {
+            outline: 1px dashed rgba(0, 212, 255, .35);
+            outline-offset: 2px;
+            cursor: text;
+            border-radius: 3px
+        }
+
+        .card.editing [contenteditable="true"]:focus {
+            outline: 2px solid var(--accent);
+            background: rgba(0, 212, 255, .06)
+        }
+
+        .card .saved-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            z-index: 25;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(16, 185, 129, .2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, .3);
+            opacity: 0;
+            transition: opacity .3s;
+            text-transform: uppercase;
+            letter-spacing: .05em
+        }
+
+        .card.is-saved .saved-badge {
+            opacity: 1
+        }
+
+        .card .product-url {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            font-size: 8px;
+            color: rgba(255, 255, 255, .3);
+            text-align: center;
+            padding: 2px 6px;
+            background: rgba(0, 0, 0, .4);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        .card:hover .product-url {
+            opacity: 1
+        }
+
+        .pagination-bar {
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(7, 10, 14, .95);
+            backdrop-filter: blur(12px);
+            border-radius: 10px 10px 0 0;
+            border: 1px solid var(--stroke);
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            z-index: 10;
+            flex-shrink: 0
+        }
+
+        .pg-btn {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--stroke);
+            color: var(--text);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all .15s;
+            font-family: inherit
+        }
+
+        .pg-btn:hover:not(:disabled) {
+            background: var(--brand);
+            border-color: var(--brand)
+        }
+
+        .pg-btn:disabled {
+            opacity: .25;
+            cursor: default
+        }
+
+        .pg-btn.active {
+            background: var(--brand);
+            border-color: var(--brand)
+        }
+
+        .pg-info {
+            font-size: 11px;
+            color: var(--muted);
+            padding: 0 6px
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, .92);
+            backdrop-filter: blur(20px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            padding: 40px
+        }
+
+        .lightbox.open {
+            display: flex
+        }
+
+        .lightbox .lb-card-wrap {
+            transform: scale(1.4);
+            transform-origin: center
+        }
+
+        .lightbox .lb-card-wrap .card {
+            pointer-events: none;
+            cursor: default;
+            animation: none
+        }
+
+        .lightbox .lb-card-wrap .card-toolbar,
+        .lightbox .lb-card-wrap .select-check,
+        .lightbox .lb-card-wrap .saved-badge {
+            display: none !important
+        }
+
+        .lb-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: #fff;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            z-index: 5
+        }
+
+        .lb-close:hover {
+            background: rgba(255, 255, 255, .2)
+        }
+
+        .lb-actions {
+            display: flex;
+            gap: 8px;
+            z-index: 2
+        }
+
+        .count-row {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .count-row select {
+            width: 70px;
+            background: rgba(0, 0, 0, .4);
+            border: 1px solid var(--stroke);
+            color: var(--text);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 6px;
+            border-radius: 6px;
+            font-family: inherit
+        }
+
+        .count-row .ct-label {
+            font-size: 10px;
+            color: var(--muted)
+        }
+
+        .count-row .ct-total {
+            font-size: 10px;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .asset-summary {
+            display: flex;
+            gap: 12px;
+            font-size: 10px;
+            color: var(--muted);
+            padding: 6px 10px;
+            background: rgba(0, 0, 0, .25);
+            border-radius: 8px;
+            border: 1px solid var(--stroke)
+        }
+
+        .asset-summary .av {
+            font-weight: 800;
+            color: var(--text)
+        }
+
+        .asset-summary .av-saved {
+            color: #34d399
+        }
+
+        .asset-summary .av-edited {
+            color: var(--accent)
+        }
     </style>
 </head>
 
@@ -2010,7 +2133,7 @@
             <div class="panel-header">
                 <img class="logo-img" src="/hellocomp-logo.png" alt="HelloComp"
                     onerror="this.outerHTML='<span style=font-weight:900;font-size:13px>HELLOCOMP</span>'" />
-                <span class="version">v5.3 PRO</span>
+                <span class="version">v6 ASSET</span>
             </div>
 
             <div class="section-label">Quick Actions</div>
@@ -2018,7 +2141,33 @@
                 <button class="btn" id="renderBtn">Generovat</button>
                 <button class="btn secondary" id="clearBtn">Vyčistit</button>
                 <button class="btn success" id="loadCacheBtn">&#x26A1; Heureka Feed (1051)</button>
-                <button class="btn export" id="exportBtn">PNG Export</button>
+            </div>
+
+            <div class="section-label">Display & Sort</div>
+            <div class="count-row">
+                <span class="ct-label">Per page:</span>
+                <select id="pageSizeSelect">
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                    <option value="30" selected>30</option>
+                    <option value="60">60</option>
+                    <option value="120">120</option>
+                    <option value="0">VŠE</option>
+                </select>
+                <span class="ct-label">Sort:</span>
+                <select id="sortSelect">
+                    <option value="price-desc" selected>💰 Cena ↓</option>
+                    <option value="price-asc">💰 Cena ↑</option>
+                    <option value="name-asc">📝 Název A-Z</option>
+                    <option value="name-desc">📝 Název Z-A</option>
+                    <option value="category">📁 Kategorie</option>
+                </select>
+                <span class="ct-total" id="totalProductsLabel">&mdash;</span>
+            </div>
+            <div class="asset-summary" id="assetSummary">
+                <span><span class="av" id="asTotal">0</span> total</span>
+                <span><span class="av av-saved" id="asSaved">0</span> saved</span>
+                <span><span class="av av-edited" id="asEdited">0</span> edited</span>
             </div>
 
             <div class="section-label">Template Filter</div>
@@ -2029,13 +2178,6 @@
                 <span class="chip" data-tpl="minimal">Minimal</span>
                 <span class="chip" data-tpl="neon">Neon</span>
                 <span class="chip" data-tpl="specs-focus">Specs</span>
-                <span class="chip" data-tpl="csgo" style="border-color:rgba(134,169,82,.3);color:#86a952">CS2</span>
-                <span class="chip" data-tpl="lol" style="border-color:rgba(200,170,80,.3);color:#c8aa50">LoL</span>
-                <span class="chip" data-tpl="fortnite"
-                    style="border-color:rgba(147,100,255,.3);color:#b57aff">Fortnite</span>
-                <span class="chip" data-tpl="minecraft"
-                    style="border-color:rgba(85,255,85,.2);color:#55ff55">Minecraft</span>
-                <span class="chip" data-tpl="roblox" style="border-color:rgba(0,180,255,.3);color:#00b4ff">Roblox</span>
             </div>
 
             <div class="section-label">Category Filter</div>
@@ -2058,7 +2200,18 @@
                 <span class="chip" data-lineup="GAMER Max">Max</span>
             </div>
 
-            <div class="section-label">🎯 Smart Background Removal</div>
+            <div class="section-label">� Export Banners</div>
+            <div class="btn-row">
+                <button class="btn export" id="exportBtn">🖼 PNG Export All</button>
+            </div>
+            <div class="export-picker" id="exportPicker">
+                <button class="ep-btn active" data-format="1080x1920">9:16 Story</button>
+                <button class="ep-btn" data-format="1080x1080">1:1 Post</button>
+                <button class="ep-btn" data-format="1200x628">FB Banner</button>
+                <button class="ep-btn" data-format="1920x1080">16:9 Wide</button>
+            </div>
+
+            <div class="section-label">�🎯 Smart Background Removal</div>
             <div class="bg-controls">
                 <button class="btn small secondary" id="selectAllCardsBtn">☑ Select All</button>
                 <button class="btn small secondary" id="deselectAllBtn">☐ Deselect</button>
@@ -2077,15 +2230,19 @@
 
             <div class="status-bar" id="statusText"></div>
 
-            <textarea class="field"
-                id="csvInput">id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;legal_line;template
-1;HelloComp AMD GAMER SE 5700 XT;Výkon bez kompromisů;18 490 Kč;Ryzen 5 5500 / RX 5700 XT / 16GB;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp PC;center;soft;Skladem;Herní počítače pro každého;OBJEDNEJTE TEĎ;Ilustrační foto.;hero
-2;HelloComp GAMER MAX DDR5 9070 XT;Posuňte hranice;od 49 990 Kč;Ryzen 7 7700X / RX 9070 XT / 32GB DDR5;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp;center;dark;Skladem;Prémiové sestavy;POSUŇTE HRANICE;Konfigurace se může lišit.;split
-3;HelloComp GAMER SE 3060 Ti;Ready to play;19 490 Kč;Ryzen 5 5500 / RTX 3060 Ti / 16GB;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp;center;default;Skladem;Herní počítače;ZAPOJ A HRAJ;Ilustrační foto.;minimal
-4;HelloComp GAMER PRO RTX 4070;Nekompromisní gameplay;32 990 Kč;Ryzen 7 5800X / RTX 4070 12GB / 32GB;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp;center;dark;Skladem;Profesionální sestavy;OBJEDNAT;Ilustrační foto.;neon
-5;HelloComp GAMER SE RX 6600;Síla v detailech;14 990 Kč;Ryzen 5 3600 / RX 6600 8GB / 16GB;https://cdn.myshoptet.com/usr/www.hellocomp.cz/user/shop/orig/5573_1-fotor-20250314181022.png?69091350;HelloComp;center;soft;Skladem;Herní počítače;DO KOŠÍKU;Ilustrační foto.;specs-focus</textarea>
+            <textarea class="field" id="csvInput"
+                placeholder="Klikni Generovat nebo Heureka Feed pro načtení produktů..."></textarea>
         </section>
         <main class="preview" id="cardsContainer"></main>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <button class="lb-close" onclick="closeLightbox()">&times;</button>
+        <div class="lb-card-wrap" id="lbContent"></div>
+        <div class="lb-actions">
+            <button class="btn success" onclick="saveLightboxCard()">💾 Save PNG</button>
+            <button class="btn secondary" onclick="closeLightbox()">Zavřít</button>
+        </div>
     </div>
 
     <script>
@@ -2291,9 +2448,8 @@
         })();
 
         // ─── Logo helper ───
-        function logoHtml(dark) {
-            const filter = dark ? '' : 'filter:brightness(0) invert(1);';
-            return '<img class="logo-watermark" src="/hellocomp-logo.png" alt="HC" style="' + filter + '" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
+        function logoHtml() {
+            return '<img class="logo-watermark" src="/hellocomp-logo.png" alt="HC" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
         }
 
         // ─── Parse specs ───
@@ -2327,10 +2483,9 @@
                     + '<div class="data-stream"></div>'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">HERO</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-line">' + p.specs + '</div>'
@@ -2348,10 +2503,9 @@
                 return '<div class="card tpl-split" data-tpl="split" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">SPLIT</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="divider"></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -2368,10 +2522,9 @@
                 return '<div class="card tpl-minimal" data-tpl="minimal" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">MINIMAL</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || '') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -2390,12 +2543,11 @@
                     + '<div class="data-stream"></div>'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">NEON</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="glow-ring"></div>'
                     + '<div class="particles">' + neonParticles() + '</div>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || 'ELITE GAMING') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -2426,10 +2578,9 @@
                     + '<div class="data-stream"></div>'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">SPECS</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">&#215;</button>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-table">' + specRows + '</div>'
@@ -2440,126 +2591,7 @@
                     + '</div>';
             },
 
-            // ─── v5.3 PRO: CS2 (Counter-Strike 2) Template ───
-            csgo(p) {
-                const s = parseSpecs(p.specs);
-                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
-                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
-                const rar = n >= 40000 ? 'covert' : n >= 25000 ? 'classified' : 'restricted';
-                const rLbl = rar === 'covert' ? '\u2605 COVERT' : rar === 'classified' ? 'CLASSIFIED' : 'RESTRICTED';
-                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram };
-                return '<div class="card tpl-csgo" data-tpl="csgo" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
-                    + lineupBadgeHtml(p._lineup)
-                    + '<span class="template-label">CS2</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
-                    + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="wear-tag">' + rLbl + '</span>' + gpuBadgeHtml(gpu) + '</div>'
-                    + '<div class="hook">' + p.hook + '</div>'
-                    + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
-                    + energyMeterHtml(specsObj, gpu)
-                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
-                    + '<div class="cta-btn">' + (p.cta || 'INSPECT') + '</div>'
-                    + '</div>'
-                    + '<div class="rarity-stripe ' + rar + '"></div>'
-                    + '</div>';
-            },
 
-            // ─── v5.3 PRO: League of Legends Template ───
-            lol(p) {
-                const s = parseSpecs(p.specs);
-                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
-                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
-                const rank = n >= 50000 ? 'CHALLENGER' : n >= 35000 ? 'MASTER' : n >= 20000 ? 'DIAMOND' : 'PLATINUM';
-                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram };
-                return '<div class="card tpl-lol" data-tpl="lol" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
-                    + '<div class="rank-frame"></div>'
-                    + lineupBadgeHtml(p._lineup)
-                    + '<span class="template-label">LOL</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
-                    + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="rank-tag">' + rank + '</span>' + gpuBadgeHtml(gpu) + '</div>'
-                    + '<div class="hook">' + p.hook + '</div>'
-                    + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
-                    + energyMeterHtml(specsObj, gpu)
-                    + socialProofHtml()
-                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
-                    + '<div class="cta-btn">' + (p.cta || 'SUMMONER\'S CHOICE') + '</div>'
-                    + '</div>'
-                    + '</div>';
-            },
-
-            // ─── v5.3 PRO: Fortnite Template ───
-            fortnite(p) {
-                const s = parseSpecs(p.specs);
-                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
-                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
-                const isLegendary = n >= 30000;
-                const rarCls = isLegendary ? 'legendary' : 'epic';
-                const rarLbl = isLegendary ? 'LEGENDARY' : 'EPIC';
-                return '<div class="card tpl-fortnite" data-tpl="fortnite" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
-                    + '<div class="diagonal-stripes"></div>'
-                    + '<div class="rarity-glow"></div>'
-                    + lineupBadgeHtml(p._lineup)
-                    + '<span class="template-label">FORTNITE</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
-                    + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="item-rarity ' + rarCls + '">' + rarLbl + '</span>' + gpuBadgeHtml(gpu) + '</div>'
-                    + '<div class="hook">' + p.hook + '</div>'
-                    + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
-                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
-                    + '<div class="cta-btn">' + (p.cta || 'GET IT NOW') + '</div>'
-                    + '</div>'
-                    + '</div>';
-            },
-
-            // ─── v5.3 PRO: Minecraft Template ───
-            minecraft(p) {
-                const s = parseSpecs(p.specs);
-                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
-                return '<div class="card tpl-minecraft" data-tpl="minecraft" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
-                    + '<div class="dirt-overlay"></div>'
-                    + lineupBadgeHtml(p._lineup)
-                    + '<span class="template-label" style="font-family:monospace">CRAFT</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
-                    + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="craft-label">[CRAFTED]</span>' + gpuBadgeHtml(gpu) + '</div>'
-                    + '<div class="hook">' + p.hook + '</div>'
-                    + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
-                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
-                    + '<div class="cta-btn">' + (p.cta || 'MINE IT') + '</div>'
-                    + '</div>'
-                    + '</div>';
-            },
-
-            // ─── v5.3 PRO: Roblox Template ───
-            roblox(p) {
-                const s = parseSpecs(p.specs);
-                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
-                return '<div class="card tpl-roblox" data-tpl="roblox" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
-                    + '<div class="rbx-gradient"></div>'
-                    + lineupBadgeHtml(p._lineup)
-                    + '<span class="template-label">ROBLOX</span>'
-                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
-                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
-                    + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml(false) + '<span class="rbx-badge">\u2B50 PREMIUM</span>' + gpuBadgeHtml(gpu) + '</div>'
-                    + '<div class="hook">' + p.hook + '</div>'
-                    + '<div class="name">' + p.product_name + '</div>'
-                    + '<div class="specs-line">' + p.specs + '</div>'
-                    + socialProofHtml()
-                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
-                    + '<div class="cta-btn">' + (p.cta || 'PLAY NOW') + '</div>'
-                    + '</div>'
-                    + '</div>';
-            }
         };
 
         // ─── CSV Parser ───
@@ -2579,10 +2611,77 @@
         let currentFilter = 'all';
         let currentCategory = 'all';
         let currentLineup = 'all';
+        let currentPage = 0;
+        let pageSize = 30;
+        let lastFilteredCount = 0;
         let cachedProducts = []; // v5: holds JSON cache data
-        let bgRemovalModule = null; // @imgly/background-removal (loaded on demand)
 
-        // ─── Render cards ───
+        // ─── v6: Inject per-card toolbar ───
+        function injectCardToolbar(card) {
+            const toolbar = document.createElement('div');
+            toolbar.className = 'card-toolbar';
+            toolbar.innerHTML = ''
+                + '<button class="tb-btn save" onclick="event.stopPropagation();saveCardAsPNG(this.closest(\'.card\'))" title="Uložit jako PNG">\uD83D\uDCBE</button>'
+                + '<button class="tb-btn edit" onclick="event.stopPropagation();toggleEditMode(this.closest(\'.card\'))" title="Upravit texty">\u270F\uFE0F</button>'
+                + '<button class="tb-btn bg" onclick="event.stopPropagation();removeBgToolbar(this)" title="Odstranit pozadí">\uD83D\uDDBC</button>'
+                + '<button class="tb-btn" onclick="event.stopPropagation();openLightbox(this.closest(\'.card\'))" title="Zvětšit">\uD83D\uDD0D</button>'
+                + '<button class="tb-btn del" onclick="event.stopPropagation();this.closest(\'.card\').remove();updateCount();updateAssetSummary()" title="Smazat">\u2715</button>';
+            card.insertBefore(toolbar, card.firstChild);
+            // v7: Template switcher
+            const currentTpl = card.dataset.tpl || 'hero';
+            const switcher = document.createElement('div');
+            switcher.className = 'tpl-switcher';
+            const tplNames = [
+                { key: 'hero', label: 'H' },
+                { key: 'split', label: 'S' },
+                { key: 'minimal', label: 'M' },
+                { key: 'neon', label: 'N' },
+                { key: 'specs-focus', label: 'Sp' }
+            ];
+            switcher.innerHTML = tplNames.map(function (t) {
+                return '<button class="ts-btn' + (t.key === currentTpl ? ' active' : '') + '" data-tpl="' + t.key + '" onclick="event.stopPropagation();switchCardTemplate(this.closest(\'.card\'),\'' + t.key + '\')" title="' + t.key + '">' + t.label + '</button>';
+            }).join('');
+            card.appendChild(switcher);
+            // Selection check circle
+            const chk = document.createElement('div');
+            chk.className = 'select-check';
+            chk.textContent = '\u2713';
+            card.appendChild(chk);
+            // Saved badge
+            const badge = document.createElement('div');
+            badge.className = 'saved-badge';
+            badge.textContent = '\uD83D\uDCBE SAVED';
+            card.appendChild(badge);
+            // Product URL strip (shows on hover)
+            if (card.dataset.url) {
+                const urlStrip = document.createElement('div');
+                urlStrip.className = 'product-url';
+                urlStrip.textContent = card.dataset.url;
+                card.appendChild(urlStrip);
+            }
+        }
+
+        // ─── v6: Render pagination bar ───
+        function renderPagination(container, totalPages, totalItems) {
+            if (totalPages <= 1) return;
+            let html = '<div class="pagination-bar">';
+            html += '<button class="pg-btn" onclick="navigatePage(0)" ' + (currentPage === 0 ? 'disabled' : '') + '>\u25C0\u25C0</button>';
+            html += '<button class="pg-btn" onclick="navigatePage(' + (currentPage - 1) + ')" ' + (currentPage === 0 ? 'disabled' : '') + '>\u25C0 Prev</button>';
+            const maxVis = 7;
+            let startPg = Math.max(0, currentPage - Math.floor(maxVis / 2));
+            let endPg = Math.min(totalPages, startPg + maxVis);
+            if (endPg - startPg < maxVis) startPg = Math.max(0, endPg - maxVis);
+            for (let pg = startPg; pg < endPg; pg++) {
+                html += '<button class="pg-btn' + (pg === currentPage ? ' active' : '') + '" onclick="navigatePage(' + pg + ')">' + (pg + 1) + '</button>';
+            }
+            html += '<button class="pg-btn" onclick="navigatePage(' + (currentPage + 1) + ')" ' + (currentPage >= totalPages - 1 ? 'disabled' : '') + '>Next \u25B6</button>';
+            html += '<button class="pg-btn" onclick="navigatePage(' + (totalPages - 1) + ')" ' + (currentPage >= totalPages - 1 ? 'disabled' : '') + '>\u25B6\u25B6</button>';
+            html += '<span class="pg-info">' + totalItems + ' produkt\u016F</span>';
+            html += '</div>';
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        // ─── Render cards (v6 — paginated + toolbar) ───
         function renderCards() {
             const csv = document.getElementById('csvInput').value;
             const products = parseCSV(csv);
@@ -2590,57 +2689,72 @@
             const container = document.getElementById('cardsContainer');
             container.innerHTML = '';
             const templateKeys = Object.keys(templates);
-            let rendered = 0;
 
+            // Step 1: resolve templates + filter
+            const filtered = [];
             products.forEach((p, i) => {
                 let tpl = (p.template || '').trim().toLowerCase();
                 if (!templates[tpl]) tpl = templateKeys[i % templateKeys.length];
                 if (currentFilter !== 'all' && tpl !== currentFilter) return;
                 if (currentCategory !== 'all' && p._category !== currentCategory) return;
                 if (currentLineup !== 'all' && p._lineup !== currentLineup) return;
-                const html = templates[tpl](p);
-                container.insertAdjacentHTML('beforeend', html);
-                rendered++;
+                filtered.push(Object.assign({}, p, { _resolvedTpl: tpl }));
             });
 
-            // Count bar with category + lineup info
+            lastFilteredCount = filtered.length;
+            const effectivePageSize = pageSize === 0 ? filtered.length : pageSize;
+            const totalPages = Math.max(1, Math.ceil(filtered.length / effectivePageSize));
+            if (currentPage >= totalPages) currentPage = totalPages - 1;
+            if (currentPage < 0) currentPage = 0;
+            const start = currentPage * effectivePageSize;
+            const pageItems = filtered.slice(start, start + effectivePageSize);
+
+            // Step 2: render page items
+            pageItems.forEach(function (p) {
+                const html = templates[p._resolvedTpl](p);
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            // Count bar
             const catLabel = currentCategory === 'all' ? 'vše' : currentCategory;
             const lineLabel = currentLineup === 'all' ? 'vše' : currentLineup;
             const countBar = '<div class="preview-count">'
-                + '<strong>' + rendered + ' karet</strong>'
+                + '<strong>' + pageItems.length + ' / ' + filtered.length + ' karet</strong>'
+                + '<span>|</span><span>str. ' + (currentPage + 1) + '/' + totalPages + '</span>'
                 + '<span>|</span><span>tpl: ' + currentFilter + '</span>'
                 + '<span>|</span><span>kat: ' + catLabel + '</span>'
-                + '<span>|</span><span>řada: ' + lineLabel + '</span>'
+                + '<span>|</span><span>\u0159ada: ' + lineLabel + '</span>'
                 + '</div>';
             container.insertAdjacentHTML('afterbegin', countBar);
 
             // Stagger card entrance animations
-            container.querySelectorAll('.card').forEach((card, idx) => {
-                card.style.animationDelay = (idx * 0.08) + 's';
+            container.querySelectorAll('.card').forEach(function (card, idx) {
+                card.style.animationDelay = (idx * 0.06) + 's';
             });
 
             // Stagger energy bar animations
-            container.querySelectorAll('.energy-fill').forEach((bar, idx) => {
+            container.querySelectorAll('.energy-fill').forEach(function (bar, idx) {
                 const baseDelay = parseFloat(bar.style.animationDelay) || 0.3;
-                bar.style.animationDelay = (baseDelay + Math.floor(idx / 3) * 0.2) + 's';
+                bar.style.animationDelay = (baseDelay + Math.floor(idx / 3) * 0.15) + 's';
             });
 
-            // Inject per-card controls (BG button + selection check)
-            container.querySelectorAll('.card').forEach(card => {
-                const btn = document.createElement('button');
-                btn.className = 'remove-btn bg-btn';
-                btn.textContent = 'BG';
-                btn.title = 'Odstranit pozadí (AI)';
-                btn.onclick = function (e) { e.stopPropagation(); removeBgCard(card.querySelector('.product-img'), btn); };
-                card.appendChild(btn);
-                // Selection check circle
-                const chk = document.createElement('div');
-                chk.className = 'select-check';
-                chk.textContent = '\u2713';
-                card.appendChild(chk);
+            // Inject per-card toolbar + controls
+            container.querySelectorAll('.card').forEach(function (card, idx) {
+                card.dataset.idx = start + idx;
+                // Store product URL on card for the URL strip
+                const productData = filtered[start + idx];
+                if (productData && productData._url) card.dataset.url = productData._url;
+                injectCardToolbar(card);
             });
 
-            setStatus('Vygenerováno ' + rendered + ' karet. v5.3 PRO ready.', '#34d399');
+            // Pagination bar
+            renderPagination(container, totalPages, filtered.length);
+
+            // Update panel
+            updateAssetSummary();
+            const label = document.getElementById('totalProductsLabel');
+            if (label) label.textContent = filtered.length + ' / ' + products.length;
+            setStatus(pageItems.length + ' karet (str. ' + (currentPage + 1) + '/' + totalPages + ' z ' + filtered.length + '). v6 ASSET ready.', '#34d399');
             updateBgStats();
         }
 
@@ -2677,21 +2791,21 @@
                 const viable = allProducts.filter(p => p.price && p.price > 50 && p.img);
                 cachedProducts = viable;
 
-                // Smart selection: diverse mix across categories and price tiers
-                const selected = smartSelectProducts(viable, 30);
+                // Smart sort: prioritized order, but load ALL products
+                const sorted = smartSelectProducts(viable, viable.length);
 
-                // Build CSV from selected Heureka products
-                const headers = 'id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;template;_category;_lineup;_gpuRaw;_stock';
+                // Build CSV from ALL Heureka products
+                const headers = 'id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;template;_category;_lineup;_gpuRaw;_stock;_url';
                 const tierTemplates = {
-                    budget: ['minimal', 'split', 'specs-focus', 'roblox', 'minecraft'],
-                    mid: ['split', 'hero', 'minimal', 'csgo', 'minecraft'],
-                    premium: ['hero', 'neon', 'fortnite', 'lol', 'csgo'],
-                    ultra: ['neon', 'fortnite', 'lol', 'csgo', 'hero']
+                    budget: ['minimal', 'split', 'specs-focus'],
+                    mid: ['split', 'hero', 'minimal', 'specs-focus'],
+                    premium: ['hero', 'neon', 'specs-focus', 'split'],
+                    ultra: ['neon', 'hero', 'specs-focus', 'split']
                 };
                 const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
                 copyEngine.reset();
 
-                const lines = selected.map(p => {
+                const lines = sorted.map(p => {
                     const category = detectCategory(p);
                     const gpu = (p.specs && p.specs.gpu) ? p.specs.gpu : '';
                     const gpuInfo = detectGpuBrand(gpu);
@@ -2723,13 +2837,16 @@
                         category,
                         p.lineup || '',
                         gpu || '',
-                        p.inStock ? '1' : '0'
+                        p.inStock ? '1' : '0',
+                        p.url || ''
                     ].join(';');
                 });
 
                 document.getElementById('csvInput').value = headers + '\n' + lines.join('\n');
                 const src = meta.source === 'heureka' ? 'Heureka feed' : 'cache';
-                setStatus('Načteno ' + selected.length + ' produktů z ' + src + ' (' + viable.length + '/' + (meta.totalProducts || allProducts.length) + ' celkem). Klikni Generovat!', '#34d399');
+                currentPage = 0;
+                var effectiveSize = pageSize === 0 ? sorted.length : pageSize;
+                setStatus('Načteno ' + sorted.length + ' produktů z ' + src + '. Stránkování: ' + effectiveSize + ' per page. Klikni Generovat!', '#34d399');
             } catch (e) {
                 setStatus('Chyba: ' + e.message, '#f87171');
                 console.error(e);
@@ -2781,41 +2898,7 @@
             return selected.slice(0, count);
         }
 
-        // ─── Legacy: Load from CSV file ───
-        async function loadProducts() {
-            setStatus('Načítám produkty z CSV...', 'var(--accent)');
-            try {
-                const res = await fetch('/products-all.csv');
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const text = await res.text();
-                const lines = text.trim().split('\n');
-                if (lines.length < 2) { setStatus('CSV prázdné.', '#f87171'); return; }
-                const headers = lines[0].split(';').map(h => h.trim());
-                const tierTemplates = {
-                    budget: ['minimal', 'split', 'specs-focus', 'roblox', 'minecraft'],
-                    mid: ['split', 'hero', 'minimal', 'csgo', 'minecraft'],
-                    premium: ['hero', 'neon', 'fortnite', 'lol', 'csgo'],
-                    ultra: ['neon', 'fortnite', 'lol', 'csgo', 'hero']
-                };
-                const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
-                const priceColIdx = headers.indexOf('price');
-                const newLines = [lines[0]];
-                for (let i = 1; i < lines.length; i++) {
-                    const vals = lines[i].split(';');
-                    const tplIdx = headers.indexOf('template');
-                    const price = priceColIdx >= 0 ? vals[priceColIdx] : '0';
-                    const tier = copyEngine.getTier(price);
-                    const pool = tierTemplates[tier];
-                    if (tplIdx >= 0) vals[tplIdx] = pool[tierCounters[tier] % pool.length];
-                    tierCounters[tier]++;
-                    newLines.push(vals.join(';'));
-                }
-                document.getElementById('csvInput').value = newLines.join('\n');
-                setStatus('Načteno ' + (lines.length - 1) + ' produktů z CSV.', '#34d399');
-            } catch (e) {
-                setStatus('Chyba: ' + e.message, '#f87171');
-            }
-        }
+
 
         // ─── Smart Copy: regenerate all hooks/claims/CTAs ───
         function generateSmartCopy() {
@@ -2845,34 +2928,30 @@
             setStatus('Smart Copy vygenerován pro ' + String(lines.length - 1) + ' produktů.', '#34d399');
         }
 
-        // ─── AI Background Removal (@imgly/background-removal — runs 100% in browser) ───
-        async function loadBgRemovalEngine() {
-            if (bgRemovalModule) return bgRemovalModule;
-            setStatus('Načítám AI model pro odstranění pozadí (~40 MB, jen poprvé)...', 'var(--accent)');
-            const preloadBtn = document.getElementById('preloadModelBtn');
-            if (preloadBtn) { preloadBtn.textContent = '⏳ Loading...'; preloadBtn.style.pointerEvents = 'none'; }
-            try {
-                bgRemovalModule = await import('https://esm.sh/@imgly/background-removal@1.5.15');
-                setStatus('AI model načten. Připraveno!', '#34d399');
-                if (preloadBtn) { preloadBtn.textContent = '✅ AI Ready'; preloadBtn.className = 'btn small success'; }
-                return bgRemovalModule;
-            } catch (e) {
-                setStatus('Chyba AI modelu: ' + e.message, '#f87171');
-                if (preloadBtn) { preloadBtn.textContent = '⚡ Preload AI'; preloadBtn.style.pointerEvents = ''; }
-                throw e;
-            }
-        }
+        // ─── AI Background Removal (Server-side via /api/remove-bg) ───
+        // No WASM, no 40MB download. Server runs onnxruntime-node natively = fast.
 
-        async function fetchImageBlob(src) {
-            try {
-                const r = await fetch(src, { mode: 'cors' });
-                if (r.ok) return await r.blob();
-            } catch (_) { }
-            try {
-                const r = await fetch('/api/proxy-image?url=' + encodeURIComponent(src));
-                if (r.ok) return await r.blob();
-            } catch (_) { }
-            throw new Error('Nelze načíst obrázek: ' + src.substring(0, 60));
+        async function removeBackgroundViaAPI(imageSrc) {
+            // If it's a blob URL or data URL, send raw bytes
+            if (imageSrc.startsWith('blob:') || imageSrc.startsWith('data:')) {
+                const r = await fetch(imageSrc);
+                const blob = await r.blob();
+                const resp = await fetch('/api/remove-bg', {
+                    method: 'POST',
+                    headers: { 'Content-Type': blob.type || 'image/png' },
+                    body: blob
+                });
+                if (!resp.ok) throw new Error('API error: ' + resp.status + ' ' + (await resp.text()));
+                return await resp.blob();
+            }
+            // External URL — let the server fetch it (no CORS issues)
+            const resp = await fetch('/api/remove-bg', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: imageSrc })
+            });
+            if (!resp.ok) throw new Error('API error: ' + resp.status + ' ' + (await resp.text()));
+            return await resp.blob();
         }
 
         // ─── Post-process: enhance cutout image ───
@@ -2880,35 +2959,35 @@
             img.classList.add('bg-removed', 'enhanced');
         }
 
-        // ─── Per-card BG removal ───
+        // ─── Per-card BG removal (legacy compat) ───
         async function removeBgCard(img, btn) {
             if (!img) return;
             if (img.dataset.bgRemoved) {
                 setStatus('Pozadí již odstraněno.', 'var(--muted)');
                 return;
             }
-            btn.textContent = '⏳';
-            btn.className = 'remove-btn bg-btn working';
+            if (btn) { btn.textContent = '⏳'; btn.style.pointerEvents = 'none'; }
             setStatus('Odstraňuji pozadí...', 'var(--accent)');
             try {
-                const mod = await loadBgRemovalEngine();
-                const imageBlob = await fetchImageBlob(img.src);
-                const resultBlob = await mod.removeBackground(imageBlob, {
-                    output: { format: 'image/png' }
-                });
+                const resultBlob = await removeBackgroundViaAPI(img.src);
                 img.src = URL.createObjectURL(resultBlob);
                 img.dataset.bgRemoved = '1';
                 enhanceImage(img);
-                btn.className = 'remove-btn bg-btn done';
-                btn.textContent = '✓';
+                if (btn) { btn.textContent = '✅'; }
                 setStatus('Pozadí odstraněno + obrázek vylepšen!', '#34d399');
                 updateBgStats();
             } catch (e) {
-                btn.className = 'remove-btn bg-btn';
-                btn.textContent = 'BG';
+                if (btn) { btn.textContent = '🖼'; btn.style.pointerEvents = ''; }
                 setStatus('Chyba: ' + e.message, '#f87171');
                 console.error('BG removal error:', e);
             }
+        }
+
+        // ─── v6: BG removal from toolbar button ───
+        async function removeBgToolbar(tbBtn) {
+            const card = tbBtn.closest('.card');
+            const img = card ? card.querySelector('.product-img') : null;
+            removeBgCard(img, tbBtn);
         }
 
         // ─── Selection helpers ───
@@ -2928,9 +3007,28 @@
             if (el) el.innerHTML = '<span>' + sel + ' selected</span> ・ <span style="color:#34d399">' + done + ' processed</span> ・ <span>' + all + ' total</span>';
         }
 
-        // ─── Preload AI model ───
+        // ─── Preload AI model (warm up the server) ───
         async function preloadModel() {
-            try { await loadBgRemovalEngine(); } catch (_) { }
+            const preloadBtn = document.getElementById('preloadModelBtn');
+            if (preloadBtn) { preloadBtn.textContent = '⏳ Warming up...'; preloadBtn.style.pointerEvents = 'none'; }
+            try {
+                // Send a tiny 1x1 red PNG to warm up the model on the server
+                const tinyPng = Uint8Array.from(atob('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='), c => c.charCodeAt(0));
+                const resp = await fetch('/api/remove-bg', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'image/png' },
+                    body: tinyPng
+                });
+                if (resp.ok) {
+                    setStatus('AI engine zahřátý. Připraveno!', '#34d399');
+                    if (preloadBtn) { preloadBtn.textContent = '✅ AI Ready'; preloadBtn.className = 'btn small success'; }
+                } else {
+                    throw new Error('Status ' + resp.status);
+                }
+            } catch (e) {
+                setStatus('Preload selhal: ' + e.message, '#f87171');
+                if (preloadBtn) { preloadBtn.textContent = '⚡ Preload AI'; preloadBtn.style.pointerEvents = ''; }
+            }
         }
 
         // ─── Batch BG removal: process SELECTED cards with progress ───
@@ -2948,9 +3046,6 @@
                 setStatus('Všechny vybrané obrázky již zpracovány.', 'var(--muted)');
                 return;
             }
-            try {
-                await loadBgRemovalEngine();
-            } catch (_) { return; }
 
             let done = 0;
             let failed = 0;
@@ -2972,20 +3067,17 @@
 
             for (const card of unprocessed) {
                 const img = card.querySelector('.product-img');
-                const btn = card.querySelector('.bg-btn');
-                if (btn) { btn.textContent = '⏳'; btn.className = 'remove-btn bg-btn working'; }
+                const btn = card.querySelector('.tb-btn.bg') || card.querySelector('.bg-btn');
+                if (btn) { btn.textContent = '⏳'; btn.style.pointerEvents = 'none'; }
                 try {
-                    const imageBlob = await fetchImageBlob(img.src);
-                    const resultBlob = await bgRemovalModule.removeBackground(imageBlob, {
-                        output: { format: 'image/png' }
-                    });
+                    const resultBlob = await removeBackgroundViaAPI(img.src);
                     img.src = URL.createObjectURL(resultBlob);
                     img.dataset.bgRemoved = '1';
                     enhanceImage(img);
-                    if (btn) { btn.className = 'remove-btn bg-btn done'; btn.textContent = '✓'; }
+                    if (btn) { btn.textContent = '✅'; }
                     done++;
                 } catch (e) {
-                    if (btn) { btn.className = 'remove-btn bg-btn'; btn.textContent = '✗'; }
+                    if (btn) { btn.textContent = '🖼'; btn.style.pointerEvents = ''; }
                     console.error('BG fail:', e);
                     failed++;
                     done++;
@@ -2998,13 +3090,237 @@
             setStatus('Hotovo: ' + successCount + '/' + total + ' obrázků zpracováno a vylepšeno.' + (failed ? ' (' + failed + ' chyb)' : ' ✅'), '#34d399');
         }
 
+        // ─── v6: Save individual card as PNG ───
+        async function saveCardAsPNG(card) {
+            if (typeof html2canvas === 'undefined') {
+                setStatus('Načítám export engine...', 'var(--accent)');
+                await new Promise(function (resolve, reject) {
+                    const s = document.createElement('script');
+                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                    s.onload = resolve; s.onerror = reject;
+                    document.head.appendChild(s);
+                });
+            }
+            var hideEls = [card.querySelector('.card-toolbar'), card.querySelector('.select-check'), card.querySelector('.saved-badge'), card.querySelector('.product-url'), card.querySelector('.tpl-switcher')];
+            hideEls.forEach(function (el) { if (el) el.style.display = 'none'; });
+            card.style.animation = 'none';
+            card.querySelectorAll('*').forEach(function (el) { el.style.animation = 'none'; });
+            var saveBtn = card.querySelector('.tb-btn.save');
+            if (saveBtn) saveBtn.textContent = '⏳';
+            try {
+                var canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null, logging: false });
+                var productName = (card.querySelector('.name') ? card.querySelector('.name').textContent : 'card');
+                var safeName = productName.replace(/[^a-zA-Z0-9]/g, '-').substring(0, 40);
+                var link = document.createElement('a');
+                link.download = 'hellocomp-' + (card.dataset.tpl || 'post') + '-' + safeName + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                card.classList.add('is-saved');
+                if (saveBtn) { saveBtn.textContent = '✅'; saveBtn.classList.add('saved-ok'); }
+                setStatus('💾 Uloženo: ' + link.download, '#34d399');
+            } catch (e) {
+                setStatus('Export chyba: ' + e.message, '#f87171');
+                if (saveBtn) saveBtn.textContent = '💾';
+            }
+            hideEls.forEach(function (el) { if (el) el.style.display = ''; });
+            updateAssetSummary();
+        }
+
+        // ─── v6: Toggle inline edit mode on card ───
+        function toggleEditMode(card) {
+            var isEditing = card.classList.toggle('editing');
+            var editables = card.querySelectorAll('.hook, .name, .price, .cta-btn, .claim, .specs-line');
+            editables.forEach(function (el) { el.contentEditable = isEditing ? 'true' : 'false'; });
+            var editBtn = card.querySelector('.tb-btn.edit');
+            if (editBtn) editBtn.textContent = isEditing ? '✅' : '✏️';
+            if (isEditing) {
+                setStatus('✏️ Edit mode: klikni na text pro úpravu. Klikni ✅ Done pro uložení.', 'var(--accent)');
+            } else {
+                card.classList.add('was-edited');
+                setStatus('✅ Úpravy uloženy na kartě.', '#34d399');
+                updateAssetSummary();
+            }
+        }
+
+        // ─── v6: Lightbox (fullscreen preview) ───
+        function openLightbox(card) {
+            var lb = document.getElementById('lightbox');
+            var content = document.getElementById('lbContent');
+            content.innerHTML = '';
+            var clone = card.cloneNode(true);
+            clone.style.animation = 'none';
+            clone.querySelectorAll('*').forEach(function (el) { el.style.animation = 'none'; });
+            content.appendChild(clone);
+            lb.classList.add('open');
+            lb.dataset.sourceIdx = card.dataset.idx || '';
+        }
+
+        function closeLightbox() {
+            var lb = document.getElementById('lightbox');
+            lb.classList.remove('open');
+            document.getElementById('lbContent').innerHTML = '';
+        }
+
+        async function saveLightboxCard() {
+            var idx = document.getElementById('lightbox').dataset.sourceIdx;
+            var original = idx ? document.querySelector('.card[data-idx="' + idx + '"]') : null;
+            if (original) {
+                closeLightbox();
+                await saveCardAsPNG(original);
+            } else {
+                setStatus('Karta nenalezena.', '#f87171');
+            }
+        }
+
+        // ─── v6: Pagination navigation ───
+        function navigatePage(page) {
+            currentPage = page;
+            renderCards();
+            document.getElementById('cardsContainer').scrollTop = 0;
+        }
+
+        // ─── v6: Asset summary update ───
+        function updateAssetSummary() {
+            var cards = document.querySelectorAll('#cardsContainer .card');
+            var saved = document.querySelectorAll('#cardsContainer .card.is-saved');
+            var edited = document.querySelectorAll('#cardsContainer .card.was-edited');
+            var el = document.getElementById('asTotal');
+            if (el) el.textContent = lastFilteredCount;
+            var se = document.getElementById('asSaved');
+            if (se) se.textContent = saved.length;
+            var ee = document.getElementById('asEdited');
+            if (ee) ee.textContent = edited.length;
+        }
+
+        // ─── v7: Per-card template switching ───
+        function switchCardTemplate(card, newTpl) {
+            if (!templates[newTpl]) return;
+            // Extract product data from card's data attrs and DOM
+            const csv = document.getElementById('csvInput').value;
+            const products = parseCSV(csv);
+            const idx = parseInt(card.dataset.idx);
+            if (isNaN(idx) || !products[idx]) return;
+            const p = products[idx];
+            p._resolvedTpl = newTpl;
+            // Remember state
+            const wasSelected = card.classList.contains('selected');
+            const wasSaved = card.classList.contains('is-saved');
+            const wasEdited = card.classList.contains('was-edited');
+            const bgRemoved = card.querySelector('.product-img.bg-removed');
+            const bgSrc = bgRemoved ? bgRemoved.src : null;
+            // Generate new HTML
+            const html = templates[newTpl](p);
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            const newCard = temp.firstElementChild;
+            // Preserve state
+            newCard.dataset.idx = idx;
+            if (p._url) newCard.dataset.url = p._url;
+            if (wasSelected) newCard.classList.add('selected');
+            if (wasSaved) newCard.classList.add('is-saved');
+            if (wasEdited) newCard.classList.add('was-edited');
+            // Replace in DOM
+            card.parentNode.replaceChild(newCard, card);
+            // Restore BG-removed image if applicable
+            if (bgSrc) {
+                const newImg = newCard.querySelector('.product-img');
+                if (newImg) { newImg.src = bgSrc; newImg.dataset.bgRemoved = '1'; enhanceImage(newImg); }
+            }
+            // Re-inject toolbar with template switcher
+            injectCardToolbar(newCard);
+            // Highlight active template in switcher
+            newCard.querySelectorAll('.ts-btn').forEach(function (b) {
+                b.classList.toggle('active', b.dataset.tpl === newTpl);
+            });
+        }
+
+        // ─── v7: Sort products in CSV ───
+        let currentSort = 'price-desc';
+        function sortProducts() {
+            const csv = document.getElementById('csvInput').value;
+            const lines = csv.trim().split('\n').filter(l => l.trim());
+            if (lines.length < 2) return;
+            const headers = lines[0];
+            const hArr = headers.split(';').map(h => h.trim());
+            const priceIdx = hArr.indexOf('price');
+            const nameIdx = hArr.indexOf('product_name');
+            const catIdx = hArr.indexOf('_category');
+            const dataLines = lines.slice(1);
+            dataLines.sort(function (a, b) {
+                const va = a.split(';');
+                const vb = b.split(';');
+                switch (currentSort) {
+                    case 'price-desc': {
+                        const pa = parseInt(String(va[priceIdx] || '0').replace(/[^\d]/g, '')) || 0;
+                        const pb = parseInt(String(vb[priceIdx] || '0').replace(/[^\d]/g, '')) || 0;
+                        return pb - pa;
+                    }
+                    case 'price-asc': {
+                        const pa = parseInt(String(va[priceIdx] || '0').replace(/[^\d]/g, '')) || 0;
+                        const pb = parseInt(String(vb[priceIdx] || '0').replace(/[^\d]/g, '')) || 0;
+                        return pa - pb;
+                    }
+                    case 'name-asc':
+                        return (va[nameIdx] || '').localeCompare(vb[nameIdx] || '', 'cs');
+                    case 'name-desc':
+                        return (vb[nameIdx] || '').localeCompare(va[nameIdx] || '', 'cs');
+                    case 'category':
+                        return (va[catIdx] || '').localeCompare(vb[catIdx] || '', 'cs') || (parseInt(String(vb[priceIdx] || '0').replace(/[^\d]/g, '')) || 0) - (parseInt(String(va[priceIdx] || '0').replace(/[^\d]/g, '')) || 0);
+                    default:
+                        return 0;
+                }
+            });
+            document.getElementById('csvInput').value = headers + '\n' + dataLines.join('\n');
+            currentPage = 0;
+            renderCards();
+        }
+
+        // ─── v7: Export format / dimensions ───
+        let currentExportFormat = '1080x1920';
+        function setExportFormat(format) {
+            currentExportFormat = format;
+            document.querySelectorAll('#exportPicker .ep-btn').forEach(function (b) {
+                b.classList.toggle('active', b.dataset.format === format);
+            });
+            // Apply dimensions to cards for visual preview
+            const dims = format.split('x');
+            const w = parseInt(dims[0]);
+            const h = parseInt(dims[1]);
+            const ratio = h / w;
+            const container = document.getElementById('cardsContainer');
+            container.querySelectorAll('.card').forEach(function (card) {
+                if (format === '1080x1920') {
+                    // Default 9:16 story — remove overrides
+                    card.style.removeProperty('aspect-ratio');
+                    card.style.removeProperty('width');
+                } else if (format === '1080x1080') {
+                    card.style.aspectRatio = '1 / 1';
+                } else if (format === '1200x628') {
+                    card.style.aspectRatio = '1200 / 628';
+                    card.style.width = '380px';
+                } else if (format === '1920x1080') {
+                    card.style.aspectRatio = '16 / 9';
+                    card.style.width = '420px';
+                }
+            });
+            setStatus('Export formát: ' + format + ' (' + w + '×' + h + ')', '#34d399');
+        }
+
         // ─── Card selection (click to toggle) ───
         document.getElementById('cardsContainer').addEventListener('click', function (e) {
-            if (e.target.closest('.remove-btn') || e.target.closest('.cta-btn')) return;
-            const card = e.target.closest('.card');
-            if (!card) return;
+            if (e.target.closest('.card-toolbar') || e.target.closest('.remove-btn') || e.target.closest('.cta-btn')) return;
+            var card = e.target.closest('.card');
+            if (!card || card.classList.contains('editing')) return;
             card.classList.toggle('selected');
             updateBgStats();
+        });
+
+        // ─── Card double-click → lightbox ───
+        document.getElementById('cardsContainer').addEventListener('dblclick', function (e) {
+            if (e.target.closest('.card-toolbar')) return;
+            var card = e.target.closest('.card');
+            if (!card || card.classList.contains('editing')) return;
+            openLightbox(card);
         });
 
         // ─── Template filter chips ───
@@ -3013,6 +3329,7 @@
             this.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             e.target.classList.add('active');
             currentFilter = e.target.dataset.tpl;
+            currentPage = 0;
             renderCards();
         });
 
@@ -3022,6 +3339,7 @@
             this.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             e.target.classList.add('active');
             currentCategory = e.target.dataset.cat;
+            currentPage = 0;
             renderCards();
         });
 
@@ -3031,11 +3349,19 @@
             this.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             e.target.classList.add('active');
             currentLineup = e.target.dataset.lineup;
+            currentPage = 0;
             renderCards();
         });
 
         // ─── Button bindings ───
-        document.getElementById('renderBtn').addEventListener('click', renderCards);
+        document.getElementById('renderBtn').addEventListener('click', async function () {
+            // Auto-load Heureka data if CSV is empty or has old hardcoded data
+            const csv = document.getElementById('csvInput').value.trim();
+            if (!csv || csv.split('\n').length < 3) {
+                await loadFromCache();
+            }
+            renderCards();
+        });
         document.getElementById('clearBtn').addEventListener('click', function () {
             document.getElementById('cardsContainer').innerHTML = '';
             setStatus('Vyčištěno.', 'var(--muted)');
@@ -3050,16 +3376,35 @@
         document.getElementById('deselectAllBtn').addEventListener('click', deselectAllCards);
         document.getElementById('preloadModelBtn').addEventListener('click', preloadModel);
         document.getElementById('exportBtn').addEventListener('click', exportCards);
+        document.getElementById('pageSizeSelect').addEventListener('change', function () {
+            pageSize = parseInt(this.value) || 0;
+            currentPage = 0;
+            renderCards();
+        });
+        // v7: Sort handler
+        document.getElementById('sortSelect').addEventListener('change', function () {
+            currentSort = this.value;
+            sortProducts();
+        });
+        // v7: Export format picker
+        document.getElementById('exportPicker').addEventListener('click', function (e) {
+            var btn = e.target.closest('.ep-btn');
+            if (!btn) return;
+            setExportFormat(btn.dataset.format);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
 
-        // ─── PNG Export (html2canvas) ───
+        // ─── PNG Export All (html2canvas) ───
         async function exportCards() {
-            const cards = document.querySelectorAll('.card');
+            var cards = document.querySelectorAll('.card');
             if (!cards.length) { setStatus('Nejdřív vygeneruj karty.', '#f87171'); return; }
 
             if (typeof html2canvas === 'undefined') {
                 setStatus('Načítám export engine...', 'var(--accent)');
-                await new Promise((resolve, reject) => {
-                    const s = document.createElement('script');
+                await new Promise(function (resolve, reject) {
+                    var s = document.createElement('script');
                     s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
                     s.onload = resolve;
                     s.onerror = reject;
@@ -3068,24 +3413,30 @@
             }
 
             setStatus('Exportuji ' + cards.length + ' karet jako PNG...', 'var(--accent)');
-            let done = 0;
+            var done = 0;
 
-            for (const card of cards) {
+            for (var ci = 0; ci < cards.length; ci++) {
+                var card = cards[ci];
                 try {
+                    var hideEls = [card.querySelector('.card-toolbar'), card.querySelector('.select-check'), card.querySelector('.saved-badge'), card.querySelector('.product-url'), card.querySelector('.tpl-switcher')];
+                    hideEls.forEach(function (el) { if (el) el.style.display = 'none'; });
                     card.style.animation = 'none';
-                    card.querySelectorAll('*').forEach(el => { el.style.animation = 'none'; });
+                    card.querySelectorAll('*').forEach(function (el) { el.style.animation = 'none'; });
 
-                    const canvas = await html2canvas(card, {
+                    var canvas = await html2canvas(card, {
                         scale: 2,
                         useCORS: true,
                         backgroundColor: null,
                         logging: false
                     });
 
-                    const link = document.createElement('a');
-                    link.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + (done + 1) + '.png';
+                    hideEls.forEach(function (el) { if (el) el.style.display = ''; });
+
+                    var link = document.createElement('a');
+                    link.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + currentExportFormat + '-' + (done + 1) + '.png';
                     link.href = canvas.toDataURL('image/png');
                     link.click();
+                    card.classList.add('is-saved');
                     done++;
                     setStatus('Export: ' + done + '/' + cards.length + '...', 'var(--accent)');
                 } catch (e) {
@@ -3093,12 +3444,15 @@
                 }
             }
 
-            renderCards();
+            updateAssetSummary();
             setStatus('Exportováno ' + done + ' karet jako PNG!', '#34d399');
         }
 
-        // ─── Auto-render on load ───
-        window.addEventListener('DOMContentLoaded', renderCards);
+        // ─── Auto-load Heureka data + render on page load ───
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadFromCache();
+            renderCards();
+        });
     </script>
 
 </body>

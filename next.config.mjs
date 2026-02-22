@@ -9,6 +9,7 @@ const nextConfig = {
       },
     ],
   },
+  serverExternalPackages: ['onnxruntime-node', '@imgly/background-removal-node', 'sharp'],
 };
 
 export default nextConfig;
