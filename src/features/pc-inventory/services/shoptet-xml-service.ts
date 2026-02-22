@@ -69,7 +69,7 @@ export async function fetchShoptetXML(): Promise<string> {
 
     const response = await fetch(xmlUrl, {
         headers,
-        next: { revalidate: 300 }, // Cache for 5 minutes
+        next: { revalidate: 30000 }, // Cache
     });
 
     if (!response.ok) {
