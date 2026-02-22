@@ -447,7 +447,7 @@
             }
         }
 
-        /* ─── v5 FUSION: Cyber Grid Overlay ─── */
+        /* ─── v5 FUSION: Cyber Grid Overlay (hover-only) ─── */
         .cyber-grid::after {
             content: '';
             position: absolute;
@@ -459,10 +459,16 @@
             pointer-events: none;
             z-index: 1;
             mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, .3) 50%, transparent 90%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, .3) 50%, transparent 90%)
+            -webkit-mask-image: linear-gradient(to bottom, transparent 10%, rgba(0, 0, 0, .3) 50%, transparent 90%);
+            opacity: 0;
+            transition: opacity .4s ease
         }
 
-        /* ─── v5: Scanner Line (futuristic sweep) ─── */
+        .card:hover.cyber-grid::after {
+            opacity: 1
+        }
+
+        /* ─── v5: Scanner Line (hover-only sweep) ─── */
         .scanner-line::before {
             content: '';
             position: absolute;
@@ -472,11 +478,17 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(0, 212, 255, .3);
             z-index: 10;
-            animation: scanLine 4s linear infinite;
-            opacity: .5
+            opacity: 0;
+            transition: opacity .3s ease;
+            animation: none
         }
 
-        /* ─── v5: Holographic Shimmer (premium cards) ─── */
+        .card:hover.scanner-line::before {
+            opacity: .5;
+            animation: scanLine 4s linear infinite
+        }
+
+        /* ─── v5: Holographic Shimmer (hover-only) ─── */
         .holo-shimmer::after {
             content: '';
             position: absolute;
@@ -488,10 +500,17 @@
                     rgba(0, 212, 255, .06) 46%,
                     transparent 54%);
             background-size: 200% 100%;
-            animation: holoShimmer 3s linear infinite;
+            animation: none;
             pointer-events: none;
             z-index: 5;
-            border-radius: 18px
+            border-radius: 18px;
+            opacity: 0;
+            transition: opacity .4s ease
+        }
+
+        .card:hover.holo-shimmer::after {
+            opacity: 1;
+            animation: holoShimmer 3s linear infinite
         }
 
         /* ─── v5: Lineup Badge ─── */
@@ -520,7 +539,10 @@
         .lineup-badge.pro {
             background: rgba(168, 85, 247, .2);
             color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, .3);
+            border: 1px solid rgba(168, 85, 247, .3)
+        }
+
+        .card:hover .lineup-badge.pro {
             animation: borderGlow 2s ease-in-out infinite
         }
 
@@ -568,8 +590,12 @@
             border: 1px solid rgba(239, 68, 68, .2);
             text-transform: uppercase;
             letter-spacing: .04em;
-            animation: urgencyPulse 2s ease-in-out infinite;
-            display: inline-block
+            display: inline-block;
+            transition: transform .2s
+        }
+
+        .card:hover .urgency-pill {
+            animation: urgencyPulse 2s ease-in-out infinite
         }
 
         .urgency-pill.hot {
@@ -688,19 +714,25 @@
             border-color: rgba(0, 0, 0, .08)
         }
 
-        /* ─── v5: Data Stream BG for dark templates ─── */
+        /* ─── v5: Data Stream BG (hover-only) ─── */
         .data-stream {
             position: absolute;
             inset: 0;
-            opacity: .03;
+            opacity: 0;
             background: repeating-linear-gradient(0deg,
                     transparent 0px,
                     transparent 18px,
                     rgba(0, 212, 255, .5) 18px,
                     rgba(0, 212, 255, .5) 19px);
-            animation: dataStream 8s linear infinite;
+            animation: none;
             pointer-events: none;
-            z-index: 0
+            z-index: 0;
+            transition: opacity .4s ease
+        }
+
+        .card:hover .data-stream {
+            opacity: .03;
+            animation: dataStream 8s linear infinite
         }
 
         .template-chips {
@@ -810,12 +842,11 @@
             overflow: hidden;
             flex-shrink: 0;
             transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s;
-            animation: cardEntrance .6s cubic-bezier(.16, 1, .3, 1) both;
             will-change: transform, opacity
         }
 
         .card:hover {
-            transform: scale(1.03) translateY(-4px);
+            transform: scale(1.02) translateY(-3px);
             box-shadow: 0 24px 48px rgba(0, 0, 0, .4)
         }
 
@@ -1015,7 +1046,6 @@
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .3));
-            animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both;
             transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s;
             border-radius: 12px
         }
@@ -1031,7 +1061,7 @@
         }
 
         .card .content {
-            animation: slideUp .5s cubic-bezier(.16, 1, .3, 1) .2s both
+            /* Static — no entrance animation for clean export look */
         }
 
         /* === HERO === */
@@ -1061,22 +1091,23 @@
 
         .tpl-hero .product-zone {
             position: absolute;
-            top: 5%;
+            top: 4%;
             left: 0;
             right: 0;
             height: 48%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px
+            padding: 18px 24px
         }
 
         .tpl-hero .product-zone .product-img {
             background: rgba(255, 255, 255, .92);
             border-radius: 16px;
-            padding: 10px;
-            max-height: 85%;
-            max-width: 75%
+            padding: 12px;
+            max-height: 80%;
+            max-width: 68%;
+            object-fit: contain
         }
 
         .tpl-hero .product-zone .product-img.bg-removed {
@@ -1130,7 +1161,6 @@
             line-height: 1.05;
             letter-spacing: -.02em;
             text-transform: uppercase;
-            animation: slideUp .4s ease .3s both;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -1163,13 +1193,15 @@
             font-size: 30px;
             font-weight: 900;
             letter-spacing: -.02em;
-            animation: priceReveal .5s ease .5s both;
             background: linear-gradient(90deg, #fff 40%, var(--accent) 50%, #fff 60%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: priceReveal .5s ease .5s both, shimmer 4s linear 1s infinite
+            background-clip: text
+        }
+
+        .tpl-hero:hover .price {
+            animation: shimmer 4s linear infinite
         }
 
         .tpl-hero .cta-btn {
@@ -1183,13 +1215,16 @@
             text-transform: uppercase;
             padding: 10px 16px;
             text-align: center;
-            animation: slideUp .4s ease .6s both, ctaPulse 2.5s ease 1.5s infinite;
-            transition: transform .2s, filter .2s
+            transition: transform .2s, filter .2s, box-shadow .3s
         }
 
         .tpl-hero .cta-btn:hover {
             transform: scale(1.03);
             filter: brightness(1.15)
+        }
+
+        .tpl-hero:hover .cta-btn {
+            animation: ctaPulse 2.5s ease infinite
         }
 
         /* === SPLIT === */
@@ -1209,12 +1244,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px
+            padding: 20px 28px
         }
 
         .tpl-split .product-img {
-            max-height: 85%;
-            max-width: 70%;
+            max-height: 80%;
+            max-width: 65%;
+            object-fit: contain;
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .12));
             border-radius: 12px
         }
@@ -1268,7 +1304,6 @@
             color: #111827;
             text-transform: uppercase;
             letter-spacing: -.01em;
-            animation: slideUp .4s ease .3s both;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -1312,8 +1347,7 @@
             font-size: 28px;
             font-weight: 900;
             color: #111827;
-            letter-spacing: -.02em;
-            animation: priceReveal .5s ease .5s both
+            letter-spacing: -.02em
         }
 
         .tpl-split .cta-btn {
@@ -1326,7 +1360,6 @@
             letter-spacing: .04em;
             padding: 10px 16px;
             text-align: center;
-            animation: slideUp .4s ease .6s both;
             transition: transform .2s, box-shadow .2s
         }
 
@@ -1352,12 +1385,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px
+            padding: 20px 28px
         }
 
         .tpl-minimal .product-img {
-            max-height: 85%;
-            max-width: 70%;
+            max-height: 80%;
+            max-width: 65%;
+            object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .12));
             border-radius: 12px
         }
@@ -1442,8 +1476,7 @@
             font-size: 28px;
             font-weight: 900;
             color: #111827;
-            letter-spacing: -.02em;
-            animation: priceReveal .5s ease .5s both
+            letter-spacing: -.02em
         }
 
         .tpl-minimal .cta-btn {
@@ -1455,7 +1488,6 @@
             padding: 10px 14px;
             text-transform: uppercase;
             letter-spacing: .04em;
-            animation: slideUp .4s ease .6s both;
             transition: transform .2s
         }
 
@@ -1478,8 +1510,13 @@
             width: 220px;
             height: 220px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 212, 255, .12), rgba(168, 85, 247, .06), transparent 70%);
+            background: radial-gradient(circle, rgba(0, 212, 255, .08), rgba(168, 85, 247, .04), transparent 70%);
             pointer-events: none;
+            animation: none;
+            transition: opacity .4s ease
+        }
+
+        .tpl-neon:hover .glow-ring {
             animation: glowPulse 3s ease-in-out infinite
         }
 
@@ -1488,7 +1525,13 @@
             inset: 0;
             pointer-events: none;
             overflow: hidden;
-            z-index: 1
+            z-index: 1;
+            opacity: 0;
+            transition: opacity .5s ease
+        }
+
+        .tpl-neon:hover .particles {
+            opacity: 1
         }
 
         .tpl-neon .particle {
@@ -1512,17 +1555,18 @@
             align-items: center;
             justify-content: center;
             z-index: 2;
-            padding: 12px
+            padding: 18px 24px
         }
 
         .tpl-neon .product-img {
             background: rgba(255, 255, 255, .88);
             border-radius: 16px;
-            padding: 10px;
-            max-height: 85%;
-            max-width: 72%;
-            filter: drop-shadow(0 0 30px rgba(0, 212, 255, .15)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
-            animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both, float 4s ease-in-out .8s infinite
+            padding: 12px;
+            max-height: 80%;
+            max-width: 65%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, .1)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
+            transition: filter .4s ease, transform .4s ease
         }
 
         .tpl-neon .product-img.bg-removed {
@@ -1532,7 +1576,8 @@
         }
 
         .tpl-neon:hover .product-img {
-            filter: drop-shadow(0 0 40px rgba(0, 212, 255, .25)) drop-shadow(0 16px 40px rgba(0, 0, 0, .5))
+            filter: drop-shadow(0 0 40px rgba(0, 212, 255, .25)) drop-shadow(0 16px 40px rgba(0, 0, 0, .5));
+            animation: float 4s ease-in-out infinite
         }
 
         .tpl-neon .content {
@@ -1580,7 +1625,10 @@
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background-clip: text
+        }
+
+        .tpl-neon:hover .claim {
             animation: shimmer 3s linear infinite
         }
 
@@ -1590,7 +1638,6 @@
             line-height: 1;
             text-transform: uppercase;
             letter-spacing: -.02em;
-            animation: slideUp .4s ease .35s both;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -1619,8 +1666,11 @@
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: priceReveal .5s ease .5s both, shimmer 3s linear 1.2s infinite
+            background-clip: text
+        }
+
+        .tpl-neon:hover .price {
+            animation: shimmer 3s linear infinite
         }
 
         .tpl-neon .cta-btn {
@@ -1633,13 +1683,16 @@
             letter-spacing: .04em;
             padding: 10px 16px;
             text-align: center;
-            animation: slideUp .4s ease .6s both, neonCtaPulse 2.5s ease 1.5s infinite;
-            transition: transform .2s, filter .2s
+            transition: transform .2s, filter .2s, box-shadow .3s
         }
 
         .tpl-neon .cta-btn:hover {
             transform: scale(1.03);
             filter: brightness(1.15)
+        }
+
+        .tpl-neon:hover .cta-btn {
+            animation: neonCtaPulse 2.5s ease infinite
         }
 
         /* === SPECS === */
@@ -1658,15 +1711,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px
+            padding: 14px 24px
         }
 
         .tpl-specs .product-img {
             background: rgba(255, 255, 255, .9);
             border-radius: 14px;
-            padding: 8px;
-            max-height: 85%;
-            max-width: 70%;
+            padding: 10px;
+            max-height: 82%;
+            max-width: 65%;
+            object-fit: contain;
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .4))
         }
 
@@ -1745,20 +1799,7 @@
             background: rgba(255, 255, 255, .03);
             border: 1px solid rgba(255, 255, 255, .06);
             border-radius: 10px;
-            animation: specSlide .4s ease both;
             transition: background .2s, border-color .2s
-        }
-
-        .tpl-specs .spec-row:nth-child(1) {
-            animation-delay: .3s
-        }
-
-        .tpl-specs .spec-row:nth-child(2) {
-            animation-delay: .4s
-        }
-
-        .tpl-specs .spec-row:nth-child(3) {
-            animation-delay: .5s
         }
 
         .tpl-specs .spec-row:hover {
@@ -1826,12 +1867,15 @@
             padding: 10px 14px;
             text-transform: uppercase;
             letter-spacing: .04em;
-            animation: slideUp .4s ease .7s both, ctaPulse 2.5s ease 1.5s infinite;
-            transition: transform .2s
+            transition: transform .2s, box-shadow .3s
         }
 
         .tpl-specs .cta-btn:hover {
             transform: scale(1.03)
+        }
+
+        .tpl-specs:hover .cta-btn {
+            animation: ctaPulse 2.5s ease infinite
         }
 
         /* === v5.3 PRO: Card Selection === */
@@ -3043,7 +3087,7 @@
                 const cat = catIdx >= 0 ? vals[catIdx] : '';
                 // Find original product from cache for smart copy
                 const pid = idIdx >= 0 ? vals[idIdx] : '';
-                const product = cachedProducts.find(function(p) { return p.id === pid; }) || null;
+                const product = cachedProducts.find(function (p) { return p.id === pid; }) || null;
                 const gen = copyEngine.generate(price, cat, product);
                 if (hookIdx >= 0) vals[hookIdx] = gen.hook;
                 if (ctaIdx >= 0) vals[ctaIdx] = gen.cta;
