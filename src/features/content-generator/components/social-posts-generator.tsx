@@ -13,11 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
     copyPostToClipboard,
-    formatPostBody,
     getPlatformEmoji,
     getToneColor,
     SocialPost,
-    SocialPostsResponse,
+    SocialPlatform,
     useSocialPostsGenerator,
 } from "../services/social-posts-service";
 
@@ -234,7 +233,7 @@ export function SocialPostsGrid({
 }
 
 interface SocialPostsGeneratorProps {
-    defaultPlatforms?: string[];
+    defaultPlatforms?: SocialPlatform[];
     defaultNumTopics?: number;
 }
 
@@ -245,7 +244,7 @@ export function SocialPostsGenerator({
     defaultPlatforms = ["tiktok", "instagram", "twitter"],
     defaultNumTopics = 2,
 }: SocialPostsGeneratorProps) {
-    const [platforms, setPlatforms] = useState<string[]>(defaultPlatforms);
+    const [platforms, setPlatforms] = useState<SocialPlatform[]>(defaultPlatforms);
     const [numTopics, setNumTopics] = useState(defaultNumTopics);
     const [showSettings, setShowSettings] = useState(false);
 
@@ -256,7 +255,7 @@ export function SocialPostsGenerator({
         refetch,
         isFetching,
     } = useSocialPostsGenerator({
-        platforms: platforms as any,
+        platforms,
         numTopics,
         enabled: false, // manual trigger only
     });
@@ -265,7 +264,7 @@ export function SocialPostsGenerator({
         refetch();
     };
 
-    const availablePlatforms = [
+    const availablePlatforms: Array<{ id: SocialPlatform; label: string }> = [
         { id: "tiktok", label: "🎵 TikTok" },
         { id: "instagram", label: "📸 Instagram" },
         { id: "twitter", label: "𝕏 Twitter" },

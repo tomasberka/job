@@ -16,11 +16,12 @@
 ---
 
 ### 👨‍💻 If You're a **Developer** (Integration/Customization)
-1. **First:** [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) — Architecture overview
-2. **Then:** [TRENDING_SOCIALS.md](TRENDING_SOCIALS.md) — Full technical docs
-3. **Code:** Review source files (Python, TypeScript)
+1. **First:** [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) — Complete technical analysis + architecture
+2. **Then:** [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) — Implementation details
+3. **Deep Dive:** [TRENDING_SOCIALS.md](TRENDING_SOCIALS.md) — Full technical docs
+4. **Code:** Review source files (Python, TypeScript)
 
-**Time investment:** 30 minutes to 1 hour
+**Time investment:** 1-2 hours
 
 ---
 
@@ -48,6 +49,7 @@
 
 | Document | Purpose | Read Time | Best For |
 |----------|---------|-----------|----------|
+| [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) | 🆕 Complete system analysis & operational guide | 30 min | Deep dive, decision-making |
 | [QUICK_REFERENCE.md](QUICK_REFERENCE.md) | One-page cheat sheet | 5 min | Everyone |
 | [COMPLETION_REPORT.md](COMPLETION_REPORT.md) | What was built | 5 min | Project overview |
 | [ONE_MAN_MARKETING_SYSTEM.md](ONE_MAN_MARKETING_SYSTEM.md) | Unified solo marketing workflow | 10 min | Solo marketer / founder |
@@ -57,6 +59,8 @@
 
 | Document | Purpose | Read Time | Best For |
 |----------|---------|-----------|----------|
+| [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) | Complete system analysis: tech stack, security, metrics, workflows | 30 min | Deep understanding, decision-making |
+| [SHOPTET_INTEGRATION.md](SHOPTET_INTEGRATION.md) | 🆕 Connect hellocomp.cz Shoptet e-shop via XML | 15 min | Real product data integration |
 | [TRENDING_SOCIALS.md](TRENDING_SOCIALS.md) | Complete reference | 30 min | Developers, deep dives |
 | [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) | Architecture & files | 15 min | Developers, architects |
 | [README.md](README.md) | Project overview | 5 min | Context |
@@ -71,8 +75,14 @@
 
 ## 🎯 Common Questions → Find Answer In
 
+### "What's the complete system overview?"
+→ [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) — Comprehensive analysis (30 min read)
+
 ### "How do I use it?"
 → [QUICK_REFERENCE.md](QUICK_REFERENCE.md) OR [TRENDING_SOCIALS_QUICKSTART.md](TRENDING_SOCIALS_QUICKSTART.md)
+
+### "How do I connect real product data from Shoptet?"
+→ [SHOPTET_INTEGRATION.md](SHOPTET_INTEGRATION.md) — Complete integration guide for hellocomp.cz
 
 ### "How do I set up Gemini API?"
 → [TRENDING_SOCIALS_QUICKSTART.md#step-1-optional](TRENDING_SOCIALS_QUICKSTART.md#step-1-optional--add-gemini-api-key)
@@ -97,6 +107,15 @@
 
 ### "What trending topics are tracked?"
 → [TRENDING_SOCIALS.md#trending-topics-database](TRENDING_SOCIALS.md#trending-topics-database)
+
+### "What's the system health status?"
+→ [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) — Metrics, security, build status
+
+### "What dependencies are installed?"
+→ [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) — Dependency inventory + recent upgrades
+
+### "What's the tech stack?"
+→ [SYSTEM_PROFILE.md](SYSTEM_PROFILE.md) OR [README.md](README.md)
 
 ### "How fast is it?"
 → [TRENDING_SOCIALS.md#benchmark-performance](TRENDING_SOCIALS.md#benchmark-performance)

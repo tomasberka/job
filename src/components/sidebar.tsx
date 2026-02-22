@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   Monitor,
   FileText,
-  Video,
   LayoutDashboard,
   Zap,
   Sparkles,
@@ -15,8 +14,9 @@ import { cn } from "@/lib/utils";
 const navItems = [
   {
     href: "/",
-    label: "Přehled",
+    label: "Command Center",
     icon: LayoutDashboard,
+    badge: "HUB",
   },
   {
     href: "/pc-inventory",
@@ -33,11 +33,6 @@ const navItems = [
     label: "Sociální sítě",
     icon: Sparkles,
     badge: "NEW",
-  },
-  {
-    href: "/video-workflow",
-    label: "Video produkce",
-    icon: Video,
   },
 ];
 

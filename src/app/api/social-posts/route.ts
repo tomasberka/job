@@ -8,8 +8,6 @@ const SocialPostRequestSchema = z.object({
     tones: z.array(z.string()).optional().default(["casual", "viral"]),
 });
 
-type SocialPostRequest = z.infer<typeof SocialPostRequestSchema>;
-
 /**
  * POST /api/social-posts
  *
@@ -34,11 +32,11 @@ type SocialPostRequest = z.infer<typeof SocialPostRequestSchema>;
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const validatedData = SocialPostRequestSchema.parse(body);
+        SocialPostRequestSchema.parse(body);
 
         // Call Python backend (via environment or subprocess)
         // For now, we'll return a mock response to show structure
-        const response = await generateSocialPostsFromPython(validatedData);
+        const response = await generateSocialPostsFromPython();
 
         return NextResponse.json(response, { status: 200 });
     } catch (error) {
@@ -70,7 +68,7 @@ export async function POST(request: NextRequest) {
  *
  * Retrieve trending topics and example posts (no generation).
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
     try {
         // Return trending topics and structure
         const trendingTopics = [
@@ -107,7 +105,7 @@ export async function GET(request: NextRequest) {
             },
             { status: 200 }
         );
-    } catch (error) {
+    } catch {
         return NextResponse.json(
             {
                 error: "Failed to fetch trending data",
@@ -125,9 +123,7 @@ export async function GET(request: NextRequest) {
  * 3. Parse JSON output
  * 4. Return to client
  */
-async function generateSocialPostsFromPython(
-    params: SocialPostRequest
-): Promise<object> {
+async function generateSocialPostsFromPython(): Promise<object> {
     // Mock implementation for demonstration
     // In production: spawn subprocess and call trending-socials CLI
 

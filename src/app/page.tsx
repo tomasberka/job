@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { MarketingHubRoute } from "@/features/marketing-hub/routes/marketing-hub-route";
 
 export const metadata: Metadata = {
-  title: "Marketing Hub | HelloComp",
+  title: "Marketing Command Center | HelloComp",
   description:
-    "Sjednocený one-man marketing hub pro SEO copywriting, social engagement, video workflow a gaming PC e-shop content.",
+    "Sjednocený one-man marketing command center. Řiď SEO, social posts, video workflow a gaming PC e-shop content z jednoho místa s live checklist, timer a system status.",
   openGraph: {
-    title: "Marketing Hub | HelloComp",
+    title: "Marketing Command Center | HelloComp",
     description:
-      "SEO + copy + social + feed workflow v jednom dashboardu pro rychlý marketing execution.",
+      "Complete one-man marketing hub: daily checklist, focus timer, trending topics, system status, and quick access to all modules.",
     images: [
-      { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Dashboard" },
+      { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Command Center" },
     ],
   },
 };
