@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hellocomp-content-automation"
+version = "1.0.0"
+description = "Content automation toolkit for HelloComp — Hook-Master AI video scripts & Loot-Box SEO generator"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "HelloComp Marketing"}]
+
+dependencies = [
+    "google-genai>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[project.scripts]
+hookmaster = "content_automation.cli:hookmaster_main"
+lootbox-seo = "content_automation.cli:lootbox_main"
+
+[tool.setuptools.packages.find]
+include = ["content_automation*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
