@@ -26,6 +26,7 @@ export function PCInventoryRoute() {
         name: p.name,
         sku: p.sku,
         description: `${p.specs.cpu} | ${p.specs.gpu} | ${p.specs.ram}`,
+        ...(p.imageUrl ? { image: p.imageUrl } : {}),
         offers: {
           "@type": "Offer",
           price: p.price,

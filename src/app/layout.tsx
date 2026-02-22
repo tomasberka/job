@@ -12,6 +12,14 @@ export const metadata: Metadata = {
     description:
       "Interní dashboard HelloComp — hellocomp.cz",
     siteName: "HelloComp Řídicí panel",
+    images: [
+      { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Řídicí panel" },
+    ],
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": "https://hellocomp.cz/feed.xml",
+    },
   },
 };
 
