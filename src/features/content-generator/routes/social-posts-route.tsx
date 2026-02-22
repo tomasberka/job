@@ -93,7 +93,7 @@ export default function SocialPostsPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                     <div className="p-4 rounded-lg border border-slate-200">
                         <p className="font-semibold text-sm text-slate-900 mb-2">
-                            What makes these posts "professional"?
+                            What makes these posts &quot;professional&quot;?
                         </p>
                         <p className="text-sm text-slate-600">
                             Each post is optimized for platform specifics (length, emoji placement, hashtags),

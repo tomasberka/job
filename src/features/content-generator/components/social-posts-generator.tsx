@@ -217,7 +217,7 @@ export function SocialPostsGrid({
             <div className="flex items-center justify-center py-12">
                 <Card className="p-6 text-center bg-slate-50">
                     <p className="text-sm text-slate-600">
-                        No posts generated yet. Click "Generate" to create trending content.
+                        No posts generated yet. Click &quot;Generate&quot; to create trending content.
                     </p>
                 </Card>
             </div>
