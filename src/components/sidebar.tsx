@@ -8,6 +8,7 @@ import {
   Video,
   LayoutDashboard,
   Zap,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,12 @@ const navItems = [
     href: "/content-generator",
     label: "Obsah",
     icon: FileText,
+  },
+  {
+    href: "/social-posts",
+    label: "Sociální sítě",
+    icon: Sparkles,
+    badge: "NEW",
   },
   {
     href: "/video-workflow",
@@ -58,7 +65,7 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="flex flex-col gap-1 px-3">
-        {navItems.map(({ href, label, icon: Icon }) => {
+        {navItems.map(({ href, label, icon: Icon, badge }) => {
           const active =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
           return (
@@ -66,7 +73,7 @@ export function Sidebar() {
               key={href}
               href={href}
               className={cn(
-                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150",
+                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150 relative",
                 active
                   ? "bg-primary/15 text-primary"
                   : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
@@ -81,6 +88,11 @@ export function Sidebar() {
                 )}
               />
               {label}
+              {badge && (
+                <span className="ml-auto text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">
+                  {badge}
+                </span>
+              )}
             </Link>
           );
         })}

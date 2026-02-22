@@ -10,6 +10,7 @@ Internal Next.js dashboard for [HelloComp](https://hellocomp.cz) — a Czech gam
 |---|---|---|
 | **PC Inventory** | `/` · `/pc-inventory` | Gaming PC stock overview — GAMER SE, Pro, Max lineups with live status and specs |
 | **Content Generator** | `/content-generator` | TikTok hooks, SEO metadata, video scripts per product SKU |
+| **Trending Social Posts** | `/social-posts` | 🆕 AI-powered social media posts with trend awareness (TikTok, Instagram, Twitter, LinkedIn, YouTube Shorts) |
 | **Video Workflow** | `/video-workflow` | DaVinci Resolve export tracker — status, progress, format, platform |
 | **RSS Feed** | `/feed.xml` | Product RSS feed for hellocomp.cz (media:content, atom:link) |
 | **Sitemap** | `/sitemap.xml` | Next.js sitemap with per-page priorities and product images |

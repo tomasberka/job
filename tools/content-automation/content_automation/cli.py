@@ -1,10 +1,11 @@
 """CLI interface for HelloComp Content Automation tools.
 
-Three entry-points:
+Four entry-points:
 
-* ``hookmaster``    — The Hook-Master AI Video Script Engine
-* ``lootbox-seo``  — Loot-Box SEO Dynamic Content Generator
-* ``omnichannel``  — Omnichannel Distributor (TikTok / Instagram / Facebook)
+* ``hookmaster``       — The Hook-Master AI Video Script Engine
+* ``lootbox-seo``     — Loot-Box SEO Dynamic Content Generator
+* ``omnichannel``     — Omnichannel Distributor (TikTok / Instagram / Facebook)
+* ``trending-socials`` — Trending Social Post Generator (AI-powered, multi-platform)
 """
 
 from __future__ import annotations
@@ -151,8 +152,76 @@ def lootbox_main(argv: list[str] | None = None) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Omnichannel Distributor CLI
+# Trending Socials CLI
 # ---------------------------------------------------------------------------
+def trending_socials_main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        prog="trending-socials",
+        description=(
+            "Trending Social Post Generator — AI-powered posts by platform, "
+            "optimized for real-time trends. Generates TikTok, Instagram, "
+            "Twitter, LinkedIn, and YouTube Shorts content."
+        ),
+    )
+    parser.add_argument(
+        "--platforms",
+        nargs="+",
+        default=["tiktok", "instagram", "twitter"],
+        help="Platforms: tiktok instagram twitter linkedin youtube-shorts facebook (default: tiktok instagram twitter)",
+    )
+    parser.add_argument(
+        "--num-topics",
+        type=int,
+        default=2,
+        help="Number of trending topics to generate posts for (default: 2)",
+    )
+    parser.add_argument(
+        "--product",
+        help="Product code or name (optional, for contextual posts)",
+    )
+    parser.add_argument(
+        "--api-key",
+        default=None,
+        help="Google Gemini API klíč (fallback: env GEMINI_API_KEY, jinak template režim)",
+    )
+    parser.add_argument(
+        "--json",
+        dest="output_json",
+        action="store_true",
+        help="Výstup jako JSON (kompatibilní s dashboardem)",
+    )
+
+    args = parser.parse_args(argv)
+
+    from .trending_socials import generate_trending_posts
+
+    result = generate_trending_posts(
+        api_key=args.api_key,
+        platforms=args.platforms,
+        num_topics=args.num_topics,
+    )
+
+    if args.output_json:
+        print(result.to_json())
+    else:
+        print("=" * 70)
+        print(f"  🚀 TRENDING SOCIALS — {len(result.posts)} posts generated")
+        print(f"  Topics: {', '.join(t.keyword for t in result.trending_topics)}")
+        print(f"  ⏱️  Generation time: {result.generation_time_ms}ms")
+        print("=" * 70)
+        print()
+
+        for post in result.posts:
+            print(f"  📱 [{post.platform.value.upper()}] {post.tone.value}")
+            print(f"     {post.body[:80]}..." if len(post.body) > 80 else f"     {post.body}")
+            if post.hashtags:
+                print(f"     Tags: {' '.join(post.hashtags[:3])}")
+            print()
+
+        print("=" * 70)
+
+
+
 def omnichannel_main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="omnichannel",

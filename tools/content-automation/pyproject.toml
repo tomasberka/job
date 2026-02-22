@@ -22,6 +22,7 @@ dev = ["pytest>=7.0.0"]
 hookmaster = "content_automation.cli:hookmaster_main"
 lootbox-seo = "content_automation.cli:lootbox_main"
 omnichannel = "content_automation.cli:omnichannel_main"
+trending-socials = "content_automation.cli:trending_socials_main"
 
 [tool.setuptools.packages.find]
 include = ["content_automation*"]
