@@ -4,7 +4,7 @@ import { VideoWorkflowRoute } from "@/features/video-workflow/routes/video-workf
 export const metadata: Metadata = {
   title: "Video produkce | HelloComp",
   description:
-    "Sledování exportů DaVinci Resolve a správa video produkce HelloComp.",
+    "Sledování exportů a správa video produkce HelloComp.",
   openGraph: {
     images: [
       { url: "https://hellocomp.cz/images/og-video.jpg", alt: "HelloComp Video produkce" },

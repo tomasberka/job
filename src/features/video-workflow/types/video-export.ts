@@ -29,11 +29,6 @@ export const VideoExportSchema = z.object({
   fileSize: z.number().describe("File size in MB"),
   status: VideoExportStatusSchema,
   progress: z.number().min(0).max(100),
-  davinci: z.object({
-    project: z.string(),
-    timeline: z.string(),
-    colorGrade: z.boolean(),
-  }),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
 });
