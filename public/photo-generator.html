@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>HelloComp Photo Post Factory v5.1 FUSION × Heureka</title>
-    <script src="https://cc-embed.adobe.com/sdk/v4/CCEverywhere.js"></script>
+    <title>HelloComp Photo Post Factory v5.3 PRO × Heureka</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
@@ -194,30 +193,6 @@
             color: var(--muted);
             padding: 4px 0;
             min-height: 1.4em
-        }
-
-        .sdk-badge {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 6px
-        }
-
-        .sdk-badge.ready {
-            background: rgba(16, 185, 129, .15);
-            color: #34d399
-        }
-
-        .sdk-badge.off {
-            background: rgba(239, 68, 68, .12);
-            color: #f87171
-        }
-
-        .sdk-badge.working {
-            background: rgba(33, 102, 204, .15);
-            color: #4d8ee8;
-            animation: pulse 1.5s infinite
         }
 
         @keyframes pulse {
@@ -880,43 +855,35 @@
             pointer-events: none
         }
 
-        #sdkOverlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, .85);
-            backdrop-filter: blur(8px)
+        .card .bg-btn.working {
+            background: rgba(0, 212, 255, .6);
+            pointer-events: none;
+            animation: pulse 1s infinite
         }
 
-        #sdkOverlay.active {
-            display: flex
-        }
-
-        #sdkOverlay .sdk-inner {
-            width: 90vw;
-            height: 90vh;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            background: #1a1a2e
-        }
-
-        #sdkOverlay .sdk-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 10;
-            background: rgba(0, 0, 0, .7);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 14px;
-            cursor: pointer;
+        .bg-progress {
+            font-size: 10px;
             font-weight: 700;
-            font-family: inherit
+            color: var(--accent);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .bg-progress .bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,.08);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        .bg-progress .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--neon-purple));
+            border-radius: 2px;
+            transition: width .3s
         }
 
         .card .template-label {
@@ -950,7 +917,13 @@
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .3));
             animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both;
-            transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s
+            transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s;
+            /* Instant visual BG removal for white-bg product photos on dark cards */
+            mix-blend-mode: multiply
+        }
+
+        .card .product-img.bg-removed {
+            mix-blend-mode: normal /* Reset after actual BG removal */
         }
 
         .card:hover .product-img {
@@ -1651,6 +1624,272 @@
         .tpl-specs .cta-btn:hover {
             transform: scale(1.03)
         }
+
+        /* === v5.3 PRO: Card Selection === */
+        .card { cursor: pointer }
+        .card.selected {
+            outline: 3px solid var(--accent);
+            outline-offset: -3px;
+            box-shadow: 0 0 24px rgba(0, 212, 255, .3), 0 20px 60px rgba(0, 0, 0, .6)
+        }
+        .card .select-check {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            z-index: 25;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.2);
+            background: rgba(0,0,0,.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: transparent;
+            transition: all .2s;
+            pointer-events: none
+        }
+        .card.selected .select-check {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            box-shadow: 0 0 12px rgba(0, 212, 255, .5)
+        }
+
+        /* === v5.3 PRO: CS2 (Counter-Strike) Style === */
+        .tpl-csgo {
+            background: linear-gradient(160deg, #1a1f1a 0%, #0d1210 40%, #0a0e0c 100%);
+            border: 1px solid rgba(134, 169, 82, .15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
+        }
+        .tpl-csgo .rarity-stripe {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            z-index: 10
+        }
+        .tpl-csgo .rarity-stripe.covert { background: #eb4b4b }
+        .tpl-csgo .rarity-stripe.classified { background: #d32ce6 }
+        .tpl-csgo .rarity-stripe.restricted { background: #8847ff }
+        .tpl-csgo .wear-tag {
+            font-size: 7px;
+            font-weight: 800;
+            color: rgba(134, 169, 82, .7);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: 2px 6px;
+            border: 1px solid rgba(134, 169, 82, .15);
+            border-radius: 3px;
+            display: inline-block
+        }
+        .tpl-csgo .hook { color: #86a952 }
+        .tpl-csgo .price { color: #86a952 }
+        .tpl-csgo .name { color: #c5d6a0 }
+        .tpl-csgo .cta-btn {
+            background: linear-gradient(135deg, #4a7a2e, #86a952);
+            color: #0d1210;
+            font-weight: 900
+        }
+        .tpl-csgo .product-zone { background: radial-gradient(ellipse at center 40%, rgba(134,169,82,.06), transparent 70%) }
+
+        /* === v5.3 PRO: League of Legends Style === */
+        .tpl-lol {
+            background: linear-gradient(170deg, #0a1628 0%, #091020 40%, #05091a 100%);
+            border: 1px solid rgba(200, 170, 80, .2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
+        }
+        .tpl-lol::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 18px;
+            padding: 1px;
+            background: linear-gradient(170deg, rgba(200, 170, 80, .4), transparent 30%, transparent 70%, rgba(200, 170, 80, .2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1
+        }
+        .tpl-lol .rank-frame {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            border: 2px solid rgba(200, 170, 80, .12);
+            border-radius: 50%;
+            z-index: 0;
+            box-shadow: 0 0 40px rgba(200, 170, 80, .06), inset 0 0 30px rgba(200, 170, 80, .04)
+        }
+        .tpl-lol .rank-tag {
+            font-size: 8px;
+            font-weight: 900;
+            color: #c8aa50;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            padding: 3px 10px;
+            border: 1px solid rgba(200, 170, 80, .25);
+            border-radius: 999px;
+            display: inline-block;
+            text-shadow: 0 0 8px rgba(200, 170, 80, .3)
+        }
+        .tpl-lol .hook { color: #c8aa50; text-shadow: 0 0 12px rgba(200, 170, 80, .3) }
+        .tpl-lol .price { color: #c8aa50; text-shadow: 0 0 8px rgba(200, 170, 80, .2) }
+        .tpl-lol .name { color: #e8dcc0 }
+        .tpl-lol .cta-btn {
+            background: linear-gradient(135deg, #785a28, #c8aa50);
+            color: #0a0c10;
+            font-weight: 900
+        }
+        .tpl-lol .product-zone { background: radial-gradient(ellipse at center 40%, rgba(200,170,80,.05), transparent 70%) }
+
+        /* === v5.3 PRO: Fortnite Style === */
+        .tpl-fortnite {
+            background: linear-gradient(160deg, #1a0a3e 0%, #0f0628 40%, #0a0420 100%);
+            border: 1px solid rgba(147, 100, 255, .2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
+        }
+        .tpl-fortnite .diagonal-stripes {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(147,100,255,.03) 20px, rgba(147,100,255,.03) 22px);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 18px
+        }
+        .tpl-fortnite .rarity-glow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 120px;
+            background: radial-gradient(ellipse, rgba(147,100,255,.12), transparent);
+            pointer-events: none;
+            z-index: 0
+        }
+        .tpl-fortnite .item-rarity {
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-block
+        }
+        .tpl-fortnite .item-rarity.legendary {
+            background: linear-gradient(135deg, rgba(255,170,0,.2), rgba(255,120,0,.2));
+            color: #ffaa00;
+            border: 1px solid rgba(255,170,0,.3);
+            text-shadow: 0 0 8px rgba(255,170,0,.4)
+        }
+        .tpl-fortnite .item-rarity.epic {
+            background: rgba(147,100,255,.15);
+            color: #b57aff;
+            border: 1px solid rgba(147,100,255,.3)
+        }
+        .tpl-fortnite .hook { color: #b57aff }
+        .tpl-fortnite .price { color: #fff; text-shadow: 0 0 12px rgba(147,100,255,.4) }
+        .tpl-fortnite .name { color: #e0d4ff }
+        .tpl-fortnite .cta-btn {
+            background: linear-gradient(135deg, #7c3aed, #9364ff);
+            color: #fff;
+            font-weight: 900;
+            border-radius: 12px
+        }
+
+        /* === v5.3 PRO: Minecraft Style === */
+        .tpl-minecraft {
+            background: linear-gradient(170deg, #3c2a14 0%, #2a1e0e 40%, #1a1208 100%);
+            border: 3px solid #5c4a2a;
+            border-radius: 4px !important;
+            box-shadow: 4px 4px 0 #1a1208, 0 20px 60px rgba(0,0,0,.7)
+        }
+        .tpl-minecraft .dirt-overlay {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0,0,0,.05) 16px, rgba(0,0,0,.05) 17px), repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(0,0,0,.05) 16px, rgba(0,0,0,.05) 17px);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 2px
+        }
+        .tpl-minecraft .craft-label {
+            font-size: 9px;
+            font-weight: 900;
+            color: #a8a8a8;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            text-shadow: 2px 2px 0 #1a1208;
+            font-family: monospace
+        }
+        .tpl-minecraft .hook { color: #55ff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
+        .tpl-minecraft .name { color: #ffff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
+        .tpl-minecraft .price { color: #55ff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
+        .tpl-minecraft .specs-line { color: #a8a8a8; font-family: monospace; text-shadow: 1px 1px 0 rgba(0,0,0,.4) }
+        .tpl-minecraft .cta-btn {
+            background: #4a8a2a;
+            color: #fff;
+            border: 2px solid #5c9e3a;
+            border-radius: 2px;
+            box-shadow: 2px 2px 0 #2a5a1a;
+            text-shadow: 1px 1px 0 rgba(0,0,0,.4);
+            font-family: monospace;
+            font-weight: 900
+        }
+
+        /* === v5.3 PRO: Roblox Style === */
+        .tpl-roblox {
+            background: linear-gradient(160deg, #1a2744 0%, #0f1a30 40%, #0a1220 100%);
+            border: 1px solid rgba(0, 180, 255, .2);
+            box-shadow: 0 20px 60px rgba(0,0,0,.6)
+        }
+        .tpl-roblox .rbx-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(0,180,255,.06), transparent);
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 18px 18px 0 0
+        }
+        .tpl-roblox .rbx-badge {
+            font-size: 8px;
+            font-weight: 900;
+            color: #00e676;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 3px 8px;
+            background: rgba(0,230,118,.1);
+            border: 1px solid rgba(0,230,118,.2);
+            border-radius: 6px;
+            display: inline-block
+        }
+        .tpl-roblox .hook { color: #00b4ff }
+        .tpl-roblox .price { color: #00e676; font-weight: 900 }
+        .tpl-roblox .name { color: #e0eaff }
+        .tpl-roblox .cta-btn {
+            background: linear-gradient(135deg, #00b4ff, #0091ea);
+            color: #fff;
+            font-weight: 900;
+            border-radius: 999px;
+            padding: 10px 20px
+        }
+
+        /* === v5.3: Enhanced BG States === */
+        .bg-controls { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px }
+        .bg-stats { font-size: 10px; color: var(--muted); padding: 2px 0 }
+        .card .product-img.enhanced {
+            filter: drop-shadow(0 8px 24px rgba(0,0,0,.5)) drop-shadow(0 2px 8px rgba(0,212,255,.15));
+            transition: filter .5s
+        }
     </style>
 </head>
 
@@ -1660,7 +1899,7 @@
             <div class="panel-header">
                 <img class="logo-img" src="/hellocomp-logo.png" alt="HelloComp"
                     onerror="this.outerHTML='<span style=font-weight:900;font-size:13px>HELLOCOMP</span>'" />
-                <span class="version">v5.1 FUSION</span>
+                <span class="version">v5.3 PRO</span>
             </div>
 
             <div class="section-label">Quick Actions</div>
@@ -1679,6 +1918,11 @@
                 <span class="chip" data-tpl="minimal">Minimal</span>
                 <span class="chip" data-tpl="neon">Neon</span>
                 <span class="chip" data-tpl="specs-focus">Specs</span>
+                <span class="chip" data-tpl="csgo" style="border-color:rgba(134,169,82,.3);color:#86a952">CS2</span>
+                <span class="chip" data-tpl="lol" style="border-color:rgba(200,170,80,.3);color:#c8aa50">LoL</span>
+                <span class="chip" data-tpl="fortnite" style="border-color:rgba(147,100,255,.3);color:#b57aff">Fortnite</span>
+                <span class="chip" data-tpl="minecraft" style="border-color:rgba(85,255,85,.2);color:#55ff55">Minecraft</span>
+                <span class="chip" data-tpl="roblox" style="border-color:rgba(0,180,255,.3);color:#00b4ff">Roblox</span>
             </div>
 
             <div class="section-label">Category Filter</div>
@@ -1701,26 +1945,17 @@
                 <span class="chip" data-lineup="GAMER Max">Max</span>
             </div>
 
-            <div class="collapsible-header" id="sdkToggle">
-                <span class="section-label">Adobe Express SDK</span>
-                <span class="section-label" style="font-size:14px">&#9658;</span>
+            <div class="section-label">🎯 Smart Background Removal</div>
+            <div class="bg-controls">
+                <button class="btn small secondary" id="selectAllCardsBtn">☑ Select All</button>
+                <button class="btn small secondary" id="deselectAllBtn">☐ Deselect</button>
             </div>
-            <div class="collapsible-body collapsed" id="sdkSection" style="max-height:260px;">
-                <div style="display:flex;flex-direction:column;gap:6px;padding-top:4px;">
-                    <input id="adobeClientId" class="field" value="6742aefa92e546b5a3f0031f7168bbde"
-                        placeholder="Client ID" />
-                    <input id="adobeAppName" class="field" value="HelloComp Photo Factory" placeholder="App Name" />
-                    <div class="auto-bg-row">
-                        <label><input type="checkbox" id="autoBgRemove" checked /> Auto-remove backgrounds po
-                            init</label>
-                    </div>
-                    <div class="btn-row">
-                        <button class="btn small" id="initSdkBtn">Init SDK</button>
-                        <button class="btn small secondary" id="removeBgAllBtn">Remove BG (vše)</button>
-                    </div>
-                    <span id="sdkStatus" class="sdk-badge off">Neinicializován</span>
-                </div>
+            <div class="btn-row">
+                <button class="btn small success" id="removeBgSelectedBtn">🖼️ Remove BG (selected)</button>
+                <button class="btn small export" id="preloadModelBtn">⚡ Preload AI</button>
             </div>
+            <div id="bgProgress"></div>
+            <div class="bg-stats" id="bgStats"></div>
 
             <div class="section-label">Smart Copy</div>
             <div class="btn-row">
@@ -2090,6 +2325,127 @@
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
                     + '</div>'
                     + '</div>';
+            },
+
+            // ─── v5.3 PRO: CS2 (Counter-Strike 2) Template ───
+            csgo(p) {
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
+                const rar = n >= 40000 ? 'covert' : n >= 25000 ? 'classified' : 'restricted';
+                const rLbl = rar === 'covert' ? '\u2605 COVERT' : rar === 'classified' ? 'CLASSIFIED' : 'RESTRICTED';
+                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram };
+                return '<div class="card tpl-csgo" data-tpl="csgo" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + lineupBadgeHtml(p._lineup)
+                    + '<span class="template-label">CS2</span>'
+                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
+                    + '<div class="content">'
+                    + '<div class="logo-row">' + logoHtml(false) + '<span class="wear-tag">' + rLbl + '</span>' + gpuBadgeHtml(gpu) + '</div>'
+                    + '<div class="hook">' + p.hook + '</div>'
+                    + '<div class="name">' + p.product_name + '</div>'
+                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + energyMeterHtml(specsObj, gpu)
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
+                    + '<div class="cta-btn">' + (p.cta || 'INSPECT') + '</div>'
+                    + '</div>'
+                    + '<div class="rarity-stripe ' + rar + '"></div>'
+                    + '</div>';
+            },
+
+            // ─── v5.3 PRO: League of Legends Template ───
+            lol(p) {
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
+                const rank = n >= 50000 ? 'CHALLENGER' : n >= 35000 ? 'MASTER' : n >= 20000 ? 'DIAMOND' : 'PLATINUM';
+                const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram };
+                return '<div class="card tpl-lol" data-tpl="lol" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="rank-frame"></div>'
+                    + lineupBadgeHtml(p._lineup)
+                    + '<span class="template-label">LOL</span>'
+                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
+                    + '<div class="content">'
+                    + '<div class="logo-row">' + logoHtml(false) + '<span class="rank-tag">' + rank + '</span>' + gpuBadgeHtml(gpu) + '</div>'
+                    + '<div class="hook">' + p.hook + '</div>'
+                    + '<div class="name">' + p.product_name + '</div>'
+                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + energyMeterHtml(specsObj, gpu)
+                    + socialProofHtml()
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
+                    + '<div class="cta-btn">' + (p.cta || 'SUMMONER\'S CHOICE') + '</div>'
+                    + '</div>'
+                    + '</div>';
+            },
+
+            // ─── v5.3 PRO: Fortnite Template ───
+            fortnite(p) {
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                const n = parseInt(String(p.price).replace(/[^\d]/g, ''), 10) || 0;
+                const isLegendary = n >= 30000;
+                const rarCls = isLegendary ? 'legendary' : 'epic';
+                const rarLbl = isLegendary ? 'LEGENDARY' : 'EPIC';
+                return '<div class="card tpl-fortnite" data-tpl="fortnite" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="diagonal-stripes"></div>'
+                    + '<div class="rarity-glow"></div>'
+                    + lineupBadgeHtml(p._lineup)
+                    + '<span class="template-label">FORTNITE</span>'
+                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
+                    + '<div class="content">'
+                    + '<div class="logo-row">' + logoHtml(false) + '<span class="item-rarity ' + rarCls + '">' + rarLbl + '</span>' + gpuBadgeHtml(gpu) + '</div>'
+                    + '<div class="hook">' + p.hook + '</div>'
+                    + '<div class="name">' + p.product_name + '</div>'
+                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
+                    + '<div class="cta-btn">' + (p.cta || 'GET IT NOW') + '</div>'
+                    + '</div>'
+                    + '</div>';
+            },
+
+            // ─── v5.3 PRO: Minecraft Template ───
+            minecraft(p) {
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                return '<div class="card tpl-minecraft" data-tpl="minecraft" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="dirt-overlay"></div>'
+                    + lineupBadgeHtml(p._lineup)
+                    + '<span class="template-label" style="font-family:monospace">CRAFT</span>'
+                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
+                    + '<div class="content">'
+                    + '<div class="logo-row">' + logoHtml(false) + '<span class="craft-label">[CRAFTED]</span>' + gpuBadgeHtml(gpu) + '</div>'
+                    + '<div class="hook">' + p.hook + '</div>'
+                    + '<div class="name">' + p.product_name + '</div>'
+                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
+                    + '<div class="cta-btn">' + (p.cta || 'MINE IT') + '</div>'
+                    + '</div>'
+                    + '</div>';
+            },
+
+            // ─── v5.3 PRO: Roblox Template ───
+            roblox(p) {
+                const s = parseSpecs(p.specs);
+                const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
+                return '<div class="card tpl-roblox" data-tpl="roblox" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="rbx-gradient"></div>'
+                    + lineupBadgeHtml(p._lineup)
+                    + '<span class="template-label">ROBLOX</span>'
+                    + '<button class="remove-btn" onclick="this.closest(\'.card\').remove();updateCount()">\u00d7</button>'
+                    + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
+                    + '<div class="content">'
+                    + '<div class="logo-row">' + logoHtml(false) + '<span class="rbx-badge">\u2B50 PREMIUM</span>' + gpuBadgeHtml(gpu) + '</div>'
+                    + '<div class="hook">' + p.hook + '</div>'
+                    + '<div class="name">' + p.product_name + '</div>'
+                    + '<div class="specs-line">' + p.specs + '</div>'
+                    + socialProofHtml()
+                    + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
+                    + '<div class="cta-btn">' + (p.cta || 'PLAY NOW') + '</div>'
+                    + '</div>'
+                    + '</div>';
             }
         };
 
@@ -2111,7 +2467,7 @@
         let currentCategory = 'all';
         let currentLineup = 'all';
         let cachedProducts = []; // v5: holds JSON cache data
-        let ccEverywhere = null;
+        let bgRemovalModule = null; // @imgly/background-removal (loaded on demand)
 
         // ─── Render cards ───
         function renderCards() {
@@ -2156,17 +2512,23 @@
                 bar.style.animationDelay = (baseDelay + Math.floor(idx / 3) * 0.2) + 's';
             });
 
-            // Inject per-card BG remove buttons
+            // Inject per-card controls (BG button + selection check)
             container.querySelectorAll('.card').forEach(card => {
                 const btn = document.createElement('button');
                 btn.className = 'remove-btn bg-btn';
                 btn.textContent = 'BG';
-                btn.title = 'Odstranit pozadí (Adobe SDK)';
-                btn.onclick = function () { removeBgCard(card.querySelector('.product-img'), btn); };
+                btn.title = 'Odstranit pozadí (AI)';
+                btn.onclick = function (e) { e.stopPropagation(); removeBgCard(card.querySelector('.product-img'), btn); };
                 card.appendChild(btn);
+                // Selection check circle
+                const chk = document.createElement('div');
+                chk.className = 'select-check';
+                chk.textContent = '\u2713';
+                card.appendChild(chk);
             });
 
-            setStatus('Vygenerováno ' + rendered + ' karet. v5 FUSION ready.', '#34d399');
+            setStatus('Vygenerováno ' + rendered + ' karet. v5.3 PRO ready.', '#34d399');
+            updateBgStats();
         }
 
         function updateCount() {
@@ -2208,10 +2570,10 @@
                 // Build CSV from selected Heureka products
                 const headers = 'id;product_name;hook;price;specs;image_url;image_alt;focal_point;overlay_style;badge_stock;positioning_claim;cta;template;_category;_lineup;_gpuRaw;_stock';
                 const tierTemplates = {
-                    budget: ['minimal', 'split', 'specs-focus'],
-                    mid: ['split', 'hero', 'minimal'],
-                    premium: ['hero', 'neon', 'specs-focus'],
-                    ultra: ['neon', 'hero', 'specs-focus']
+                    budget: ['minimal', 'split', 'specs-focus', 'roblox', 'minecraft'],
+                    mid: ['split', 'hero', 'minimal', 'csgo', 'minecraft'],
+                    premium: ['hero', 'neon', 'fortnite', 'lol', 'csgo'],
+                    ultra: ['neon', 'fortnite', 'lol', 'csgo', 'hero']
                 };
                 const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
                 copyEngine.reset();
@@ -2317,10 +2679,10 @@
                 if (lines.length < 2) { setStatus('CSV prázdné.', '#f87171'); return; }
                 const headers = lines[0].split(';').map(h => h.trim());
                 const tierTemplates = {
-                    budget: ['minimal', 'split', 'specs-focus'],
-                    mid: ['split', 'hero', 'minimal'],
-                    premium: ['hero', 'neon', 'specs-focus'],
-                    ultra: ['neon', 'hero', 'specs-focus']
+                    budget: ['minimal', 'split', 'specs-focus', 'roblox', 'minecraft'],
+                    mid: ['split', 'hero', 'minimal', 'csgo', 'minecraft'],
+                    premium: ['hero', 'neon', 'fortnite', 'lol', 'csgo'],
+                    ultra: ['neon', 'fortnite', 'lol', 'csgo', 'hero']
                 };
                 const tierCounters = { budget: 0, mid: 0, premium: 0, ultra: 0 };
                 const priceColIdx = headers.indexOf('price');
@@ -2370,152 +2732,167 @@
             setStatus('Smart Copy vygenerován pro ' + String(lines.length - 1) + ' produktů.', '#34d399');
         }
 
-        // ─── Adobe Express SDK ───
-        async function initSDK() {
-            const statusEl = document.getElementById('sdkStatus');
-            statusEl.className = 'sdk-badge working';
-            statusEl.textContent = 'Inicializuji...';
-            setStatus('Inicializuji Adobe Express SDK...', 'var(--accent)');
-
+        // ─── AI Background Removal (@imgly/background-removal — runs 100% in browser) ───
+        async function loadBgRemovalEngine() {
+            if (bgRemovalModule) return bgRemovalModule;
+            setStatus('Načítám AI model pro odstranění pozadí (~40 MB, jen poprvé)...', 'var(--accent)');
+            const preloadBtn = document.getElementById('preloadModelBtn');
+            if (preloadBtn) { preloadBtn.textContent = '⏳ Loading...'; preloadBtn.style.pointerEvents = 'none'; }
             try {
-                if (typeof window.CCEverywhere === 'undefined') {
-                    throw new Error('SDK not loaded. Check script tag.');
-                }
-                ccEverywhere = await window.CCEverywhere.initialize({
-                    clientId: document.getElementById('adobeClientId').value,
-                    appName: document.getElementById('adobeAppName').value
-                });
-                statusEl.className = 'sdk-badge ready';
-                statusEl.textContent = 'Připraveno';
-                setStatus('Adobe SDK inicializováno.', '#34d399');
-
-                if (document.getElementById('autoBgRemove').checked) {
-                    setStatus('SDK ready — klikni BG na kartě nebo "Remove BG (vše)" pro batch.', '#34d399');
-                }
+                bgRemovalModule = await import('https://esm.sh/@imgly/background-removal@1.5.15');
+                setStatus('AI model načten. Připraveno!', '#34d399');
+                if (preloadBtn) { preloadBtn.textContent = '✅ AI Ready'; preloadBtn.className = 'btn small success'; }
+                return bgRemovalModule;
             } catch (e) {
-                statusEl.className = 'sdk-badge off';
-                statusEl.textContent = 'Chyba';
-                setStatus('SDK chyba: ' + e.message, '#f87171');
+                setStatus('Chyba AI modelu: ' + e.message, '#f87171');
+                if (preloadBtn) { preloadBtn.textContent = '⚡ Preload AI'; preloadBtn.style.pointerEvents = ''; }
+                throw e;
             }
         }
 
-        // ─── Per-card BG removal via SDK Quick Action ───
-        function removeBgCard(img, btn) {
+        async function fetchImageBlob(src) {
+            try {
+                const r = await fetch(src, { mode: 'cors' });
+                if (r.ok) return await r.blob();
+            } catch (_) {}
+            try {
+                const r = await fetch('/api/proxy-image?url=' + encodeURIComponent(src));
+                if (r.ok) return await r.blob();
+            } catch (_) {}
+            throw new Error('Nelze načíst obrázek: ' + src.substring(0, 60));
+        }
+
+        // ─── Post-process: enhance cutout image ───
+        function enhanceImage(img) {
+            img.classList.add('bg-removed', 'enhanced');
+        }
+
+        // ─── Per-card BG removal ───
+        async function removeBgCard(img, btn) {
             if (!img) return;
             if (img.dataset.bgRemoved) {
-                setStatus('Pozadí již odstraněno na této kartě.', 'var(--muted)');
+                setStatus('Pozadí již odstraněno.', 'var(--muted)');
                 return;
             }
-            if (!ccEverywhere) {
-                setStatus('Nejdřív inicializuj Adobe SDK (klikni Init SDK).', '#f87171');
-                return;
-            }
-            setStatus('Otevírám Adobe Quick Action — odstraňuji pozadí...', 'var(--accent)');
-            const overlay = document.getElementById('sdkOverlay');
-            overlay.classList.add('active');
-
+            btn.textContent = '⏳';
+            btn.className = 'remove-btn bg-btn working';
+            setStatus('Odstraňuji pozadí...', 'var(--accent)');
             try {
-                ccEverywhere.quickAction.removeBackground(
-                    {
-                        asset: {
-                            data: img.src,
-                            dataType: img.src.startsWith('data:') ? 'base64' : 'url',
-                            type: 'image'
-                        }
-                    },
-                    {},
-                    {
-                        callbacks: {
-                            onPublish: function (intent, publishParams) {
-                                if (publishParams.asset && publishParams.asset[0]) {
-                                    img.src = publishParams.asset[0].data;
-                                    img.dataset.bgRemoved = '1';
-                                    if (btn) { btn.classList.add('done'); btn.textContent = '\u2713'; }
-                                }
-                                closeSdkOverlay();
-                                setStatus('Pozadí odstraněno!', '#34d399');
-                            },
-                            onError: function (err) {
-                                closeSdkOverlay();
-                                setStatus('SDK chyba: ' + (err.message || JSON.stringify(err)), '#f87171');
-                            }
-                        }
-                    },
-                    { id: 'sdkInner' }
-                );
+                const mod = await loadBgRemovalEngine();
+                const imageBlob = await fetchImageBlob(img.src);
+                const resultBlob = await mod.removeBackground(imageBlob, {
+                    output: { format: 'image/png' }
+                });
+                img.src = URL.createObjectURL(resultBlob);
+                img.dataset.bgRemoved = '1';
+                enhanceImage(img);
+                btn.className = 'remove-btn bg-btn done';
+                btn.textContent = '✓';
+                setStatus('Pozadí odstraněno + obrázek vylepšen!', '#34d399');
+                updateBgStats();
             } catch (e) {
-                closeSdkOverlay();
-                setStatus('SDK chyba: ' + e.message, '#f87171');
+                btn.className = 'remove-btn bg-btn';
+                btn.textContent = 'BG';
+                setStatus('Chyba: ' + e.message, '#f87171');
+                console.error('BG removal error:', e);
             }
         }
 
-        function closeSdkOverlay() {
-            document.getElementById('sdkOverlay').classList.remove('active');
-            document.getElementById('sdkInner').innerHTML = '';
+        // ─── Selection helpers ───
+        function selectAllCards() {
+            document.querySelectorAll('.card').forEach(c => c.classList.add('selected'));
+            updateBgStats();
+        }
+        function deselectAllCards() {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+            updateBgStats();
+        }
+        function updateBgStats() {
+            const all = document.querySelectorAll('.card').length;
+            const sel = document.querySelectorAll('.card.selected').length;
+            const done = document.querySelectorAll('.card .product-img.bg-removed').length;
+            const el = document.getElementById('bgStats');
+            if (el) el.innerHTML = '<span>' + sel + ' selected</span> ・ <span style="color:#34d399">' + done + ' processed</span> ・ <span>' + all + ' total</span>';
         }
 
-        // ─── Batch BG removal ───
-        async function removeBackgroundAll() {
-            const cards = Array.from(document.querySelectorAll('.card'));
-            const unprocessed = cards.filter(c => {
+        // ─── Preload AI model ───
+        async function preloadModel() {
+            try { await loadBgRemovalEngine(); } catch (_) {}
+        }
+
+        // ─── Batch BG removal: process SELECTED cards with progress ───
+        async function removeBackgroundSelected() {
+            const selectedCards = Array.from(document.querySelectorAll('.card.selected'));
+            const unprocessed = selectedCards.filter(c => {
                 const img = c.querySelector('.product-img');
                 return img && !img.dataset.bgRemoved;
             });
+            if (!selectedCards.length) {
+                setStatus('Nejdřív vyber karty kliknutím. Pak klikni Remove BG.', '#f87171');
+                return;
+            }
             if (!unprocessed.length) {
-                setStatus('Všechny obrázky již zpracovány.', 'var(--muted)');
+                setStatus('Všechny vybrané obrázky již zpracovány.', 'var(--muted)');
                 return;
             }
-            if (!ccEverywhere) {
-                setStatus('Nejdřív inicializuj Adobe SDK (Init SDK).', '#f87171');
-                return;
-            }
-            setStatus('Batch BG removal: 0/' + unprocessed.length + '...', 'var(--accent)');
+            try {
+                await loadBgRemovalEngine();
+            } catch (_) { return; }
+
             let done = 0;
+            let failed = 0;
+            const total = unprocessed.length;
+            const progressEl = document.getElementById('bgProgress');
+            const startTime = Date.now();
+            function updateProgress() {
+                const pct = Math.round((done / total) * 100);
+                const elapsed = (Date.now() - startTime) / 1000;
+                const perItem = done > 0 ? elapsed / done : 0;
+                const remaining = Math.round(perItem * (total - done));
+                const eta = done > 0 && done < total ? ' ・ ~' + remaining + 's left' : '';
+                progressEl.innerHTML = '<div class="bg-progress"><span>' + done + '/' + total + (failed ? ' (' + failed + ' err)' : '') + '</span>'
+                    + '<div class="bar"><div class="bar-fill" style="width:' + pct + '%"></div></div>'
+                    + '<span>' + pct + '%' + eta + '</span></div>';
+                setStatus('BG removal: ' + done + '/' + total + '...' + eta, 'var(--accent)');
+            }
+            updateProgress();
 
             for (const card of unprocessed) {
                 const img = card.querySelector('.product-img');
                 const btn = card.querySelector('.bg-btn');
+                if (btn) { btn.textContent = '⏳'; btn.className = 'remove-btn bg-btn working'; }
                 try {
-                    await new Promise(function (resolve) {
-                        const overlay = document.getElementById('sdkOverlay');
-                        overlay.classList.add('active');
-                        ccEverywhere.quickAction.removeBackground(
-                            {
-                                asset: {
-                                    data: img.src,
-                                    dataType: img.src.startsWith('data:') ? 'base64' : 'url',
-                                    type: 'image'
-                                }
-                            },
-                            {},
-                            {
-                                callbacks: {
-                                    onPublish: function (intent, publishParams) {
-                                        if (publishParams.asset && publishParams.asset[0]) {
-                                            img.src = publishParams.asset[0].data;
-                                            img.dataset.bgRemoved = '1';
-                                            if (btn) { btn.classList.add('done'); btn.textContent = '\u2713'; }
-                                        }
-                                        done++;
-                                        closeSdkOverlay();
-                                        setStatus('Batch BG: ' + done + '/' + unprocessed.length + '...', 'var(--accent)');
-                                        resolve();
-                                    },
-                                    onError: function (err) {
-                                        closeSdkOverlay();
-                                        resolve();
-                                    }
-                                }
-                            },
-                            { id: 'sdkInner' }
-                        );
+                    const imageBlob = await fetchImageBlob(img.src);
+                    const resultBlob = await bgRemovalModule.removeBackground(imageBlob, {
+                        output: { format: 'image/png' }
                     });
+                    img.src = URL.createObjectURL(resultBlob);
+                    img.dataset.bgRemoved = '1';
+                    enhanceImage(img);
+                    if (btn) { btn.className = 'remove-btn bg-btn done'; btn.textContent = '✓'; }
+                    done++;
                 } catch (e) {
-                    closeSdkOverlay();
+                    if (btn) { btn.className = 'remove-btn bg-btn'; btn.textContent = '✗'; }
+                    console.error('BG fail:', e);
+                    failed++;
+                    done++;
                 }
+                updateProgress();
+                updateBgStats();
             }
-            setStatus('Hotovo: ' + done + '/' + unprocessed.length + ' obrázků zpracováno.', '#34d399');
+            progressEl.innerHTML = '';
+            const successCount = total - failed;
+            setStatus('Hotovo: ' + successCount + '/' + total + ' obrázků zpracováno a vylepšeno.' + (failed ? ' (' + failed + ' chyb)' : ' ✅'), '#34d399');
         }
+
+        // ─── Card selection (click to toggle) ───
+        document.getElementById('cardsContainer').addEventListener('click', function (e) {
+            if (e.target.closest('.remove-btn') || e.target.closest('.cta-btn')) return;
+            const card = e.target.closest('.card');
+            if (!card) return;
+            card.classList.toggle('selected');
+            updateBgStats();
+        });
 
         // ─── Template filter chips ───
         document.getElementById('templateChips').addEventListener('click', function (e) {
@@ -2544,11 +2921,6 @@
             renderCards();
         });
 
-        // ─── Collapsible SDK section ───
-        document.getElementById('sdkToggle').addEventListener('click', function () {
-            document.getElementById('sdkSection').classList.toggle('collapsed');
-        });
-
         // ─── Button bindings ───
         document.getElementById('renderBtn').addEventListener('click', renderCards);
         document.getElementById('clearBtn').addEventListener('click', function () {
@@ -2560,8 +2932,10 @@
             generateSmartCopy();
             renderCards();
         });
-        document.getElementById('initSdkBtn').addEventListener('click', initSDK);
-        document.getElementById('removeBgAllBtn').addEventListener('click', removeBackgroundAll);
+        document.getElementById('removeBgSelectedBtn').addEventListener('click', removeBackgroundSelected);
+        document.getElementById('selectAllCardsBtn').addEventListener('click', selectAllCards);
+        document.getElementById('deselectAllBtn').addEventListener('click', deselectAllCards);
+        document.getElementById('preloadModelBtn').addEventListener('click', preloadModel);
         document.getElementById('exportBtn').addEventListener('click', exportCards);
 
         // ─── PNG Export (html2canvas) ───
@@ -2614,11 +2988,6 @@
         window.addEventListener('DOMContentLoaded', renderCards);
     </script>
 
-    <!-- SDK Quick Action overlay -->
-    <div id="sdkOverlay">
-        <div class="sdk-inner" id="sdkInner"></div>
-        <button class="sdk-close" onclick="closeSdkOverlay()">&#10005; Zavřít</button>
-    </div>
 </body>
 
 </html>
