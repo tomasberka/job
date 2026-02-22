@@ -1,3 +1,3 @@
-"""HelloComp Content Automation — Hook-Master & Loot-Box SEO toolkit."""
+"""HelloComp Content Automation — Hook-Master, Loot-Box SEO & Omnichannel Distributor toolkit."""
 
-__version__ = "1.0.0"
+__version__ = "2026.1.0"

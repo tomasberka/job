@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 from .models import ContentItem, ContentStatus, ContentType
@@ -35,6 +35,7 @@ class HookMasterResult:
     seo_description: str
     gpu: str
     target_audience: str
+    ab_variants: list[dict[str, str]] = field(default_factory=list)
 
     def to_content_items(self) -> list[ContentItem]:
         """Convert results into dashboard-compatible ContentItem list."""
@@ -83,6 +84,31 @@ _HOOK_TEMPLATES = [
     "3 sekundy, které změní tvůj gaming navždy — HelloComp s {gpu} 🎮🚀",
 ]
 
+# A/B hook variant templates (3 styles per Retention Hacker spec)
+_AB_VARIANT_TEMPLATES: list[dict[str, str]] = [
+    {
+        "style": "aggressive-myth-bust",
+        "template": (
+            "MÝTUS: {gpu} na gaming nestačí. REALITA: HelloComp tě nechá "
+            "dominovat {audience} na 144+ FPS — nebo ti vrátíme peníze. 🔥"
+        ),
+    },
+    {
+        "style": "curiosity-secret",
+        "template": (
+            "Proč top {audience} hráči tiše přešli na HelloComp s {gpu}? "
+            "Odpověď tě překvapí… 👀"
+        ),
+    },
+    {
+        "style": "educational-demo",
+        "template": (
+            "Jak {gpu} v HelloComp GAMER dosahuje 200+ FPS v {audience}: "
+            "[1] Prémiová sestava [2] Optimalizovaný BIOS [3] Česká podpora 24/7 🎮"
+        ),
+    },
+]
+
 _SCRIPT_TEMPLATE = """[0:00] HOOK — Otevření záběrem na rozsvícený HelloComp PC s {gpu}.
 [0:03] „Víš, co odlišuje průměrného hráče od TOHO hráče? Technika."
 [0:07] Střih na gameplay ({audience}) — ultra nastavení, FPS counter v rohu.
@@ -99,6 +125,16 @@ _SEO_TEMPLATE = (
 )
 
 
+def _build_ab_variants(gpu: str, target_audience: str) -> list[dict[str, str]]:
+    return [
+        {
+            "style": v["style"],
+            "hook": v["template"].format(gpu=gpu, audience=target_audience),
+        }
+        for v in _AB_VARIANT_TEMPLATES
+    ]
+
+
 def _generate_from_templates(gpu: str, target_audience: str) -> HookMasterResult:
     hooks = [t.format(gpu=gpu, audience=target_audience) for t in _HOOK_TEMPLATES]
     script = _SCRIPT_TEMPLATE.format(gpu=gpu, audience=target_audience)
@@ -109,6 +145,7 @@ def _generate_from_templates(gpu: str, target_audience: str) -> HookMasterResult
         seo_description=seo,
         gpu=gpu,
         target_audience=target_audience,
+        ab_variants=_build_ab_variants(gpu, target_audience),
     )
 
 
@@ -155,6 +192,7 @@ def _generate_with_gemini(
         seo_description=data.get("seo_description", ""),
         gpu=gpu,
         target_audience=target_audience,
+        ab_variants=_build_ab_variants(gpu, target_audience),
     )
 
 

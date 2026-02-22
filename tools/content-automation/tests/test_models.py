@@ -14,6 +14,7 @@ class TestContentType:
         assert ContentType.SEO_META.value == "seo-meta"
         assert ContentType.VIDEO_SCRIPT.value == "video-script"
         assert ContentType.PRODUCT_DESCRIPTION.value == "product-description"
+        assert ContentType.SOCIAL_POST.value == "social-post"
 
 
 class TestContentStatus:

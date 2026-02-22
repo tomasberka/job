@@ -5,6 +5,7 @@ export const ContentTypeSchema = z.enum([
   "seo-meta",
   "video-script",
   "product-description",
+  "social-post",
 ]);
 export type ContentType = z.infer<typeof ContentTypeSchema>;
 

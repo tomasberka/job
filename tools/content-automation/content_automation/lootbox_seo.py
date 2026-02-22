@@ -165,6 +165,82 @@ def get_keyword_suggestions() -> list[dict[str, str]]:
     return list(TRENDING_KEYWORDS)
 
 
+# ---------------------------------------------------------------------------
+# TL;DR generation
+# ---------------------------------------------------------------------------
+def generate_tldr(products: list[Product], gpu_filter: Optional[str] = None) -> str:
+    """Generate a concise TL;DR summary for a GPU lineup.
+
+    Parameters
+    ----------
+    products:
+        Product catalogue.
+    gpu_filter:
+        Focus the TL;DR on products with this GPU (e.g. ``"5070"``).
+    """
+    filtered = products
+    if gpu_filter:
+        gpu_lower = gpu_filter.lower()
+        filtered = [p for p in products if gpu_lower in p.name.lower()]
+
+    count = len({p.name for p in filtered})
+    gpu_label = gpu_filter or "různé GPU"
+    tiers = sorted({p.tier for p in filtered if p.tier})
+    tier_text = ", ".join(tiers) if tiers else "různé řady"
+    platforms = sorted({p.platform for p in filtered if p.platform})
+    platform_text = " a ".join(platforms) if platforms else "různé platformy"
+
+    if count == 0:
+        return f'TL;DR: Pro GPU "{gpu_filter}" aktuálně nemáme žádné sestavy.'
+
+    return (
+        f"TL;DR: HelloComp nabízí {count} konfigurací s {gpu_label} "
+        f"({tier_text}) na platformách {platform_text}. "
+        f"Všechny dostupné na hellocomp.cz."
+    )
+
+
+# ---------------------------------------------------------------------------
+# Topic cluster CTAs
+# ---------------------------------------------------------------------------
+TOPIC_CLUSTER_CTAS: list[dict[str, str]] = [
+    {
+        "topic": "GTA VI",
+        "cta": "🎮 Připrav se na GTA VI — zjisti, které HelloComp sestavy to zvládnou na max nastavení.",
+        "url": "hellocomp.cz/gta-vi-pc",
+    },
+    {
+        "topic": "CS2",
+        "cta": "🏆 Dominuj v CS2 — HelloComp GAMER Pro s RTX 5070 Ti pro stabilních 300+ FPS.",
+        "url": "hellocomp.cz/cs2-pc",
+    },
+    {
+        "topic": "RTX 5090",
+        "cta": "🚀 RTX 5090 v HelloComp Extreme — nejrychlejší herní PC v ČR. Limitovaná dostupnost.",
+        "url": "hellocomp.cz/rtx-5090",
+    },
+    {
+        "topic": "budget",
+        "cta": "💰 Herní PC pod 30 000 Kč? HelloComp GAMER SE — výkon bez kompromisů za rozumnou cenu.",
+        "url": "hellocomp.cz/gamer-se",
+    },
+]
+
+
+def get_topic_cluster_ctas(topic_filter: Optional[str] = None) -> list[dict[str, str]]:
+    """Return topic cluster CTAs, optionally filtered by topic keyword.
+
+    Parameters
+    ----------
+    topic_filter:
+        Case-insensitive substring to filter topics.
+    """
+    if topic_filter is None:
+        return list(TOPIC_CLUSTER_CTAS)
+    lower = topic_filter.lower()
+    return [c for c in TOPIC_CLUSTER_CTAS if lower in c["topic"].lower()]
+
+
 def generate_full_seo_content(
     gpu_filter: Optional[str] = None,
     tier_filter: Optional[str] = None,
@@ -173,12 +249,14 @@ def generate_full_seo_content(
     """High-level entry point: load CSV → produce table + paragraph + keywords.
 
     Returns a dict with keys ``table_md``, ``table_html``, ``paragraph``,
-    ``keywords``, and ``content_items``.
+    ``tldr``, ``keywords``, ``topic_cluster_ctas``, and ``content_items``.
     """
     products = filter_gaming_pcs(load_products(csv_path))
     table = build_comparison_table(products, gpu_filter=gpu_filter, tier_filter=tier_filter)
     paragraph = generate_seo_paragraph(products, gpu_filter=gpu_filter)
+    tldr = generate_tldr(products, gpu_filter=gpu_filter)
     keywords = get_keyword_suggestions()
+    ctas = get_topic_cluster_ctas()
 
     content_items = [
         ContentItem(
@@ -199,6 +277,8 @@ def generate_full_seo_content(
         "table_md": table.to_markdown(),
         "table_html": table.to_html(),
         "paragraph": paragraph,
+        "tldr": tldr,
         "keywords": keywords,
+        "topic_cluster_ctas": ctas,
         "content_items": [item.to_dict() for item in content_items],
     }

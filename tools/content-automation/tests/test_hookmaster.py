@@ -42,3 +42,16 @@ class TestGenerate:
         parsed = json.loads(result.to_json())
         assert isinstance(parsed, list)
         assert len(parsed) == 5
+
+    def test_ab_variants_present(self):
+        result = generate("RTX 5080", "hráč Warzone")
+        assert len(result.ab_variants) == 3
+        styles = [v["style"] for v in result.ab_variants]
+        assert "aggressive-myth-bust" in styles
+        assert "curiosity-secret" in styles
+        assert "educational-demo" in styles
+
+    def test_ab_variants_contain_gpu(self):
+        result = generate("RTX 5070 Ti", "hráč CS2")
+        for variant in result.ab_variants:
+            assert "RTX 5070 Ti" in variant["hook"]
