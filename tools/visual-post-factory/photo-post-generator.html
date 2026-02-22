@@ -60,10 +60,9 @@
         }
 
         .panel-header .logo-img {
-            height: 22px;
+            height: 26px;
             width: auto;
-            filter: brightness(0) invert(1);
-            opacity: .9
+            opacity: .95
         }
 
         .panel-header .version {
@@ -498,15 +497,15 @@
         /* ─── v5: Lineup Badge ─── */
         .lineup-badge {
             position: absolute;
-            top: 8px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
             font-size: 8px;
             font-weight: 900;
-            letter-spacing: .1em;
+            letter-spacing: .12em;
             text-transform: uppercase;
-            padding: 3px 10px;
+            padding: 3px 12px;
             border-radius: 999px;
             backdrop-filter: blur(8px);
             white-space: nowrap
@@ -536,11 +535,14 @@
         .gpu-badge {
             font-size: 8px;
             font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 5px;
             letter-spacing: .04em;
             text-transform: uppercase;
-            display: inline-block
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            white-space: nowrap
         }
 
         .gpu-badge.nvidia {
@@ -612,13 +614,13 @@
             color: var(--muted);
             text-transform: uppercase;
             letter-spacing: .06em;
-            width: 48px;
+            width: 32px;
             flex-shrink: 0
         }
 
         .energy-bar {
             flex: 1;
-            height: 6px;
+            height: 5px;
             background: rgba(255, 255, 255, .06);
             border-radius: 3px;
             overflow: hidden;
@@ -657,10 +659,10 @@
         }
 
         .energy-value {
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             color: var(--text);
-            width: 70px;
+            width: 80px;
             flex-shrink: 0;
             text-align: right;
             white-space: nowrap;
@@ -904,10 +906,10 @@
         }
 
         .card .logo-watermark {
-            height: 20px;
+            height: 24px;
             width: auto;
-            opacity: .85;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3));
+            opacity: .95;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .18));
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges
         }
@@ -1092,23 +1094,23 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 18px;
+            padding: 18px 20px 22px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
             background: linear-gradient(to top, rgba(4, 7, 13, .98) 0%, rgba(8, 13, 24, .85) 60%, transparent 100%)
         }
 
         .tpl-hero .logo-row {
             display: flex;
             align-items: center;
-            justify-content: space-between
+            justify-content: space-between;
+            gap: 6px
         }
 
         .tpl-hero .logo-watermark {
-            filter: brightness(0) invert(1);
-            opacity: .85;
-            height: 20px
+            opacity: .95;
+            height: 24px
         }
 
         .tpl-hero .stock-pill {
@@ -1123,18 +1125,25 @@
         }
 
         .tpl-hero .hook {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
-            line-height: 1;
+            line-height: 1.05;
             letter-spacing: -.02em;
             text-transform: uppercase;
-            animation: slideUp .4s ease .3s both
+            animation: slideUp .4s ease .3s both;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
         }
 
         .tpl-hero .name {
             font-size: 11px;
             color: #8b9ab5;
-            font-weight: 600
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
         }
 
         .tpl-hero .specs-line {
@@ -1216,23 +1225,23 @@
             left: 0;
             right: 0;
             height: 50%;
-            padding: 18px;
+            padding: 16px 20px 22px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             background: #fff
         }
 
         .tpl-split .logo-row {
             display: flex;
             align-items: center;
-            justify-content: space-between
+            justify-content: space-between;
+            gap: 6px
         }
 
         .tpl-split .logo-watermark {
-            filter: none;
-            opacity: .85;
-            height: 20px
+            opacity: .95;
+            height: 24px
         }
 
         .tpl-split .stock-pill {
@@ -1253,19 +1262,26 @@
         }
 
         .tpl-split .hook {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 900;
             line-height: 1.05;
             color: #111827;
             text-transform: uppercase;
             letter-spacing: -.01em;
-            animation: slideUp .4s ease .3s both
+            animation: slideUp .4s ease .3s both;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
         }
 
         .tpl-split .name {
             font-size: 11px;
             color: #6b7280;
-            font-weight: 600
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
         }
 
         .tpl-split .specs-grid {
@@ -1352,22 +1368,22 @@
             left: 0;
             right: 0;
             height: 45%;
-            padding: 20px;
+            padding: 18px 20px 22px;
             display: flex;
             flex-direction: column;
-            gap: 6px
+            gap: 5px
         }
 
         .tpl-minimal .logo-row {
             display: flex;
             align-items: center;
-            justify-content: space-between
+            justify-content: space-between;
+            gap: 6px
         }
 
         .tpl-minimal .logo-watermark {
-            filter: none;
-            opacity: .8;
-            height: 18px
+            opacity: .9;
+            height: 22px
         }
 
         .tpl-minimal .stock-tag {
@@ -1389,18 +1405,25 @@
         }
 
         .tpl-minimal .hook {
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 900;
             line-height: 1.05;
             color: #111827;
             text-transform: uppercase;
-            letter-spacing: -.01em
+            letter-spacing: -.01em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
         }
 
         .tpl-minimal .name {
             font-size: 11px;
             color: #6b7280;
-            font-weight: 600
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
         }
 
         .tpl-minimal .specs-line {
@@ -1517,10 +1540,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 18px;
+            padding: 16px 20px 22px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
             background: linear-gradient(to top, rgba(5, 8, 14, .98) 0%, rgba(5, 8, 14, .8) 60%, transparent 100%);
             z-index: 3
         }
@@ -1528,13 +1551,14 @@
         .tpl-neon .logo-row {
             display: flex;
             align-items: center;
-            justify-content: space-between
+            justify-content: space-between;
+            gap: 6px
         }
 
         .tpl-neon .logo-watermark {
-            filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(0, 212, 255, .4));
-            opacity: .8;
-            height: 20px
+            opacity: .95;
+            height: 24px;
+            filter: drop-shadow(0 0 6px rgba(0, 212, 255, .4))
         }
 
         .tpl-neon .stock-pill {
@@ -1561,18 +1585,25 @@
         }
 
         .tpl-neon .hook {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 900;
-            line-height: .95;
+            line-height: 1;
             text-transform: uppercase;
             letter-spacing: -.02em;
-            animation: slideUp .4s ease .35s both
+            animation: slideUp .4s ease .35s both;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
         }
 
         .tpl-neon .name {
             font-size: 11px;
             color: #6b7a92;
-            font-weight: 600
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
         }
 
         .tpl-neon .specs-line {
@@ -1650,24 +1681,24 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 62%;
-            padding: 16px;
+            height: 64%;
+            padding: 14px 18px 22px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             background: linear-gradient(to top, #0b0f1a, #0b0f1a 80%, transparent)
         }
 
         .tpl-specs .logo-row {
             display: flex;
             align-items: center;
-            justify-content: space-between
+            justify-content: space-between;
+            gap: 6px
         }
 
         .tpl-specs .logo-watermark {
-            filter: brightness(0) invert(1);
-            opacity: .8;
-            height: 20px
+            opacity: .95;
+            height: 24px
         }
 
         .tpl-specs .stock-pill {
@@ -1681,16 +1712,23 @@
         }
 
         .tpl-specs .hook {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 900;
             line-height: 1.1;
-            text-transform: uppercase
+            text-transform: uppercase;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
         }
 
         .tpl-specs .name {
             font-size: 10px;
             color: #6b7a92;
-            font-weight: 600
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
         }
 
         .tpl-specs .specs-table {
@@ -1703,7 +1741,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 12px;
+            padding: 7px 12px;
             background: rgba(255, 255, 255, .03);
             border: 1px solid rgba(255, 255, 255, .06);
             border-radius: 10px;
@@ -1729,29 +1767,41 @@
         }
 
         .tpl-specs .spec-icon {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 8px;
-            background: rgba(33, 102, 204, .15);
+            background: rgba(33, 102, 204, .12);
+            border: 1px solid rgba(33, 102, 204, .15);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: .03em;
+            color: var(--accent);
+            flex-shrink: 0;
+            text-transform: uppercase;
+            font-family: 'Inter', system-ui, sans-serif
         }
 
         .tpl-specs .spec-label {
-            font-size: 9px;
+            font-size: 8px;
             color: #4a5568;
             text-transform: uppercase;
-            letter-spacing: .05em;
-            font-weight: 700
+            letter-spacing: .06em;
+            font-weight: 700;
+            line-height: 1
         }
 
         .tpl-specs .spec-value {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            color: #e2e8f0
+            color: #e2e8f0;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px
         }
 
         .tpl-specs .price-row {
@@ -1956,6 +2006,27 @@
             opacity: 1
         }
 
+        /* ─── v8: Web CTA URL indicator ─── */
+        .cta-url {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-align: center;
+            opacity: .5;
+            margin-top: -2px
+        }
+
+        .tpl-hero .cta-url,
+        .tpl-neon .cta-url,
+        .tpl-specs .cta-url {
+            color: rgba(255, 255, 255, .45)
+        }
+
+        .tpl-split .cta-url,
+        .tpl-minimal .cta-url {
+            color: rgba(0, 0, 0, .3)
+        }
+
         .pagination-bar {
             position: sticky;
             bottom: 0;
@@ -2131,7 +2202,7 @@
     <div class="app">
         <section class="panel">
             <div class="panel-header">
-                <img class="logo-img" src="/hellocomp-logo.png" alt="HelloComp"
+                <img class="logo-img" src="/hellocomp-logo-white.png" alt="HelloComp"
                     onerror="this.outerHTML='<span style=font-weight:900;font-size:13px>HELLOCOMP</span>'" />
                 <span class="version">v6 ASSET</span>
             </div>
@@ -2362,52 +2433,19 @@
 
         // ─── Smart Copy Engine (v5 — category aware) ───
         const copyEngine = (function () {
-            const hooksByTier = {
-                budget: [
-                    'GAMING ZA HUBIČKU', 'VÝKON ZA MÁLO', 'LEVNĚ A SILNĚ', 'NEČEKANÝ VÝKON',
-                    'VSTUPTE DO HRY', 'READY TO PLAY', 'HRA ZAČÍNÁ', 'POWER ENTRY',
-                    'SMART VOLBA', 'BEZ KOMPROMISŮ', 'GAME ON', 'START HERE'
-                ],
-                mid: [
-                    'VÝKON BEZ KOMPROMISŮ', 'POSUŇ HRANICE', 'HERNÍ DOMINANCE', 'TVŮJ NEXT LEVEL',
-                    'BUILT TO WIN', 'BEYOND LIMITS', 'POWER UPGRADE', 'SERIOUS GAMING',
-                    'PRO KAŽDÝ FRAME', 'UNLEASH POWER', 'LEVEL UP NOW', 'GAME CHANGER'
-                ],
-                premium: [
-                    'NEKOMPROMISNÍ SÍLA', 'ABSOLUTNÍ VÝKON', 'TOP TIER GAMING', 'PURE PERFORMANCE',
-                    'MAXED OUT', 'ELITE LEVEL', 'ZERO COMPROMISE', 'FUTURE PROOF',
-                    'ULTIMATE SETUP', 'POWERHOUSE', 'RAW POWER', 'BEAST INSIDE'
-                ],
-                ultra: [
-                    'LIMITLESS POWER', 'APEX PERFORMANCE', 'EXTREME MACHINE', 'THE ONE',
-                    'SUPREMACY', 'NO LIMITS', 'GODLIKE SETUP', 'BEAST MODE ON',
-                    'FLAGSHIP KILLER', 'DREAM BUILD', 'MAX EVERYTHING', 'UNSTOPPABLE'
-                ]
+            // ─── v7: Product-aware smart copy ───
+            // Hooks are now SPEC-DRIVEN, not random buzzwords
+            const ctaByCategory = {
+                pc: ['NAKONFIGUROVAT', 'ZOBRAZIT SESTAVU', 'OBJEDNAT PC', 'VYBRAT KONFIGURACI', 'MÁM ZÁJEM'],
+                gpu: ['KOUPIT GRAFIKU', 'DO KOŠÍKU', 'OBJEDNAT', 'CHCI UPGRADE'],
+                notebook: ['ZOBRAZIT NOTEBOOK', 'OBJEDNAT', 'CHCI HO', 'MÁM ZÁJEM'],
+                cpu: ['KOUPIT PROCESOR', 'DO KOŠÍKU', 'OBJEDNAT', 'UPGRADE CPU'],
+                phone: ['KOUPIT TELEFON', 'OBJEDNAT', 'CHCI HO', 'DO KOŠÍKU'],
+                headset: ['KOUPIT', 'DO KOŠÍKU', 'OBJEDNAT', 'CHCI JE'],
+                monitor: ['KOUPIT MONITOR', 'OBJEDNAT', 'DO KOŠÍKU', 'MÁM ZÁJEM'],
+                peripheral: ['KOUPIT', 'DO KOŠÍKU', 'OBJEDNAT TEĎ'],
+                default: ['OBJEDNAT', 'DO KOŠÍKU', 'ZJISTIT VÍCE', 'KOUPIT', 'MÁM ZÁJEM']
             };
-
-            const hooksByCategory = {
-                gpu: ['UPGRADE SVŮJ RIG', 'GRAFICKÝ SKOK', 'NOVÁ GRAFIKA', 'FPS BOOST', 'VISUAL POWER', 'NEXT GEN GPU'],
-                notebook: ['GAMING ON THE GO', 'MOBILNÍ SÍLA', 'VEZMI SI VÝKON', 'HRAJ KDEKOLIV', 'PORTABLE BEAST'],
-                cpu: ['SRDCE SESTAVY', 'CORE UPGRADE', 'NOVÝ PROCESOR', 'RAW COMPUTE', 'MULTI-THREAD BEAST'],
-                phone: ['SMART VOLBA', 'TVŮJ NOVÝ TELEFON', 'ALWAYS CONNECTED', 'VÝKON V KAPSE', 'FLAGSHIP LEVEL'],
-                headset: ['SLYŠ KAŽDÝ DETAIL', 'ZVUKOVÁ DOMINANCE', 'IMMERSIVE AUDIO', 'HEAR THE GAME'],
-                monitor: ['FULL IMMERSION', 'CRYSTAL CLEAR', 'PIXEL PERFECT', 'VIZUÁLNÍ UPGRADE'],
-                peripheral: ['CONTROL FREAK', 'PŘESNOST V RUKÁCH', 'PRO SETUP', 'GAME GEAR'],
-                case: ['BYDLENÍ PRO PC', 'STYLE & AIRFLOW', 'DREAM CHASSIS'],
-                cooler: ['KEEP IT COOL', 'ZERO THROTTLE', 'ICE COLD TEMPS'],
-                psu: ['STABILNÍ NAPÁJENÍ', 'POWER BACKBONE', 'ENERGY CORE'],
-                ram: ['MEMORY BOOST', 'RYCHLOST PAMĚTI', 'ZERO LAG'],
-                storage: ['BLESKOVÉ ÚLOŽIŠTĚ', 'ZERO LOAD TIMES', 'SSD POWER']
-            };
-
-            const claimsByTier = {
-                budget: ['Herní PC pro každého', 'Vstupní brána do gamingu', 'Smart gaming volba', 'Ověřený výkon za rozumnou cenu'],
-                mid: ['Herní sestava nové generace', 'Pro náročné hráče', 'Výkon, který překvapí', 'Sestaveno pro výhry'],
-                premium: ['Profesionální herní platforma', 'Pro streamery a profíky', 'Nekompromisní herní zážitek', 'Elite gaming řešení'],
-                ultra: ['Absolutní špička v gamingu', 'Ta nejlepší sestava na trhu', 'Exkluzivní herní platforma', 'Dream build realitou']
-            };
-
-            const ctaPool = ['OBJEDNAT TEĎ', 'DO KOŠÍKU', 'CHCI TO', 'KOUPIT', 'ZJISTIT VÍCE', 'VYBRAT KONFIGURACI', 'PROZKOUMAT', 'NAKONFIGUROVAT', 'ZÍSKAT TEĎ', 'MÁM ZÁJEM'];
 
             const used = { hooks: new Set(), claims: new Set(), ctas: new Set() };
 
@@ -2427,18 +2465,96 @@
                 return 'ultra';
             }
 
-            function generate(priceStr, category) {
+            // Shorten GPU name: "NVIDIA RTX 5090" → "RTX 5090"
+            function shortGpu(g) {
+                return (g || '').replace(/NVIDIA\s+|AMD\s+|GeForce\s+|Radeon\s+/gi, '').trim();
+            }
+            // Shorten CPU name: "AMD Ryzen 9 9950X3D" → "Ryzen 9 9950X3D"
+            function shortCpu(c) {
+                return (c || '').replace(/AMD\s+|Intel\s+/gi, '').trim();
+            }
+
+            function generate(priceStr, category, product) {
                 const tier = getTier(priceStr);
-                let hookPool = [...hooksByTier[tier]];
-                // Mix in category-specific hooks
-                if (category && hooksByCategory[category]) {
-                    hookPool = hookPool.concat(hooksByCategory[category]);
+                const s = (product && product.specs) ? product.specs : {};
+                const gpuS = shortGpu(s.gpu);
+                const cpuS = shortCpu(s.cpu);
+                let hook = '';
+                let claim = '';
+
+                // ── HOOK: spec-driven, unique per product ──
+                if (category === 'pc' || category === 'notebook') {
+                    if (gpuS && cpuS) {
+                        // Mix patterns to avoid repetition
+                        const patterns = [
+                            gpuS + ' \u2022 ' + cpuS + (s.ram ? ' \u2022 ' + s.ram : ''),
+                            cpuS + ' + ' + gpuS + (s.vram ? ' ' + s.vram : ''),
+                            gpuS + (s.vram ? ' ' + s.vram : '') + ' | ' + s.ram + ' RAM',
+                            (s.cpuCores ? s.cpuCores + ' JADER \u2022 ' : '') + gpuS + ' \u2022 ' + s.ram
+                        ];
+                        hook = pickUnique(patterns, used.hooks);
+                    } else if (gpuS) {
+                        hook = gpuS + (s.vram ? ' ' + s.vram : '') + (s.ram ? ' | ' + s.ram + ' RAM' : '');
+                    } else if (cpuS) {
+                        hook = cpuS + (s.ram ? ' \u2022 ' + s.ram : '');
+                    } else {
+                        hook = (product && product.name) ? product.name.replace(/HelloComp\s*/i, '').substring(0, 40) : 'HERNÍ SESTAVA';
+                    }
+                } else if (category === 'gpu') {
+                    hook = gpuS + (s.vram ? ' ' + s.vram + ' VRAM' : '');
+                    if (!hook) hook = (product && product.name) || 'GRAFICKÁ KARTA';
+                } else if (category === 'cpu') {
+                    hook = cpuS + (s.cpuCores ? ' \u2022 ' + s.cpuCores + ' jader' : '') + (s.cpuFreq ? ' \u2022 ' + s.cpuFreq : '');
+                    if (!hook.trim()) hook = (product && product.name) || 'PROCESOR';
+                } else if (category === 'monitor') {
+                    hook = (product && product.name) ? product.name.replace(/HelloComp\s*/i, '').substring(0, 45) : 'MONITOR';
+                } else if (category === 'headset') {
+                    hook = (product && product.name) ? product.name.replace(/HelloComp\s*/i, '').substring(0, 45) : 'HERNÍ SLUCHÁTKA';
+                } else if (category === 'phone') {
+                    hook = (product && product.name) ? product.name.replace(/HelloComp\s*/i, '').substring(0, 45) : 'SMARTPHONE';
+                } else {
+                    // Accessories, peripherals, etc. — use product name as hook
+                    hook = (product && product.name) ? product.name.replace(/HelloComp\s*/i, '').substring(0, 40) : 'PŘÍSLUŠENSTVÍ';
                 }
+
+                // ── CLAIM: contextual product description ──
+                if (category === 'pc') {
+                    const highlights = [];
+                    if (gpuS) highlights.push(gpuS);
+                    if (s.storage) highlights.push(s.storage);
+                    if (s.os && s.os !== 'dle výběru') highlights.push(s.os);
+                    // HelloComp USPs mixed in
+                    const usps = [
+                        highlights.length ? 'Herní PC s ' + highlights.join(', ') : 'Herní PC od HelloComp',
+                        'Sestaveno v ČR \u2022 2 roky záruka \u2022 ' + (s.storage || 'SSD'),
+                        (s.cpuCores ? s.cpuCores + '\u00D7 CPU' : 'Multi-core') + ' + ' + (gpuS || 'dedikovaná GPU') + ' \u2022 Ready to play',
+                        'HelloComp \u2022 Profesionální sestava' + (s.ram ? ' \u2022 ' + s.ram + ' RAM' : '')
+                    ];
+                    claim = pickUnique(usps, used.claims);
+                } else if (category === 'notebook') {
+                    claim = 'Herní notebook' + (gpuS ? ' s ' + gpuS : '') + (s.ram ? ' \u2022 ' + s.ram : '') + ' od HelloComp';
+                } else if (category === 'gpu') {
+                    const vr = s.vram ? s.vram + ' VRAM \u2022 ' : '';
+                    claim = vr + 'Grafická karta pro náročné hráče \u2022 HelloComp';
+                } else if (category === 'cpu') {
+                    claim = 'Procesor' + (s.cpuCores ? ' ' + s.cpuCores + ' jader' : '') + ' \u2022 Srdce každé sestavy';
+                } else if (category === 'phone') {
+                    claim = 'Prémiový smartphone \u2022 Expedice do 24h';
+                } else if (category === 'headset') {
+                    claim = 'Herní audio \u2022 Slyš každý detail \u2022 HelloComp';
+                } else if (category === 'monitor') {
+                    claim = 'Gaming monitor \u2022 Plynulý obraz \u2022 HelloComp';
+                } else {
+                    claim = 'Kvalitní hardware \u2022 Expedice do 24h \u2022 HelloComp';
+                }
+
+                // ── CTA: category-specific ──
+                const ctaArr = ctaByCategory[category] || ctaByCategory.default;
                 return {
-                    hook: pickUnique(hookPool, used.hooks),
-                    claim: pickUnique(claimsByTier[tier], used.claims),
-                    cta: pickUnique(ctaPool, used.ctas),
-                    tier
+                    hook: hook,
+                    claim: claim,
+                    cta: pickUnique(ctaArr, used.ctas),
+                    tier: tier
                 };
             }
 
@@ -2448,8 +2564,9 @@
         })();
 
         // ─── Logo helper ───
-        function logoHtml() {
-            return '<img class="logo-watermark" src="/hellocomp-logo.png" alt="HC" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
+        function logoHtml(dark) {
+            var src = dark ? '/hellocomp-logo-white.png' : '/hellocomp-logo.png';
+            return '<img class="logo-watermark" src="' + src + '" alt="HC" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
         }
 
         // ─── Parse specs ───
@@ -2485,13 +2602,14 @@
                     + '<span class="template-label">HERO</span>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-line">' + p.specs + '</div>'
                     + socialProofHtml()
                     + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
+                    + '<div class="cta-url">hellocomp.cz</div>'
                     + '</div>'
                     + '</div>';
             },
@@ -2505,13 +2623,14 @@
                     + '<span class="template-label">SPLIT</span>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="divider"></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-grid">' + specTags + '</div>'
                     + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
+                    + '<div class="cta-url">hellocomp.cz</div>'
                     + '</div>'
                     + '</div>';
             },
@@ -2524,13 +2643,14 @@
                     + '<span class="template-label">MINIMAL</span>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(false) + gpuBadgeHtml(gpu) + '<span class="stock-tag">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || '') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-line">' + p.specs + '</div>'
                     + '<div class="price-row"><div class="price">' + p.price + '</div></div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
+                    + '<div class="cta-url">hellocomp.cz</div>'
                     + '</div>'
                     + '</div>';
             },
@@ -2547,7 +2667,7 @@
                     + '<div class="particles">' + neonParticles() + '</div>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="claim">' + (p.positioning_claim || 'ELITE GAMING') + '</div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -2556,6 +2676,7 @@
                     + '<div class="price">' + p.price + '</div>'
                     + urgencyHtml(p)
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
+                    + '<div class="cta-url">hellocomp.cz</div>'
                     + '</div>'
                     + '</div>';
             },
@@ -2565,9 +2686,9 @@
                 const gpu = detectGpuBrand(s.gpu || p._gpuRaw);
                 const specsObj = { cpu: s.cpu, gpu: s.gpu, ram: s.ram, storage: s.items[3] || '' };
                 const specRows = [
-                    { icon: '\u26A1', label: 'PROCESOR', value: s.cpu },
-                    { icon: '\uD83C\uDFAE', label: 'GRAFIKA', value: s.gpu },
-                    { icon: '\uD83D\uDCBE', label: 'PAMĚŤ', value: s.ram }
+                    { icon: 'CPU', label: 'PROCESOR', value: s.cpu },
+                    { icon: 'GPU', label: 'GRAFIKA', value: s.gpu },
+                    { icon: 'RAM', label: 'PAMĚŤ', value: s.ram }
                 ].filter(r => r.value).map(r =>
                     '<div class="spec-row">'
                     + '<div class="spec-icon">' + r.icon + '</div>'
@@ -2580,13 +2701,14 @@
                     + '<span class="template-label">SPECS</span>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
-                    + '<div class="logo-row">' + logoHtml() + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
+                    + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
                     + '<div class="specs-table">' + specRows + '</div>'
                     + energyMeterHtml(specsObj, gpu)
                     + '<div class="price-row"><div class="price">' + p.price + '</div>' + urgencyHtml(p) + '</div>'
                     + '<div class="cta-btn">' + (p.cta || 'OBJEDNAT') + '</div>'
+                    + '<div class="cta-url">hellocomp.cz</div>'
                     + '</div>'
                     + '</div>';
             },
@@ -2811,7 +2933,7 @@
                     const gpuInfo = detectGpuBrand(gpu);
                     const priceStr = p.priceFormatted || formatPrice(p.price);
                     const tier = copyEngine.getTier(String(p.price));
-                    const copy = copyEngine.generate(String(p.price), category);
+                    const copy = copyEngine.generate(String(p.price), category, p);
                     const pool = tierTemplates[tier];
                     const tpl = pool[tierCounters[tier] % pool.length];
                     tierCounters[tier]++;
@@ -2912,13 +3034,17 @@
             const claimIdx = headers.indexOf('positioning_claim');
             const priceIdx = headers.indexOf('price');
             const catIdx = headers.indexOf('_category');
+            const idIdx = headers.indexOf('id');
 
             const newLines = [lines[0]];
             for (let i = 1; i < lines.length; i++) {
                 const vals = lines[i].split(';');
                 const price = priceIdx >= 0 ? vals[priceIdx] : '0';
                 const cat = catIdx >= 0 ? vals[catIdx] : '';
-                const gen = copyEngine.generate(price, cat);
+                // Find original product from cache for smart copy
+                const pid = idIdx >= 0 ? vals[idIdx] : '';
+                const product = cachedProducts.find(function(p) { return p.id === pid; }) || null;
+                const gen = copyEngine.generate(price, cat, product);
                 if (hookIdx >= 0) vals[hookIdx] = gen.hook;
                 if (ctaIdx >= 0) vals[ctaIdx] = gen.cta;
                 if (claimIdx >= 0) vals[claimIdx] = gen.claim;
@@ -3129,7 +3255,7 @@
         // ─── v6: Toggle inline edit mode on card ───
         function toggleEditMode(card) {
             var isEditing = card.classList.toggle('editing');
-            var editables = card.querySelectorAll('.hook, .name, .price, .cta-btn, .claim, .specs-line');
+            var editables = card.querySelectorAll('.hook, .name, .price, .cta-btn, .claim, .specs-line, .cta-url');
             editables.forEach(function (el) { el.contentEditable = isEditing ? 'true' : 'false'; });
             var editBtn = card.querySelector('.tb-btn.edit');
             if (editBtn) editBtn.textContent = isEditing ? '✅' : '✏️';
