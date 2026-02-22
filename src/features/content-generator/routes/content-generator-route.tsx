@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchContentItems } from "../services/content-service";
 import { ContentCard } from "../components/content-card";
+import { CreateContentDialog } from "../components/create-content-dialog";
 import { FileText } from "lucide-react";
 
 export function ContentGeneratorRoute() {
@@ -34,18 +35,21 @@ export function ContentGeneratorRoute() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
-            <FileText className="h-5 w-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15">
+              <FileText className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-foreground">
+                Generátor obsahu
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                TikTok hooky · SEO meta · Video skripty
+              </p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-foreground">
-              Generátor obsahu
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              TikTok hooky · SEO meta · Video skripty
-            </p>
-          </div>
+          <CreateContentDialog />
         </div>
 
         {isLoading ? (

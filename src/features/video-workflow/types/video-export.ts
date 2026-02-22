@@ -38,3 +38,22 @@ export const VideoExportSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 export type VideoExport = z.infer<typeof VideoExportSchema>;
+
+export const VideoPlatformSchema = z.enum(["youtube", "tiktok", "instagram", "internal"]);
+export type VideoPlatform = z.infer<typeof VideoPlatformSchema>;
+
+export const CreateVideoExportSchema = z.object({
+  title: z.string().min(1, "Název je povinný"),
+  productSku: z.string().min(1, "SKU produktu je povinné"),
+  platform: VideoPlatformSchema,
+  format: VideoFormatSchema,
+  resolution: z.string().min(1, "Rozlišení je povinné"),
+  duration: z.number().nonnegative("Délka nesmí být záporná"),
+  fileSize: z.number().nonnegative("Velikost nesmí být záporná"),
+  davinci: z.object({
+    project: z.string().min(1, "Název projektu je povinný"),
+    timeline: z.string().min(1, "Časová osa je povinná"),
+    colorGrade: z.boolean(),
+  }),
+});
+export type CreateVideoExport = z.infer<typeof CreateVideoExportSchema>;

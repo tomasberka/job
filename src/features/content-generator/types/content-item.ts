@@ -29,3 +29,13 @@ export const ContentItemSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 export type ContentItem = z.infer<typeof ContentItemSchema>;
+
+export const CreateContentItemSchema = z.object({
+  type: ContentTypeSchema,
+  productSku: z.string().min(1, "SKU produktu je povinné"),
+  title: z.string().min(1, "Název je povinný"),
+  body: z.string().min(1, "Obsah je povinný"),
+  status: ContentStatusSchema,
+  tags: z.array(z.string()),
+});
+export type CreateContentItem = z.infer<typeof CreateContentItemSchema>;
