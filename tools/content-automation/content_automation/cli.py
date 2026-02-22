@@ -1,9 +1,10 @@
 """CLI interface for HelloComp Content Automation tools.
 
-Two entry-points:
+Three entry-points:
 
-* ``hookmaster``  — The Hook-Master AI Video Script Engine
-* ``lootbox-seo`` — Loot-Box SEO Dynamic Content Generator
+* ``hookmaster``    — The Hook-Master AI Video Script Engine
+* ``lootbox-seo``  — Loot-Box SEO Dynamic Content Generator
+* ``omnichannel``  — Omnichannel Distributor (TikTok / Instagram / Facebook)
 """
 
 from __future__ import annotations
@@ -136,6 +137,9 @@ def lootbox_main(argv: list[str] | None = None) -> None:
         print("  📝 SEO odstavec:")
         print(f"    {data['paragraph']}")
         print()
+        print("  📌 TL;DR:")
+        print(f"    {data['tldr']}")
+        print()
 
     if args.keywords:
         print()
@@ -144,3 +148,55 @@ def lootbox_main(argv: list[str] | None = None) -> None:
         for kw in get_keyword_suggestions():
             print(f"    • {kw['keyword']} → {kw['tip']}")
         print()
+
+
+# ---------------------------------------------------------------------------
+# Omnichannel Distributor CLI
+# ---------------------------------------------------------------------------
+def omnichannel_main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        prog="omnichannel",
+        description=(
+            "Omnichannel Distributor — generuje platformně specifické posty "
+            "pro TikTok, Instagram a Facebook pro HelloComp."
+        ),
+    )
+    parser.add_argument("gpu", help='Název GPU, např. "RTX 5080"')
+    parser.add_argument("audience", help='Cílová skupina, např. "hráč Warzone"')
+    parser.add_argument(
+        "--api-key",
+        default=None,
+        help="Google Gemini API klíč (fallback: env GEMINI_API_KEY, jinak template režim)",
+    )
+    parser.add_argument(
+        "--json",
+        dest="output_json",
+        action="store_true",
+        help="Výstup jako JSON (kompatibilní s dashboardem)",
+    )
+
+    args = parser.parse_args(argv)
+
+    from .omnichannel import distribute
+
+    result = distribute(args.gpu, args.audience, api_key=args.api_key)
+
+    if args.output_json:
+        print(result.to_json())
+    else:
+        print("=" * 60)
+        print(f"  OMNICHANNEL — {result.gpu} | {result.target_audience}")
+        print("=" * 60)
+        print()
+        print("  🎵 TikTok:")
+        print(f"    {result.tiktok}")
+        print()
+        print("  📸 Instagram:")
+        for line in result.instagram.strip().splitlines():
+            print(f"    {line}")
+        print()
+        print("  👍 Facebook:")
+        for line in result.facebook.strip().splitlines():
+            print(f"    {line}")
+        print()
+        print("=" * 60)

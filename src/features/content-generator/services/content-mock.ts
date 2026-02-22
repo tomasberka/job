@@ -34,4 +34,15 @@ export const CONTENT_MOCK: ContentItem[] = [
     createdAt: "2024-12-10T14:00:00.000Z",
     updatedAt: "2024-12-10T14:30:00.000Z",
   },
+  {
+    id: "cg-004",
+    type: "social-post",
+    productSku: "HC-GAMER-MAX-001",
+    title: "RTX 5080 — Omnichannel Instagram post",
+    body: "✨ Nový level odemčen.\n\nRTX 5080 v HelloComp GAMER sérii — pro hráče jako jsi ty. Žádné kompromisy, jen čistý výkon.\n\nCílová skupina: hráč Warzone 🎮\n\n#HelloComp #HerníPC #Gaming #RTX5080 #CzechGaming",
+    status: "draft",
+    tags: ["instagram", "social", "rtx5080"],
+    createdAt: "2025-01-15T10:00:00.000Z",
+    updatedAt: "2025-01-15T10:30:00.000Z",
+  },
 ];

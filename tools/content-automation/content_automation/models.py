@@ -19,6 +19,7 @@ class ContentType(str, Enum):
     SEO_META = "seo-meta"
     VIDEO_SCRIPT = "video-script"
     PRODUCT_DESCRIPTION = "product-description"
+    SOCIAL_POST = "social-post"
 
 
 class ContentStatus(str, Enum):

@@ -8,10 +8,10 @@ Python toolkit pro automatizaci marketingového obsahu pro [HelloComp](https://h
 
 ### 1. Hook-Master — AI Video Script Engine
 
-Generuje TikTok hooky, 9:16 video scénáře a SEO popisky pomocí **Google Gemini API**. Bez API klíče funguje v template režimu.
+Generuje TikTok hooky, 9:16 video scénáře a SEO popisky pomocí **Google Gemini API**. Bez API klíče funguje v template režimu. Nově generuje také **A/B hook varianty** ve třech stylech (aggressive myth-bust, curiosity/secret, educational demo).
 
 **Vstup:** název GPU + cílová skupina  
-**Výstup:** 3 hooky, video scénář, SEO popisek
+**Výstup:** 3 hooky, A/B varianty, video scénář, SEO popisek
 
 ```bash
 # Template režim (bez API klíče)
@@ -26,7 +26,7 @@ hookmaster "RTX 5070 Ti" "hráč CS2" --json
 
 ### 2. Loot-Box SEO — Dynamic Content Generator
 
-Generuje SEO srovnávací tabulky a marketingové texty z CSV produktových dat.
+Generuje SEO srovnávací tabulky a marketingové texty z CSV produktových dat. Nově obsahuje **TL;DR generátor** a **topic cluster CTAs** pro SGE & E-E-A-T SEO.
 
 ```bash
 # Celá nabídka
@@ -43,6 +43,24 @@ lootbox-seo --gpu "5070" --format json --keywords
 
 # HTML pro web
 lootbox-seo --gpu "5080" --format html
+```
+
+### 3. Omnichannel Distributor — Social Media Copy
+
+Generuje platformně specifické posty pro **TikTok, Instagram a Facebook** z jednoho produktového briefu. Výstup je ve formátu `social-post` kompatibilním s dashboardem.
+
+**Vstup:** název GPU + cílová skupina  
+**Výstup:** TikTok post, Instagram post, Facebook post
+
+```bash
+# Template režim (bez API klíče)
+omnichannel "RTX 5080" "hráč Warzone"
+
+# S Google Gemini API
+GEMINI_API_KEY=your-key omnichannel "RTX 5080" "hráč Warzone"
+
+# JSON výstup (kompatibilní s dashboardem)
+omnichannel "RTX 5070 Ti" "hráč CS2" --json
 ```
 
 ---
@@ -81,7 +99,7 @@ pytest -v
 
 ## Integrace s dashboardem
 
-Oba nástroje generují výstup kompatibilní se schématy dashboardu (`ContentItem`):
+Všechny nástroje generují výstup kompatibilní se schématy dashboardu (`ContentItem`):
 
 ```bash
 # Generuj hooky a ulož jako JSON
@@ -89,6 +107,9 @@ hookmaster "RTX 5080" "hráč Warzone" --json > hooks.json
 
 # Generuj SEO obsah jako JSON
 lootbox-seo --gpu "5070" --format json > seo.json
+
+# Generuj social posty jako JSON
+omnichannel "RTX 5080" "hráč Warzone" --json > social.json
 ```
 
 Typy obsahu odpovídají TypeScript schématům:
@@ -96,6 +117,7 @@ Typy obsahu odpovídají TypeScript schématům:
 - `seo-meta` — SEO metadata a popisky
 - `video-script` — Video scénáře
 - `product-description` — Produktové popisy
+- `social-post` — Platformní social media posty (TikTok, Instagram, Facebook)
 
 ---
 
@@ -111,10 +133,12 @@ tools/content-automation/
 │   ├── csv_loader.py                       # CSV produktový loader
 │   ├── hookmaster.py                       # Hook-Master — AI Video Script Engine
 │   ├── lootbox_seo.py                      # Loot-Box SEO — Dynamic Content Generator
+│   ├── omnichannel.py                      # Omnichannel Distributor — Social Media Copy
 │   └── cli.py                              # CLI rozhraní
 └── tests/
     ├── test_models.py
     ├── test_csv_loader.py
     ├── test_hookmaster.py
-    └── test_lootbox_seo.py
+    ├── test_lootbox_seo.py
+    └── test_omnichannel.py
 ```

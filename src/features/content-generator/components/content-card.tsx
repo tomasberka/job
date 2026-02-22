@@ -18,6 +18,7 @@ const typeLabels: Record<string, string> = {
   "seo-meta": "SEO Meta",
   "video-script": "Video skript",
   "product-description": "Popis produktu",
+  "social-post": "Social Post",
 };
 
 const typeColors: Record<string, string> = {
@@ -25,6 +26,7 @@ const typeColors: Record<string, string> = {
   "seo-meta": "text-green-400",
   "video-script": "text-blue-400",
   "product-description": "text-orange-400",
+  "social-post": "text-purple-400",
 };
 
 interface ContentCardProps {
