@@ -1244,6 +1244,195 @@
             animation: ctaPulse 2.5s ease infinite
         }
 
+        /* ─── HERO VFX: Aurora Glow Halo ─── */
+        .tpl-hero .hero-aurora {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 40%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(33,102,204,.2) 0%, rgba(0,212,255,.1) 30%, transparent 70%);
+            filter: blur(30px);
+            z-index: 1;
+            opacity: .4;
+            transition: opacity .5s .5s, transform .8s .5s
+        }
+        .tpl-hero:hover .hero-aurora {
+            opacity: 1;
+            transform: translateX(-50%) scale(1.15);
+            animation: heroAuroraPulse 4s ease-in-out infinite
+        }
+        @keyframes heroAuroraPulse {
+            0%, 100% { opacity: .8; transform: translateX(-50%) scale(1.1) }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.2) }
+        }
+
+        /* ─── HERO VFX: Rotating Light Rays ─── */
+        .tpl-hero .hero-rays {
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity .6s .5s;
+            pointer-events: none;
+            background:
+                conic-gradient(from 0deg at 50% 35%,
+                    transparent 0deg, rgba(33,102,204,.06) 15deg, transparent 30deg,
+                    transparent 60deg, rgba(0,212,255,.04) 75deg, transparent 90deg,
+                    transparent 120deg, rgba(33,102,204,.06) 135deg, transparent 150deg,
+                    transparent 180deg, rgba(0,212,255,.04) 195deg, transparent 210deg,
+                    transparent 240deg, rgba(33,102,204,.06) 255deg, transparent 270deg,
+                    transparent 300deg, rgba(0,212,255,.04) 315deg, transparent 330deg,
+                    transparent 360deg
+                )
+        }
+        .tpl-hero:hover .hero-rays {
+            opacity: 1;
+            animation: heroRaysRotate 20s linear infinite
+        }
+        @keyframes heroRaysRotate {
+            from { transform: rotate(0deg) }
+            to { transform: rotate(360deg) }
+        }
+
+        /* ─── HERO VFX: Floating Sparks ─── */
+        .tpl-hero .hero-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .5s .5s;
+            pointer-events: none
+        }
+        .tpl-hero:hover .hero-particles { opacity: 1 }
+        .tpl-hero .h-spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: none
+        }
+        .tpl-hero:hover .h-spark {
+            animation: heroSparkFloat linear infinite
+        }
+        @keyframes heroSparkFloat {
+            0% { transform: translateY(0) scale(0); opacity: 0 }
+            15% { opacity: 1 }
+            85% { opacity: .8 }
+            100% { transform: translateY(-120vh) scale(2); opacity: 0 }
+        }
+
+        /* ─── HERO VFX: Edge Electric Glow ─── */
+        .tpl-hero .hero-edge-glow {
+            position: absolute;
+            inset: -2px;
+            border-radius: 20px;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity .4s .5s;
+            pointer-events: none;
+            background: conic-gradient(from 0deg,
+                rgba(33,102,204,.4), rgba(0,212,255,.6), rgba(168,85,247,.3),
+                rgba(0,212,255,.6), rgba(33,102,204,.4), rgba(168,85,247,.3),
+                rgba(0,212,255,.6), rgba(33,102,204,.4)
+            );
+            background-size: 400% 400%;
+            filter: blur(6px)
+        }
+        .tpl-hero:hover .hero-edge-glow {
+            opacity: 1;
+            animation: heroEdgeSpin 6s linear infinite
+        }
+        @keyframes heroEdgeSpin {
+            0% { background-position: 0% 0% }
+            100% { background-position: 400% 400% }
+        }
+
+        /* ─── HERO VFX: Lens Flare ─── */
+        .tpl-hero .hero-flare {
+            position: absolute;
+            top: 12%;
+            left: 55%;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,.15) 0%, rgba(0,212,255,.08) 30%, transparent 60%);
+            z-index: 3;
+            opacity: 0;
+            transition: opacity .6s .7s;
+            pointer-events: none;
+            filter: blur(8px)
+        }
+        .tpl-hero:hover .hero-flare {
+            opacity: 1;
+            animation: heroFlareShift 5s ease-in-out infinite
+        }
+        @keyframes heroFlareShift {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: .7 }
+            30% { transform: translate(-20px, 10px) scale(1.3); opacity: 1 }
+            70% { transform: translate(15px, -5px) scale(.9); opacity: .5 }
+        }
+
+        /* ─── HERO VFX: Product Spotlight Ring ─── */
+        .tpl-hero .hero-spotlight {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 38%;
+            border-radius: 50%;
+            border: 1.5px solid rgba(33,102,204,.08);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity .5s .5s, border-color .5s;
+            pointer-events: none
+        }
+        .tpl-hero:hover .hero-spotlight {
+            opacity: 1;
+            border-color: rgba(0,212,255,.2);
+            animation: heroSpotlightPulse 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(0,212,255,.1), inset 0 0 40px rgba(33,102,204,.05)
+        }
+        @keyframes heroSpotlightPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: .7 }
+            50% { transform: translateX(-50%) scale(1.06); opacity: 1 }
+        }
+
+        /* ─── HERO VFX: Product hover lift ─── */
+        .tpl-hero .product-zone .product-img {
+            transition: transform .6s cubic-bezier(.22,1,.36,1), filter .6s
+        }
+        .tpl-hero:hover .product-zone .product-img {
+            transform: translateY(-6px) scale(1.03);
+            filter: drop-shadow(0 20px 50px rgba(33,102,204,.35)) drop-shadow(0 6px 16px rgba(0,0,0,.5))
+        }
+        .tpl-hero:hover .product-zone .product-img.bg-removed {
+            filter: drop-shadow(0 0 60px rgba(0,212,255,.35)) drop-shadow(0 0 120px rgba(33,102,204,.15)) drop-shadow(0 30px 60px rgba(0,0,0,.8))
+        }
+
+        /* ─── HERO VFX: Bottom content glow bar ─── */
+        .tpl-hero .hero-glow-bar {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,212,255,.5), rgba(33,102,204,.6), rgba(0,212,255,.5), transparent);
+            z-index: 11;
+            opacity: 0;
+            transition: opacity .4s .5s;
+            filter: blur(1px)
+        }
+        .tpl-hero:hover .hero-glow-bar { opacity: 1 }
+
         /* === SPLIT === */
         .tpl-split {
             background: #f5f7fa;
@@ -1557,7 +1746,9 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(0, 212, 255, .1), rgba(168, 85, 247, .06), transparent 70%);
             pointer-events: none;
-            animation: glowPulse 6s ease-in-out infinite;
+            animation: none;
+            opacity: .3;
+            transition: opacity .5s .5s;
             opacity: .7
         }
 
@@ -1571,8 +1762,10 @@
             pointer-events: none;
             overflow: hidden;
             z-index: 1;
-            opacity: .6
+            opacity: 0;
+            transition: opacity .5s .5s
         }
+        .tpl-neon:hover .particles { opacity: 1 }
 
         .tpl-neon .particle {
             position: absolute;
@@ -1952,6 +2145,24 @@
             box-shadow: 0 0 24px rgba(0, 212, 255, .3), 0 20px 60px rgba(0, 0, 0, .6)
         }
 
+        /* Force hover states when recording video */
+        .card.recording-active .hero-aurora,
+        .card.recording-active .hero-rays,
+        .card.recording-active .hero-particles,
+        .card.recording-active .hero-edge-glow,
+        .card.recording-active .hero-flare,
+        .card.recording-active .hero-spotlight,
+        .card.recording-active .hero-glow-bar { opacity: 1 !important }
+        .card.recording-active .glow-ring { opacity: .7 !important; animation: glowPulse 3s ease-in-out infinite !important }
+        .card.recording-active .particles { opacity: 1 !important }
+        .card.recording-active .cinema-bg { animation: cinemaBgPulse 8s ease-in-out infinite !important }
+        .card.recording-active .cinema-particles { opacity: 1 !important }
+        .card.recording-active .cinema-sweep { opacity: 1 !important; animation: cinemaSweep 6s ease-in-out infinite !important }
+        .card.recording-active .cinema-glow { opacity: .6 !important; animation: cinemaGlow 4s ease-in-out infinite !important }
+        .card.recording-active .product-img { animation: cinemaProductFloat 5s ease-in-out infinite !important }
+        .card.recording-active .hook { animation: shimmer 4s linear infinite !important }
+        .card.recording-active .cta-btn { animation: cinemaCtaShift 5s ease infinite !important }
+
         .card .select-check {
             position: absolute;
             bottom: 8px;
@@ -2011,6 +2222,10 @@
                         radial-gradient(ellipse at 50% 100%, rgba(0, 212, 255, .15) 0%, transparent 40%),
                         linear-gradient(180deg, #050810 0%, #0a0e1a 50%, #050810 100%);
             z-index: 1;
+            animation: none;
+            transition: opacity .5s .5s
+        }
+        .tpl-cinema:hover .cinema-bg {
             animation: cinemaBgPulse 8s ease-in-out infinite
         }
 
@@ -2024,9 +2239,11 @@
             position: absolute;
             inset: 0;
             z-index: 2;
-            overflow: hidden
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .5s .5s
         }
-
+        .tpl-cinema:hover .cinema-particles { opacity: 1 }
         .tpl-cinema .c-particle {
             position: absolute;
             width: 3px;
@@ -2051,6 +2268,12 @@
             z-index: 3;
             background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .06) 45%, rgba(255, 255, 255, .12) 50%, rgba(255, 255, 255, .06) 55%, transparent 60%);
             background-size: 300% 100%;
+            animation: none;
+            opacity: 0;
+            transition: opacity .5s .5s
+        }
+        .tpl-cinema:hover .cinema-sweep {
+            opacity: 1;
             animation: cinemaSweep 6s ease-in-out infinite
         }
 
@@ -2087,10 +2310,14 @@
             max-width: 80%;
             object-fit: contain;
             filter: drop-shadow(0 0 40px rgba(0, 212, 255, .3)) drop-shadow(0 20px 60px rgba(0, 0, 0, .8));
-            animation: cinemaProductFloat 5s ease-in-out infinite;
+            animation: none;
             border: none;
             background: none;
-            padding: 0
+            padding: 0;
+            transition: transform .6s cubic-bezier(.22,1,.36,1), filter .6s
+        }
+        .tpl-cinema:hover .product-img {
+            animation: cinemaProductFloat 5s ease-in-out infinite
         }
 
         @keyframes cinemaProductFloat {
@@ -2113,8 +2340,14 @@
             border-radius: 50%;
             background: radial-gradient(ellipse, rgba(0, 212, 255, .15) 0%, rgba(168, 85, 247, .08) 40%, transparent 70%);
             z-index: 5;
-            animation: cinemaGlow 4s ease-in-out infinite;
-            filter: blur(20px)
+            animation: none;
+            filter: blur(20px);
+            opacity: .3;
+            transition: opacity .5s .5s
+        }
+        .tpl-cinema:hover .cinema-glow {
+            opacity: .6;
+            animation: cinemaGlow 4s ease-in-out infinite
         }
 
         @keyframes cinemaGlow {
@@ -2179,11 +2412,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmer 4s linear infinite;
+            animation: none;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden
+        }
+        .tpl-cinema:hover .hook {
+            animation: shimmer 4s linear infinite
         }
 
         .tpl-cinema .name {
@@ -2213,7 +2449,7 @@
         .tpl-cinema .cta-btn {
             background: linear-gradient(135deg, var(--accent) 0%, var(--brand) 50%, var(--neon-purple) 100%);
             background-size: 200% auto;
-            animation: cinemaCtaShift 5s ease infinite;
+            animation: none;
             color: #fff;
             border-radius: 10px;
             font-size: 12px;
@@ -2239,9 +2475,17 @@
             text-transform: uppercase
         }
 
+        .tpl-cinema:hover .cta-btn {
+            animation: cinemaCtaShift 5s ease infinite
+        }
         .tpl-cinema .template-label {
             background: linear-gradient(135deg, var(--accent), var(--neon-purple));
-            color: #fff
+            color: #fff;
+            top: auto;
+            bottom: 6px;
+            right: 6px;
+            left: auto;
+            z-index: 22
         }
 
         /* CINEMA Video recording indicator */
@@ -2732,7 +2976,7 @@
             <div class="section-label">📦 Export Banners</div>
             <div class="btn-row">
                 <button class="btn export" id="exportBtn">🖼 PNG Export All</button>
-                <button class="btn small export" id="recordVideoBtn" style="background:linear-gradient(135deg,var(--accent),var(--neon-purple));font-weight:800">🎬 Record Video</button>
+                <button class="btn small export" id="recordVideoBtn" style="background:linear-gradient(135deg,var(--accent),var(--neon-purple));font-weight:800">🎬 Cinematic MP4</button>
             </div>
             <div class="export-picker" id="exportPicker">
                 <button class="ep-btn active" data-format="1080x1920">9:16 Story</button>
@@ -2782,6 +3026,20 @@
            =========================== */
 
         // ─── Neon template particles ───
+        function heroParticlesHtml() {
+            var html = '';
+            for (var i = 0; i < 18; i++) {
+                var left = Math.round(Math.random() * 100);
+                var dur = 4 + Math.random() * 6;
+                var delay = Math.random() * 6;
+                var size = 2 + Math.random() * 3;
+                var colors = ['rgba(33,102,204,.7)', 'rgba(0,212,255,.6)', 'rgba(168,85,247,.5)', 'rgba(255,255,255,.4)'];
+                var color = colors[Math.floor(Math.random() * colors.length)];
+                html += '<div class="h-spark" style="left:' + left + '%;bottom:0;width:' + size + 'px;height:' + size + 'px;background:' + color + ';animation-duration:' + dur + 's;animation-delay:' + delay + 's"></div>';
+            }
+            return html;
+        }
+
         function neonParticles() {
             let html = '';
             for (let i = 0; i < 16; i++) {
@@ -3070,11 +3328,18 @@
                 const isPremium = gpu.tier >= 75;
                 const cls = 'card tpl-hero cyber-grid scanner-line' + (isPremium ? ' holo-shimmer' : '');
                 return '<div class="' + cls + '" data-tpl="hero" data-cat="' + (p._category || '') + '" data-lineup="' + (p._lineup || '') + '">'
+                    + '<div class="hero-edge-glow"></div>'
+                    + '<div class="hero-aurora"></div>'
+                    + '<div class="hero-rays"></div>'
+                    + '<div class="hero-particles">' + heroParticlesHtml() + '</div>'
+                    + '<div class="hero-flare"></div>'
+                    + '<div class="hero-spotlight"></div>'
                     + '<div class="data-stream"></div>'
                     + lineupBadgeHtml(p._lineup)
                     + '<span class="template-label">HERO</span>'
                     + '<div class="product-zone"><img class="product-img" src="' + p.image_url + '" alt="' + (p.image_alt || p.product_name) + '"/></div>'
                     + '<div class="content">'
+                    + '<div class="hero-glow-bar"></div>'
                     + '<div class="logo-row">' + logoHtml(true) + gpuBadgeHtml(gpu) + '<span class="stock-pill">' + (p.badge_stock || 'SKLADEM') + '</span></div>'
                     + '<div class="hook">' + p.hook + '</div>'
                     + '<div class="name">' + p.product_name + '</div>'
@@ -4189,45 +4454,413 @@
             setStatus('Exportováno ' + done + ' karet jako PNG!', '#34d399');
         }
 
-        // ─── 🎬 VIDEO EXPORT — Record card animations as WebM ───
-        async function recordCardVideo(card, durationSec) {
-            durationSec = durationSec || 6;
-            // Enable all animations
-            card.style.animation = '';
-            card.querySelectorAll('*').forEach(function(el) { el.style.animation = ''; });
-            // Show REC indicator for cinema cards
-            var recEl = card.querySelector('.cinema-rec');
-            if (recEl) recEl.classList.add('active');
+        // ═══════════════════════════════════════════════════════════
+        // 🎬 PRO VIDEO EXPORT — Cinematic 15s Reveal + MP4/WebM
+        // Uses WebCodecs API + mp4-muxer for MP4 (Chrome/Edge)
+        // Falls back to MediaRecorder WebM for Safari/Firefox
+        // ═══════════════════════════════════════════════════════════
 
-            // Use html2canvas to snapshot frames into a canvas
+        // Easing functions for cinematic motion
+        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+        function easeInOutQuart(t) { return t < .5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2; }
+        function easeOutBack(t) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); }
+
+        /**
+         * Render a cinematic frame onto a canvas context.
+         * t = progress 0..1 over 15 seconds
+         * snapshotImg = html2canvas rendered image of the card
+         */
+        function drawCinematicFrame(ctx, w, h, t, snapshotImg) {
+            // Clear
+            ctx.clearRect(0, 0, w, h);
+
+            // Phase timeline (15s):
+            // 0-0.1  (0-1.5s): Black with subtle particles fade-in
+            // 0.1-0.35 (1.5-5.25s): Product reveal — zoom from large to normal with blur clear
+            // 0.35-0.55 (5.25-8.25s): Full card visible, gaming VFX burst
+            // 0.55-0.85 (8.25-12.75s): Hold with ambient effects
+            // 0.85-1.0 (12.75-15s): Final glamour hold with subtle pulse
+
+            // === BACKGROUND ===
+            // Dark cinematic bg with gradient
+            var grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#050810');
+            grad.addColorStop(0.5, '#0a0e1a');
+            grad.addColorStop(1, '#050810');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+
+            // === PHASE 1: Black intro with particles ===
+            if (t < 0.1) {
+                var introAlpha = easeOutCubic(t / 0.1);
+                // Draw subtle floating particles
+                drawGamingParticles(ctx, w, h, t, introAlpha * 0.3);
+                // Draw cinematic letterbox bars
+                drawLetterbox(ctx, w, h, 1);
+                return;
+            }
+
+            // === PHASE 2: Product reveal ===
+            var revealT = 0;
+            if (t >= 0.1 && t < 0.35) {
+                revealT = easeOutBack((t - 0.1) / 0.25);
+            } else {
+                revealT = 1;
+            }
+
+            // Card scale: starts at 1.4x zoomed in, settles to 1x
+            var cardScale = 1.4 - 0.4 * revealT;
+            // Card opacity: fades in
+            var cardAlpha = Math.min(1, revealT * 1.5);
+            // Card blur: starts blurry
+            var shouldBlur = t < 0.2;
+
+            // Draw gaming VFX behind card
+            if (t >= 0.1) {
+                var vfxIntensity = t < 0.35 ? easeOutCubic((t - 0.1) / 0.25) * 0.5 : 1;
+                drawGamingVFX(ctx, w, h, t, vfxIntensity);
+            }
+
+            // === Draw the card snapshot ===
+            ctx.save();
+            ctx.globalAlpha = cardAlpha;
+            ctx.translate(w / 2, h / 2);
+            ctx.scale(cardScale, cardScale);
+
+            if (snapshotImg) {
+                // Center the snapshot
+                var imgW = snapshotImg.width;
+                var imgH = snapshotImg.height;
+                var fitScale = Math.min(w / imgW, h / imgH) * 0.95;
+                ctx.drawImage(snapshotImg, -imgW * fitScale / 2, -imgH * fitScale / 2, imgW * fitScale, imgH * fitScale);
+            }
+            ctx.restore();
+
+            // === PHASE 3: Gaming VFX burst ===
+            if (t >= 0.35 && t < 0.55) {
+                var burstT = (t - 0.35) / 0.2;
+                drawVFXBurst(ctx, w, h, burstT);
+            }
+
+            // === Floating particles always ===
+            var particleAlpha = t < 0.1 ? t / 0.1 * 0.3 : (t < 0.35 ? 0.3 + (t - 0.1) / 0.25 * 0.5 : 0.8);
+            drawGamingParticles(ctx, w, h, t, particleAlpha);
+
+            // === Light sweep ===
+            if (t >= 0.25) {
+                drawLightSweep(ctx, w, h, t);
+            }
+
+            // === Scanlines ===
+            drawScanlines(ctx, w, h, 0.04);
+
+            // === Letterbox bars ===
+            var barSize = t < 0.1 ? 1 : (t < 0.35 ? 1 - (t - 0.1) / 0.25 * 0.4 : 0.6);
+            drawLetterbox(ctx, w, h, barSize);
+
+            // === Brand watermark ===
+            if (t >= 0.3) {
+                var wmAlpha = Math.min(1, (t - 0.3) / 0.15);
+                ctx.globalAlpha = wmAlpha * 0.7;
+                ctx.font = 'bold ' + Math.round(h * 0.018) + 'px Inter, sans-serif';
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.textAlign = 'right';
+                ctx.fillText('hellocomp.cz', w - w * 0.04, h - h * 0.03);
+                ctx.globalAlpha = 1;
+            }
+
+            // === REC indicator ===
+            if (t >= 0.05) {
+                var recAlpha = (Math.sin(t * 8) + 1) / 2;
+                ctx.globalAlpha = recAlpha * 0.8;
+                ctx.fillStyle = '#ff3b3b';
+                ctx.beginPath();
+                ctx.arc(w * 0.94, h * 0.04, h * 0.008, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.font = 'bold ' + Math.round(h * 0.014) + 'px Inter, sans-serif';
+                ctx.fillStyle = '#ff3b3b';
+                ctx.textAlign = 'left';
+                ctx.fillText('REC', w * 0.94 + h * 0.015, h * 0.04 + h * 0.005);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function drawGamingParticles(ctx, w, h, t, alpha) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            var seed = 42;
+            for (var i = 0; i < 30; i++) {
+                seed = (seed * 16807 + i * 131) % 2147483647;
+                var px = (seed % 1000) / 1000 * w;
+                seed = (seed * 16807) % 2147483647;
+                var baseY = (seed % 1000) / 1000 * h;
+                var speed = 0.3 + (seed % 100) / 100 * 0.7;
+                var py = (baseY - t * speed * h * 2) % (h * 1.2);
+                if (py < 0) py += h * 1.2;
+                seed = (seed * 16807) % 2147483647;
+                var size = 1 + (seed % 100) / 100 * 3;
+                var colors = ['rgba(0,212,255,.6)', 'rgba(33,102,204,.5)', 'rgba(168,85,247,.4)', 'rgba(255,255,255,.3)'];
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.beginPath();
+                ctx.arc(px, py, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+        function drawGamingVFX(ctx, w, h, t, intensity) {
+            ctx.save();
+            ctx.globalAlpha = intensity * 0.15;
+            // Radial glow behind center
+            var grd = ctx.createRadialGradient(w / 2, h * 0.35, 0, w / 2, h * 0.35, w * 0.5);
+            grd.addColorStop(0, 'rgba(0,212,255,.3)');
+            grd.addColorStop(0.4, 'rgba(33,102,204,.15)');
+            grd.addColorStop(0.7, 'rgba(168,85,247,.05)');
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, w, h);
+
+            // Rotating light rays
+            ctx.globalAlpha = intensity * 0.06;
+            ctx.translate(w / 2, h * 0.35);
+            ctx.rotate(t * 0.5);
+            for (var r = 0; r < 8; r++) {
+                ctx.rotate(Math.PI / 4);
+                var rGrad = ctx.createLinearGradient(0, 0, w * 0.6, 0);
+                rGrad.addColorStop(0, 'rgba(0,212,255,.3)');
+                rGrad.addColorStop(1, 'transparent');
+                ctx.fillStyle = rGrad;
+                ctx.fillRect(0, -2, w * 0.6, 4);
+            }
+            ctx.restore();
+        }
+
+        function drawVFXBurst(ctx, w, h, burstT) {
+            ctx.save();
+            // Expanding ring
+            var ringRadius = easeOutCubic(burstT) * w * 0.6;
+            var ringAlpha = (1 - burstT) * 0.3;
+            ctx.globalAlpha = ringAlpha;
+            ctx.strokeStyle = 'rgba(0,212,255,.6)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(w / 2, h * 0.4, ringRadius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Secondary ring
+            var ring2 = easeOutCubic(Math.max(0, burstT - 0.1) / 0.9) * w * 0.45;
+            ctx.globalAlpha = ringAlpha * 0.5;
+            ctx.strokeStyle = 'rgba(168,85,247,.4)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(w / 2, h * 0.4, ring2, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Flash
+            if (burstT < 0.15) {
+                ctx.globalAlpha = (1 - burstT / 0.15) * 0.15;
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, w, h);
+            }
+            ctx.restore();
+        }
+
+        function drawLightSweep(ctx, w, h, t) {
+            ctx.save();
+            var sweepT = ((t - 0.25) * 0.4) % 1;
+            var sweepX = -w * 0.3 + sweepT * w * 1.6;
+            var grad = ctx.createLinearGradient(sweepX - w * 0.1, 0, sweepX + w * 0.1, 0);
+            grad.addColorStop(0, 'transparent');
+            grad.addColorStop(0.4, 'rgba(255,255,255,.03)');
+            grad.addColorStop(0.5, 'rgba(255,255,255,.06)');
+            grad.addColorStop(0.6, 'rgba(255,255,255,.03)');
+            grad.addColorStop(1, 'transparent');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            ctx.restore();
+        }
+
+        function drawScanlines(ctx, w, h, alpha) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            for (var y = 0; y < h; y += 4) {
+                ctx.fillStyle = 'rgba(0,0,0,.15)';
+                ctx.fillRect(0, y, w, 1);
+            }
+            ctx.restore();
+        }
+
+        function drawLetterbox(ctx, w, h, size) {
+            var barH = h * 0.08 * size;
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, w, barH);
+            ctx.fillRect(0, h - barH, w, barH);
+        }
+
+        // Load mp4-muxer dynamically  (open-source: https://github.com/Vanilagy/mp4-muxer)
+        var mp4MuxerLoaded = false;
+        async function loadMp4Muxer() {
+            if (mp4MuxerLoaded) return true;
+            try {
+                // Try to load mp4-muxer via dynamic ESM import
+                var mod = await import('https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.mjs');
+                window.Mp4Muxer = mod;
+                mp4MuxerLoaded = true;
+                return true;
+            } catch (e) {
+                console.warn('mp4-muxer load failed, using WebM fallback:', e);
+                return false;
+            }
+        }
+
+        /**
+         * Professional video export with cinematic reveal animation.
+         * Tries WebCodecs + mp4-muxer for MP4 output.
+         * Falls back to canvas captureStream + MediaRecorder for WebM.
+         */
+        async function recordCardVideo(card, durationSec) {
+            durationSec = durationSec || 15;
+            var fps = 30;
+            var totalFrames = durationSec * fps;
+            var scale = 2;
+
+            // Ensure html2canvas is loaded
             if (typeof html2canvas === 'undefined') {
-                setStatus('Načítám export engine...', 'var(--accent)');
+                setStatus('Loading export engine...', 'var(--accent)');
                 await new Promise(function(resolve, reject) {
                     var s = document.createElement('script');
                     s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-                    s.onload = resolve;
-                    s.onerror = reject;
+                    s.onload = resolve; s.onerror = reject;
                     document.head.appendChild(s);
                 });
             }
 
-            setStatus('🎬 Recording video... ' + durationSec + 's', 'var(--accent)');
+            setStatus('🎬 Preparing cinematic export...', 'var(--accent)');
 
-            // Hide UI elements
+            // Enable hover state & animations on the card for snapshot
+            card.classList.add('recording-active');
+            card.dispatchEvent(new MouseEvent('mouseenter'));
+            // Wait for CSS transitions to activate (0.5s delay + 0.3s transition)
+            await new Promise(r => setTimeout(r, 1000));
+
+            // Hide UI overlays
             var hideEls = [card.querySelector('.card-toolbar'), card.querySelector('.select-check'), card.querySelector('.saved-badge'), card.querySelector('.product-url'), card.querySelector('.tpl-switcher')];
             hideEls.forEach(function(el) { if (el) el.style.display = 'none'; });
 
-            // Create offscreen canvas for recording
+            // Show REC indicator for cinema template
+            var recEl = card.querySelector('.cinema-rec');
+            if (recEl) recEl.classList.add('active');
+
+            // Take a hi-res snapshot of the card with animations active
+            var snapshot = await html2canvas(card, { scale: scale, useCORS: true, backgroundColor: null, logging: false });
+
+            var cw = card.offsetWidth * scale;
+            var ch = card.offsetHeight * scale;
+
+            // Try MP4 export via WebCodecs + mp4-muxer
+            var useMP4 = ('VideoEncoder' in window) && await loadMp4Muxer();
+
+            if (useMP4) {
+                await exportMP4(card, snapshot, cw, ch, fps, totalFrames, durationSec, hideEls, recEl);
+            } else {
+                await exportWebM(card, snapshot, cw, ch, fps, totalFrames, durationSec, hideEls, recEl);
+            }
+        }
+
+        async function exportMP4(card, snapshot, cw, ch, fps, totalFrames, durationSec, hideEls, recEl) {
+            setStatus('🎬 Encoding MP4 (WebCodecs + mp4-muxer)...', 'var(--accent)');
+
+            var Muxer = window.Mp4Muxer.Muxer;
+            var muxer = new Muxer({
+                target: new window.Mp4Muxer.ArrayBufferTarget(),
+                video: {
+                    codec: 'avc',
+                    width: cw,
+                    height: ch
+                },
+                fastStart: 'in-memory'
+            });
+
+            var frameIndex = 0;
+            var encodeDone = false;
+
+            var encoder = new VideoEncoder({
+                output: function(chunk, meta) {
+                    muxer.addVideoChunk(chunk, meta);
+                },
+                error: function(e) { console.error('VideoEncoder error:', e); }
+            });
+
+            encoder.configure({
+                codec: 'avc1.640028',
+                width: cw,
+                height: ch,
+                bitrate: 12000000,
+                framerate: fps,
+                hardwareAcceleration: 'prefer-hardware'
+            });
+
+            // Render frames
+            var offscreen = new OffscreenCanvas(cw, ch);
+            var offCtx = offscreen.getContext('2d');
+
+            for (var i = 0; i < totalFrames; i++) {
+                var t = i / totalFrames;
+                drawCinematicFrame(offCtx, cw, ch, t, snapshot);
+
+                var frame = new VideoFrame(offscreen, {
+                    timestamp: i * (1000000 / fps),
+                    duration: 1000000 / fps
+                });
+                encoder.encode(frame, { keyFrame: i % (fps * 2) === 0 });
+                frame.close();
+
+                // Update progress every 10 frames
+                if (i % 10 === 0) {
+                    var pct = Math.round((i / totalFrames) * 100);
+                    setStatus('🎬 Encoding MP4: ' + pct + '% (' + i + '/' + totalFrames + ')', 'var(--accent)');
+                    await new Promise(r => setTimeout(r, 0)); // yield to UI
+                }
+            }
+
+            await encoder.flush();
+            encoder.close();
+            muxer.finalize();
+
+            var buffer = muxer.target.buffer;
+            var blob = new Blob([buffer], { type: 'video/mp4' });
+
+            // Cleanup
+            hideEls.forEach(function(el) { if (el) el.style.display = ''; });
+            if (recEl) recEl.classList.remove('active');
+            card.classList.remove('recording-active');
+
+            // Download
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + currentExportFormat + '-cinematic.mp4';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            setStatus('🎬 MP4 exported! (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB) — ' + durationSec + 's cinematic', '#34d399');
+        }
+
+        async function exportWebM(card, snapshot, cw, ch, fps, totalFrames, durationSec, hideEls, recEl) {
+            setStatus('🎬 Recording WebM (cinematic ' + durationSec + 's)...', 'var(--accent)');
+
             var recCanvas = document.createElement('canvas');
-            var scale = 2;
-            recCanvas.width = card.offsetWidth * scale;
-            recCanvas.height = card.offsetHeight * scale;
+            recCanvas.width = cw;
+            recCanvas.height = ch;
             var recCtx = recCanvas.getContext('2d');
 
-            var stream = recCanvas.captureStream(30); // 30 fps
+            var stream = recCanvas.captureStream(fps);
+            var mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+                ? 'video/webm;codecs=vp9'
+                : 'video/webm;codecs=vp8';
             var recorder = new MediaRecorder(stream, {
-                mimeType: 'video/webm;codecs=vp9',
-                videoBitsPerSecond: 8000000
+                mimeType: mimeType,
+                videoBitsPerSecond: 10000000
             });
             var chunks = [];
             recorder.ondataavailable = function(e) { if (e.data.size > 0) chunks.push(e.data); };
@@ -4236,38 +4869,37 @@
                 recorder.onstop = function() {
                     hideEls.forEach(function(el) { if (el) el.style.display = ''; });
                     if (recEl) recEl.classList.remove('active');
+                    card.classList.remove('recording-active');
 
                     var blob = new Blob(chunks, { type: 'video/webm' });
                     var url = URL.createObjectURL(blob);
                     var a = document.createElement('a');
                     a.href = url;
-                    a.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + currentExportFormat + '-video.webm';
+                    a.download = 'hellocomp-' + (card.dataset.tpl || 'card') + '-' + currentExportFormat + '-cinematic.webm';
                     a.click();
                     URL.revokeObjectURL(url);
-                    setStatus('🎬 Video exported! (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB)', '#34d399');
+                    setStatus('🎬 WebM exported! (' + (blob.size / 1024 / 1024).toFixed(1) + ' MB) — ' + durationSec + 's cinematic', '#34d399');
                     resolve();
                 };
 
                 recorder.start();
-                var fps = 30;
-                var totalFrames = durationSec * fps;
                 var frameCount = 0;
 
-                function captureFrame() {
+                function renderFrame() {
                     if (frameCount >= totalFrames) {
                         recorder.stop();
                         return;
                     }
-                    html2canvas(card, { scale: scale, useCORS: true, backgroundColor: null, logging: false }).then(function(snapshot) {
-                        recCtx.clearRect(0, 0, recCanvas.width, recCanvas.height);
-                        recCtx.drawImage(snapshot, 0, 0);
-                        frameCount++;
+                    var t = frameCount / totalFrames;
+                    drawCinematicFrame(recCtx, cw, ch, t, snapshot);
+                    frameCount++;
+                    if (frameCount % 10 === 0) {
                         var pct = Math.round((frameCount / totalFrames) * 100);
-                        setStatus('🎬 Recording: ' + pct + '% (' + frameCount + '/' + totalFrames + ' frames)', 'var(--accent)');
-                        requestAnimationFrame(captureFrame);
-                    });
+                        setStatus('🎬 Recording: ' + pct + '%', 'var(--accent)');
+                    }
+                    requestAnimationFrame(renderFrame);
                 }
-                captureFrame();
+                renderFrame();
             });
         }
 
@@ -4275,8 +4907,8 @@
             var selected = document.querySelector('.card.selected') || document.querySelector('.card');
             if (!selected) { setStatus('No card to record.', '#f87171'); return; }
             var btn = document.getElementById('recordVideoBtn');
-            if (btn) { btn.textContent = '⏺ Recording...'; btn.style.pointerEvents = 'none'; }
-            await recordCardVideo(selected, 6);
+            if (btn) { btn.innerHTML = '⏺ <span style="font-size:10px">RECORDING...</span>'; btn.style.pointerEvents = 'none'; }
+            await recordCardVideo(selected, 15);
             if (btn) { btn.textContent = '🎬 Record Video'; btn.style.pointerEvents = ''; }
         }
 
