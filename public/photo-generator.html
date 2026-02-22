@@ -62,7 +62,8 @@
         .panel-header .logo-img {
             height: 26px;
             width: auto;
-            opacity: .95
+            opacity: .95;
+            filter: brightness(0) invert(1)
         }
 
         .panel-header .version {
@@ -937,10 +938,9 @@
         }
 
         .card .logo-watermark {
-            height: 24px;
+            height: 22px;
             width: auto;
-            opacity: .95;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .18));
+            opacity: 1;
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges
         }
@@ -1040,8 +1040,8 @@
 
         .card .product-img {
             display: block;
-            max-height: 80%;
-            max-width: 70%;
+            max-height: 72%;
+            max-width: 62%;
             width: auto;
             height: auto;
             object-fit: contain;
@@ -1098,22 +1098,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 18px 24px
+            padding: 22px 30px
         }
 
         .tpl-hero .product-zone .product-img {
-            background: rgba(255, 255, 255, .92);
-            border-radius: 16px;
-            padding: 12px;
-            max-height: 80%;
-            max-width: 68%;
-            object-fit: contain
+            background: rgba(255, 255, 255, .94);
+            border-radius: 14px;
+            padding: 16px;
+            max-height: 74%;
+            max-width: 60%;
+            object-fit: contain;
+            border: 2px solid rgba(33, 102, 204, .2);
+            box-shadow: 0 0 0 1px rgba(33, 102, 204, .08), 0 8px 24px rgba(0, 0, 0, .15)
         }
 
         .tpl-hero .product-zone .product-img.bg-removed {
             background: none;
             padding: 0;
-            border-radius: 0
+            border-radius: 0;
+            border: none;
+            box-shadow: none
         }
 
         .tpl-hero .product-img {
@@ -1140,8 +1144,12 @@
         }
 
         .tpl-hero .logo-watermark {
-            opacity: .95;
-            height: 24px
+            opacity: 1;
+            height: 22px;
+            background: rgba(255, 255, 255, .92);
+            padding: 4px 10px;
+            border-radius: 8px;
+            backdrop-filter: blur(6px)
         }
 
         .tpl-hero .stock-pill {
@@ -1244,15 +1252,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 28px
+            padding: 24px 32px
         }
 
         .tpl-split .product-img {
-            max-height: 80%;
-            max-width: 65%;
+            max-height: 72%;
+            max-width: 58%;
             object-fit: contain;
             filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .12));
-            border-radius: 12px
+            border-radius: 12px;
+            background: #fff;
+            padding: 14px;
+            border: 2px solid rgba(33, 102, 204, .12);
+            box-shadow: 0 0 0 1px rgba(33, 102, 204, .06), 0 4px 16px rgba(0, 0, 0, .06)
+        }
+
+        .tpl-split .product-img.bg-removed {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            border: none;
+            box-shadow: none
         }
 
         .tpl-split .content {
@@ -1276,8 +1296,8 @@
         }
 
         .tpl-split .logo-watermark {
-            opacity: .95;
-            height: 24px
+            opacity: 1;
+            height: 22px
         }
 
         .tpl-split .stock-pill {
@@ -1385,15 +1405,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 28px
+            padding: 24px 32px
         }
 
         .tpl-minimal .product-img {
-            max-height: 80%;
-            max-width: 65%;
+            max-height: 72%;
+            max-width: 58%;
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .12));
-            border-radius: 12px
+            border-radius: 12px;
+            background: #fff;
+            padding: 14px;
+            border: 2px solid rgba(33, 102, 204, .10);
+            box-shadow: 0 0 0 1px rgba(33, 102, 204, .05), 0 4px 16px rgba(0, 0, 0, .05)
+        }
+
+        .tpl-minimal .product-img.bg-removed {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            border: none;
+            box-shadow: none
         }
 
         .tpl-minimal .content {
@@ -1416,7 +1448,7 @@
         }
 
         .tpl-minimal .logo-watermark {
-            opacity: .9;
+            opacity: 1;
             height: 22px
         }
 
@@ -1555,24 +1587,28 @@
             align-items: center;
             justify-content: center;
             z-index: 2;
-            padding: 18px 24px
+            padding: 22px 30px
         }
 
         .tpl-neon .product-img {
-            background: rgba(255, 255, 255, .88);
-            border-radius: 16px;
-            padding: 12px;
-            max-height: 80%;
-            max-width: 65%;
+            background: rgba(255, 255, 255, .92);
+            border-radius: 14px;
+            padding: 16px;
+            max-height: 72%;
+            max-width: 58%;
             object-fit: contain;
             filter: drop-shadow(0 0 20px rgba(0, 212, 255, .1)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
-            transition: filter .4s ease, transform .4s ease
+            transition: filter .4s ease, transform .4s ease;
+            border: 2px solid rgba(0, 212, 255, .2);
+            box-shadow: 0 0 0 1px rgba(0, 212, 255, .08), 0 8px 24px rgba(0, 0, 0, .2)
         }
 
         .tpl-neon .product-img.bg-removed {
             background: none;
             padding: 0;
-            border-radius: 0
+            border-radius: 0;
+            border: none;
+            box-shadow: none
         }
 
         .tpl-neon:hover .product-img {
@@ -1601,9 +1637,13 @@
         }
 
         .tpl-neon .logo-watermark {
-            opacity: .95;
-            height: 24px;
-            filter: drop-shadow(0 0 6px rgba(0, 212, 255, .4))
+            opacity: 1;
+            height: 22px;
+            background: rgba(255, 255, 255, .92);
+            padding: 4px 10px;
+            border-radius: 8px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 12px rgba(0, 212, 255, .2)
         }
 
         .tpl-neon .stock-pill {
@@ -1711,23 +1751,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 24px
+            padding: 18px 28px
         }
 
         .tpl-specs .product-img {
-            background: rgba(255, 255, 255, .9);
-            border-radius: 14px;
-            padding: 10px;
-            max-height: 82%;
-            max-width: 65%;
+            background: rgba(255, 255, 255, .94);
+            border-radius: 12px;
+            padding: 14px;
+            max-height: 76%;
+            max-width: 58%;
             object-fit: contain;
-            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .4))
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .4));
+            border: 2px solid rgba(33, 102, 204, .18);
+            box-shadow: 0 0 0 1px rgba(33, 102, 204, .06), 0 6px 20px rgba(0, 0, 0, .15)
         }
 
         .tpl-specs .product-img.bg-removed {
             background: none;
             padding: 0;
-            border-radius: 0
+            border-radius: 0;
+            border: none;
+            box-shadow: none
         }
 
         .tpl-specs .content {
@@ -1751,8 +1795,12 @@
         }
 
         .tpl-specs .logo-watermark {
-            opacity: .95;
-            height: 24px
+            opacity: 1;
+            height: 22px;
+            background: rgba(255, 255, 255, .92);
+            padding: 4px 10px;
+            border-radius: 8px;
+            backdrop-filter: blur(6px)
         }
 
         .tpl-specs .stock-pill {
@@ -2246,7 +2294,7 @@
     <div class="app">
         <section class="panel">
             <div class="panel-header">
-                <img class="logo-img" src="/hellocomp-logo-white.png" alt="HelloComp"
+                <img class="logo-img" src="/hellocomp_logo_website.svg" alt="HelloComp"
                     onerror="this.outerHTML='<span style=font-weight:900;font-size:13px>HELLOCOMP</span>'" />
                 <span class="version">v6 ASSET</span>
             </div>
@@ -2609,7 +2657,7 @@
 
         // ─── Logo helper ───
         function logoHtml(dark) {
-            var src = dark ? '/hellocomp-logo-white.png' : '/hellocomp-logo.png';
+            var src = '/hellocomp_logo_website.svg';
             return '<img class="logo-watermark" src="' + src + '" alt="HC" onerror="this.outerHTML=\'<span style=font-weight:900;font-size:11px;opacity:.6>HELLOCOMP</span>\'">';
         }
 
