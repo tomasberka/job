@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import { PCInventoryRoute } from "@/features/pc-inventory/routes/pc-inventory-route";
 
 export const metadata: Metadata = {
-  title: "Dashboard | HelloComp",
+  title: "Přehled | HelloComp",
   description:
-    "HelloComp Social & Content Dashboard — PC lineup management, content automation and video workflow.",
+    "HelloComp řídicí panel — správa PC sestavů, tvorba obsahu a sledování video produkce.",
+  openGraph: {
+    images: [
+      { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Dashboard" },
+    ],
+  },
 };
 
 export default function DashboardPage() {

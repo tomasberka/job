@@ -14,9 +14,9 @@ export function ContentGeneratorRoute() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "Content Generator | HelloComp",
+    name: "Generátor obsahu | HelloComp",
     description:
-      "Automate TikTok hooks, SEO metadata and video scripts for HelloComp products.",
+      "Automatizace TikTok hooků, SEO metadat a video skriptů pro produkty HelloComp.",
     url: "https://hellocomp.cz/content-generator",
     publisher: {
       "@type": "Organization",
@@ -38,10 +38,10 @@ export function ContentGeneratorRoute() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              Content Generator
+              Generátor obsahu
             </h1>
             <p className="text-sm text-muted-foreground">
-              TikTok hooks · SEO meta · Video scripts
+              TikTok hooky · SEO meta · Video skripty
             </p>
           </div>
         </div>

@@ -8,10 +8,10 @@ const statusConfig: Record<
   PCStatus,
   { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
 > = {
-  "in-stock": { label: "In Stock", variant: "default" },
-  "low-stock": { label: "Low Stock", variant: "secondary" },
-  "out-of-stock": { label: "Out of Stock", variant: "destructive" },
-  "pre-order": { label: "Pre-order", variant: "outline" },
+  "in-stock": { label: "Skladem", variant: "default" },
+  "low-stock": { label: "Poslední kusy", variant: "secondary" },
+  "out-of-stock": { label: "Vyprodáno", variant: "destructive" },
+  "pre-order": { label: "Předobjednávka", variant: "outline" },
 };
 
 const lineupColors: Record<string, string> = {
@@ -28,7 +28,7 @@ export function PCProductCard({ product }: PCProductCardProps) {
   const status = statusConfig[product.status];
 
   return (
-    <Card className="glass border-white/8 transition-all duration-200 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+    <Card className="glass border-white/8 transition-all duration-200 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div>
@@ -82,7 +82,7 @@ export function PCProductCard({ product }: PCProductCardProps) {
         </div>
         {product.stock > 0 && (
           <p className="text-xs text-muted-foreground/70">
-            {product.stock} units available
+            {product.stock} ks skladem
           </p>
         )}
       </CardContent>

@@ -14,9 +14,9 @@ export function VideoWorkflowRoute() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "Video Workflow | HelloComp",
+    name: "Video produkce | HelloComp",
     description:
-      "DaVinci Resolve export tracking and video production workflow for HelloComp.",
+      "Sledování exportů DaVinci Resolve a správa video produkce HelloComp.",
     url: "https://hellocomp.cz/video-workflow",
     publisher: {
       "@type": "Organization",
@@ -38,10 +38,10 @@ export function VideoWorkflowRoute() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-foreground">
-              Video Workflow
+              Video produkce
             </h1>
             <p className="text-sm text-muted-foreground">
-              DaVinci Resolve export tracking
+              Správa exportů DaVinci Resolve
             </p>
           </div>
         </div>

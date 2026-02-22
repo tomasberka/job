@@ -7,17 +7,17 @@ const statusConfig: Record<
   ContentStatus,
   { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
 > = {
-  draft: { label: "Draft", variant: "outline" },
-  review: { label: "In Review", variant: "secondary" },
-  approved: { label: "Approved", variant: "default" },
-  published: { label: "Published", variant: "default" },
+  draft: { label: "Koncept", variant: "outline" },
+  review: { label: "Ke schválení", variant: "secondary" },
+  approved: { label: "Schváleno", variant: "default" },
+  published: { label: "Publikováno", variant: "default" },
 };
 
 const typeLabels: Record<string, string> = {
   "tiktok-hook": "TikTok Hook",
   "seo-meta": "SEO Meta",
-  "video-script": "Video Script",
-  "product-description": "Product Description",
+  "video-script": "Video skript",
+  "product-description": "Popis produktu",
 };
 
 const typeColors: Record<string, string> = {

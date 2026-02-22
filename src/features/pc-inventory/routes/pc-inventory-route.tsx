@@ -14,9 +14,9 @@ export function PCInventoryRoute() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "HelloComp Gaming PC Lineup",
+    name: "HelloComp herní PC — kompletní nabídka",
     description:
-      "GAMER SE, Pro and Max series gaming PCs by HelloComp.cz",
+      "Série GAMER SE, Pro a Max — herní počítače od HelloComp.cz",
     url: "https://hellocomp.cz",
     itemListElement: (products ?? []).map((p, i) => ({
       "@type": "ListItem",
@@ -26,6 +26,7 @@ export function PCInventoryRoute() {
         name: p.name,
         sku: p.sku,
         description: `${p.specs.cpu} | ${p.specs.gpu} | ${p.specs.ram}`,
+        ...(p.imageUrl ? { image: p.imageUrl } : {}),
         offers: {
           "@type": "Offer",
           price: p.price,
@@ -53,9 +54,9 @@ export function PCInventoryRoute() {
             <Monitor className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-foreground">PC Inventory</h1>
+            <h1 className="text-xl font-bold text-foreground">Sklad PC</h1>
             <p className="text-sm text-muted-foreground">
-              HelloComp GAMER SE · Pro · Max lineup
+              HelloComp GAMER SE · Pro · Max — aktuální zásoby
             </p>
           </div>
         </div>

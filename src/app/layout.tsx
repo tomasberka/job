@@ -4,14 +4,22 @@ import { Sidebar } from "@/components/sidebar";
 import { QueryProvider } from "@/components/query-provider";
 
 export const metadata: Metadata = {
-  title: "HelloComp Social & Content Dashboard",
+  title: "HelloComp — Řídicí panel",
   description:
-    "Internal dashboard for HelloComp PC lineup management, content generation and video workflow tracking.",
+    "Interní dashboard HelloComp pro správu PC sestavů, tvorbu obsahu a sledování video produkce.",
   openGraph: {
-    title: "HelloComp Social & Content Dashboard",
+    title: "HelloComp — Řídicí panel",
     description:
-      "Internal dashboard for HelloComp — hellocomp.cz",
-    siteName: "HelloComp Dashboard",
+      "Interní dashboard HelloComp — hellocomp.cz",
+    siteName: "HelloComp Řídicí panel",
+    images: [
+      { url: "https://hellocomp.cz/images/og-dashboard.jpg", alt: "HelloComp Řídicí panel" },
+    ],
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": "https://hellocomp.cz/feed.xml",
+    },
   },
 };
 
