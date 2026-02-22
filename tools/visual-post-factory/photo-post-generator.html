@@ -71,10 +71,10 @@
             font-size: 10px;
             color: var(--accent);
             margin-left: auto;
-            background: linear-gradient(135deg, rgba(0,212,255,.12), rgba(168,85,247,.12));
+            background: linear-gradient(135deg, rgba(0, 212, 255, .12), rgba(168, 85, 247, .12));
             padding: 2px 8px;
             border-radius: 6px;
-            border: 1px solid rgba(0,212,255,.2);
+            border: 1px solid rgba(0, 212, 255, .2);
             font-weight: 800;
             letter-spacing: .05em;
             animation: versionGlow 3s ease-in-out infinite
@@ -141,7 +141,7 @@
             left: -60%;
             width: 40%;
             height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
             transform: skewX(-25deg);
             animation: btnShine 3s ease-in-out infinite
         }
@@ -221,80 +221,190 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1 }
-            50% { opacity: .5 }
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .5
+            }
         }
 
         @keyframes cardEntrance {
-            from { opacity: 0; transform: translateY(40px) scale(.95) }
-            to { opacity: 1; transform: translateY(0) scale(1) }
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(.95)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px) }
-            to { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         @keyframes scaleIn {
-            from { opacity: 0; transform: scale(.85) }
-            to { opacity: 1; transform: scale(1) }
+            from {
+                opacity: 0;
+                transform: scale(.85)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
         }
 
         @keyframes shimmer {
-            0% { background-position: -200% center }
-            100% { background-position: 200% center }
+            0% {
+                background-position: -200% center
+            }
+
+            100% {
+                background-position: 200% center
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) }
-            50% { transform: translateY(-8px) }
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
         }
 
         @keyframes glowPulse {
-            0%, 100% { opacity: .6; transform: translateX(-50%) scale(1) }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.08) }
+
+            0%,
+            100% {
+                opacity: .6;
+                transform: translateX(-50%) scale(1)
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.08)
+            }
         }
 
         @keyframes btnShine {
-            0% { left: -60% }
-            30%, 100% { left: 120% }
+            0% {
+                left: -60%
+            }
+
+            30%,
+            100% {
+                left: 120%
+            }
         }
 
         @keyframes specSlide {
-            from { opacity: 0; transform: translateX(-16px) }
-            to { opacity: 1; transform: translateX(0) }
+            from {
+                opacity: 0;
+                transform: translateX(-16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
         }
 
         @keyframes versionGlow {
-            0%, 100% { box-shadow: 0 0 0 rgba(0,212,255,0) }
-            50% { box-shadow: 0 0 12px rgba(0,212,255,.3) }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 rgba(0, 212, 255, 0)
+            }
+
+            50% {
+                box-shadow: 0 0 12px rgba(0, 212, 255, .3)
+            }
         }
 
         @keyframes gradientMove {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
         }
 
         @keyframes priceReveal {
-            from { opacity: 0; transform: translateY(8px) scale(.9); filter: blur(4px) }
-            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0) }
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(.9);
+                filter: blur(4px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0)
+            }
         }
 
         @keyframes ctaPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(33,102,204,.4) }
-            50% { box-shadow: 0 0 0 6px rgba(33,102,204,0) }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(33, 102, 204, .4)
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(33, 102, 204, 0)
+            }
         }
 
         @keyframes neonCtaPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,.4) }
-            50% { box-shadow: 0 0 0 8px rgba(0,212,255,0) }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 212, 255, .4)
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 212, 255, 0)
+            }
         }
 
         @keyframes dotFloat {
-            0% { transform: translateY(0) scale(1); opacity: .7 }
-            50% { opacity: 1 }
-            100% { transform: translateY(-180px) scale(0); opacity: 0 }
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: .7
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-180px) scale(0);
+                opacity: 0
+            }
         }
 
         .template-chips {
@@ -403,14 +513,14 @@
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
-            transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
-            animation: cardEntrance .6s cubic-bezier(.16,1,.3,1) both;
+            transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s;
+            animation: cardEntrance .6s cubic-bezier(.16, 1, .3, 1) both;
             will-change: transform, opacity
         }
 
         .card:hover {
             transform: scale(1.03) translateY(-4px);
-            box-shadow: 0 24px 48px rgba(0,0,0,.4)
+            box-shadow: 0 24px 48px rgba(0, 0, 0, .4)
         }
 
         .card .remove-btn {
@@ -520,17 +630,17 @@
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 12px 32px rgba(0, 0, 0, .3));
-            animation: scaleIn .5s cubic-bezier(.16,1,.3,1) .15s both;
-            transition: transform .4s cubic-bezier(.4,0,.2,1), filter .4s
+            animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both;
+            transition: transform .4s cubic-bezier(.4, 0, .2, 1), filter .4s
         }
 
         .card:hover .product-img {
             transform: scale(1.04);
-            filter: drop-shadow(0 16px 40px rgba(0,0,0,.4))
+            filter: drop-shadow(0 16px 40px rgba(0, 0, 0, .4))
         }
 
         .card .content {
-            animation: slideUp .5s cubic-bezier(.16,1,.3,1) .2s both
+            animation: slideUp .5s cubic-bezier(.16, 1, .3, 1) .2s both
         }
 
         /* === HERO === */
@@ -546,7 +656,7 @@
             inset: -1px;
             border-radius: 18px;
             padding: 1px;
-            background: linear-gradient(170deg, rgba(33,102,204,.3), transparent 40%, rgba(0,212,255,.15));
+            background: linear-gradient(170deg, rgba(33, 102, 204, .3), transparent 40%, rgba(0, 212, 255, .15));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -555,7 +665,7 @@
         }
 
         .tpl-hero:hover {
-            box-shadow: 0 24px 64px rgba(33,102,204,.15), 0 20px 60px rgba(0,0,0,.6)
+            box-shadow: 0 24px 64px rgba(33, 102, 204, .15), 0 20px 60px rgba(0, 0, 0, .6)
         }
 
         .tpl-hero .product-zone {
@@ -791,7 +901,7 @@
 
         .tpl-split .cta-btn:hover {
             transform: scale(1.03);
-            box-shadow: 0 8px 24px rgba(0,0,0,.15)
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .15)
         }
 
         /* === MINIMAL === */
@@ -963,11 +1073,11 @@
 
         .tpl-neon .product-img {
             filter: drop-shadow(0 0 30px rgba(0, 212, 255, .15)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
-            animation: scaleIn .5s cubic-bezier(.16,1,.3,1) .15s both, float 4s ease-in-out .8s infinite
+            animation: scaleIn .5s cubic-bezier(.16, 1, .3, 1) .15s both, float 4s ease-in-out .8s infinite
         }
 
         .tpl-neon:hover .product-img {
-            filter: drop-shadow(0 0 40px rgba(0,212,255,.25)) drop-shadow(0 16px 40px rgba(0,0,0,.5))
+            filter: drop-shadow(0 0 40px rgba(0, 212, 255, .25)) drop-shadow(0 16px 40px rgba(0, 0, 0, .5))
         }
 
         .tpl-neon .content {
@@ -1150,13 +1260,21 @@
             transition: background .2s, border-color .2s
         }
 
-        .tpl-specs .spec-row:nth-child(1) { animation-delay: .3s }
-        .tpl-specs .spec-row:nth-child(2) { animation-delay: .4s }
-        .tpl-specs .spec-row:nth-child(3) { animation-delay: .5s }
+        .tpl-specs .spec-row:nth-child(1) {
+            animation-delay: .3s
+        }
+
+        .tpl-specs .spec-row:nth-child(2) {
+            animation-delay: .4s
+        }
+
+        .tpl-specs .spec-row:nth-child(3) {
+            animation-delay: .5s
+        }
 
         .tpl-specs .spec-row:hover {
-            background: rgba(33,102,204,.08);
-            border-color: rgba(33,102,204,.2)
+            background: rgba(33, 102, 204, .08);
+            border-color: rgba(33, 102, 204, .2)
         }
 
         .tpl-specs .spec-icon {
