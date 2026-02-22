@@ -517,30 +517,31 @@
         /* ─── v5: Lineup Badge ─── */
         .lineup-badge {
             position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 8px;
+            left: 10px;
+            transform: none;
             z-index: 20;
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 900;
-            letter-spacing: .12em;
+            letter-spacing: .1em;
             text-transform: uppercase;
-            padding: 3px 12px;
+            padding: 2px 8px;
             border-radius: 999px;
             backdrop-filter: blur(8px);
-            white-space: nowrap
+            white-space: nowrap;
+            opacity: .86
         }
 
         .lineup-badge.se {
-            background: rgba(33, 102, 204, .2);
-            color: var(--brand-light);
-            border: 1px solid rgba(33, 102, 204, .3)
+            background: rgba(33, 102, 204, .14);
+            color: #9fc4ff;
+            border: 1px solid rgba(33, 102, 204, .24)
         }
 
         .lineup-badge.pro {
-            background: rgba(168, 85, 247, .2);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, .3)
+            background: rgba(168, 85, 247, .14);
+            color: #cfb2ff;
+            border: 1px solid rgba(168, 85, 247, .24)
         }
 
         .card:hover .lineup-badge.pro {
@@ -548,10 +549,10 @@
         }
 
         .lineup-badge.max {
-            background: linear-gradient(135deg, rgba(234, 179, 8, .2), rgba(249, 115, 22, .2));
-            color: #fbbf24;
-            border: 1px solid rgba(234, 179, 8, .3);
-            text-shadow: 0 0 8px rgba(234, 179, 8, .3)
+            background: linear-gradient(135deg, rgba(234, 179, 8, .15), rgba(249, 115, 22, .15));
+            color: #ffd36b;
+            border: 1px solid rgba(234, 179, 8, .25);
+            text-shadow: 0 0 6px rgba(234, 179, 8, .2)
         }
 
         /* ─── v5: GPU Brand Badge ─── */
@@ -1068,16 +1069,15 @@
         /* === HERO === */
         .tpl-hero {
             background:
-                /* Hot red-orange gaming focal points */
-                radial-gradient(circle at 15% 10%, rgba(255, 40, 40, .35) 0%, transparent 35%),
-                radial-gradient(circle at 85% 15%, rgba(255, 120, 0, .25) 0%, transparent 30%),
-                radial-gradient(circle at 50% 45%, rgba(220, 20, 60, .15) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 90%, rgba(255, 60, 0, .2) 0%, transparent 40%),
-                radial-gradient(ellipse at 25% 75%, rgba(180, 0, 50, .12) 0%, transparent 45%),
-                /* Deep dark gaming base */
-                linear-gradient(155deg, #1a0508 0%, #0d0205 25%, #120810 50%, #0a0206 75%, #050103 100%);
-            border: 1px solid rgba(255, 50, 50, .25);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7), 0 0 80px rgba(255, 40, 40, .08), inset 0 0 120px rgba(255, 40, 40, .03)
+                radial-gradient(circle at 16% 12%, rgba(47, 132, 255, .34) 0%, transparent 36%),
+                radial-gradient(circle at 78% 14%, rgba(18, 92, 226, .26) 0%, transparent 32%),
+                radial-gradient(circle at 52% 44%, rgba(255, 58, 74, .18) 0%, transparent 52%),
+                radial-gradient(ellipse at 76% 84%, rgba(255, 78, 78, .2) 0%, transparent 42%),
+                radial-gradient(ellipse at 22% 78%, rgba(20, 130, 255, .16) 0%, transparent 45%),
+                linear-gradient(158deg, #031024 0%, #06162f 32%, #071a39 58%, #040f22 80%, #020816 100%);
+            border: 1px solid rgba(74, 148, 255, .26);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .72), 0 0 90px rgba(37, 114, 255, .14), inset 0 0 120px rgba(255, 64, 64, .04);
+            animation: heroBackdropFlow 14s ease-in-out infinite
         }
 
         .tpl-hero::before {
@@ -1086,13 +1086,14 @@
             inset: -1px;
             border-radius: 18px;
             padding: 1px;
-            background: linear-gradient(170deg, rgba(255, 50, 50, .5), rgba(255, 120, 0, .3) 30%, transparent 50%, rgba(255, 40, 40, .2));
+            background: linear-gradient(170deg, rgba(83, 156, 255, .5), rgba(255, 60, 80, .28) 32%, transparent 52%, rgba(58, 132, 255, .26));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
-            z-index: 1
+            z-index: 1;
+            animation: heroEdgeBreathe 8s ease-in-out infinite
         }
 
         /* Gaming mesh grid overlay */
@@ -1109,31 +1110,32 @@
             background-size: 30px 30px, 30px 30px, 86px 86px;
             pointer-events: none;
             z-index: 1;
-            opacity: .5
+            opacity: .52;
+            animation: heroGridDrift 20s linear infinite
         }
 
         .tpl-hero:hover {
-            box-shadow: 0 24px 64px rgba(255, 40, 40, .2), 0 20px 60px rgba(0, 0, 0, .7), 0 0 120px rgba(255, 50, 50, .1)
+            box-shadow: 0 24px 64px rgba(44, 122, 255, .24), 0 20px 60px rgba(0, 0, 0, .7), 0 0 130px rgba(255, 64, 80, .14)
         }
 
         .tpl-hero .product-zone {
             position: absolute;
-            top: 2%;
+            top: 5%;
             left: 0;
             right: 0;
-            height: 52%;
+            height: 48%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 16px
+            padding: 10px 18px
         }
 
         .tpl-hero .product-zone .product-img {
             background: rgba(255, 255, 255, .96);
             border-radius: 14px;
             padding: 12px;
-            max-height: 88%;
-            max-width: 80%;
+            max-height: 84%;
+            max-width: 76%;
             object-fit: contain;
             border: 1.5px solid rgba(33, 102, 204, .15);
             box-shadow: 0 0 0 1px rgba(33, 102, 204, .06), 0 8px 24px rgba(0, 0, 0, .12)
@@ -1216,8 +1218,42 @@
 
         .tpl-hero .specs-line {
             font-size: 10px;
-            color: #6b7a92;
+            color: #8fa8c7;
             margin-top: 2px
+        }
+
+        @keyframes heroBackdropFlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%, 100% 50%, 50% 50%, 70% 90%, 25% 75%, 50% 50%
+            }
+
+            50% {
+                background-position: 6% 42%, 92% 56%, 54% 48%, 76% 82%, 18% 70%, 50% 50%
+            }
+        }
+
+        @keyframes heroGridDrift {
+            from {
+                background-position: 0 0, 0 0, 0 0
+            }
+
+            to {
+                background-position: 24px 24px, 24px 24px, 80px 80px
+            }
+        }
+
+        @keyframes heroEdgeBreathe {
+
+            0%,
+            100% {
+                opacity: .75
+            }
+
+            50% {
+                opacity: 1
+            }
         }
 
         .tpl-hero .price-row {
@@ -1824,16 +1860,14 @@
         /* === NEON === */
         .tpl-neon {
             background:
-                /* Electric cyan hotspots */
-                radial-gradient(circle at 20% 15%, rgba(0, 255, 255, .3) 0%, transparent 30%),
-                radial-gradient(circle at 80% 20%, rgba(120, 0, 255, .25) 0%, transparent 30%),
-                radial-gradient(circle at 50% 50%, rgba(0, 200, 255, .1) 0%, transparent 50%),
-                radial-gradient(circle at 30% 85%, rgba(168, 85, 247, .2) 0%, transparent 35%),
-                radial-gradient(circle at 75% 75%, rgba(0, 255, 200, .12) 0%, transparent 40%),
-                /* Cyberpunk dark base */
-                linear-gradient(160deg, #06101a 0%, #040818 30%, #0a0620 60%, #030510 100%);
-            border: 1px solid rgba(0, 212, 255, .3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .7), 0 0 100px rgba(0, 212, 255, .12), inset 0 0 100px rgba(0, 212, 255, .04)
+                radial-gradient(circle at 18% 15%, rgba(0, 228, 255, .22) 0%, transparent 34%),
+                radial-gradient(circle at 82% 18%, rgba(255, 60, 86, .22) 0%, transparent 32%),
+                radial-gradient(circle at 50% 50%, rgba(42, 122, 255, .12) 0%, transparent 52%),
+                radial-gradient(circle at 30% 84%, rgba(90, 168, 255, .16) 0%, transparent 38%),
+                radial-gradient(circle at 74% 76%, rgba(255, 72, 96, .14) 0%, transparent 42%),
+                linear-gradient(164deg, #040d1c 0%, #061428 32%, #07152a 62%, #030910 100%);
+            border: 1px solid rgba(82, 170, 255, .26);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .72), 0 0 100px rgba(32, 126, 255, .13), inset 0 0 100px rgba(255, 64, 96, .04)
         }
 
         /* Neon hex grid overlay */
@@ -1899,23 +1933,23 @@
 
         .tpl-neon .product-zone {
             position: absolute;
-            top: 2%;
+            top: 5%;
             left: 0;
             right: 0;
-            height: 50%;
+            height: 46%;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2;
-            padding: 12px 16px
+            padding: 10px 18px
         }
 
         .tpl-neon .product-img {
             background: rgba(255, 255, 255, .94);
             border-radius: 14px;
             padding: 12px;
-            max-height: 88%;
-            max-width: 78%;
+            max-height: 82%;
+            max-width: 74%;
             object-fit: contain;
             filter: drop-shadow(0 0 20px rgba(0, 212, 255, .1)) drop-shadow(0 12px 32px rgba(0, 0, 0, .5));
             transition: filter .4s ease, transform .4s ease;
@@ -2017,7 +2051,7 @@
 
         .tpl-neon .specs-line {
             font-size: 10px;
-            color: #4a5568
+            color: #8ca4c2
         }
 
         .tpl-neon .price {
@@ -2060,16 +2094,14 @@
         /* === SPECS === */
         .tpl-specs {
             background:
-                /* Military-grade tactical blue/teal hotspots */
-                radial-gradient(circle at 25% 10%, rgba(0, 150, 255, .2) 0%, transparent 35%),
-                radial-gradient(circle at 75% 20%, rgba(16, 185, 129, .18) 0%, transparent 30%),
-                radial-gradient(circle at 50% 60%, rgba(33, 102, 204, .1) 0%, transparent 45%),
-                radial-gradient(circle at 20% 90%, rgba(0, 200, 180, .1) 0%, transparent 35%),
-                radial-gradient(circle at 85% 80%, rgba(33, 102, 204, .08) 0%, transparent 40%),
-                /* Dark tactical base */
-                linear-gradient(165deg, #0a1018 0%, #060c14 30%, #081015 60%, #040810 100%);
-            border: 1px solid rgba(33, 102, 204, .18);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .6), 0 0 60px rgba(33, 102, 204, .06)
+                radial-gradient(circle at 20% 12%, rgba(83, 156, 255, .14) 0%, transparent 35%),
+                radial-gradient(circle at 78% 20%, rgba(120, 151, 189, .12) 0%, transparent 32%),
+                radial-gradient(circle at 52% 62%, rgba(74, 110, 153, .1) 0%, transparent 46%),
+                radial-gradient(circle at 18% 88%, rgba(56, 89, 125, .1) 0%, transparent 36%),
+                radial-gradient(circle at 84% 82%, rgba(86, 125, 170, .08) 0%, transparent 40%),
+                linear-gradient(166deg, #0b1119 0%, #0a1017 35%, #0d141d 62%, #090d13 100%);
+            border: 1px solid rgba(126, 153, 188, .2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .62), 0 0 60px rgba(90, 128, 172, .06)
         }
 
         /* Tactical grid overlay */
@@ -2193,30 +2225,30 @@
             align-items: center;
             gap: 10px;
             padding: 7px 12px;
-            background: rgba(255, 255, 255, .03);
-            border: 1px solid rgba(255, 255, 255, .06);
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(180, 200, 224, .12);
             border-radius: 10px;
             transition: background .2s, border-color .2s
         }
 
         .tpl-specs .spec-row:hover {
-            background: rgba(33, 102, 204, .08);
-            border-color: rgba(33, 102, 204, .2)
+            background: rgba(84, 122, 168, .1);
+            border-color: rgba(130, 167, 212, .28)
         }
 
         .tpl-specs .spec-icon {
             width: 30px;
             height: 30px;
             border-radius: 8px;
-            background: rgba(33, 102, 204, .12);
-            border: 1px solid rgba(33, 102, 204, .15);
+            background: rgba(96, 128, 170, .16);
+            border: 1px solid rgba(120, 154, 200, .24);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 9px;
             font-weight: 900;
             letter-spacing: .03em;
-            color: var(--accent);
+            color: #d7e5f8;
             flex-shrink: 0;
             text-transform: uppercase;
             font-family: 'Inter', system-ui, sans-serif
@@ -2224,7 +2256,7 @@
 
         .tpl-specs .spec-label {
             font-size: 8px;
-            color: #4a5568;
+            color: #8fa3bd;
             text-transform: uppercase;
             letter-spacing: .06em;
             font-weight: 700;
@@ -2234,7 +2266,7 @@
         .tpl-specs .spec-value {
             font-size: 11px;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #eef3fb;
             line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
@@ -2429,6 +2461,15 @@
             transform: translate(-50%, -50%) !important
         }
 
+        .tpl-hero.fmt-fb .lineup-badge,
+        .tpl-neon.fmt-fb .lineup-badge {
+            top: 6px !important;
+            left: 8px !important;
+            font-size: 6.5px !important;
+            padding: 2px 7px !important;
+            opacity: .78 !important
+        }
+
         /* Neon glow ring reposition */
         .tpl-neon.fmt-fb .glow-ring {
             left: 20% !important;
@@ -2538,6 +2579,15 @@
             left: 21% !important;
             top: 50% !important;
             transform: translate(-50%, -50%) !important
+        }
+
+        .tpl-hero.fmt-wide .lineup-badge,
+        .tpl-neon.fmt-wide .lineup-badge {
+            top: 7px !important;
+            left: 9px !important;
+            font-size: 6.5px !important;
+            padding: 2px 7px !important;
+            opacity: .78 !important
         }
 
         .tpl-neon.fmt-wide .glow-ring {

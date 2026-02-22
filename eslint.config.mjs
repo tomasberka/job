@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig([
     {
-        ignores: [".next/**", "node_modules/**", "dist/**"],
+        ignores: [".next/**", "node_modules/**", "dist/**", "background-removal-js-main/**", "scripts/**"],
     },
     ...tseslint.configs.recommended,
     {
