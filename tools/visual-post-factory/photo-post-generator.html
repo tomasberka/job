@@ -874,7 +874,7 @@
         .bg-progress .bar {
             flex: 1;
             height: 4px;
-            background: rgba(255,255,255,.08);
+            background: rgba(255, 255, 255, .08);
             border-radius: 2px;
             overflow: hidden
         }
@@ -923,7 +923,8 @@
         }
 
         .card .product-img.bg-removed {
-            mix-blend-mode: normal /* Reset after actual BG removal */
+            mix-blend-mode: normal
+                /* Reset after actual BG removal */
         }
 
         .card:hover .product-img {
@@ -1626,12 +1627,16 @@
         }
 
         /* === v5.3 PRO: Card Selection === */
-        .card { cursor: pointer }
+        .card {
+            cursor: pointer
+        }
+
         .card.selected {
             outline: 3px solid var(--accent);
             outline-offset: -3px;
             box-shadow: 0 0 24px rgba(0, 212, 255, .3), 0 20px 60px rgba(0, 0, 0, .6)
         }
+
         .card .select-check {
             position: absolute;
             bottom: 8px;
@@ -1640,8 +1645,8 @@
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,.2);
-            background: rgba(0,0,0,.4);
+            border: 2px solid rgba(255, 255, 255, .2);
+            background: rgba(0, 0, 0, .4);
             backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
@@ -1651,6 +1656,7 @@
             transition: all .2s;
             pointer-events: none
         }
+
         .card.selected .select-check {
             background: var(--accent);
             border-color: var(--accent);
@@ -1664,6 +1670,7 @@
             border: 1px solid rgba(134, 169, 82, .15);
             box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
         }
+
         .tpl-csgo .rarity-stripe {
             position: absolute;
             bottom: 0;
@@ -1672,9 +1679,19 @@
             height: 4px;
             z-index: 10
         }
-        .tpl-csgo .rarity-stripe.covert { background: #eb4b4b }
-        .tpl-csgo .rarity-stripe.classified { background: #d32ce6 }
-        .tpl-csgo .rarity-stripe.restricted { background: #8847ff }
+
+        .tpl-csgo .rarity-stripe.covert {
+            background: #eb4b4b
+        }
+
+        .tpl-csgo .rarity-stripe.classified {
+            background: #d32ce6
+        }
+
+        .tpl-csgo .rarity-stripe.restricted {
+            background: #8847ff
+        }
+
         .tpl-csgo .wear-tag {
             font-size: 7px;
             font-weight: 800;
@@ -1686,15 +1703,28 @@
             border-radius: 3px;
             display: inline-block
         }
-        .tpl-csgo .hook { color: #86a952 }
-        .tpl-csgo .price { color: #86a952 }
-        .tpl-csgo .name { color: #c5d6a0 }
+
+        .tpl-csgo .hook {
+            color: #86a952
+        }
+
+        .tpl-csgo .price {
+            color: #86a952
+        }
+
+        .tpl-csgo .name {
+            color: #c5d6a0
+        }
+
         .tpl-csgo .cta-btn {
             background: linear-gradient(135deg, #4a7a2e, #86a952);
             color: #0d1210;
             font-weight: 900
         }
-        .tpl-csgo .product-zone { background: radial-gradient(ellipse at center 40%, rgba(134,169,82,.06), transparent 70%) }
+
+        .tpl-csgo .product-zone {
+            background: radial-gradient(ellipse at center 40%, rgba(134, 169, 82, .06), transparent 70%)
+        }
 
         /* === v5.3 PRO: League of Legends Style === */
         .tpl-lol {
@@ -1702,6 +1732,7 @@
             border: 1px solid rgba(200, 170, 80, .2);
             box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
         }
+
         .tpl-lol::before {
             content: '';
             position: absolute;
@@ -1715,6 +1746,7 @@
             pointer-events: none;
             z-index: 1
         }
+
         .tpl-lol .rank-frame {
             position: absolute;
             top: 38%;
@@ -1727,6 +1759,7 @@
             z-index: 0;
             box-shadow: 0 0 40px rgba(200, 170, 80, .06), inset 0 0 30px rgba(200, 170, 80, .04)
         }
+
         .tpl-lol .rank-tag {
             font-size: 8px;
             font-weight: 900;
@@ -1739,15 +1772,30 @@
             display: inline-block;
             text-shadow: 0 0 8px rgba(200, 170, 80, .3)
         }
-        .tpl-lol .hook { color: #c8aa50; text-shadow: 0 0 12px rgba(200, 170, 80, .3) }
-        .tpl-lol .price { color: #c8aa50; text-shadow: 0 0 8px rgba(200, 170, 80, .2) }
-        .tpl-lol .name { color: #e8dcc0 }
+
+        .tpl-lol .hook {
+            color: #c8aa50;
+            text-shadow: 0 0 12px rgba(200, 170, 80, .3)
+        }
+
+        .tpl-lol .price {
+            color: #c8aa50;
+            text-shadow: 0 0 8px rgba(200, 170, 80, .2)
+        }
+
+        .tpl-lol .name {
+            color: #e8dcc0
+        }
+
         .tpl-lol .cta-btn {
             background: linear-gradient(135deg, #785a28, #c8aa50);
             color: #0a0c10;
             font-weight: 900
         }
-        .tpl-lol .product-zone { background: radial-gradient(ellipse at center 40%, rgba(200,170,80,.05), transparent 70%) }
+
+        .tpl-lol .product-zone {
+            background: radial-gradient(ellipse at center 40%, rgba(200, 170, 80, .05), transparent 70%)
+        }
 
         /* === v5.3 PRO: Fortnite Style === */
         .tpl-fortnite {
@@ -1755,14 +1803,16 @@
             border: 1px solid rgba(147, 100, 255, .2);
             box-shadow: 0 20px 60px rgba(0, 0, 0, .7)
         }
+
         .tpl-fortnite .diagonal-stripes {
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(147,100,255,.03) 20px, rgba(147,100,255,.03) 22px);
+            background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(147, 100, 255, .03) 20px, rgba(147, 100, 255, .03) 22px);
             pointer-events: none;
             z-index: 1;
             border-radius: 18px
         }
+
         .tpl-fortnite .rarity-glow {
             position: absolute;
             bottom: 0;
@@ -1770,10 +1820,11 @@
             transform: translateX(-50%);
             width: 80%;
             height: 120px;
-            background: radial-gradient(ellipse, rgba(147,100,255,.12), transparent);
+            background: radial-gradient(ellipse, rgba(147, 100, 255, .12), transparent);
             pointer-events: none;
             z-index: 0
         }
+
         .tpl-fortnite .item-rarity {
             font-size: 8px;
             font-weight: 900;
@@ -1783,20 +1834,33 @@
             border-radius: 4px;
             display: inline-block
         }
+
         .tpl-fortnite .item-rarity.legendary {
-            background: linear-gradient(135deg, rgba(255,170,0,.2), rgba(255,120,0,.2));
+            background: linear-gradient(135deg, rgba(255, 170, 0, .2), rgba(255, 120, 0, .2));
             color: #ffaa00;
-            border: 1px solid rgba(255,170,0,.3);
-            text-shadow: 0 0 8px rgba(255,170,0,.4)
+            border: 1px solid rgba(255, 170, 0, .3);
+            text-shadow: 0 0 8px rgba(255, 170, 0, .4)
         }
+
         .tpl-fortnite .item-rarity.epic {
-            background: rgba(147,100,255,.15);
+            background: rgba(147, 100, 255, .15);
             color: #b57aff;
-            border: 1px solid rgba(147,100,255,.3)
+            border: 1px solid rgba(147, 100, 255, .3)
         }
-        .tpl-fortnite .hook { color: #b57aff }
-        .tpl-fortnite .price { color: #fff; text-shadow: 0 0 12px rgba(147,100,255,.4) }
-        .tpl-fortnite .name { color: #e0d4ff }
+
+        .tpl-fortnite .hook {
+            color: #b57aff
+        }
+
+        .tpl-fortnite .price {
+            color: #fff;
+            text-shadow: 0 0 12px rgba(147, 100, 255, .4)
+        }
+
+        .tpl-fortnite .name {
+            color: #e0d4ff
+        }
+
         .tpl-fortnite .cta-btn {
             background: linear-gradient(135deg, #7c3aed, #9364ff);
             color: #fff;
@@ -1809,16 +1873,18 @@
             background: linear-gradient(170deg, #3c2a14 0%, #2a1e0e 40%, #1a1208 100%);
             border: 3px solid #5c4a2a;
             border-radius: 4px !important;
-            box-shadow: 4px 4px 0 #1a1208, 0 20px 60px rgba(0,0,0,.7)
+            box-shadow: 4px 4px 0 #1a1208, 0 20px 60px rgba(0, 0, 0, .7)
         }
+
         .tpl-minecraft .dirt-overlay {
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0,0,0,.05) 16px, rgba(0,0,0,.05) 17px), repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(0,0,0,.05) 16px, rgba(0,0,0,.05) 17px);
+            background: repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(0, 0, 0, .05) 16px, rgba(0, 0, 0, .05) 17px), repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(0, 0, 0, .05) 16px, rgba(0, 0, 0, .05) 17px);
             pointer-events: none;
             z-index: 1;
             border-radius: 2px
         }
+
         .tpl-minecraft .craft-label {
             font-size: 9px;
             font-weight: 900;
@@ -1828,17 +1894,38 @@
             text-shadow: 2px 2px 0 #1a1208;
             font-family: monospace
         }
-        .tpl-minecraft .hook { color: #55ff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
-        .tpl-minecraft .name { color: #ffff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
-        .tpl-minecraft .price { color: #55ff55; text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-family: monospace }
-        .tpl-minecraft .specs-line { color: #a8a8a8; font-family: monospace; text-shadow: 1px 1px 0 rgba(0,0,0,.4) }
+
+        .tpl-minecraft .hook {
+            color: #55ff55;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
+            font-family: monospace
+        }
+
+        .tpl-minecraft .name {
+            color: #ffff55;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
+            font-family: monospace
+        }
+
+        .tpl-minecraft .price {
+            color: #55ff55;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, .5);
+            font-family: monospace
+        }
+
+        .tpl-minecraft .specs-line {
+            color: #a8a8a8;
+            font-family: monospace;
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, .4)
+        }
+
         .tpl-minecraft .cta-btn {
             background: #4a8a2a;
             color: #fff;
             border: 2px solid #5c9e3a;
             border-radius: 2px;
             box-shadow: 2px 2px 0 #2a5a1a;
-            text-shadow: 1px 1px 0 rgba(0,0,0,.4);
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, .4);
             font-family: monospace;
             font-weight: 900
         }
@@ -1847,19 +1934,21 @@
         .tpl-roblox {
             background: linear-gradient(160deg, #1a2744 0%, #0f1a30 40%, #0a1220 100%);
             border: 1px solid rgba(0, 180, 255, .2);
-            box-shadow: 0 20px 60px rgba(0,0,0,.6)
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .6)
         }
+
         .tpl-roblox .rbx-gradient {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 50%;
-            background: linear-gradient(180deg, rgba(0,180,255,.06), transparent);
+            background: linear-gradient(180deg, rgba(0, 180, 255, .06), transparent);
             pointer-events: none;
             z-index: 0;
             border-radius: 18px 18px 0 0
         }
+
         .tpl-roblox .rbx-badge {
             font-size: 8px;
             font-weight: 900;
@@ -1867,14 +1956,25 @@
             text-transform: uppercase;
             letter-spacing: .08em;
             padding: 3px 8px;
-            background: rgba(0,230,118,.1);
-            border: 1px solid rgba(0,230,118,.2);
+            background: rgba(0, 230, 118, .1);
+            border: 1px solid rgba(0, 230, 118, .2);
             border-radius: 6px;
             display: inline-block
         }
-        .tpl-roblox .hook { color: #00b4ff }
-        .tpl-roblox .price { color: #00e676; font-weight: 900 }
-        .tpl-roblox .name { color: #e0eaff }
+
+        .tpl-roblox .hook {
+            color: #00b4ff
+        }
+
+        .tpl-roblox .price {
+            color: #00e676;
+            font-weight: 900
+        }
+
+        .tpl-roblox .name {
+            color: #e0eaff
+        }
+
         .tpl-roblox .cta-btn {
             background: linear-gradient(135deg, #00b4ff, #0091ea);
             color: #fff;
@@ -1884,10 +1984,21 @@
         }
 
         /* === v5.3: Enhanced BG States === */
-        .bg-controls { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px }
-        .bg-stats { font-size: 10px; color: var(--muted); padding: 2px 0 }
+        .bg-controls {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-top: 2px
+        }
+
+        .bg-stats {
+            font-size: 10px;
+            color: var(--muted);
+            padding: 2px 0
+        }
+
         .card .product-img.enhanced {
-            filter: drop-shadow(0 8px 24px rgba(0,0,0,.5)) drop-shadow(0 2px 8px rgba(0,212,255,.15));
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .5)) drop-shadow(0 2px 8px rgba(0, 212, 255, .15));
             transition: filter .5s
         }
     </style>
@@ -1920,8 +2031,10 @@
                 <span class="chip" data-tpl="specs-focus">Specs</span>
                 <span class="chip" data-tpl="csgo" style="border-color:rgba(134,169,82,.3);color:#86a952">CS2</span>
                 <span class="chip" data-tpl="lol" style="border-color:rgba(200,170,80,.3);color:#c8aa50">LoL</span>
-                <span class="chip" data-tpl="fortnite" style="border-color:rgba(147,100,255,.3);color:#b57aff">Fortnite</span>
-                <span class="chip" data-tpl="minecraft" style="border-color:rgba(85,255,85,.2);color:#55ff55">Minecraft</span>
+                <span class="chip" data-tpl="fortnite"
+                    style="border-color:rgba(147,100,255,.3);color:#b57aff">Fortnite</span>
+                <span class="chip" data-tpl="minecraft"
+                    style="border-color:rgba(85,255,85,.2);color:#55ff55">Minecraft</span>
                 <span class="chip" data-tpl="roblox" style="border-color:rgba(0,180,255,.3);color:#00b4ff">Roblox</span>
             </div>
 
@@ -2754,11 +2867,11 @@
             try {
                 const r = await fetch(src, { mode: 'cors' });
                 if (r.ok) return await r.blob();
-            } catch (_) {}
+            } catch (_) { }
             try {
                 const r = await fetch('/api/proxy-image?url=' + encodeURIComponent(src));
                 if (r.ok) return await r.blob();
-            } catch (_) {}
+            } catch (_) { }
             throw new Error('Nelze načíst obrázek: ' + src.substring(0, 60));
         }
 
@@ -2817,7 +2930,7 @@
 
         // ─── Preload AI model ───
         async function preloadModel() {
-            try { await loadBgRemovalEngine(); } catch (_) {}
+            try { await loadBgRemovalEngine(); } catch (_) { }
         }
 
         // ─── Batch BG removal: process SELECTED cards with progress ───
